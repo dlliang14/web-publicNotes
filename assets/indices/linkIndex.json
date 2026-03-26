@@ -1,812 +1,812 @@
 {
   "index": {
     "links": {
-      "/%E5%A4%A7%E7%BA%B2/%E7%BE%A4%E8%BE%89": [
+      "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/%E7%BE%A4%E8%BE%89",
-          "target": "/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99",
-          "text": "群辉-回收站"
-        }
-      ],
-      "/%E5%A4%A7%E7%BA%B2/calico": [
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
-          "target": "/calico-%E4%BB%8B%E7%BB%8D",
-          "text": "calico-介绍"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
-          "target": "/calico-%E5%AE%89%E8%A3%85",
-          "text": "calico-安装"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
-          "target": "/calico-bgp%E9%85%8D%E7%BD%AE",
-          "text": "calico-bgp配置"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
-          "target": "/calico-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2",
-          "text": "calico-数据平面"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
-          "target": "/calico-ebpf%E6%A8%A1%E5%BC%8F",
-          "text": "calico-ebpf模式"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
-          "target": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
-          "text": "calico-可观测"
-        }
-      ],
-      "/%E5%A4%A7%E7%BA%B2/k8s": [
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
-          "text": "k8s-部署-通用注意点"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
-          "text": "k8s-部署-高可用方案"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
-          "text": "k8s-部署-常用部署工具"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-          "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "text": "k8s-方案-大规模集群"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-          "target": "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88",
-          "text": "k8s-存储方案"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-          "target": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
-          "text": "k8s-网络方案"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-          "target": "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86",
-          "text": "k8s-日志收集"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-          "target": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
-          "text": "k8s-监控告警"
-        }
-      ],
-      "/%E5%A4%A7%E7%BA%B2/python": [
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/python",
-          "target": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
-          "text": "python-网络开发知识点"
-        },
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/python",
-          "target": "/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0",
-          "text": "无意义-python-老网课笔记"
-        }
-      ],
-      "/%E5%A4%A7%E7%BA%B2/victoriametrics": [
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/victoriametrics",
-          "target": "/victoriametrics-%E4%BB%8B%E7%BB%8D",
-          "text": "victoriametrics-介绍"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
+          "source": "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
           "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "text": "k8s-方案-大规模集群#灰度发布"
         }
       ],
-      "/%E7%81%B5%E6%84%9F/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy": [
+      "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
+          "source": "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
           "target": "/calico-%E4%BB%8B%E7%BB%8D",
           "text": "calico的typha"
         }
       ],
-      "/%E7%81%B5%E6%84%9F/bgp": [
+      "/%E7%BE%A4%E8%BE%89": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/bgp",
-          "target": "/calico",
-          "text": "calico"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
-          "target": "/iptables",
-          "text": "iptables"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
-          "target": "/eBPF",
-          "text": "eBPF"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
-          "target": "/bgp",
-          "text": "bgp"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
-          "target": "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
-          "text": "状态扇出代理-fan-out-proxy"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
-          "target": "/k8s-port-forward",
-          "text": "k8s-port-forward"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/calico-bgp%E9%85%8D%E7%BD%AE": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/calico-bgp%E9%85%8D%E7%BD%AE",
-          "target": "/bgp",
-          "text": "bgp"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/calico-ebpf%E6%A8%A1%E5%BC%8F": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/calico-ebpf%E6%A8%A1%E5%BC%8F",
-          "target": "/ebpf",
-          "text": "ebpf"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/cicd": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/cicd",
-          "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "text": "k8s-方案-大规模集群#Dockerfile 镜像 CICD 管理"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
-          "text": "k8s-部署-通用注意点"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
-          "text": "k8s-部署-高可用方案"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E5%A2%9E%E5%8A%A0%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B",
-          "text": "k8s-增加节点流程"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B",
-          "text": "k8s-删除节点流程"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-etcd%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D",
-          "text": "k8s-etcd备份和恢复"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E9%9B%86%E7%BE%A4%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B",
-          "text": "k8s-集群升级流程"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88",
-          "text": "k8s-存储方案"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
-          "text": "k8s-网络方案"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86",
-          "text": "k8s-日志收集"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
-          "text": "k8s-监控告警"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BCistio",
-          "text": "k8s-服务网格istio"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E9%AB%98%E7%BA%A7%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BDopenkruise",
-          "text": "k8s-高级工作负载openkruise"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E8%80%81%E5%86%85%E6%A0%B8%E5%AF%BC%E8%87%B4%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98",
-          "text": "k8s-老内核导致的相关问题"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E6%91%98%E6%B5%81%E6%96%B9%E6%A1%88",
-          "text": "k8s-摘流方案"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E9%9B%86%E7%BE%A4%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86",
-          "text": "k8s-集群证书管理"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B",
-          "text": "k8s-僵尸进程"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
-          "text": "灰度发布"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/cicd",
-          "text": "cicd"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/k8s-debug%E5%91%BD%E4%BB%A4",
-          "text": "k8s-debug命令#pod 抓包"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
-          "target": "/victoriametrics",
-          "text": "victoriametrics"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
-          "target": "/prometheus",
-          "text": "prometheus"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
-          "target": "/thanos",
-          "text": "thanos"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
-          "target": "/calico",
-          "text": "calico"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
-          "target": "/flannel",
-          "text": "flannel"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
-          "target": "/cilium",
-          "text": "cilium"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
-          "target": "/kubekey",
-          "text": "kubekey"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
-          "target": "/sealos",
-          "text": "sealos"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
-          "target": "/lvm",
-          "text": "lvm"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
-          "target": "/kubekey",
-          "text": "kubekey"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
-          "target": "/linux-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5",
-          "text": "linux-时间同步"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
-          "target": "/sealos",
-          "text": "sealos"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/k8s-port-forward": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-port-forward",
-          "target": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
-          "text": "calico-可观测"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
-          "target": "/tcp",
-          "text": "tcp"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
-          "target": "/udp",
-          "text": "udp"
-        }
-      ],
-      "/%E7%81%B5%E6%84%9F/tcp": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/tcp",
-          "target": "/tcp-%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81",
-          "text": "tcp-连接状态"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/tcp",
-          "target": "/tcp-%E9%AB%98%E7%BA%A7%E7%9F%A5%E8%AF%86%E7%82%B9",
-          "text": "tcp-高级知识点"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/tcp",
-          "target": "/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96",
-          "text": "tcp-配置优化"
-        }
-      ]
-    },
-    "backlinks": {
-      "/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0": [
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/python",
-          "target": "/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0",
-          "text": "无意义-python-老网课笔记"
-        }
-      ],
-      "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "target": "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
-          "text": "灰度发布"
-        }
-      ],
-      "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy": [
-        {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
-          "target": "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
-          "text": "状态扇出代理-fan-out-proxy"
-        }
-      ],
-      "/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99": [
-        {
-          "source": "/%E5%A4%A7%E7%BA%B2/%E7%BE%A4%E8%BE%89",
+          "source": "/%E7%BE%A4%E8%BE%89",
           "target": "/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99",
           "text": "群辉-回收站"
         }
       ],
       "/bgp": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/calico-bgp%E9%85%8D%E7%BD%AE",
+          "source": "/bgp",
+          "target": "/calico",
+          "text": "calico"
+        }
+      ],
+      "/calico": [
+        {
+          "source": "/calico",
+          "target": "/calico-%E4%BB%8B%E7%BB%8D",
+          "text": "calico-介绍"
+        },
+        {
+          "source": "/calico",
+          "target": "/calico-%E5%AE%89%E8%A3%85",
+          "text": "calico-安装"
+        },
+        {
+          "source": "/calico",
+          "target": "/calico-bgp%E9%85%8D%E7%BD%AE",
+          "text": "calico-bgp配置"
+        },
+        {
+          "source": "/calico",
+          "target": "/calico-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2",
+          "text": "calico-数据平面"
+        },
+        {
+          "source": "/calico",
+          "target": "/calico-ebpf%E6%A8%A1%E5%BC%8F",
+          "text": "calico-ebpf模式"
+        },
+        {
+          "source": "/calico",
+          "target": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
+          "text": "calico-可观测"
+        }
+      ],
+      "/calico-%E4%BB%8B%E7%BB%8D": [
+        {
+          "source": "/calico-%E4%BB%8B%E7%BB%8D",
+          "target": "/iptables",
+          "text": "iptables"
+        },
+        {
+          "source": "/calico-%E4%BB%8B%E7%BB%8D",
+          "target": "/eBPF",
+          "text": "eBPF"
+        },
+        {
+          "source": "/calico-%E4%BB%8B%E7%BB%8D",
           "target": "/bgp",
           "text": "bgp"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
+          "source": "/calico-%E4%BB%8B%E7%BB%8D",
+          "target": "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
+          "text": "状态扇出代理-fan-out-proxy"
+        }
+      ],
+      "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B": [
+        {
+          "source": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
+          "target": "/k8s-port-forward",
+          "text": "k8s-port-forward"
+        }
+      ],
+      "/calico-bgp%E9%85%8D%E7%BD%AE": [
+        {
+          "source": "/calico-bgp%E9%85%8D%E7%BD%AE",
+          "target": "/bgp",
+          "text": "bgp"
+        }
+      ],
+      "/calico-ebpf%E6%A8%A1%E5%BC%8F": [
+        {
+          "source": "/calico-ebpf%E6%A8%A1%E5%BC%8F",
+          "target": "/ebpf",
+          "text": "ebpf"
+        }
+      ],
+      "/cicd": [
+        {
+          "source": "/cicd",
+          "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "text": "k8s-方案-大规模集群#Dockerfile 镜像 CICD 管理"
+        }
+      ],
+      "/k8s": [
+        {
+          "source": "/k8s",
+          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+          "text": "k8s-部署-通用注意点"
+        },
+        {
+          "source": "/k8s",
+          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
+          "text": "k8s-部署-高可用方案"
+        },
+        {
+          "source": "/k8s",
+          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
+          "text": "k8s-部署-常用部署工具"
+        },
+        {
+          "source": "/k8s",
+          "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "text": "k8s-方案-大规模集群"
+        },
+        {
+          "source": "/k8s",
+          "target": "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88",
+          "text": "k8s-存储方案"
+        },
+        {
+          "source": "/k8s",
+          "target": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+          "text": "k8s-网络方案"
+        },
+        {
+          "source": "/k8s",
+          "target": "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86",
+          "text": "k8s-日志收集"
+        },
+        {
+          "source": "/k8s",
+          "target": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+          "text": "k8s-监控告警"
+        }
+      ],
+      "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4": [
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+          "text": "k8s-部署-通用注意点"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
+          "text": "k8s-部署-高可用方案"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E5%A2%9E%E5%8A%A0%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B",
+          "text": "k8s-增加节点流程"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B",
+          "text": "k8s-删除节点流程"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-etcd%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D",
+          "text": "k8s-etcd备份和恢复"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E9%9B%86%E7%BE%A4%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B",
+          "text": "k8s-集群升级流程"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88",
+          "text": "k8s-存储方案"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+          "text": "k8s-网络方案"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86",
+          "text": "k8s-日志收集"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+          "text": "k8s-监控告警"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BCistio",
+          "text": "k8s-服务网格istio"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E9%AB%98%E7%BA%A7%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BDopenkruise",
+          "text": "k8s-高级工作负载openkruise"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E8%80%81%E5%86%85%E6%A0%B8%E5%AF%BC%E8%87%B4%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98",
+          "text": "k8s-老内核导致的相关问题"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E6%91%98%E6%B5%81%E6%96%B9%E6%A1%88",
+          "text": "k8s-摘流方案"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E9%9B%86%E7%BE%A4%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86",
+          "text": "k8s-集群证书管理"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B",
+          "text": "k8s-僵尸进程"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
+          "text": "灰度发布"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/cicd",
+          "text": "cicd"
+        },
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/k8s-debug%E5%91%BD%E4%BB%A4",
+          "text": "k8s-debug命令#pod 抓包"
+        }
+      ],
+      "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6": [
+        {
+          "source": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+          "target": "/victoriametrics",
+          "text": "victoriametrics"
+        },
+        {
+          "source": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+          "target": "/prometheus",
+          "text": "prometheus"
+        },
+        {
+          "source": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+          "target": "/thanos",
+          "text": "thanos"
+        }
+      ],
+      "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88": [
+        {
+          "source": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+          "target": "/calico",
+          "text": "calico"
+        },
+        {
+          "source": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+          "target": "/flannel",
+          "text": "flannel"
+        },
+        {
+          "source": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+          "target": "/cilium",
+          "text": "cilium"
+        }
+      ],
+      "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7": [
+        {
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
+          "target": "/kubekey",
+          "text": "kubekey"
+        },
+        {
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
+          "target": "/sealos",
+          "text": "sealos"
+        }
+      ],
+      "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9": [
+        {
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+          "target": "/lvm",
+          "text": "lvm"
+        },
+        {
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+          "target": "/kubekey",
+          "text": "kubekey"
+        },
+        {
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+          "target": "/linux-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5",
+          "text": "linux-时间同步"
+        }
+      ],
+      "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88": [
+        {
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
+          "target": "/sealos",
+          "text": "sealos"
+        }
+      ],
+      "/k8s-port-forward": [
+        {
+          "source": "/k8s-port-forward",
+          "target": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
+          "text": "calico-可观测"
+        }
+      ],
+      "/python": [
+        {
+          "source": "/python",
+          "target": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
+          "text": "python-网络开发知识点"
+        },
+        {
+          "source": "/python",
+          "target": "/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0",
+          "text": "无意义-python-老网课笔记"
+        }
+      ],
+      "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9": [
+        {
+          "source": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
+          "target": "/tcp",
+          "text": "tcp"
+        },
+        {
+          "source": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
+          "target": "/udp",
+          "text": "udp"
+        }
+      ],
+      "/tcp": [
+        {
+          "source": "/tcp",
+          "target": "/tcp-%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81",
+          "text": "tcp-连接状态"
+        },
+        {
+          "source": "/tcp",
+          "target": "/tcp-%E9%AB%98%E7%BA%A7%E7%9F%A5%E8%AF%86%E7%82%B9",
+          "text": "tcp-高级知识点"
+        },
+        {
+          "source": "/tcp",
+          "target": "/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96",
+          "text": "tcp-配置优化"
+        }
+      ],
+      "/victoriametrics": [
+        {
+          "source": "/victoriametrics",
+          "target": "/victoriametrics-%E4%BB%8B%E7%BB%8D",
+          "text": "victoriametrics-介绍"
+        }
+      ]
+    },
+    "backlinks": {
+      "/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0": [
+        {
+          "source": "/python",
+          "target": "/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0",
+          "text": "无意义-python-老网课笔记"
+        }
+      ],
+      "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83": [
+        {
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "target": "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
+          "text": "灰度发布"
+        }
+      ],
+      "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy": [
+        {
+          "source": "/calico-%E4%BB%8B%E7%BB%8D",
+          "target": "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
+          "text": "状态扇出代理-fan-out-proxy"
+        }
+      ],
+      "/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99": [
+        {
+          "source": "/%E7%BE%A4%E8%BE%89",
+          "target": "/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99",
+          "text": "群辉-回收站"
+        }
+      ],
+      "/bgp": [
+        {
+          "source": "/calico-bgp%E9%85%8D%E7%BD%AE",
+          "target": "/bgp",
+          "text": "bgp"
+        },
+        {
+          "source": "/calico-%E4%BB%8B%E7%BB%8D",
           "target": "/bgp",
           "text": "bgp"
         }
       ],
       "/calico": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/bgp",
+          "source": "/bgp",
           "target": "/calico",
           "text": "calico"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+          "source": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
           "target": "/calico",
           "text": "calico"
         }
       ],
       "/calico-%E4%BB%8B%E7%BB%8D": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
+          "source": "/calico",
           "target": "/calico-%E4%BB%8B%E7%BB%8D",
           "text": "calico-介绍"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
+          "source": "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
           "target": "/calico-%E4%BB%8B%E7%BB%8D",
           "text": "calico的typha"
         }
       ],
       "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
+          "source": "/calico",
           "target": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
           "text": "calico-可观测"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-port-forward",
+          "source": "/k8s-port-forward",
           "target": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
           "text": "calico-可观测"
         }
       ],
       "/calico-%E5%AE%89%E8%A3%85": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
+          "source": "/calico",
           "target": "/calico-%E5%AE%89%E8%A3%85",
           "text": "calico-安装"
         }
       ],
       "/calico-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
+          "source": "/calico",
           "target": "/calico-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2",
           "text": "calico-数据平面"
         }
       ],
       "/calico-bgp%E9%85%8D%E7%BD%AE": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
+          "source": "/calico",
           "target": "/calico-bgp%E9%85%8D%E7%BD%AE",
           "text": "calico-bgp配置"
         }
       ],
       "/calico-ebpf%E6%A8%A1%E5%BC%8F": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/calico",
+          "source": "/calico",
           "target": "/calico-ebpf%E6%A8%A1%E5%BC%8F",
           "text": "calico-ebpf模式"
         }
       ],
       "/cicd": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/cicd",
           "text": "cicd"
         }
       ],
       "/cilium": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+          "source": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
           "target": "/cilium",
           "text": "cilium"
         }
       ],
       "/eBPF": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
+          "source": "/calico-%E4%BB%8B%E7%BB%8D",
           "target": "/eBPF",
           "text": "eBPF"
         }
       ],
       "/ebpf": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/calico-ebpf%E6%A8%A1%E5%BC%8F",
+          "source": "/calico-ebpf%E6%A8%A1%E5%BC%8F",
           "target": "/ebpf",
           "text": "ebpf"
         }
       ],
       "/flannel": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+          "source": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
           "target": "/flannel",
           "text": "flannel"
         }
       ],
       "/iptables": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
+          "source": "/calico-%E4%BB%8B%E7%BB%8D",
           "target": "/iptables",
           "text": "iptables"
         }
       ],
       "/k8s-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B",
           "text": "k8s-僵尸进程"
         }
       ],
       "/k8s-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B",
           "text": "k8s-删除节点流程"
         }
       ],
       "/k8s-%E5%A2%9E%E5%8A%A0%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E5%A2%9E%E5%8A%A0%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B",
           "text": "k8s-增加节点流程"
         }
       ],
       "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88",
           "text": "k8s-存储方案"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s",
           "target": "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88",
           "text": "k8s-存储方案"
         }
       ],
       "/k8s-%E6%91%98%E6%B5%81%E6%96%B9%E6%A1%88": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E6%91%98%E6%B5%81%E6%96%B9%E6%A1%88",
           "text": "k8s-摘流方案"
         }
       ],
       "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-          "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-          "text": "k8s-方案-大规模集群"
-        },
-        {
-          "source": "/%E7%81%B5%E6%84%9F/cicd",
+          "source": "/cicd",
           "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "text": "k8s-方案-大规模集群#Dockerfile 镜像 CICD 管理"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
+          "source": "/k8s",
+          "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "text": "k8s-方案-大规模集群"
+        },
+        {
+          "source": "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
           "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "text": "k8s-方案-大规模集群#灰度发布"
         }
       ],
       "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86",
           "text": "k8s-日志收集"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s",
           "target": "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86",
           "text": "k8s-日志收集"
         }
       ],
       "/k8s-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BCistio": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BCistio",
           "text": "k8s-服务网格istio"
         }
       ],
       "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
           "text": "k8s-监控告警"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s",
           "target": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
           "text": "k8s-监控告警"
         }
       ],
       "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
           "text": "k8s-网络方案"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s",
           "target": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
           "text": "k8s-网络方案"
         }
       ],
       "/k8s-%E8%80%81%E5%86%85%E6%A0%B8%E5%AF%BC%E8%87%B4%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E8%80%81%E5%86%85%E6%A0%B8%E5%AF%BC%E8%87%B4%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98",
           "text": "k8s-老内核导致的相关问题"
         }
       ],
       "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
+          "source": "/k8s",
           "target": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
           "text": "k8s-部署-常用部署工具"
         }
       ],
       "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
           "text": "k8s-部署-通用注意点"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s",
           "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
           "text": "k8s-部署-通用注意点"
         }
       ],
       "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/k8s",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
           "text": "k8s-部署-高可用方案"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s",
           "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
           "text": "k8s-部署-高可用方案"
         }
       ],
       "/k8s-%E9%9B%86%E7%BE%A4%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E9%9B%86%E7%BE%A4%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B",
           "text": "k8s-集群升级流程"
         }
       ],
       "/k8s-%E9%9B%86%E7%BE%A4%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E9%9B%86%E7%BE%A4%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86",
           "text": "k8s-集群证书管理"
         }
       ],
       "/k8s-%E9%AB%98%E7%BA%A7%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BDopenkruise": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-%E9%AB%98%E7%BA%A7%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BDopenkruise",
           "text": "k8s-高级工作负载openkruise"
         }
       ],
       "/k8s-debug%E5%91%BD%E4%BB%A4": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-debug%E5%91%BD%E4%BB%A4",
           "text": "k8s-debug命令#pod 抓包"
         }
       ],
       "/k8s-etcd%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+          "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
           "target": "/k8s-etcd%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D",
           "text": "k8s-etcd备份和恢复"
         }
       ],
       "/k8s-port-forward": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
+          "source": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
           "target": "/k8s-port-forward",
           "text": "k8s-port-forward"
         }
       ],
       "/kubekey": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
           "target": "/kubekey",
           "text": "kubekey"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
           "target": "/kubekey",
           "text": "kubekey"
         }
       ],
       "/linux-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
           "target": "/linux-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5",
           "text": "linux-时间同步"
         }
       ],
       "/lvm": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
           "target": "/lvm",
           "text": "lvm"
         }
       ],
       "/prometheus": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+          "source": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
           "target": "/prometheus",
           "text": "prometheus"
         }
       ],
       "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/python",
+          "source": "/python",
           "target": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
           "text": "python-网络开发知识点"
         }
       ],
       "/sealos": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
           "target": "/sealos",
           "text": "sealos"
         },
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
+          "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
           "target": "/sealos",
           "text": "sealos"
         }
       ],
       "/tcp": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
+          "source": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
           "target": "/tcp",
           "text": "tcp"
         }
       ],
       "/tcp-%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/tcp",
+          "source": "/tcp",
           "target": "/tcp-%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81",
           "text": "tcp-连接状态"
         }
       ],
       "/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/tcp",
+          "source": "/tcp",
           "target": "/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96",
           "text": "tcp-配置优化"
         }
       ],
       "/tcp-%E9%AB%98%E7%BA%A7%E7%9F%A5%E8%AF%86%E7%82%B9": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/tcp",
+          "source": "/tcp",
           "target": "/tcp-%E9%AB%98%E7%BA%A7%E7%9F%A5%E8%AF%86%E7%82%B9",
           "text": "tcp-高级知识点"
         }
       ],
       "/thanos": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+          "source": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
           "target": "/thanos",
           "text": "thanos"
         }
       ],
       "/udp": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
+          "source": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
           "target": "/udp",
           "text": "udp"
         }
       ],
       "/victoriametrics": [
         {
-          "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+          "source": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
           "target": "/victoriametrics",
           "text": "victoriametrics"
         }
       ],
       "/victoriametrics-%E4%BB%8B%E7%BB%8D": [
         {
-          "source": "/%E5%A4%A7%E7%BA%B2/victoriametrics",
+          "source": "/victoriametrics",
           "target": "/victoriametrics-%E4%BB%8B%E7%BB%8D",
           "text": "victoriametrics-介绍"
         }
@@ -815,334 +815,334 @@
   },
   "links": [
     {
-      "source": "/%E5%A4%A7%E7%BA%B2/calico",
-      "target": "/calico-%E4%BB%8B%E7%BB%8D",
-      "text": "calico-介绍"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/calico",
-      "target": "/calico-%E5%AE%89%E8%A3%85",
-      "text": "calico-安装"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/calico",
-      "target": "/calico-bgp%E9%85%8D%E7%BD%AE",
-      "text": "calico-bgp配置"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/calico",
-      "target": "/calico-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2",
-      "text": "calico-数据平面"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/calico",
-      "target": "/calico-ebpf%E6%A8%A1%E5%BC%8F",
-      "text": "calico-ebpf模式"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/calico",
-      "target": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
-      "text": "calico-可观测"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-      "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
-      "text": "k8s-部署-通用注意点"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-      "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
-      "text": "k8s-部署-高可用方案"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-      "target": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
-      "text": "k8s-部署-常用部署工具"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-      "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-      "text": "k8s-方案-大规模集群"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-      "target": "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88",
-      "text": "k8s-存储方案"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-      "target": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
-      "text": "k8s-网络方案"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-      "target": "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86",
-      "text": "k8s-日志收集"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/k8s",
-      "target": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
-      "text": "k8s-监控告警"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/python",
-      "target": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
-      "text": "python-网络开发知识点"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/python",
-      "target": "/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0",
-      "text": "无意义-python-老网课笔记"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/victoriametrics",
-      "target": "/victoriametrics-%E4%BB%8B%E7%BB%8D",
-      "text": "victoriametrics-介绍"
-    },
-    {
-      "source": "/%E5%A4%A7%E7%BA%B2/%E7%BE%A4%E8%BE%89",
-      "target": "/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99",
-      "text": "群辉-回收站"
-    },
-    {
-      "source": "/%E7%81%B5%E6%84%9F/bgp",
+      "source": "/bgp",
       "target": "/calico",
       "text": "calico"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/calico-bgp%E9%85%8D%E7%BD%AE",
+      "source": "/calico-bgp%E9%85%8D%E7%BD%AE",
       "target": "/bgp",
       "text": "bgp"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/calico-ebpf%E6%A8%A1%E5%BC%8F",
+      "source": "/calico-ebpf%E6%A8%A1%E5%BC%8F",
       "target": "/ebpf",
       "text": "ebpf"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
+      "source": "/calico-%E4%BB%8B%E7%BB%8D",
       "target": "/iptables",
       "text": "iptables"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
+      "source": "/calico-%E4%BB%8B%E7%BB%8D",
       "target": "/eBPF",
       "text": "eBPF"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
+      "source": "/calico-%E4%BB%8B%E7%BB%8D",
       "target": "/bgp",
       "text": "bgp"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/calico-%E4%BB%8B%E7%BB%8D",
+      "source": "/calico-%E4%BB%8B%E7%BB%8D",
       "target": "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
       "text": "状态扇出代理-fan-out-proxy"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
+      "source": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
       "target": "/k8s-port-forward",
       "text": "k8s-port-forward"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/cicd",
-      "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
-      "text": "k8s-方案-大规模集群#Dockerfile 镜像 CICD 管理"
+      "source": "/calico",
+      "target": "/calico-%E4%BB%8B%E7%BB%8D",
+      "text": "calico-介绍"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-port-forward",
+      "source": "/calico",
+      "target": "/calico-%E5%AE%89%E8%A3%85",
+      "text": "calico-安装"
+    },
+    {
+      "source": "/calico",
+      "target": "/calico-bgp%E9%85%8D%E7%BD%AE",
+      "text": "calico-bgp配置"
+    },
+    {
+      "source": "/calico",
+      "target": "/calico-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2",
+      "text": "calico-数据平面"
+    },
+    {
+      "source": "/calico",
+      "target": "/calico-ebpf%E6%A8%A1%E5%BC%8F",
+      "text": "calico-ebpf模式"
+    },
+    {
+      "source": "/calico",
       "target": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
       "text": "calico-可观测"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/cicd",
+      "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "text": "k8s-方案-大规模集群#Dockerfile 镜像 CICD 管理"
+    },
+    {
+      "source": "/k8s-port-forward",
+      "target": "/calico-%E5%8F%AF%E8%A7%82%E6%B5%8B",
+      "text": "calico-可观测"
+    },
+    {
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
       "text": "k8s-部署-通用注意点"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
       "text": "k8s-部署-高可用方案"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E5%A2%9E%E5%8A%A0%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B",
       "text": "k8s-增加节点流程"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B",
       "text": "k8s-删除节点流程"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-etcd%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D",
       "text": "k8s-etcd备份和恢复"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E9%9B%86%E7%BE%A4%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B",
       "text": "k8s-集群升级流程"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88",
       "text": "k8s-存储方案"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
       "text": "k8s-网络方案"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86",
       "text": "k8s-日志收集"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
       "text": "k8s-监控告警"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BCistio",
       "text": "k8s-服务网格istio"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E9%AB%98%E7%BA%A7%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BDopenkruise",
       "text": "k8s-高级工作负载openkruise"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E8%80%81%E5%86%85%E6%A0%B8%E5%AF%BC%E8%87%B4%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98",
       "text": "k8s-老内核导致的相关问题"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E6%91%98%E6%B5%81%E6%96%B9%E6%A1%88",
       "text": "k8s-摘流方案"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E9%9B%86%E7%BE%A4%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86",
       "text": "k8s-集群证书管理"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B",
       "text": "k8s-僵尸进程"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
       "text": "灰度发布"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/cicd",
       "text": "cicd"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "source": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "target": "/k8s-debug%E5%91%BD%E4%BB%A4",
       "text": "k8s-debug命令#pod 抓包"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+      "source": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
       "target": "/victoriametrics",
       "text": "victoriametrics"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+      "source": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
       "target": "/prometheus",
       "text": "prometheus"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+      "source": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
       "target": "/thanos",
       "text": "thanos"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+      "source": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
       "target": "/calico",
       "text": "calico"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+      "source": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
       "target": "/flannel",
       "text": "flannel"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+      "source": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
       "target": "/cilium",
       "text": "cilium"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
+      "source": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
       "target": "/kubekey",
       "text": "kubekey"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
+      "source": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
       "target": "/sealos",
       "text": "sealos"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+      "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
       "target": "/lvm",
       "text": "lvm"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+      "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
       "target": "/kubekey",
       "text": "kubekey"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+      "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
       "target": "/linux-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5",
       "text": "linux-时间同步"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
+      "source": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
       "target": "/sealos",
       "text": "sealos"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
+      "source": "/k8s",
+      "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9",
+      "text": "k8s-部署-通用注意点"
+    },
+    {
+      "source": "/k8s",
+      "target": "/k8s-%E9%83%A8%E7%BD%B2-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88",
+      "text": "k8s-部署-高可用方案"
+    },
+    {
+      "source": "/k8s",
+      "target": "/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7",
+      "text": "k8s-部署-常用部署工具"
+    },
+    {
+      "source": "/k8s",
+      "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
+      "text": "k8s-方案-大规模集群"
+    },
+    {
+      "source": "/k8s",
+      "target": "/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88",
+      "text": "k8s-存储方案"
+    },
+    {
+      "source": "/k8s",
+      "target": "/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88",
+      "text": "k8s-网络方案"
+    },
+    {
+      "source": "/k8s",
+      "target": "/k8s-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86",
+      "text": "k8s-日志收集"
+    },
+    {
+      "source": "/k8s",
+      "target": "/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6",
+      "text": "k8s-监控告警"
+    },
+    {
+      "source": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
       "target": "/tcp",
       "text": "tcp"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
+      "source": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
       "target": "/udp",
       "text": "udp"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/tcp",
+      "source": "/python",
+      "target": "/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9",
+      "text": "python-网络开发知识点"
+    },
+    {
+      "source": "/python",
+      "target": "/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0",
+      "text": "无意义-python-老网课笔记"
+    },
+    {
+      "source": "/tcp",
       "target": "/tcp-%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81",
       "text": "tcp-连接状态"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/tcp",
+      "source": "/tcp",
       "target": "/tcp-%E9%AB%98%E7%BA%A7%E7%9F%A5%E8%AF%86%E7%82%B9",
       "text": "tcp-高级知识点"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/tcp",
+      "source": "/tcp",
       "target": "/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96",
       "text": "tcp-配置优化"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
+      "source": "/victoriametrics",
+      "target": "/victoriametrics-%E4%BB%8B%E7%BB%8D",
+      "text": "victoriametrics-介绍"
+    },
+    {
+      "source": "/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83",
       "target": "/k8s-%E6%96%B9%E6%A1%88-%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E7%BE%A4",
       "text": "k8s-方案-大规模集群#灰度发布"
     },
     {
-      "source": "/%E7%81%B5%E6%84%9F/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
+      "source": "/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy",
       "target": "/calico-%E4%BB%8B%E7%BB%8D",
       "text": "calico的typha"
+    },
+    {
+      "source": "/%E7%BE%A4%E8%BE%89",
+      "target": "/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99",
+      "text": "群辉-回收站"
     }
   ]
 }
