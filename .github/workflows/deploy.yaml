@@ -35,7 +35,7 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PUBLISH_TOKEN }}
           external_repository: dlliang14/publicNotes
           publish_dir: ./public
           publish_branch: main  # deploying branch
