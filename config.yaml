@@ -1,4 +1,4 @@
-baseURL: https://amethyst.bencuan.me
+baseURL: https://dlliang14.github.io/amethyst/
 
 # Book configuration
 disablePathToLower: true
@@ -25,13 +25,13 @@ menu:
   #     weight: 10
   after:
     - name: "Github"
-      url: "https://github.com/64bitpandas/amethyst"
+      url: "https://github.com/dlliang14"
       weight: 10
 
 params:
 
-  name: Ben Cuan
-  title: 📓 Amethyst
+  name: dlliang14
+  title: 📓 dll-第二大脑
 
   # OPTIONAL: custom favicon location
   # favicon: 'location/to/favicon.png'
@@ -70,7 +70,7 @@ params:
   enableMermaid: true
 
   # Link to your Github repo
-  GitHubLink: https://github.com/64bitpandas/amethyst
+  GitHubLink: https://github.com/dlliang14/amethyst
 
   # Search (WIP)
   search:
@@ -80,15 +80,13 @@ params:
 
   # Site description and title
   description:
-    Notes, hosted by bencuan
+    Notes, hosted by dlliang14
 
   
   # Footer links
   links:
-    - link_name: Website
-      link: https://bencuan.me
-    - link_name: Blog
-      link: https://blog.bencuan.me
+    - link_name: BILIBILI
+      link: https://space.bilibili.com/4741350
 
   # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.
@@ -145,3 +143,7 @@ params:
   BookSearch: false
   BookServiceWorker: false
   BookPortableLinks: false
+
+ignoreFiles: [  
+    "/content/.foam/templates/*"
+]
