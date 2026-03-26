@@ -33,9 +33,11 @@ jobs:
         run: hugo --minify
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          external_repository: dlliang14/publicNotes
           publish_dir: ./public
           publish_branch: main  # deploying branch
+          commit_message: "Deploy to GitHub Pages"
           cname: dlliang14.github.io
