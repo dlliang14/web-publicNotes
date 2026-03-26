@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Build Link Index
-        uses: jackyzha0/hugo-obsidian@v2.20
+        uses: jackyzha0/hugo-obsidian@v2.18
         with:
           index: true
           input: content
@@ -33,10 +33,9 @@ jobs:
         run: hugo --minify
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.PUBLISH_TOKEN }}
           publish_dir: ./public
           publish_branch: deploy  # deploying branch
-          commit_message: "Deploy to GitHub Pages"
           cname: dlliang14.github.io
