@@ -146,6 +146,17 @@ $.Site.Params.enableCodeBlockCopy }} {{ $clipboard := resources.Get
     {{end}}
 
     {{if $data.enableMermaid | default $.Site.Params.enableMermaid}}
+      const mermaidCodeBlocks = document.querySelectorAll("pre > code.language-mermaid, pre > code[data-lang='mermaid']")
+      mermaidCodeBlocks.forEach((codeEl) => {
+        const pre = codeEl.parentElement
+        if (!pre || pre.classList.contains("mermaid")) return
+
+        const mermaidEl = document.createElement("pre")
+        mermaidEl.className = "mermaid"
+        mermaidEl.textContent = codeEl.textContent || ""
+        pre.replaceWith(mermaidEl)
+      })
+
       var els = document.getElementsByClassName("mermaid");
       if (els.length > 0) {
         import('https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs').then(
