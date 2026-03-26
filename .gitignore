@@ -1,5 +1,8 @@
 public/
 exampleSite/public/
+resources/_gen/
+assets/indices/*.json
+static/linkmap
 .DS_Store
 .hugo_build.lock
 themes
