@@ -46,8 +46,8 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
   }
 
   const data = {
-    nodes: [...neighbours].map((id) => ({ id })),
-    links: copyLinks.filter((l) => neighbours.has(l.source) && neighbours.has(l.target)),
+    nodes: [...neighbours].filter((id) => content[id]).map((id) => ({ id })),
+    links: copyLinks.filter((l) => neighbours.has(l.source) && neighbours.has(l.target) && content[l.source] && content[l.target]),
   }
 
   const color = (d) => {
