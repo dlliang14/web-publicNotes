@@ -23,10 +23,10 @@ menu:
   #   - name: "Sample"
   #     url: "https://google.com"
   #     weight: 10
-  after:
-    - name: "Github"
-      url: "https://github.com/dlliang14"
-      weight: 10
+  # after:
+  #   - name: "Github"
+  #     url: "https://github.com/dlliang14"
+  #     weight: 10
 
 params:
 
@@ -87,6 +87,8 @@ params:
   links:
     - link_name: BILIBILI
       link: https://space.bilibili.com/4741350
+    - link_name: GITHUB
+      link: https://github.com/dlliang14
 
   # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.
