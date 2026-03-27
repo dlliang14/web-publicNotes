@@ -1,0 +1,196 @@
+<!doctype html><html lang=en dir=ltr><head><meta property="og:url" content="https://dlliang14.github.io/web-publicNotes/hugo%E5%BB%BA%E7%AB%99/"><meta property="og:site_name" content="📓 dll-笔记"><meta property="og:title" content="📓 dll-笔记"><meta property="og:description" content='大纲-hugo建站 # 1. hugo 建站教程记录 # b站24年视频教程 对应文字教程 hugo官网
+1.1. 创建 hugo 项目 # hugo new site dll-notes Congratulations! Your new Hugo project was created in Z:\dlliang14\Obsidian\myNote\dll-notes. Just a few more steps... 1. Change the current directory to Z:\dlliang14\Obsidian\myNote\dll-notes. 2. Create or install a theme: - Create a new theme with the command "hugo new theme <THEMENAME>" - Or, install a theme from https://themes.gohugo.io/ 3. Edit hugo.toml, setting the "theme" property to the theme name. 4. Create new content with the command "hugo new content <SECTIONNAME>\<FILENAME>.<FORMAT>". 5. Start the embedded web server with the command "hugo server --buildDrafts". 1.2. 测试 hugo # cd dll-notes hugo server -D Built in 15 ms Environment: "development" Serving pages from disk Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender Web Server is available at http://localhost:1313/ (bind address 127.0.0.1) Press Ctrl+C to stop # 出现 Page Not Found 说明hugo正常 下一步安装主题 1.3. 安装配置 hugo 主题 # 紫水晶主题-支持双链'><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:tag" content="大纲"><meta property="article:tag" content="博客"><title>Hugo建站 | 📓 dll-笔记</title><link rel=manifest href=/web-publicNotes/manifest.json><link rel=icon href=/web-publicNotes/favicon.png type=image/x-icon><link rel=stylesheet href=/web-publicNotes/book.min.ba09574c9901fece0875407bd4458ac1712ce621ddae7a3e6079311e13a7da55.css integrity="sha256-uglXTJkB/s4IdUB71EWKwXEs5iHdrno+YHkxHhOn2lU=" crossorigin=anonymous><meta charset=UTF-8><meta name=description content='
+  大纲-hugo建站
+  #
+
+
+  1. hugo 建站教程记录
+  #
+
+
+b站24年视频教程
+
+对应文字教程
+
+hugo官网
+
+  1.1. 创建 hugo 项目
+  #
+
+hugo new site dll-notes
+
+Congratulations! Your new Hugo project was created in Z:\dlliang14\Obsidian\myNote\dll-notes.
+
+Just a few more steps...
+
+1. Change the current directory to Z:\dlliang14\Obsidian\myNote\dll-notes.
+2. Create or install a theme:
+   - Create a new theme with the command "hugo new theme <THEMENAME>"
+   - Or, install a theme from https://themes.gohugo.io/
+3. Edit hugo.toml, setting the "theme" property to the theme name.
+4. Create new content with the command "hugo new content <SECTIONNAME>\<FILENAME>.<FORMAT>".
+5. Start the embedded web server with the command "hugo server --buildDrafts".
+
+  1.2. 测试 hugo
+  #
+
+cd dll-notes
+hugo server -D
+
+Built in 15 ms
+Environment: "development"
+Serving pages from disk
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+
+# 出现 Page Not Found 说明hugo正常 下一步安装主题
+
+  1.3. 安装配置 hugo 主题
+  #
+
+
+紫水晶主题-支持双链'><title>📓 dll-笔记</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://dlliang14.github.io/web-publicNotes//favicon.png><link href=https://dlliang14.github.io/web-publicNotes/styles.e08ceb33360cec132feb69cfb982e2a4.min.css rel=stylesheet><link href=https://dlliang14.github.io/web-publicNotes/quartz/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/darkmode.ee7e4f92c1dc2443b05a655a898a2502.min.js></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/util.c69e233dc1cc331a30b0f670e657b425.min.js></script><script async src=https://unpkg.com/@floating-ui/core@0.7.3></script><script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script><script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://dlliang14.github.io/web-publicNotes/",fetchData=Promise.all([fetch("https://dlliang14.github.io/web-publicNotes/indices/linkIndex.b7ee907c1e147b5db72cf109b9241772.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://dlliang14.github.io/web-publicNotes/indices/contentIndex.678ce18f0b7a767af460803bd9f79709.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addCollapsibleCallouts(),initPopover("https://dlliang14.github.io/web-publicNotes",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s;drawGraph("https://dlliang14.github.io/web-publicNotes",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}const i=document.querySelectorAll("pre > code.language-mermaid, pre > code[data-lang='mermaid']");i.forEach(e=>{const t=e.parentElement;if(!t||t.classList.contains("mermaid"))return;const n=document.createElement("pre");n.className="mermaid",n.textContent=e.textContent||"",t.replaceWith(n)});var a=document.getElementsByClassName("mermaid");a.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{"’":"'"},throwOnError:!1})}</script><script>window.Million={navigate:e=>window.location.href=e,prefetch:()=>{}},window.addEventListener("DOMContentLoaded",()=>{init(),render()})</script></head><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><header class=book-header><label for=menu-control><img src=/web-publicNotes/svg/menu.svg class=book-icon alt=Menu></label><h1 id=page-title><a href=https://dlliang14.github.io/web-publicNotes/>📓 dll-笔记</a></h1><div class=spacer></div><div id=search-icon class=quartz-search><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg>
+</label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control><main class=flex><aside class=book-menu><div class=book-menu-content><nav><div class=menu-search><div id=search-icon class=quartz-search><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div></div><ul><li><a href=/web-publicNotes/calico/>Calico</a></li><li><a href=/web-publicNotes/hugo%E5%BB%BA%E7%AB%99/ class=active>Hugo建站</a></li><li><a href=/web-publicNotes/k8s/>K8s</a></li><li><a href=/web-publicNotes/python/>Python</a></li><li><a href=/web-publicNotes/victoriametrics/>Victoriametrics</a></li><li><a href=/web-publicNotes/%E7%BE%A4%E8%BE%89/>群辉</a></li></ul><ul><li><a href=https://github.com/dlliang14 target=_blank rel=noopener>Github</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class="book-page container"><article class=markdown><h1 class=title>Hugo建站</h1><h1 id=大纲-hugo建站>大纲-hugo建站
+<a class=anchor href=#%e5%a4%a7%e7%ba%b2-hugo%e5%bb%ba%e7%ab%99>#</a></h1><h2 id=1-hugo-建站教程记录>1. hugo 建站教程记录
+<a class=anchor href=#1-hugo-%e5%bb%ba%e7%ab%99%e6%95%99%e7%a8%8b%e8%ae%b0%e5%bd%95>#</a></h2><p><a href=https://www.bilibili.com/video/BV1bovfeaEtQ rel=noopener>b站24年视频教程</a>
+<a href=https://letere-gzj.github.io/hugo-stack/p/hugo/custom-blog/ rel=noopener>对应文字教程</a>
+<a href=https://gohugo.io/ rel=noopener>hugo官网</a></p><h3 id=11-创建-hugo-项目>1.1. 创建 hugo 项目
+<a class=anchor href=#11-%e5%88%9b%e5%bb%ba-hugo-%e9%a1%b9%e7%9b%ae>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>hugo new site dll-notes
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Congratulations! Your new Hugo project was created in Z:<span style=color:#ae81ff>\d</span>lliang14<span style=color:#ae81ff>\O</span>bsidian<span style=color:#ae81ff>\m</span>yNote<span style=color:#ae81ff>\d</span>ll-notes.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Just a few more steps...
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>1. Change the current directory to Z:<span style=color:#ae81ff>\d</span>lliang14<span style=color:#ae81ff>\O</span>bsidian<span style=color:#ae81ff>\m</span>yNote<span style=color:#ae81ff>\d</span>ll-notes.
+</span></span><span style=display:flex><span>2. Create or install a theme:
+</span></span><span style=display:flex><span>   - Create a new theme with the command <span style=color:#e6db74>&#34;hugo new theme &lt;THEMENAME&gt;&#34;</span>
+</span></span><span style=display:flex><span>   - Or, install a theme from https://themes.gohugo.io/
+</span></span><span style=display:flex><span>3. Edit hugo.toml, setting the <span style=color:#e6db74>&#34;theme&#34;</span> property to the theme name.
+</span></span><span style=display:flex><span>4. Create new content with the command <span style=color:#e6db74>&#34;hugo new content &lt;SECTIONNAME&gt;\&lt;FILENAME&gt;.&lt;FORMAT&gt;&#34;</span>.
+</span></span><span style=display:flex><span>5. Start the embedded web server with the command <span style=color:#e6db74>&#34;hugo server --buildDrafts&#34;</span>.
+</span></span></code></pre></div><h3 id=12-测试-hugo>1.2. 测试 hugo
+<a class=anchor href=#12-%e6%b5%8b%e8%af%95-hugo>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>cd dll-notes
+</span></span><span style=display:flex><span>hugo server -D
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Built in <span style=color:#ae81ff>15</span> ms
+</span></span><span style=display:flex><span>Environment: <span style=color:#e6db74>&#34;development&#34;</span>
+</span></span><span style=display:flex><span>Serving pages from disk
+</span></span><span style=display:flex><span>Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+</span></span><span style=display:flex><span>Web Server is available at http://localhost:1313/ <span style=color:#f92672>(</span>bind address 127.0.0.1<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Press Ctrl+C to stop
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 出现 Page Not Found 说明hugo正常 下一步安装主题</span>
+</span></span></code></pre></div><h3 id=13-安装配置-hugo-主题>1.3. 安装配置 hugo 主题
+<a class=anchor href=#13-%e5%ae%89%e8%a3%85%e9%85%8d%e7%bd%ae-hugo-%e4%b8%bb%e9%a2%98>#</a></h3><p><a href=https://amethyst.bencuan.me/ rel=noopener>紫水晶主题-支持双链</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#75715e># 先fork 再clone</span>
+</span></span><span style=display:flex><span>git clone https://github.com/dlliang14/amethyst.git
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 文件夹结构</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 所有链接都应相对于根/content路径</span>
+</span></span><span style=display:flex><span>/content <span style=color:#75715e># 所有要发布的笔记</span>
+</span></span><span style=display:flex><span>  /_index.md <span style=color:#75715e># 主页</span>
+</span></span></code></pre></div><h4 id=131-元数据要求>1.3.1. 元数据要求
+<a class=anchor href=#131-%e5%85%83%e6%95%b0%e6%8d%ae%e8%a6%81%e6%b1%82>#</a></h4><ul><li>Hugo 对文件元数据要求很高。请确保标题使用双引号括起来，并在文件顶部的 front matter 中定义标题</li><li>可选 front matter 配置项<ul><li>type = &ldquo;docs&rdquo; 页面按 docs 模板渲染</li><li>weight：左侧排序权重</li><li>bookFlatSection：是否扁平化 section</li><li>bookCollapseSection：该层是否默认折叠子项</li><li>bookHidden：是否从左侧菜单隐藏</li><li>bookToC：是否显示右侧目录</li><li>bookComments：是否启用评论</li><li>bookSearchExclude：是否排除搜索</li><li>bookHref：菜单点击跳转外链</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#75715e># 可以通过 title 或者 一级标题 来设置标题</span>
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>title: <span style=color:#e6db74>&#34;Example Title&#34;</span>
+</span></span><span style=display:flex><span>tags:
+</span></span><span style=display:flex><span>- example-tag
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 左侧不想显示的页面可以设置 bookHidden: true</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 我把非大纲的都设置了 bookHidden: true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Hugo 通用字段</span>
+</span></span><span style=display:flex><span>常见有：title、date、draft、tags、categories、aliases、summary、description、slug、url、lastmod 等。
+</span></span></code></pre></div><h4 id=132-链接笔记库>1.3.2. 链接笔记库
+<a class=anchor href=#132-%e9%93%be%e6%8e%a5%e7%ac%94%e8%ae%b0%e5%ba%93>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>cd ./amethyst
+</span></span><span style=display:flex><span>rm -rf content
+</span></span><span style=display:flex><span>git submodule add https://github.com/dlliang14/myNote.git content
+</span></span></code></pre></div><h3 id=14-hugo-预览>1.4. hugo 预览
+<a class=anchor href=#14-hugo-%e9%a2%84%e8%a7%88>#</a></h3><p><a class="internal-link broken">windows命令行工具</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#75715e># Install and link `hugo-obsidian` locally</span>
+</span></span><span style=display:flex><span>go install github.com/jackyzha0/hugo-obsidian@latest
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>cd ./amethyst
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 本地预览</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 需要有make工具，可以参考双链教程安装</span>
+</span></span><span style=display:flex><span>make serve
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 会有动态更新的文件，需要加入.gitignore</span>
+</span></span><span style=display:flex><span>resources/_gen  <span style=color:#75715e># 这是 Hugo 的 处理缓存（如缩减后的 CSS、转换后的 SCSS、裁剪后的图片）</span>
+</span></span><span style=display:flex><span>assets/indices/*.json <span style=color:#75715e># 这是 hugo-obsidian 生成的索引文件</span>
+</span></span><span style=display:flex><span>static/linkmap <span style=color:#75715e># 这通常是 Quartz 映射双链的中间产物</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 如果之前已经被 Git 跟踪，还需要把它从索引里移除（保留本地文件）</span>
+</span></span><span style=display:flex><span>git rm --cached -r resources/_gen
+</span></span><span style=display:flex><span>git rm --cached -r assets/indices/*.json
+</span></span><span style=display:flex><span>git rm --cached -r static/linkmap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># View your site in a browser at http://localhost:1313/</span>
+</span></span></code></pre></div><h3 id=15-主题修复>1.5. 主题修复
+<a class=anchor href=#15-%e4%b8%bb%e9%a2%98%e4%bf%ae%e5%a4%8d>#</a></h3><p>[[git-分支管理]]</p><h4 id=151-bug-修复---hugo-模板不兼容问题>1.5.1. bug 修复 - hugo 模板不兼容问题
+<a class=anchor href=#151-bug-%e4%bf%ae%e5%a4%8d---hugo-%e6%a8%a1%e6%9d%bf%e4%b8%8d%e5%85%bc%e5%ae%b9%e9%97%ae%e9%a2%98>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#75715e># 报错</span>
+</span></span><span style=display:flex><span>Ignored <span style=color:#ae81ff>0</span> private files
+</span></span><span style=display:flex><span>Parsed <span style=color:#ae81ff>76</span> total links
+</span></span><span style=display:flex><span>Removed <span style=color:#ae81ff>10</span> external and non-markdown links
+</span></span><span style=display:flex><span>hugo server --enableGitInfo --minify --bind<span style=color:#f92672>=</span>0.0.0.0 --baseURL<span style=color:#f92672>=</span>http://localhost --port<span style=color:#f92672>=</span><span style=color:#ae81ff>1313</span> --appendPort<span style=color:#f92672>=</span>true
+</span></span><span style=display:flex><span>ERROR <span style=color:#e6db74>&#34;Z:\dlliang14\Obsidian\amethyst\layouts\partials\quartz\backlinks.html:6:1&#34;</span>: parse of template failed: template: _partials/quartz/backlinks.html:6: <span style=color:#66d9ef>function</span> <span style=color:#e6db74>&#34;getJSON&#34;</span> not defined
+</span></span><span style=display:flex><span>make: *** <span style=color:#f92672>[</span>Makefile:21: serve<span style=color:#f92672>]</span> Error <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 这个主题是2023年的，和hugo最新版本不兼容</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># getJSON 目前版本 被更安全的 resources.GetRemote 或 dict 相关逻辑取代</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>git checkout -b fix/hugo-template-issue
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>git commit -m <span style=color:#e6db74>&#34;fix: resolve hugo template getJSON issue&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 发布分支</span>
+</span></span><span style=display:flex><span>git push origin fix/hugo-template-issue
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># github 上创建 pull request，等待合并后再切换回 main 分支</span>
+</span></span><span style=display:flex><span>git checkout main
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 复杂冲突 本地合并</span>
+</span></span><span style=display:flex><span>git merge fix/hugo-template-issue --no-ff
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 删除分支</span>
+</span></span><span style=display:flex><span>git branch -d fix/hugo-template-issue
+</span></span><span style=display:flex><span>git push origin --delete fix/hugo-template-issue
+</span></span></code></pre></div><h4 id=152-mermaid-图表渲染修复>1.5.2. mermaid 图表渲染修复
+<a class=anchor href=#152-mermaid-%e5%9b%be%e8%a1%a8%e6%b8%b2%e6%9f%93%e4%bf%ae%e5%a4%8d>#</a></h4><h2 id=2-发布与自定义修改>2. 发布与自定义修改
+<a class=anchor href=#2-%e5%8f%91%e5%b8%83%e4%b8%8e%e8%87%aa%e5%ae%9a%e4%b9%89%e4%bf%ae%e6%94%b9>#</a></h2><h3 id=21-发布计划准备>2.1. 发布计划准备
+<a class=anchor href=#21-%e5%8f%91%e5%b8%83%e8%ae%a1%e5%88%92%e5%87%86%e5%a4%87>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#75715e># github pages 只能有 1 个“主站”</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 但可以有 无限多个“子站（项目站）”</span>
+</span></span><span style=display:flex><span>username.github.io        → 博客（主站）
+</span></span><span style=display:flex><span>username.github.io/amethyst  → 笔记（子站）
+</span></span></code></pre></div><h3 id=github-actions-自动部署>github actions 自动部署
+<a class=anchor href=#github-actions-%e8%87%aa%e5%8a%a8%e9%83%a8%e7%bd%b2>#</a></h3><p><a href=https://amethyst.bencuan.me/setup/hosting/ rel=noopener>参考文字</a>
+<a href=https://gohugo.io/configuration/all/#ignore-content-and-data-files-when-rendering rel=noopener>hugo 忽略渲染逻辑</a></p><ul><li>on.push: 监听 main 分支的 push 事件</li><li>jobs.deploy: 定义部署流程<ul><li>runs-on: ubuntu-latest 选择运行环境</li><li><a href=https://github.com/actions/checkout/tree/releases/v4 rel=noopener>actions/checkout@v4</a></li><li><a href=https://github.com/jackyzha0/hugo-obsidian rel=noopener>jackyzha0/hugo-obsidian@v2.20</a></li><li><a href=https://github.com/peaceiris/actions-hugo rel=noopener>peaceiris/actions-hugo@v3</a></li><li>build web</li><li><a href=https://github.com/peaceiris/actions-gh-pages rel=noopener>peaceiris/actions-gh-pages@v3</a></li></ul></li></ul><p><img src=https://img.180007.xyz/20260326173148.png width=auto alt=token权限></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># 创建token - 务必勾选上图权限</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># config.yaml</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>baseURL</span>: <span style=color:#ae81ff>https://dlliang14.github.io/amethyst/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 忽略渲染 方案1 config.yaml</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>ignoreFiles</span>: [  
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;/content/.foam/templates/*&#34;</span>,  
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;/content/private/*&#34;</span>, 
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&lt;your path here&gt;&#34;</span>
+</span></span><span style=display:flex><span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 忽略渲染 方案2 front matter 中设置</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 但是 Interactive Graph 里还是有啊！好丑！</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>draft</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 本地想看看可以设置`--buildDrafts|-D`</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>hugo server --buildDrafts</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># .github/workflows/deploy.yaml</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>cname</span>: <span style=color:#ae81ff>dlliang14.github.io</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># config.yaml 换个新分支来发布！</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>publish_branch</span>: <span style=color:#ae81ff>deploy </span> <span style=color:#75715e># deploying branch</span>
+</span></span></code></pre></div><h3 id=22-hugo-通用-configyaml>2.2. hugo 通用 config.yaml
+<a class=anchor href=#22-hugo-%e9%80%9a%e7%94%a8-configyaml>#</a></h3><p><a href=https://amethyst.bencuan.me/setup/config/ rel=noopener>说明文档</a></p><h3 id=23-hugo-首页-content_indexmd>2.3. hugo 首页 content/_index.md
+<a class=anchor href=#23-hugo-%e9%a6%96%e9%a1%b5-content_indexmd>#</a></h3><h3 id=24-amethyst-主题>2.4. amethyst 主题
+<a class=anchor href=#24-amethyst-%e4%b8%bb%e9%a2%98>#</a></h3><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/graph.cbd78cfa87df7d3e230d16fc24f06548.js></script></div></div><div id=contact_buttons><footer><p>Made with <a href=https://github.com/64bitpandas/amethyst>Amethyst</a>, © 2026 dlliang14</p><ul><li><a href=https://dlliang14.github.io/web-publicNotes/>Home</a></li><li><a href=https://space.bilibili.com/4741350>BILIBILI</a></li></ul></footer></div></article><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#大纲-hugo建站>大纲-hugo建站</a><ul><li><a href=#1-hugo-建站教程记录>1. hugo 建站教程记录</a><ul><li><a href=#11-创建-hugo-项目>1.1. 创建 hugo 项目</a></li><li><a href=#12-测试-hugo>1.2. 测试 hugo</a></li><li><a href=#13-安装配置-hugo-主题>1.3. 安装配置 hugo 主题</a></li><li><a href=#14-hugo-预览>1.4. hugo 预览</a></li><li><a href=#15-主题修复>1.5. 主题修复</a></li></ul></li><li><a href=#2-发布与自定义修改>2. 发布与自定义修改</a><ul><li><a href=#21-发布计划准备>2.1. 发布计划准备</a></li><li><a href=#github-actions-自动部署>github actions 自动部署</a></li><li><a href=#22-hugo-通用-configyaml>2.2. hugo 通用 config.yaml</a></li><li><a href=#23-hugo-首页-content_indexmd>2.3. hugo 首页 content/_index.md</a></li><li><a href=#24-amethyst-主题>2.4. amethyst 主题</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>

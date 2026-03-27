@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ebpf on</title><link>https://dlliang14.github.io/web-publicNotes/tags/ebpf/</link><description>Recent content in Ebpf on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/ebpf/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico-ebpf%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico-ebpf%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h1 id="calico-ebpf模式"&gt;
+ calico-ebpf模式
+ &lt;a class="anchor" href="#calico-ebpf%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="启动-ebpf"&gt;
+ 启动 ebpf
+ &lt;a class="anchor" href="#%e5%90%af%e5%8a%a8-ebpf"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;[[ebpf]]&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1. 配置cm
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2. 关闭kube-proxy
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;3. 修改installer为 ebpf 会帮忙调整felix配置
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;3.1. 报错1 节点挂载
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mount -t bpf bpf /sys/fs/bpf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;4. 查看ebpf规则的方法
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt install linux-tools-&lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;uname -r&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt; -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 找到对应的cali网卡&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bpftool net | grep cali
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 反编译ebpf代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bpftool prog dump xlated id &lt;span style="color:#ae81ff"&gt;441&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 查看管理了什么map&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bpftool prog show &lt;span style="color:#ae81ff"&gt;441&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

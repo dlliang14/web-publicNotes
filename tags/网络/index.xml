@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>网络 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E7%BD%91%E7%BB%9C/</link><description>Recent content in 网络 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88/</guid><description>&lt;h1 id="k8s-网络方案"&gt;
+ k8s-网络方案
+ &lt;a class="anchor" href="#k8s-%e7%bd%91%e7%bb%9c%e6%96%b9%e6%a1%88"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;[[calico]]&lt;/li&gt;
+&lt;li&gt;[[flannel]]&lt;/li&gt;
+&lt;li&gt;[[cilium]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</guid><description>&lt;h1 id="tcp-配置优化"&gt;
+ tcp-配置优化
+ &lt;a class="anchor" href="#tcp-%e9%85%8d%e7%bd%ae%e4%bc%98%e5%8c%96"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="tcp-缓冲区配置"&gt;
+ tcp 缓冲区配置
+ &lt;a class="anchor" href="#tcp-%e7%bc%93%e5%86%b2%e5%8c%ba%e9%85%8d%e7%bd%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 系统tcp缓冲区配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# TCP 的缓冲区不是一个固定值，而是一个由“三元组”构成的范围。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 确保这个值是 1 (开启自动调优)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl net.ipv4.tcp_moderate_rcvbuf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# **永久修改**&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# /etc/sysctl.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# TCP 接收缓冲区：min, default, max&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.tcp_rmem &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;4096&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;131072&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;16777216&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# TCP 发送缓冲区：min, default, max&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.tcp_wmem &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;4096&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;16384&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;16777216&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 必须配合设置这个，否则 tcp_rmem 的 max 无法超过它&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.core.rmem_max &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;16777216&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.core.wmem_max &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;16777216&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="windows的-配置查看"&gt;
+ windows的 配置查看
+ &lt;a class="anchor" href="#windows%e7%9a%84-%e9%85%8d%e7%bd%ae%e6%9f%a5%e7%9c%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bat" data-lang="bat"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;netsh interface tcp show global
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;TCP 全局参数
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;----------------------------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;接收方缩放状态 : enabled
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;接收窗口自动调节级别 : normal 这是最智能的状态，支持根据千兆网环境自动扩容
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;加载项拥塞控制提供程序 : default
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ECN 功能 : disabled 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;RFC 1323 时间戳 : enabled 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;初始 RTO : 1000 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;接收段合并状态 : enabled
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;非 Sack Rtt 复原 : disabled 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;最大 SYN 重新传输次数 : 4
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;快速打开 : enabled
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;快速打开回退 : enabled
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;HyStart : enabled
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;比例费率降低 : enabled
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;节奏配置文件 : off
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="linux-的-配置查看"&gt;
+ linux 的 配置查看
+ &lt;a class="anchor" href="#linux-%e7%9a%84-%e9%85%8d%e7%bd%ae%e6%9f%a5%e7%9c%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -a
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl net.ipv4.tcp_rmem
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl net.core.rmem_max
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Linux 现代内核默认的 max 上限&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 6291456 = 6 * 1024 * 1024 = 6MB &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@pve:~# sysctl net.ipv4.tcp_rmem
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.tcp_rmem &lt;span style="color:#f92672"&gt;=&lt;/span&gt; 4096	131072	&lt;span style="color:#ae81ff"&gt;6291456&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@pve:~# sysctl net.core.rmem_max
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.core.rmem_max &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;212992&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/tcp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/tcp/</guid><description>&lt;h1 id="tcp"&gt;
+ tcp
+ &lt;a class="anchor" href="#tcp"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="tcp-知识点"&gt;
+ tcp 知识点
+ &lt;a class="anchor" href="#tcp-%e7%9f%a5%e8%af%86%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;[[tcp-连接状态]]
+[[tcp-高级知识点]]
+[[tcp-配置优化]]&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>群辉 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E7%BE%A4%E8%BE%89/</link><description>Recent content in 群辉 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E7%BE%A4%E8%BE%89/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99/</guid><description>&lt;h1 id="群辉-回收站"&gt;
+ 群辉-回收站
+ &lt;a class="anchor" href="#%e7%be%a4%e8%be%89-%e5%9b%9e%e6%94%b6%e7%ab%99"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="回收站区别"&gt;
+ 回收站区别
+ &lt;a class="anchor" href="#%e5%9b%9e%e6%94%b6%e7%ab%99%e5%8c%ba%e5%88%ab"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+&lt;a href="https://www.storagealchemist.com/exploring-synology-recycle-bins/" rel="noopener"&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;并没有解答我的疑惑&lt;/li&gt;
+&lt;li&gt;不知道为什么，我在web里删除后，进入的是home目录下的回收站。我在windows的smb挂载里删除，是放到homes的回收站？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="synology-drive-回收站"&gt;
+ Synology Drive 回收站
+ &lt;a class="anchor" href="#synology-drive-%e5%9b%9e%e6%94%b6%e7%ab%99"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;团队文件夹&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 开启回收站&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1. Synology Drive Admin Console-设置-回收站-启用回收站
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 回收站路径&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="file-station-回收站"&gt;
+ File Station 回收站
+ &lt;a class="anchor" href="#file-station-%e5%9b%9e%e6%94%b6%e7%ab%99"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 开启回收站&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1. File Station-工具-回收站-启用回收站
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 回收站路径&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/volume1/xxx/#recycle
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

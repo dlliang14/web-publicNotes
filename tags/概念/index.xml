@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>概念 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E6%A6%82%E5%BF%B5/</link><description>Recent content in 概念 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E6%A6%82%E5%BF%B5/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%8A%B6%E6%80%81%E6%89%87%E5%87%BA%E4%BB%A3%E7%90%86-fan-out-proxy/</guid><description>&lt;h1 id="状态扇出代理-fan-out-proxy"&gt;
+ 状态扇出代理 (Fan-out Proxy)
+ &lt;a class="anchor" href="#%e7%8a%b6%e6%80%81%e6%89%87%e5%87%ba%e4%bb%a3%e7%90%86-fan-out-proxy"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="扇出-fan-out"&gt;
+ 扇出 (Fan-out)
+ &lt;a class="anchor" href="#%e6%89%87%e5%87%ba-fan-out"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;源于电子工程，指一个逻辑门的输出连接到多个逻辑门的输入。&lt;/li&gt;
+&lt;li&gt;在计算机网络中，有以下几种常见的扇出模式：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;广播 (Broadcast)&lt;/strong&gt;：将数据包发送到网络中的所有设备。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多播 (Multicast)&lt;/strong&gt;：将数据包发送到特定的设备组。&lt;/li&gt;
+&lt;li&gt;[[calico-介绍|calico的typha]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

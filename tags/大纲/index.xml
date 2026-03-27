@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>大纲 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/</link><description>Recent content in 大纲 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico/</guid><description>&lt;h1 id="大纲-calico"&gt;
+ 大纲-calico
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-calico"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="学习"&gt;
+ 学习
+ &lt;a class="anchor" href="#%e5%ad%a6%e4%b9%a0"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[calico-介绍]]&lt;/li&gt;
+&lt;li&gt;[[calico-安装]]&lt;/li&gt;
+&lt;li&gt;[[calico-bgp配置]]&lt;/li&gt;
+&lt;li&gt;[[calico-数据平面]]&lt;/li&gt;
+&lt;li&gt;[[calico-ebpf模式]]&lt;/li&gt;
+&lt;li&gt;[[calico-可观测]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/hugo%E5%BB%BA%E7%AB%99/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/hugo%E5%BB%BA%E7%AB%99/</guid><description>&lt;h1 id="大纲-hugo建站"&gt;
+ 大纲-hugo建站
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-hugo%e5%bb%ba%e7%ab%99"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="1-hugo-建站教程记录"&gt;
+ 1. hugo 建站教程记录
+ &lt;a class="anchor" href="#1-hugo-%e5%bb%ba%e7%ab%99%e6%95%99%e7%a8%8b%e8%ae%b0%e5%bd%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+&lt;a href="https://www.bilibili.com/video/BV1bovfeaEtQ" rel="noopener"&gt;b站24年视频教程&lt;/a&gt;
+
+&lt;a href="https://letere-gzj.github.io/hugo-stack/p/hugo/custom-blog/" rel="noopener"&gt;对应文字教程&lt;/a&gt;
+
+&lt;a href="https://gohugo.io/" rel="noopener"&gt;hugo官网&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="11-创建-hugo-项目"&gt;
+ 1.1. 创建 hugo 项目
+ &lt;a class="anchor" href="#11-%e5%88%9b%e5%bb%ba-hugo-%e9%a1%b9%e7%9b%ae"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo new site dll-notes
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Congratulations! Your new Hugo project was created in Z:&lt;span style="color:#ae81ff"&gt;\d&lt;/span&gt;lliang14&lt;span style="color:#ae81ff"&gt;\O&lt;/span&gt;bsidian&lt;span style="color:#ae81ff"&gt;\m&lt;/span&gt;yNote&lt;span style="color:#ae81ff"&gt;\d&lt;/span&gt;ll-notes.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Just a few more steps...
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1. Change the current directory to Z:&lt;span style="color:#ae81ff"&gt;\d&lt;/span&gt;lliang14&lt;span style="color:#ae81ff"&gt;\O&lt;/span&gt;bsidian&lt;span style="color:#ae81ff"&gt;\m&lt;/span&gt;yNote&lt;span style="color:#ae81ff"&gt;\d&lt;/span&gt;ll-notes.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2. Create or install a theme:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - Create a new theme with the command &lt;span style="color:#e6db74"&gt;&amp;#34;hugo new theme &amp;lt;THEMENAME&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - Or, install a theme from https://themes.gohugo.io/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;3. Edit hugo.toml, setting the &lt;span style="color:#e6db74"&gt;&amp;#34;theme&amp;#34;&lt;/span&gt; property to the theme name.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;4. Create new content with the command &lt;span style="color:#e6db74"&gt;&amp;#34;hugo new content &amp;lt;SECTIONNAME&amp;gt;\&amp;lt;FILENAME&amp;gt;.&amp;lt;FORMAT&amp;gt;&amp;#34;&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5. Start the embedded web server with the command &lt;span style="color:#e6db74"&gt;&amp;#34;hugo server --buildDrafts&amp;#34;&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="12-测试-hugo"&gt;
+ 1.2. 测试 hugo
+ &lt;a class="anchor" href="#12-%e6%b5%8b%e8%af%95-hugo"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd dll-notes
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo server -D
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Built in &lt;span style="color:#ae81ff"&gt;15&lt;/span&gt; ms
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Environment: &lt;span style="color:#e6db74"&gt;&amp;#34;development&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Serving pages from disk
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Web Server is available at http://localhost:1313/ &lt;span style="color:#f92672"&gt;(&lt;/span&gt;bind address 127.0.0.1&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Press Ctrl+C to stop
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 出现 Page Not Found 说明hugo正常 下一步安装主题&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="13-安装配置-hugo-主题"&gt;
+ 1.3. 安装配置 hugo 主题
+ &lt;a class="anchor" href="#13-%e5%ae%89%e8%a3%85%e9%85%8d%e7%bd%ae-hugo-%e4%b8%bb%e9%a2%98"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+&lt;a href="https://amethyst.bencuan.me/" rel="noopener"&gt;紫水晶主题-支持双链&lt;/a&gt;&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s/</guid><description>&lt;h1 id="大纲-k8s"&gt;
+ 大纲-k8s
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-k8s"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="k8s-基础知识"&gt;
+ k8s 基础知识
+ &lt;a class="anchor" href="#k8s-%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h2 id="k8s-部署"&gt;
+ k8s 部署
+ &lt;a class="anchor" href="#k8s-%e9%83%a8%e7%bd%b2"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[k8s-部署-通用注意点]]&lt;/li&gt;
+&lt;li&gt;[[k8s-部署-高可用方案]]&lt;/li&gt;
+&lt;li&gt;[[k8s-部署-常用部署工具]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="k8s-方案分享"&gt;
+ k8s 方案分享
+ &lt;a class="anchor" href="#k8s-%e6%96%b9%e6%a1%88%e5%88%86%e4%ba%ab"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[k8s-方案-大规模集群]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="k8s-社区"&gt;
+ k8s 社区
+ &lt;a class="anchor" href="#k8s-%e7%a4%be%e5%8c%ba"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[k8s-存储方案]]&lt;/li&gt;
+&lt;li&gt;[[k8s-网络方案]]&lt;/li&gt;
+&lt;li&gt;[[k8s-日志收集]]&lt;/li&gt;
+&lt;li&gt;[[k8s-监控告警]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="k8s-故障处理"&gt;
+ k8s 故障处理
+ &lt;a class="anchor" href="#k8s-%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python/</guid><description>&lt;h1 id="大纲-python"&gt;
+ 大纲-python
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-python"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="基础知识"&gt;
+ 基础知识
+ &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h2 id="网络开发"&gt;
+ 网络开发
+ &lt;a class="anchor" href="#%e7%bd%91%e7%bb%9c%e5%bc%80%e5%8f%91"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-网络开发知识点]]&lt;/li&gt;
+&lt;li&gt;[[无意义-python-老网课笔记]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/victoriametrics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/victoriametrics/</guid><description>&lt;h1 id="大纲-victoriametrics"&gt;
+ 大纲-victoriametrics
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-victoriametrics"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="victoriametrics-学习"&gt;
+ victoriametrics 学习
+ &lt;a class="anchor" href="#victoriametrics-%e5%ad%a6%e4%b9%a0"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[victoriametrics-介绍]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89/</guid><description>&lt;h1 id="大纲-群辉使用"&gt;
+ 大纲-群辉使用
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-%e7%be%a4%e8%be%89%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="群辉使用"&gt;
+ 群辉使用
+ &lt;a class="anchor" href="#%e7%be%a4%e8%be%89%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[群辉-回收站]]&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>
