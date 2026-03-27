@@ -16,14 +16,6 @@ jobs:
           submodules: recursive
           token: ${{ secrets.PUBLISH_TOKEN }}
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
-
-      - name: Install hugo-obsidian
-        run: go install github.com/jackyzha0/hugo-obsidian@latest
-
       - name: Debug content input
         run: |
           echo "Workspace: $GITHUB_WORKSPACE"
@@ -37,8 +29,12 @@ jobs:
           find content -type f -name "*.md" | wc -l
 
       - name: Build Link Index
-        run: |
-          hugo-obsidian -input=content -output=assets/indices -index -root=.
+        uses: jackyzha0/hugo-obsidian@v2.20
+        with:
+          index: true
+          input: content
+          output: assets/indices
+          root: .
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
