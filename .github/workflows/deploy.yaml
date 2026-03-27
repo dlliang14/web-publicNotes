@@ -7,25 +7,39 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Install hugo-obsidian
+        run: go install github.com/jackyzha0/hugo-obsidian@latest
+
+      - name: Debug content input
+        run: |
+          echo "Workspace: $GITHUB_WORKSPACE"
+          echo "List content directory"
+          ls -lah content
+          echo "Find markdown files (first 100)"
+          find content -type f -name "*.md" | sed -n '1,100p'
+          echo "Total markdown files"
+          find content -type f -name "*.md" | wc -l
 
       - name: Build Link Index
-        uses: jackyzha0/hugo-obsidian@v2.18
-        with:
-          index: true
-          input: content
-          output: assets/indices
-          root: .
+        run: |
+          hugo-obsidian -input=content -output=assets/indices -index -root=.
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.159.0'
+          hugo-version: "0.159.0"
           # hugo-version: '0.96.0'
           extended: true
 
@@ -33,9 +47,10 @@ jobs:
         run: hugo --minify
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.PUBLISH_TOKEN }}
           publish_dir: ./public
-          publish_branch: deploy  # deploying branch
+          publish_branch: deploy # deploying branch
+          commit_message: "Deploy to GitHub Pages"
           cname: dlliang14.github.io
