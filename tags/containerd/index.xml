@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Containerd on</title><link>https://dlliang14.github.io/web-publicNotes/tags/containerd/</link><description>Recent content in Containerd on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/containerd/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-gpu-runtimeclass-containerd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-gpu-runtimeclass-containerd/</guid><description>&lt;h1 id="k8s-gpu-runtimeclass-containerd"&gt;
+ k8s-gpu-runtimeclass-containerd
+ &lt;a class="anchor" href="#k8s-gpu-runtimeclass-containerd"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[k8s-使用gpu]]&lt;/p&gt;
+&lt;h2 id="目标"&gt;
+ 目标
+ &lt;a class="anchor" href="#%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;将 Pod 的 &lt;code&gt;runtimeClassName&lt;/code&gt; 映射到 containerd 的指定 runtime handler，使 GPU 容器走 nvidia runtime。&lt;/p&gt;
+&lt;h2 id="配置步骤"&gt;
+ 配置步骤
+ &lt;a class="anchor" href="#%e9%85%8d%e7%bd%ae%e6%ad%a5%e9%aa%a4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="1-runtimeclass"&gt;
+ 1. RuntimeClass
+ &lt;a class="anchor" href="#1-runtimeclass"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;apiVersion&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;node.k8s.io/v1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;kind&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;RuntimeClass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;nvidia1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;handler&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;my-custom-handler&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-containerd-runtime"&gt;
+ 2. containerd runtime
+ &lt;a class="anchor" href="#2-containerd-runtime"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#a6e22e"&gt;plugins&lt;/span&gt;.&lt;span style="color:#e6db74"&gt;&amp;#34;io.containerd.grpc.v1.cri&amp;#34;&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;containerd&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;runtimes&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;my-custom-handler&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;runtime_type&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;io.containerd.runc.v2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;plugins&lt;/span&gt;.&lt;span style="color:#e6db74"&gt;&amp;#34;io.containerd.grpc.v1.cri&amp;#34;&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;containerd&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;runtimes&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;my-custom-handler&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;options&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;BinaryName&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;/usr/bin/nvidia-container-runtime&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="3-重启-containerd"&gt;
+ 3. 重启 containerd
+ &lt;a class="anchor" href="#3-%e9%87%8d%e5%90%af-containerd"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl restart containerd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="4-pod-中指定-runtimeclass"&gt;
+ 4. Pod 中指定 RuntimeClass
+ &lt;a class="anchor" href="#4-pod-%e4%b8%ad%e6%8c%87%e5%ae%9a-runtimeclass"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;spec&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;runtimeClassName&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;nvidia1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="排障要点"&gt;
+ 排障要点
+ &lt;a class="anchor" href="#%e6%8e%92%e9%9a%9c%e8%a6%81%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;RuntimeClass.handler&lt;/code&gt; 必须和 containerd runtime 名称一致&lt;/li&gt;
+&lt;li&gt;containerd 重启后再验证 Pod 调度&lt;/li&gt;
+&lt;li&gt;结合 &lt;code&gt;kubectl describe pod&lt;/code&gt; 与 &lt;code&gt;kubectl logs&lt;/code&gt; 交叉定位&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

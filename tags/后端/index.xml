@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>后端 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%90%8E%E7%AB%AF/</link><description>Recent content in 后端 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%90%8E%E7%AB%AF/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</guid><description>&lt;h1 id="python后端-依赖管理"&gt;
+ python后端-依赖管理
+ &lt;a class="anchor" href="#python%e5%90%8e%e7%ab%af-%e4%be%9d%e8%b5%96%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python后端]]&lt;/p&gt;
+&lt;h2 id="生成-requirementstxt"&gt;
+ 生成 requirements.txt
+ &lt;a class="anchor" href="#%e7%94%9f%e6%88%90-requirementstxt"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install pipreqs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /path/to/your/project
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pipreqs ./ --encoding&lt;span style="color:#f92672"&gt;=&lt;/span&gt;utf8
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--ignore &amp;lt;dir1,dir2,...&amp;gt;&lt;/code&gt; 忽略某些目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--force&lt;/code&gt; 强制覆盖已有 &lt;code&gt;requirements.txt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-pin&lt;/code&gt; 不锁版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意：&lt;code&gt;pipreqs&lt;/code&gt; 可能会联网查询最新版本，偶尔与当前 Python 版本不兼容。&lt;/p&gt;
+&lt;h2 id="安装依赖"&gt;
+ 安装依赖
+ &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install -r requirements.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-i &amp;lt;url&amp;gt;&lt;/code&gt; 指定镜像源&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-cache-dir&lt;/code&gt; 不使用缓存，强制重新下载&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--upgrade&lt;/code&gt; 升级到最新版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="导出依赖"&gt;
+ 导出依赖
+ &lt;a class="anchor" href="#%e5%af%bc%e5%87%ba%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip freeze &amp;gt; requirements.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pip list&lt;/code&gt; 查看已安装包&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pip freeze&lt;/code&gt; 生成可复现依赖清单&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="python后端-环境安装"&gt;
+ python后端-环境安装
+ &lt;a class="anchor" href="#python%e5%90%8e%e7%ab%af-%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python后端]]&lt;/p&gt;
+&lt;h2 id="conda-环境创建"&gt;
+ Conda 环境创建
+ &lt;a class="anchor" href="#conda-%e7%8e%af%e5%a2%83%e5%88%9b%e5%bb%ba"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda create -n python-backend python&lt;span style="color:#f92672"&gt;=&lt;/span&gt;3.12
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-y&lt;/code&gt; 自动确认安装，无需手动输入&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-default-packages&lt;/code&gt; 不安装默认包，创建更干净的环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="环境管理"&gt;
+ 环境管理
+ &lt;a class="anchor" href="#%e7%8e%af%e5%a2%83%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda env list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda activate python-backend
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="建议"&gt;
+ 建议
+ &lt;a class="anchor" href="#%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;项目独立虚拟环境，避免依赖污染&lt;/li&gt;
+&lt;li&gt;先激活环境再安装依赖&lt;/li&gt;
+&lt;li&gt;在 README 记录 Python 版本和环境名&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF/</guid><description>&lt;h1 id="大纲-python后端"&gt;
+ 大纲-python后端
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-python%e5%90%8e%e7%ab%af"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="环境与依赖"&gt;
+ 环境与依赖
+ &lt;a class="anchor" href="#%e7%8e%af%e5%a2%83%e4%b8%8e%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python后端-环境安装]]&lt;/li&gt;
+&lt;li&gt;[[python后端-依赖管理]]&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

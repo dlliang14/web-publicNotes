@@ -6,7 +6,59 @@
 &lt;li&gt;[[calico]]&lt;/li&gt;
 &lt;li&gt;[[flannel]]&lt;/li&gt;
 &lt;li&gt;[[cilium]]&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</guid><description>&lt;h1 id="tcp-配置优化"&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid><description>&lt;h1 id="python-io多路复用"&gt;
+ python-io多路复用
+ &lt;a class="anchor" href="#python-io%e5%a4%9a%e8%b7%af%e5%a4%8d%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python-并发编程]]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考操作系统层面的原理：[[ebpf]]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="非阻塞-io不推荐直接使用"&gt;
+ 非阻塞 IO（不推荐直接使用）
+ &lt;a class="anchor" href="#%e9%9d%9e%e9%98%bb%e5%a1%9e-io%e4%b8%8d%e6%8e%a8%e8%8d%90%e7%9b%b4%e6%8e%a5%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;server.setblocking(False)&lt;/code&gt; 设置非阻塞模式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点1&lt;/strong&gt;：需要不停轮询所有连接，浪费 CPU&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点2&lt;/strong&gt;：连接越多，轮询时间越长，响应越慢&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; socket &lt;span style="color:#f92672"&gt;import&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server &lt;span style="color:#f92672"&gt;=&lt;/span&gt; socket(AF_INET, SOCK_STREAM)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server&lt;span style="color:#f92672"&gt;.&lt;/span&gt;bind((&lt;span style="color:#e6db74"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;8080&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server&lt;span style="color:#f92672"&gt;.&lt;/span&gt;listen(&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server&lt;span style="color:#f92672"&gt;.&lt;/span&gt;setblocking(&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conn_list &lt;span style="color:#f92672"&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;while&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn, addr &lt;span style="color:#f92672"&gt;=&lt;/span&gt; server&lt;span style="color:#f92672"&gt;.&lt;/span&gt;accept()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;except&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;BlockingIOError&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;setblocking(&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn_list&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append(conn)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; del_l &lt;span style="color:#f92672"&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; conn &lt;span style="color:#f92672"&gt;in&lt;/span&gt; conn_list:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; data &lt;span style="color:#f92672"&gt;=&lt;/span&gt; conn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;recv(&lt;span style="color:#ae81ff"&gt;1024&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;except&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;BlockingIOError&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;except&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ConnectionResetError&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; del_l&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append(conn)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;not&lt;/span&gt; data:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; del_l&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append(conn)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;send(data&lt;span style="color:#f92672"&gt;.&lt;/span&gt;upper())
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; conn &lt;span style="color:#f92672"&gt;in&lt;/span&gt; del_l:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn_list&lt;span style="color:#f92672"&gt;.&lt;/span&gt;remove(conn)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="select-模块"&gt;
+ select 模块
+ &lt;a class="anchor" href="#select-%e6%a8%a1%e5%9d%97"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;告诉内核监听哪些 IO 事件，内核帮筛选出就绪的事件，避免无效轮询。&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</guid><description>&lt;h1 id="tcp-配置优化"&gt;
  tcp-配置优化
  &lt;a class="anchor" href="#tcp-%e9%85%8d%e7%bd%ae%e4%bc%98%e5%8c%96"&gt;#&lt;/a&gt;
 &lt;/h1&gt;

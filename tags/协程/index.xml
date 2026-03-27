@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>协程 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%8D%8F%E7%A8%8B/</link><description>Recent content in 协程 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%8D%8F%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E5%8D%8F%E7%A8%8Bgevent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E5%8D%8F%E7%A8%8Bgevent/</guid><description>&lt;h1 id="python-协程gevent"&gt;
+ python-协程gevent
+ &lt;a class="anchor" href="#python-%e5%8d%8f%e7%a8%8bgevent"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python-并发编程]]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;协程&lt;/strong&gt;：单线程下实现的并发&lt;/li&gt;
+&lt;li&gt;遇到 IO 时切换任务，将单线程的 IO 等待降到最低&lt;/li&gt;
+&lt;li&gt;通过 &lt;code&gt;gevent&lt;/code&gt; 库调度协程切换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="核心-api"&gt;
+ 核心 API
+ &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83-api"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; gevent &lt;span style="color:#f92672"&gt;import&lt;/span&gt; monkey; monkey&lt;span style="color:#f92672"&gt;.&lt;/span&gt;patch_all() &lt;span style="color:#75715e"&gt;# 必须放在所有 import 之前，将阻塞操作改为非阻塞&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; gevent
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;g1 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;spawn(func, args) &lt;span style="color:#75715e"&gt;# 创建协程&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;g1&lt;span style="color:#f92672"&gt;.&lt;/span&gt;join() &lt;span style="color:#75715e"&gt;# 等待单个协程完成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;joinall([g1, g2]) &lt;span style="color:#75715e"&gt;# 等待所有协程完成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;⚠️ &lt;code&gt;monkey.patch_all()&lt;/code&gt; 必须放在所有 &lt;code&gt;import&lt;/code&gt; 之前（除 gevent 本身），否则补丁不生效。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="基础示例"&gt;
+ 基础示例
+ &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; gevent &lt;span style="color:#f92672"&gt;import&lt;/span&gt; monkey; monkey&lt;span style="color:#f92672"&gt;.&lt;/span&gt;patch_all()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; gevent&lt;span style="color:#f92672"&gt;,&lt;/span&gt; time
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;eat&lt;/span&gt;(name):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; eat 1&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; eat 2&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;play&lt;/span&gt;(name):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; play 1&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; play 2&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;g1 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;spawn(eat, &lt;span style="color:#e6db74"&gt;&amp;#39;egon&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;g2 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;spawn(play, name&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;egon&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;joinall([g1, g2])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#39;完&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="tcp-并发服务器"&gt;
+ TCP 并发服务器
+ &lt;a class="anchor" href="#tcp-%e5%b9%b6%e5%8f%91%e6%9c%8d%e5%8a%a1%e5%99%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;每个连接启动一个协程处理，实现高并发。&lt;/p&gt;</description></item></channel></rss>

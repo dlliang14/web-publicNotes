@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Operator on</title><link>https://dlliang14.github.io/web-publicNotes/tags/operator/</link><description>Recent content in Operator on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/operator/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-gpu-operator/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-gpu-operator/</guid><description>&lt;h1 id="k8s-gpu-operator"&gt;
+ k8s-gpu-operator
+ &lt;a class="anchor" href="#k8s-gpu-operator"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[k8s-使用gpu]]&lt;/p&gt;
+&lt;h2 id="文档入口"&gt;
+ 文档入口
+ &lt;a class="anchor" href="#%e6%96%87%e6%a1%a3%e5%85%a5%e5%8f%a3"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/NVIDIA/gpu-operator" rel="noopener"&gt;GPU Operator GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html" rel="noopener"&gt;GPU Operator 官方文档&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="组件分层理解"&gt;
+ 组件分层理解
+ &lt;a class="anchor" href="#%e7%bb%84%e4%bb%b6%e5%88%86%e5%b1%82%e7%90%86%e8%a7%a3"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;核心控制层：&lt;code&gt;gpu-operator&lt;/code&gt; Deployment&lt;/li&gt;
+&lt;li&gt;硬件发现层：NFD + &lt;code&gt;gpu-feature-discovery&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;基础注入层：driver/container-toolkit/device-plugin&lt;/li&gt;
+&lt;li&gt;验证监控层：validator/cuda-validator/dcgm-exporter&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="安装"&gt;
+ 安装
+ &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm repo update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm pull --untar nvidia/gpu-operator
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm install gpu-operator . -n gpu-operator --create-namespace
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="常见故障secure-boot"&gt;
+ 常见故障：Secure Boot
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%95%85%e9%9a%9csecure-boot"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;现象：&lt;code&gt;modprobe: ERROR: could not insert 'nvidia': Key was rejected by service&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;根因：宿主机开启 Secure Boot 导致内核模块签名校验失败&lt;/li&gt;
+&lt;li&gt;处理：在 BIOS/UEFI 关闭 Secure Boot 后重启，再重新验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mokutil --sb-state
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

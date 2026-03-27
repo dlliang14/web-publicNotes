@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Comfyui on</title><link>https://dlliang14.github.io/web-publicNotes/tags/comfyui/</link><description>Recent content in Comfyui on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/comfyui/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-gpu-comfyui%E9%83%A8%E7%BD%B2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-gpu-comfyui%E9%83%A8%E7%BD%B2/</guid><description>&lt;h1 id="k8s-gpu-comfyui部署"&gt;
+ k8s-gpu-comfyui部署
+ &lt;a class="anchor" href="#k8s-gpu-comfyui%e9%83%a8%e7%bd%b2"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[k8s-使用gpu]]&lt;/p&gt;
+&lt;h2 id="前置检查"&gt;
+ 前置检查
+ &lt;a class="anchor" href="#%e5%89%8d%e7%bd%ae%e6%a3%80%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nvidia-smi
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo nvidia-smi -pm &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nerdctl pull --namespace&lt;span style="color:#f92672"&gt;=&lt;/span&gt;k8s.io yanwk/comfyui-boot:cu126-slim-20260223
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="基于-hami-的部署要点"&gt;
+ 基于 HAMi 的部署要点
+ &lt;a class="anchor" href="#%e5%9f%ba%e4%ba%8e-hami-%e7%9a%84%e9%83%a8%e7%bd%b2%e8%a6%81%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Pod/StatefulSet 指定 &lt;code&gt;runtimeClassName: nvidia&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;资源限制至少声明 &lt;code&gt;nvidia.com/gpu: 1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将模型与缓存目录通过 &lt;code&gt;hostPath&lt;/code&gt; 或 PVC 挂载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="基于-gpu-operator-的部署要点"&gt;
+ 基于 GPU Operator 的部署要点
+ &lt;a class="anchor" href="#%e5%9f%ba%e4%ba%8e-gpu-operator-%e7%9a%84%e9%83%a8%e7%bd%b2%e8%a6%81%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;resources.limits&lt;/code&gt; 必须包含 &lt;code&gt;nvidia.com/gpu&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;节点需能看到 &lt;code&gt;nvidia.com/gpu: 1&lt;/code&gt; 等标签/资源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="最小资源片段"&gt;
+ 最小资源片段
+ &lt;a class="anchor" href="#%e6%9c%80%e5%b0%8f%e8%b5%84%e6%ba%90%e7%89%87%e6%ae%b5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;resources&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;limits&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;nvidia.com/gpu&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="访问与验证"&gt;
+ 访问与验证
+ &lt;a class="anchor" href="#%e8%ae%bf%e9%97%ae%e4%b8%8e%e9%aa%8c%e8%af%81"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -f comfyui.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl get pod -n comfyui -o wide
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl exec -it -n comfyui &amp;lt;pod-name&amp;gt; -- nvidia-smi
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;NodePort 访问示例：&lt;code&gt;http://10.0.0.11:30188&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;容器内 &lt;code&gt;torch.version.cuda&lt;/code&gt; 用于确认 PyTorch 编译时 CUDA 版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="清理"&gt;
+ 清理
+ &lt;a class="anchor" href="#%e6%b8%85%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl delete -f comfyui.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl delete ns comfyui --force --grace-period&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

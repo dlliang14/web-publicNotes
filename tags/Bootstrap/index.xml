@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bootstrap on</title><link>https://dlliang14.github.io/web-publicNotes/tags/Bootstrap/</link><description>Recent content in Bootstrap on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/Bootstrap/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-bootstrap%E5%9F%BA%E7%A1%80/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-bootstrap%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="js开发-bootstrap基础"&gt;
+ js开发-bootstrap基础
+ &lt;a class="anchor" href="#js%e5%bc%80%e5%8f%91-bootstrap%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[js开发]]&lt;/p&gt;
+&lt;h2 id="简介"&gt;
+ 简介
+ &lt;a class="anchor" href="#%e7%ae%80%e4%bb%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bootstrap 是前端 UI 框架，提供响应式布局和预定义组件&lt;/li&gt;
+&lt;li&gt;可快速搭建页面，减少重复样式开发&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*.min.css&lt;/code&gt; / &lt;code&gt;*.min.js&lt;/code&gt; 表示压缩版资源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="依赖说明"&gt;
+ 依赖说明
+ &lt;a class="anchor" href="#%e4%be%9d%e8%b5%96%e8%af%b4%e6%98%8e"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bootstrap 4 及以前常依赖 jQuery&lt;/li&gt;
+&lt;li&gt;Bootstrap 5 默认不依赖 jQuery&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="cdn-引入示例"&gt;
+ CDN 引入示例
+ &lt;a class="anchor" href="#cdn-%e5%bc%95%e5%85%a5%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;link&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;rel&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;stylesheet&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;href&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;crossorigin&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;anonymous&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;script&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;src&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;crossorigin&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;anonymous&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style="color:#f92672"&gt;script&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="模板资源"&gt;
+ 模板资源
+ &lt;a class="anchor" href="#%e6%a8%a1%e6%9d%bf%e8%b5%84%e6%ba%90"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://www.bootmb.com/" rel="noopener"&gt;BootMB 模板站&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

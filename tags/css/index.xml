@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Css on</title><link>https://dlliang14.github.io/web-publicNotes/tags/css/</link><description>Recent content in Css on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/css/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF-css%E5%9F%BA%E7%A1%80/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF-css%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="web前端-css基础"&gt;
+ web前端-css基础
+ &lt;a class="anchor" href="#web%e5%89%8d%e7%ab%af-css%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[web前端]]&lt;/p&gt;
+&lt;h2 id="四种引入方式"&gt;
+ 四种引入方式
+ &lt;a class="anchor" href="#%e5%9b%9b%e7%a7%8d%e5%bc%95%e5%85%a5%e6%96%b9%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;方式&lt;/th&gt;
+ &lt;th&gt;写法&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;内联样式&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;style=&amp;quot;...&amp;quot;&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;优先级最高，不可复用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;内部样式表&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; 标签&lt;/td&gt;
+ &lt;td&gt;仅当前页面生效&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;外部样式表&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; 引入&lt;/td&gt;
+ &lt;td&gt;推荐，可缓存可复用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;@import&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;@import url()&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;加载慢，兼容性差，不推荐&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 内联 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;h1&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;style&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;color: red;&amp;#34;&lt;/span&gt;&amp;gt;Hello&amp;lt;/&lt;span style="color:#f92672"&gt;h1&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 内部 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;style&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;p&lt;/span&gt; { &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;blue&lt;/span&gt;; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#f92672"&gt;style&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 外部（推荐） --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;link&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;rel&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;stylesheet&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;href&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;styles.css&amp;#34;&lt;/span&gt; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- @import（不推荐） --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;style&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; @&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; &lt;span style="color:#f92672"&gt;url&lt;/span&gt;&lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;styles.css&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#f92672"&gt;style&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="常用选择器"&gt;
+ 常用选择器
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e9%80%89%e6%8b%a9%e5%99%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;选择器&lt;/th&gt;
+ &lt;th&gt;示例&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;标签&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;h1&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;选所有该标签&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;类&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;.class&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;选所有该 class&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;ID&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;#id&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;选唯一元素&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;属性&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;[type=&amp;quot;text&amp;quot;]&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;按属性值匹配&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;伪类&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;a:hover&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;状态匹配&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* ID 选择器 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;#main-header {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;text-align&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;center&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;background-color&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;#333&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;white&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* 类选择器 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.&lt;span style="color:#a6e22e"&gt;danger-title&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;red&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;font-size&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;24&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* 属性选择器 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;&lt;span style="color:#f92672"&gt;type&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;text&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;border&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;solid&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;#ccc&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;padding&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* Vue scoped 特殊属性匹配 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;&lt;span style="color:#f92672"&gt;data-v-xxx&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;border&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;solid&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;#ccc&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* 伪类 - hover */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;a&lt;/span&gt;:&lt;span style="color:#a6e22e"&gt;hover&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;green&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* !important - 提高优先级，覆盖其他样式（慎用） */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.&lt;span style="color:#a6e22e"&gt;warning-title&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;orange&lt;/span&gt; &lt;span style="color:#75715e"&gt;!important&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="三大特性"&gt;
+ 三大特性
+ &lt;a class="anchor" href="#%e4%b8%89%e5%a4%a7%e7%89%b9%e6%80%a7"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;继承性&lt;/strong&gt;：&lt;code&gt;color&lt;/code&gt;、&lt;code&gt;font-*&lt;/code&gt;、&lt;code&gt;line-*&lt;/code&gt;、&lt;code&gt;text-*&lt;/code&gt; 可继承；&lt;code&gt;margin&lt;/code&gt;、&lt;code&gt;padding&lt;/code&gt;、&lt;code&gt;border&lt;/code&gt; 不继承&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;层叠性&lt;/strong&gt;：同优先级时，后定义的覆盖先定义的；继承属性按就近原则&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优先级（特异性）&lt;/strong&gt;：选择器越具体优先级越高，&lt;code&gt;id &amp;gt; class &amp;gt; 标签&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="盒子模型"&gt;
+ 盒子模型
+ &lt;a class="anchor" href="#%e7%9b%92%e5%ad%90%e6%a8%a1%e5%9e%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;box-sizing: border-box&lt;/code&gt;（推荐）：&lt;code&gt;width/height&lt;/code&gt; 包含 &lt;code&gt;padding&lt;/code&gt; 和 &lt;code&gt;border&lt;/code&gt;，不会撑大盒子&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;box-sizing: content-box&lt;/code&gt;（默认）：&lt;code&gt;width/height&lt;/code&gt; 只算内容区，加上 &lt;code&gt;padding&lt;/code&gt;/&lt;code&gt;border&lt;/code&gt; 会撑大&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.&lt;span style="color:#a6e22e"&gt;box&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;width&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;200&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;height&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;padding&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;20&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;border&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;solid&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;blue&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;margin&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;30&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;box-sizing&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;border-box&lt;/span&gt;; &lt;span style="color:#75715e"&gt;/* 总宽度 = 200px，不会超出 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;💡 &lt;strong&gt;CSS Sprite（精灵图）&lt;/strong&gt;：将多个小图合并成一张大图，通过 &lt;code&gt;background-position&lt;/code&gt; 控制显示区域，减少 HTTP 请求，提高加载速度。&lt;/p&gt;</description></item></channel></rss>

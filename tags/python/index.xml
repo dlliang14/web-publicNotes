@@ -1,4 +1,413 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on</title><link>https://dlliang14.github.io/web-publicNotes/tags/python/</link><description>Recent content in Python on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9/</guid><description>&lt;h1 id="python-网络开发知识点"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on</title><link>https://dlliang14.github.io/web-publicNotes/tags/python/</link><description>Recent content in Python on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid><description>&lt;h1 id="python-io多路复用"&gt;
+ python-io多路复用
+ &lt;a class="anchor" href="#python-io%e5%a4%9a%e8%b7%af%e5%a4%8d%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python-并发编程]]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考操作系统层面的原理：[[ebpf]]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="非阻塞-io不推荐直接使用"&gt;
+ 非阻塞 IO（不推荐直接使用）
+ &lt;a class="anchor" href="#%e9%9d%9e%e9%98%bb%e5%a1%9e-io%e4%b8%8d%e6%8e%a8%e8%8d%90%e7%9b%b4%e6%8e%a5%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;server.setblocking(False)&lt;/code&gt; 设置非阻塞模式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点1&lt;/strong&gt;：需要不停轮询所有连接，浪费 CPU&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点2&lt;/strong&gt;：连接越多，轮询时间越长，响应越慢&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; socket &lt;span style="color:#f92672"&gt;import&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server &lt;span style="color:#f92672"&gt;=&lt;/span&gt; socket(AF_INET, SOCK_STREAM)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server&lt;span style="color:#f92672"&gt;.&lt;/span&gt;bind((&lt;span style="color:#e6db74"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;8080&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server&lt;span style="color:#f92672"&gt;.&lt;/span&gt;listen(&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server&lt;span style="color:#f92672"&gt;.&lt;/span&gt;setblocking(&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conn_list &lt;span style="color:#f92672"&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;while&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn, addr &lt;span style="color:#f92672"&gt;=&lt;/span&gt; server&lt;span style="color:#f92672"&gt;.&lt;/span&gt;accept()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;except&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;BlockingIOError&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;setblocking(&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn_list&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append(conn)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; del_l &lt;span style="color:#f92672"&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; conn &lt;span style="color:#f92672"&gt;in&lt;/span&gt; conn_list:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; data &lt;span style="color:#f92672"&gt;=&lt;/span&gt; conn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;recv(&lt;span style="color:#ae81ff"&gt;1024&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;except&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;BlockingIOError&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;except&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ConnectionResetError&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; del_l&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append(conn)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;not&lt;/span&gt; data:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; del_l&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append(conn)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;send(data&lt;span style="color:#f92672"&gt;.&lt;/span&gt;upper())
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; conn &lt;span style="color:#f92672"&gt;in&lt;/span&gt; del_l:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn_list&lt;span style="color:#f92672"&gt;.&lt;/span&gt;remove(conn)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="select-模块"&gt;
+ select 模块
+ &lt;a class="anchor" href="#select-%e6%a8%a1%e5%9d%97"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;告诉内核监听哪些 IO 事件，内核帮筛选出就绪的事件，避免无效轮询。&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-ipc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-ipc/</guid><description>&lt;h1 id="python-ipc"&gt;
+ python-ipc
+ &lt;a class="anchor" href="#python-ipc"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;IPC（Inter-Process Communication）进程间通信。&lt;/p&gt;
+&lt;p&gt;[[python-并发编程]]&lt;/p&gt;
+&lt;h2 id="管道-pipe不推荐"&gt;
+ 管道 Pipe（不推荐）
+ &lt;a class="anchor" href="#%e7%ae%a1%e9%81%93-pipe%e4%b8%8d%e6%8e%a8%e8%8d%90"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Pipe()&lt;/code&gt; 返回两个连接对象，用于进程间双向通信&lt;/li&gt;
+&lt;li&gt;只能在两个进程间使用，多进程需要用 Queue&lt;/li&gt;
+&lt;li&gt;不是线程安全的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️ &lt;strong&gt;死锁风险&lt;/strong&gt;：先 &lt;code&gt;join()&lt;/code&gt; 再 &lt;code&gt;recv()&lt;/code&gt; 可能会死锁
+操作系统管道缓冲区有大小限制（通常约 64KB）
+子进程发送大数据时卡在 &lt;code&gt;send()&lt;/code&gt;，等主进程 &lt;code&gt;recv()&lt;/code&gt; 腾空间
+主进程在执行 &lt;code&gt;join()&lt;/code&gt;，死等子进程结束 → 两者互等，死锁&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; multiprocessing &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Process, Pipe
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;f&lt;/span&gt;(conn):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;send([&lt;span style="color:#ae81ff"&gt;42&lt;/span&gt;, &lt;span style="color:#66d9ef"&gt;None&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; conn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;close()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; parent_conn, child_conn &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Pipe()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; p &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Process(target&lt;span style="color:#f92672"&gt;=&lt;/span&gt;f, args&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(child_conn,))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; p&lt;span style="color:#f92672"&gt;.&lt;/span&gt;start()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(parent_conn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;recv()) &lt;span style="color:#75715e"&gt;# 先 recv 再 join，避免死锁&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; p&lt;span style="color:#f92672"&gt;.&lt;/span&gt;join()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="队列-queue"&gt;
+ 队列 Queue
+ &lt;a class="anchor" href="#%e9%98%9f%e5%88%97-queue"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;底层用锁实现的线程安全队列。&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;类型&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;multiprocessing.Queue()&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;进程级队列&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;multiprocessing.JoinableQueue()&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;进程级队列，额外支持 &lt;code&gt;task_done()&lt;/code&gt; 和 &lt;code&gt;join()&lt;/code&gt;，适合生产者消费者模式&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;queue.Queue()&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;线程级队列&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;queue.PriorityQueue()&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;线程级优先级队列，数值小的先取出&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;queue.LifoQueue()&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;线程级堆栈，后进先出&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; queue &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Queue
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;q &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Queue(maxsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;q&lt;span style="color:#f92672"&gt;.&lt;/span&gt;put(&lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;, block&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;, timeout&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;None&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 队列满时阻塞，None 表示一直等&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;q&lt;span style="color:#f92672"&gt;.&lt;/span&gt;put(&lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;, block&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 队列满时直接抛出异常&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;q&lt;span style="color:#f92672"&gt;.&lt;/span&gt;get(block&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;, timeout&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;None&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 队列空时阻塞&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;q&lt;span style="color:#f92672"&gt;.&lt;/span&gt;get(block&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 队列空时直接抛出异常&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E5%8D%8F%E7%A8%8Bgevent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E5%8D%8F%E7%A8%8Bgevent/</guid><description>&lt;h1 id="python-协程gevent"&gt;
+ python-协程gevent
+ &lt;a class="anchor" href="#python-%e5%8d%8f%e7%a8%8bgevent"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python-并发编程]]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;协程&lt;/strong&gt;：单线程下实现的并发&lt;/li&gt;
+&lt;li&gt;遇到 IO 时切换任务，将单线程的 IO 等待降到最低&lt;/li&gt;
+&lt;li&gt;通过 &lt;code&gt;gevent&lt;/code&gt; 库调度协程切换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="核心-api"&gt;
+ 核心 API
+ &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83-api"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; gevent &lt;span style="color:#f92672"&gt;import&lt;/span&gt; monkey; monkey&lt;span style="color:#f92672"&gt;.&lt;/span&gt;patch_all() &lt;span style="color:#75715e"&gt;# 必须放在所有 import 之前，将阻塞操作改为非阻塞&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; gevent
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;g1 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;spawn(func, args) &lt;span style="color:#75715e"&gt;# 创建协程&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;g1&lt;span style="color:#f92672"&gt;.&lt;/span&gt;join() &lt;span style="color:#75715e"&gt;# 等待单个协程完成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;joinall([g1, g2]) &lt;span style="color:#75715e"&gt;# 等待所有协程完成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;⚠️ &lt;code&gt;monkey.patch_all()&lt;/code&gt; 必须放在所有 &lt;code&gt;import&lt;/code&gt; 之前（除 gevent 本身），否则补丁不生效。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="基础示例"&gt;
+ 基础示例
+ &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; gevent &lt;span style="color:#f92672"&gt;import&lt;/span&gt; monkey; monkey&lt;span style="color:#f92672"&gt;.&lt;/span&gt;patch_all()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; gevent&lt;span style="color:#f92672"&gt;,&lt;/span&gt; time
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;eat&lt;/span&gt;(name):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; eat 1&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; eat 2&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;play&lt;/span&gt;(name):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; play 1&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; play 2&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;g1 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;spawn(eat, &lt;span style="color:#e6db74"&gt;&amp;#39;egon&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;g2 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;spawn(play, name&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;egon&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gevent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;joinall([g1, g2])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#39;完&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="tcp-并发服务器"&gt;
+ TCP 并发服务器
+ &lt;a class="anchor" href="#tcp-%e5%b9%b6%e5%8f%91%e6%9c%8d%e5%8a%a1%e5%99%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;每个连接启动一个协程处理，实现高并发。&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</guid><description>&lt;h1 id="大纲-python-并发编程"&gt;
+ 大纲-python 并发编程
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-python-%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="ipc-进程间通信"&gt;
+ IPC 进程间通信
+ &lt;a class="anchor" href="#ipc-%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-ipc]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="并发模式"&gt;
+ 并发模式
+ &lt;a class="anchor" href="#%e5%b9%b6%e5%8f%91%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-生产者消费者]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="进程与线程"&gt;
+ 进程与线程
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-进程和线程]]&lt;/li&gt;
+&lt;li&gt;[[python-线程编程]]&lt;/li&gt;
+&lt;li&gt;[[python-锁]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="池化"&gt;
+ 池化
+ &lt;a class="anchor" href="#%e6%b1%a0%e5%8c%96"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-线程池进程池]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="协程"&gt;
+ 协程
+ &lt;a class="anchor" href="#%e5%8d%8f%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-协程gevent]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="io-模型"&gt;
+ IO 模型
+ &lt;a class="anchor" href="#io-%e6%a8%a1%e5%9e%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-io多路复用]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85/</guid><description>&lt;h1 id="python-生产者消费者"&gt;
+ python-生产者消费者
+ &lt;a class="anchor" href="#python-%e7%94%9f%e4%ba%a7%e8%80%85%e6%b6%88%e8%b4%b9%e8%80%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python-并发编程]] | [[python-ipc]]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点&lt;/strong&gt;：解耦合，平衡生产者的生产力与消费者的处理能力。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;生产者负责产生数据，消费者负责取走数据处理&lt;/li&gt;
+&lt;li&gt;通过队列通信&lt;/li&gt;
+&lt;li&gt;Python 一般输入 &lt;code&gt;None&lt;/code&gt; 作为结束信号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="方式1queue--none-哨兵"&gt;
+ 方式1：Queue + None 哨兵
+ &lt;a class="anchor" href="#%e6%96%b9%e5%bc%8f1queue--none-%e5%93%a8%e5%85%b5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;主进程在所有生产者结束后，手动向队列投入 &lt;code&gt;None&lt;/code&gt;，每个消费者收到 &lt;code&gt;None&lt;/code&gt; 后退出。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; multiprocessing &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Process, Queue
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; time&lt;span style="color:#f92672"&gt;,&lt;/span&gt; random
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;producer&lt;/span&gt;(q, name, food):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; res &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;food&lt;span style="color:#e6db74"&gt;}{&lt;/span&gt;i&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(random&lt;span style="color:#f92672"&gt;.&lt;/span&gt;randint(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; q&lt;span style="color:#f92672"&gt;.&lt;/span&gt;put(res)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; 生产了 &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;res&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;consumer&lt;/span&gt;(q, name):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;while&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; res &lt;span style="color:#f92672"&gt;=&lt;/span&gt; q&lt;span style="color:#f92672"&gt;.&lt;/span&gt;get()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; res &lt;span style="color:#f92672"&gt;is&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;None&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(random&lt;span style="color:#f92672"&gt;.&lt;/span&gt;randint(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; 吃了 &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;res&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; q &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Queue()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; producers &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Process(target&lt;span style="color:#f92672"&gt;=&lt;/span&gt;producer, args&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(q, &lt;span style="color:#e6db74"&gt;&amp;#34;厨师1&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;包子&amp;#34;&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Process(target&lt;span style="color:#f92672"&gt;=&lt;/span&gt;producer, args&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(q, &lt;span style="color:#e6db74"&gt;&amp;#34;厨师2&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;烧麦&amp;#34;&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; consumers &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Process(target&lt;span style="color:#f92672"&gt;=&lt;/span&gt;consumer, args&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(q, &lt;span style="color:#e6db74"&gt;&amp;#34;lxx&amp;#34;&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Process(target&lt;span style="color:#f92672"&gt;=&lt;/span&gt;consumer, args&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(q, &lt;span style="color:#e6db74"&gt;&amp;#34;hxx&amp;#34;&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; p &lt;span style="color:#f92672"&gt;in&lt;/span&gt; producers &lt;span style="color:#f92672"&gt;+&lt;/span&gt; consumers:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; p&lt;span style="color:#f92672"&gt;.&lt;/span&gt;start()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; p &lt;span style="color:#f92672"&gt;in&lt;/span&gt; producers:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; p&lt;span style="color:#f92672"&gt;.&lt;/span&gt;join()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 每个消费者收到一个 None 就退出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; _ &lt;span style="color:#f92672"&gt;in&lt;/span&gt; consumers:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; q&lt;span style="color:#f92672"&gt;.&lt;/span&gt;put(&lt;span style="color:#66d9ef"&gt;None&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="方式2joinablequeue推荐"&gt;
+ 方式2：JoinableQueue（推荐）
+ &lt;a class="anchor" href="#%e6%96%b9%e5%bc%8f2joinablequeue%e6%8e%a8%e8%8d%90"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;消费者设为守护进程，主进程通过 &lt;code&gt;q.join()&lt;/code&gt; 等待所有任务处理完再退出，无需手动发 &lt;code&gt;None&lt;/code&gt;。&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%BF%9B%E7%A8%8B%E6%B1%A0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%BF%9B%E7%A8%8B%E6%B1%A0/</guid><description>&lt;h1 id="python-线程池进程池"&gt;
+ python-线程池进程池
+ &lt;a class="anchor" href="#python-%e7%ba%bf%e7%a8%8b%e6%b1%a0%e8%bf%9b%e7%a8%8b%e6%b1%a0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python-并发编程]]&lt;/p&gt;
+&lt;p&gt;减少频繁创建和销毁进程/线程的开销，通过复用来提升性能。&lt;/p&gt;
+&lt;h2 id="进程池-vs-线程池"&gt;
+ 进程池 vs 线程池
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e6%b1%a0-vs-%e7%ba%bf%e7%a8%8b%e6%b1%a0"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;&lt;/th&gt;
+ &lt;th&gt;进程池 &lt;code&gt;ProcessPoolExecutor&lt;/code&gt;&lt;/th&gt;
+ &lt;th&gt;线程池 &lt;code&gt;ThreadPoolExecutor&lt;/code&gt;&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;回调函数执行位置&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;主进程&lt;/strong&gt;中执行&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;子线程&lt;/strong&gt;中执行&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;默认最大并发数&lt;/td&gt;
+ &lt;td&gt;CPU 核心数&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;min(32, os.cpu_count() + 4)&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="核心-api"&gt;
+ 核心 API
+ &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83-api"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; concurrent.futures &lt;span style="color:#f92672"&gt;import&lt;/span&gt; ThreadPoolExecutor, ProcessPoolExecutor
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pool &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ThreadPoolExecutor(max_workers&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;future &lt;span style="color:#f92672"&gt;=&lt;/span&gt; pool&lt;span style="color:#f92672"&gt;.&lt;/span&gt;submit(task, arg) &lt;span style="color:#75715e"&gt;# 提交任务，返回 Future 对象&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;future&lt;span style="color:#f92672"&gt;.&lt;/span&gt;add_done_callback(handle) &lt;span style="color:#75715e"&gt;# 任务完成后触发回调&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;future&lt;span style="color:#f92672"&gt;.&lt;/span&gt;result() &lt;span style="color:#75715e"&gt;# 获取任务返回值（阻塞等待）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pool&lt;span style="color:#f92672"&gt;.&lt;/span&gt;shutdown(wait&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 等待所有任务完成后关闭&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="示例"&gt;
+ 示例
+ &lt;a class="anchor" href="#%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; concurrent.futures &lt;span style="color:#f92672"&gt;import&lt;/span&gt; ThreadPoolExecutor
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; threading &lt;span style="color:#f92672"&gt;import&lt;/span&gt; current_thread
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; time&lt;span style="color:#f92672"&gt;,&lt;/span&gt; random
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;task&lt;/span&gt;(n):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;current_thread()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; is running&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(random&lt;span style="color:#f92672"&gt;.&lt;/span&gt;randint(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; n &lt;span style="color:#f92672"&gt;**&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;handle&lt;/span&gt;(future):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; res &lt;span style="color:#f92672"&gt;=&lt;/span&gt; future&lt;span style="color:#f92672"&gt;.&lt;/span&gt;result()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;current_thread()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; 处理结果：&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;res&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 方式1：手动 shutdown&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pool &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ThreadPoolExecutor(max_workers&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;19&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pool&lt;span style="color:#f92672"&gt;.&lt;/span&gt;submit(task, i)&lt;span style="color:#f92672"&gt;.&lt;/span&gt;add_done_callback(handle)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pool&lt;span style="color:#f92672"&gt;.&lt;/span&gt;shutdown(wait&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 方式2：with 自动 shutdown（推荐）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;with&lt;/span&gt; ThreadPoolExecutor(max_workers&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; pool:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;19&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pool&lt;span style="color:#f92672"&gt;.&lt;/span&gt;submit(task, i)&lt;span style="color:#f92672"&gt;.&lt;/span&gt;add_done_callback(handle)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/</guid><description>&lt;h1 id="python-线程编程"&gt;
+ python-线程编程
+ &lt;a class="anchor" href="#python-%e7%ba%bf%e7%a8%8b%e7%bc%96%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python-并发编程]] | [[python-进程和线程]] | [[python-锁]]&lt;/p&gt;
+&lt;h2 id="基础用法"&gt;
+ 基础用法
+ &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80%e7%94%a8%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="函数式"&gt;
+ 函数式
+ &lt;a class="anchor" href="#%e5%87%bd%e6%95%b0%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; threading &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Thread, current_thread
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;task&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;current_thread()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; is running&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Thread(target&lt;span style="color:#f92672"&gt;=&lt;/span&gt;task, name&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;线程1&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t&lt;span style="color:#f92672"&gt;.&lt;/span&gt;start()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;&amp;#39;主线程&amp;#39;&lt;/span&gt;, current_thread()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="类继承式"&gt;
+ 类继承式
+ &lt;a class="anchor" href="#%e7%b1%bb%e7%bb%a7%e6%89%bf%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; threading &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Thread
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;MyThread&lt;/span&gt;(Thread):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__init__&lt;/span&gt;(self, name):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; super()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;__init__&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name &lt;span style="color:#f92672"&gt;=&lt;/span&gt; name
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;run&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; is running&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; MyThread(&lt;span style="color:#e6db74"&gt;&amp;#34;线程1&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t&lt;span style="color:#f92672"&gt;.&lt;/span&gt;start()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="常用对象和方法"&gt;
+ 常用对象和方法
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%af%b9%e8%b1%a1%e5%92%8c%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; threading &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Thread, current_thread, active_count, enumerate
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; time
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;task&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;current_thread()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; is running&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(&lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Thread(target&lt;span style="color:#f92672"&gt;=&lt;/span&gt;task)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t&lt;span style="color:#f92672"&gt;.&lt;/span&gt;start()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(enumerate()) &lt;span style="color:#75715e"&gt;# 列出所有活跃线程&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(active_count()) &lt;span style="color:#75715e"&gt;# 活跃线程数量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(t&lt;span style="color:#f92672"&gt;.&lt;/span&gt;is_alive()) &lt;span style="color:#75715e"&gt;# 线程是否还在运行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;&amp;#39;主线程&amp;#39;&lt;/span&gt;, current_thread()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="守护线程"&gt;
+ 守护线程
+ &lt;a class="anchor" href="#%e5%ae%88%e6%8a%a4%e7%ba%bf%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;效忠对象：&lt;strong&gt;进程中所有非守护线程&lt;/strong&gt;，比守护进程生命周期更长。&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9/</guid><description>&lt;h1 id="python-网络开发知识点"&gt;
  python-网络开发知识点
  &lt;a class="anchor" href="#python-%e7%bd%91%e7%bb%9c%e5%bc%80%e5%8f%91%e7%9f%a5%e8%af%86%e7%82%b9"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -41,7 +450,186 @@
 &lt;li&gt;&lt;strong&gt;windows&lt;/strong&gt; 接收的大小 小于 发送的大小 会直接报错&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;linux&lt;/strong&gt; 接收的大小 小于 发送的大小 不会报错，但是剩余的数据丢失&lt;/li&gt;
 &lt;li&gt;udp也有&lt;strong&gt;五元组&lt;/strong&gt; 但不区分连接状态，不会单独设置缓存&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python/</guid><description>&lt;h1 id="大纲-python"&gt;
+&lt;/ol&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/</guid><description>&lt;h1 id="python-进程和线程"&gt;
+ python-进程和线程
+ &lt;a class="anchor" href="#python-%e8%bf%9b%e7%a8%8b%e5%92%8c%e7%ba%bf%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python-并发编程]]&lt;/p&gt;
+&lt;h2 id="对比"&gt;
+ 对比
+ &lt;a class="anchor" href="#%e5%af%b9%e6%af%94"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;&lt;/th&gt;
+ &lt;th&gt;进程&lt;/th&gt;
+ &lt;th&gt;线程&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;比喻&lt;/td&gt;
+ &lt;td&gt;工厂（资源单位）&lt;/td&gt;
+ &lt;td&gt;流水线（调度/执行单位）&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;资源&lt;/td&gt;
+ &lt;td&gt;每次开子进程都会复制父进程的资源&lt;/td&gt;
+ &lt;td&gt;线程间共享进程资源，开启不用复制&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Python&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;multiprocessing.Process&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;threading.Thread&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="python-线程的限制gil"&gt;
+ Python 线程的限制（GIL）
+ &lt;a class="anchor" href="#python-%e7%ba%bf%e7%a8%8b%e7%9a%84%e9%99%90%e5%88%b6gil"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Python Thread&lt;/strong&gt; 是&lt;strong&gt;内核模式&lt;/strong&gt;操作系统线程&lt;/li&gt;
+&lt;li&gt;受 &lt;strong&gt;GIL&lt;/strong&gt;（Global Interpreter Lock，全局解释器锁）限制&lt;/li&gt;
+&lt;li&gt;同一时刻，同一进程里只有&lt;strong&gt;一个线程&lt;/strong&gt;在执行 Python 字节码&lt;/li&gt;
+&lt;li&gt;无法利用多核 CPU 的优势（CPU 密集型任务，多线程无加速）&lt;/li&gt;
+&lt;li&gt;IO 密集型任务不受影响，IO 等待期间会释放 GIL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;对比&lt;/strong&gt;：Go 的 Goroutine 是&lt;strong&gt;用户模式&lt;/strong&gt;轻量级线程，调度器自动映射到内核线程，能充分利用多核。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Python 3.13&lt;/strong&gt;：实验性自由线程（Nogil）支持，允许线程在不受 GIL 限制的情况下真正并行。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="守护进程-vs-守护线程"&gt;
+ 守护进程 vs 守护线程
+ &lt;a class="anchor" href="#%e5%ae%88%e6%8a%a4%e8%bf%9b%e7%a8%8b-vs-%e5%ae%88%e6%8a%a4%e7%ba%bf%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;&lt;/th&gt;
+ &lt;th&gt;守护进程&lt;/th&gt;
+ &lt;th&gt;守护线程&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;效忠对象&lt;/td&gt;
+ &lt;td&gt;主进程的&lt;strong&gt;代码执行&lt;/strong&gt;（代码跑完就结束）&lt;/td&gt;
+ &lt;td&gt;进程中所有&lt;strong&gt;非守护线程&lt;/strong&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;结束时机&lt;/td&gt;
+ &lt;td&gt;主进程代码运行完即结束（不等子进程）&lt;/td&gt;
+ &lt;td&gt;所有非守护线程结束才结束，比守护进程生命周期更长&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;设置方式&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;p.daemon = True&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;t.daemon = True&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E9%94%81/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E9%94%81/</guid><description>&lt;h1 id="python-锁"&gt;
+ python-锁
+ &lt;a class="anchor" href="#python-%e9%94%81"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python-并发编程]] | [[python-线程编程]]&lt;/p&gt;
+&lt;h2 id="互斥锁-lock"&gt;
+ 互斥锁 Lock
+ &lt;a class="anchor" href="#%e4%ba%92%e6%96%a5%e9%94%81-lock"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;线程和进程使用方法相同。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; threading &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Thread, Lock
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; time
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;n &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mutex &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Lock()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;task&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;global&lt;/span&gt; n
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;with&lt;/span&gt; mutex:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; temp &lt;span style="color:#f92672"&gt;=&lt;/span&gt; n
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(&lt;span style="color:#ae81ff"&gt;0.1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; n &lt;span style="color:#f92672"&gt;=&lt;/span&gt; temp &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; threads &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [Thread(target&lt;span style="color:#f92672"&gt;=&lt;/span&gt;task) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; _ &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; t &lt;span style="color:#f92672"&gt;in&lt;/span&gt; threads:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t&lt;span style="color:#f92672"&gt;.&lt;/span&gt;start()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; t &lt;span style="color:#f92672"&gt;in&lt;/span&gt; threads:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t&lt;span style="color:#f92672"&gt;.&lt;/span&gt;join()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(n) &lt;span style="color:#75715e"&gt;# 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="信号量-semaphore"&gt;
+ 信号量 Semaphore
+ &lt;a class="anchor" href="#%e4%bf%a1%e5%8f%b7%e9%87%8f-semaphore"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;控制并发数量（最多 N 个线程同时执行）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;子线程可以直接使用全局信号量对象，无需传递&lt;/li&gt;
+&lt;li&gt;子&lt;strong&gt;进程&lt;/strong&gt;必须通过参数传递信号量对象（子进程有独立内存空间）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; threading &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Thread, Semaphore, current_thread
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; time&lt;span style="color:#f92672"&gt;,&lt;/span&gt; random
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sm &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Semaphore(&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 最多 5 个线程并发&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;func&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sm&lt;span style="color:#f92672"&gt;.&lt;/span&gt;acquire()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;current_thread()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; is running&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(random&lt;span style="color:#f92672"&gt;.&lt;/span&gt;randint(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sm&lt;span style="color:#f92672"&gt;.&lt;/span&gt;release()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;23&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Thread(target&lt;span style="color:#f92672"&gt;=&lt;/span&gt;func)&lt;span style="color:#f92672"&gt;.&lt;/span&gt;start()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="递归锁-rlock"&gt;
+ 递归锁 RLock
+ &lt;a class="anchor" href="#%e9%80%92%e5%bd%92%e9%94%81-rlock"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;死锁&lt;/strong&gt;：多个线程互相等待对方释放资源，导致程序卡死&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RLock&lt;/strong&gt;：允许同一线程多次获取锁，避免因重复获取锁而死锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-py" data-lang="py"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; threading &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Thread, RLock
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; time
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 将 Lock 改为 RLock 解决死锁&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mutexA &lt;span style="color:#f92672"&gt;=&lt;/span&gt; mutexB &lt;span style="color:#f92672"&gt;=&lt;/span&gt; RLock()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;MyThread&lt;/span&gt;(Thread):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__init__&lt;/span&gt;(self, name):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; super()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;__init__&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name &lt;span style="color:#f92672"&gt;=&lt;/span&gt; name
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;run&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;f1()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;f2()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;f1&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mutexA&lt;span style="color:#f92672"&gt;.&lt;/span&gt;acquire()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; 抢到了A锁&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mutexB&lt;span style="color:#f92672"&gt;.&lt;/span&gt;acquire()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; 抢到了B锁&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mutexB&lt;span style="color:#f92672"&gt;.&lt;/span&gt;release()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mutexA&lt;span style="color:#f92672"&gt;.&lt;/span&gt;release()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;f2&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mutexB&lt;span style="color:#f92672"&gt;.&lt;/span&gt;acquire()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; 抢到了B锁&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; time&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(&lt;span style="color:#ae81ff"&gt;0.1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mutexA&lt;span style="color:#f92672"&gt;.&lt;/span&gt;acquire()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; 抢到了A锁&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mutexA&lt;span style="color:#f92672"&gt;.&lt;/span&gt;release()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mutexB&lt;span style="color:#f92672"&gt;.&lt;/span&gt;release()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; MyThread(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;线程&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;i&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)&lt;span style="color:#f92672"&gt;.&lt;/span&gt;start()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="事件-event"&gt;
+ 事件 Event
+ &lt;a class="anchor" href="#%e4%ba%8b%e4%bb%b6-event"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;线程间的信号通知机制，用于一个线程等待另一个线程的某个状态。&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python/</guid><description>&lt;h1 id="大纲-python"&gt;
  大纲-python
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-python"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -56,6 +644,100 @@
 &lt;ul&gt;
 &lt;li&gt;[[python-网络开发知识点]]&lt;/li&gt;
 &lt;li&gt;[[无意义-python-老网课笔记]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="并发编程"&gt;
+ 并发编程
+ &lt;a class="anchor" href="#%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-并发编程]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="后端开发"&gt;
+ 后端开发
+ &lt;a class="anchor" href="#%e5%90%8e%e7%ab%af%e5%bc%80%e5%8f%91"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python后端]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</guid><description>&lt;h1 id="python后端-依赖管理"&gt;
+ python后端-依赖管理
+ &lt;a class="anchor" href="#python%e5%90%8e%e7%ab%af-%e4%be%9d%e8%b5%96%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python后端]]&lt;/p&gt;
+&lt;h2 id="生成-requirementstxt"&gt;
+ 生成 requirements.txt
+ &lt;a class="anchor" href="#%e7%94%9f%e6%88%90-requirementstxt"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install pipreqs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /path/to/your/project
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pipreqs ./ --encoding&lt;span style="color:#f92672"&gt;=&lt;/span&gt;utf8
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--ignore &amp;lt;dir1,dir2,...&amp;gt;&lt;/code&gt; 忽略某些目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--force&lt;/code&gt; 强制覆盖已有 &lt;code&gt;requirements.txt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-pin&lt;/code&gt; 不锁版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意：&lt;code&gt;pipreqs&lt;/code&gt; 可能会联网查询最新版本，偶尔与当前 Python 版本不兼容。&lt;/p&gt;
+&lt;h2 id="安装依赖"&gt;
+ 安装依赖
+ &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install -r requirements.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-i &amp;lt;url&amp;gt;&lt;/code&gt; 指定镜像源&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-cache-dir&lt;/code&gt; 不使用缓存，强制重新下载&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--upgrade&lt;/code&gt; 升级到最新版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="导出依赖"&gt;
+ 导出依赖
+ &lt;a class="anchor" href="#%e5%af%bc%e5%87%ba%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip freeze &amp;gt; requirements.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pip list&lt;/code&gt; 查看已安装包&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pip freeze&lt;/code&gt; 生成可复现依赖清单&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="python后端-环境安装"&gt;
+ python后端-环境安装
+ &lt;a class="anchor" href="#python%e5%90%8e%e7%ab%af-%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python后端]]&lt;/p&gt;
+&lt;h2 id="conda-环境创建"&gt;
+ Conda 环境创建
+ &lt;a class="anchor" href="#conda-%e7%8e%af%e5%a2%83%e5%88%9b%e5%bb%ba"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda create -n python-backend python&lt;span style="color:#f92672"&gt;=&lt;/span&gt;3.12
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-y&lt;/code&gt; 自动确认安装，无需手动输入&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-default-packages&lt;/code&gt; 不安装默认包，创建更干净的环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="环境管理"&gt;
+ 环境管理
+ &lt;a class="anchor" href="#%e7%8e%af%e5%a2%83%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda env list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda activate python-backend
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="建议"&gt;
+ 建议
+ &lt;a class="anchor" href="#%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;项目独立虚拟环境，避免依赖污染&lt;/li&gt;
+&lt;li&gt;先激活环境再安装依赖&lt;/li&gt;
+&lt;li&gt;在 README 记录 Python 版本和环境名&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF/</guid><description>&lt;h1 id="大纲-python后端"&gt;
+ 大纲-python后端
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-python%e5%90%8e%e7%ab%af"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="环境与依赖"&gt;
+ 环境与依赖
+ &lt;a class="anchor" href="#%e7%8e%af%e5%a2%83%e4%b8%8e%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python后端-环境安装]]&lt;/li&gt;
+&lt;li&gt;[[python后端-依赖管理]]&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0/</guid><description>&lt;h1 id="python-老网课笔记-大概率不会再看"&gt;
  python-老网课笔记-大概率不会再看
  &lt;a class="anchor" href="#python-%e8%80%81%e7%bd%91%e8%af%be%e7%ac%94%e8%ae%b0-%e5%a4%a7%e6%a6%82%e7%8e%87%e4%b8%8d%e4%bc%9a%e5%86%8d%e7%9c%8b"&gt;#&lt;/a&gt;

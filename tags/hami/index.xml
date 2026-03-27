@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hami on</title><link>https://dlliang14.github.io/web-publicNotes/tags/hami/</link><description>Recent content in Hami on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/hami/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-gpu-hami%E9%83%A8%E7%BD%B2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-gpu-hami%E9%83%A8%E7%BD%B2/</guid><description>&lt;h1 id="k8s-gpu-hami部署"&gt;
+ k8s-gpu-hami部署
+ &lt;a class="anchor" href="#k8s-gpu-hami%e9%83%a8%e7%bd%b2"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[k8s-使用gpu]]&lt;/p&gt;
+&lt;h2 id="组件与依赖"&gt;
+ 组件与依赖
+ &lt;a class="anchor" href="#%e7%bb%84%e4%bb%b6%e4%b8%8e%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;HAMi：Heterogeneous AI Management Infrastructure&lt;/li&gt;
+&lt;li&gt;NVIDIA 驱动&lt;/li&gt;
+&lt;li&gt;NVIDIA Container Toolkit&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NVIDIA/k8s-device-plugin&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="快速流程"&gt;
+ 快速流程
+ &lt;a class="anchor" href="#%e5%bf%ab%e9%80%9f%e6%b5%81%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;安装并验证宿主机 NVIDIA 驱动（&lt;code&gt;nvidia-smi&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;安装 &lt;code&gt;nvidia-container-toolkit&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置 containerd 的 nvidia runtime 并重启 containerd&lt;/li&gt;
+&lt;li&gt;安装 HAMi Helm Chart&lt;/li&gt;
+&lt;li&gt;给 GPU 节点打标签，验证 &lt;code&gt;nvidia.com/gpu&lt;/code&gt; 资源&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="关键命令"&gt;
+ 关键命令
+ &lt;a class="anchor" href="#%e5%85%b3%e9%94%ae%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装 toolkit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt install -y nvidia-container-toolkit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo nvidia-ctk runtime configure --runtime&lt;span style="color:#f92672"&gt;=&lt;/span&gt;containerd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl restart containerd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装 hami&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm repo add hami https://project-hami.github.io/Hami/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm pull --untar hami-charts/hami --version v2.8.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm install hami hami-charts/hami -n kube-system &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set scheduler.kubeScheduler.imageTag&lt;span style="color:#f92672"&gt;=&lt;/span&gt;v1.32.4 &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set devicePlugin.runtimeClassName&lt;span style="color:#f92672"&gt;=&lt;/span&gt;nvidia &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set devicePlugin.createRuntimeClass&lt;span style="color:#f92672"&gt;=&lt;/span&gt;true
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 节点标签&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl label node prod-m1 gpu&lt;span style="color:#f92672"&gt;=&lt;/span&gt;on
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl describe node prod-m1 | grep -i nvidia
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="常见资源声明"&gt;
+ 常见资源声明
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e8%b5%84%e6%ba%90%e5%a3%b0%e6%98%8e"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;vGPU：&lt;code&gt;nvidia.com/vgpu: 1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;MIG：&lt;code&gt;nvidia.com/mig-1g.5gb: 1&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见故障"&gt;
+ 常见故障
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%95%85%e9%9a%9c"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;现象：&lt;code&gt;hami-device-plugin&lt;/code&gt; 反复重启（BackOff）&lt;/li&gt;
+&lt;li&gt;处理：补齐 &lt;code&gt;RuntimeClass&lt;/code&gt; 并让 HAMi 强制使用 nvidia runtime&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;apiVersion&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;node.k8s.io/v1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;kind&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;RuntimeClass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;nvidia&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;handler&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;nvidia&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm upgrade hami hami-charts/hami -n kube-system &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set devicePlugin.runtimeClassName&lt;span style="color:#f92672"&gt;=&lt;/span&gt;nvidia &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set resourceName&lt;span style="color:#f92672"&gt;=&lt;/span&gt;nvidia.com/gpu &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set resourceMem&lt;span style="color:#f92672"&gt;=&lt;/span&gt;nvidia.com/gpumem &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set resourceCore&lt;span style="color:#f92672"&gt;=&lt;/span&gt;nvidia.com/gpucores
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

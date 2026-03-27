@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>备份 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%87%E4%BB%BD/</link><description>Recent content in 备份 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%87%E4%BB%BD/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-vm-%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-vm-%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/</guid><description>&lt;h1 id="k8s-vm-备份恢复"&gt;
+ k8s-vm-备份恢复
+ &lt;a class="anchor" href="#k8s-vm-%e5%a4%87%e4%bb%bd%e6%81%a2%e5%a4%8d"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[k8s-使用vm监控]]&lt;/p&gt;
+&lt;h2 id="版本能力"&gt;
+ 版本能力
+ &lt;a class="anchor" href="#%e7%89%88%e6%9c%ac%e8%83%bd%e5%8a%9b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;企业版：支持自动化 &lt;code&gt;vmbackupmanager&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;开源版：通常用定时任务 + 对象存储（S3 兼容）手动编排&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="开源版建议流程"&gt;
+ 开源版建议流程
+ &lt;a class="anchor" href="#%e5%bc%80%e6%ba%90%e7%89%88%e5%bb%ba%e8%ae%ae%e6%b5%81%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;对 VMSingle 做快照&lt;/li&gt;
+&lt;li&gt;上传快照到 S3 兼容存储&lt;/li&gt;
+&lt;li&gt;故障时下载并手动恢复&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="secret-管理原则"&gt;
+ Secret 管理原则
+ &lt;a class="anchor" href="#secret-%e7%ae%a1%e7%90%86%e5%8e%9f%e5%88%99"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;只在 Kubernetes Secret 中保存凭据&lt;/li&gt;
+&lt;li&gt;笔记中只保留模板，不写真实 &lt;code&gt;access-key&lt;/code&gt;/&lt;code&gt;secret-key&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;apiVersion&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;v1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;kind&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;Secret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;vmbackup-credentials&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;namespace&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;vm&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;type&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;Opaque&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;stringData&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;access-key&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;lt;REDACTED&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;secret-key&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;lt;REDACTED&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="文档入口"&gt;
+ 文档入口
+ &lt;a class="anchor" href="#%e6%96%87%e6%a1%a3%e5%85%a5%e5%8f%a3"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://docs.victoriametrics.com/operator/api/#vmbackup" rel="noopener"&gt;VMBackup API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kubectl explain vmsingle.spec&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

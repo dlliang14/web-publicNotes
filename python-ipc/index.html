@@ -1,0 +1,109 @@
+<!doctype html><html lang=en dir=ltr><head><meta property="og:url" content="https://dlliang14.github.io/web-publicNotes/python-ipc/"><meta property="og:site_name" content="📓 dll-笔记"><meta property="og:title" content="📓 dll-笔记"><meta property="og:description" content="python-ipc # IPC（Inter-Process Communication）进程间通信。
+[[python-并发编程]]
+管道 Pipe（不推荐） # Pipe() 返回两个连接对象，用于进程间双向通信 只能在两个进程间使用，多进程需要用 Queue 不是线程安全的 ⚠️ 死锁风险：先 join() 再 recv() 可能会死锁 操作系统管道缓冲区有大小限制（通常约 64KB） 子进程发送大数据时卡在 send()，等主进程 recv() 腾空间 主进程在执行 join()，死等子进程结束 → 两者互等，死锁
+from multiprocessing import Process, Pipe def f(conn): conn.send([42, None, 'hello']) conn.close() if __name__ == '__main__': parent_conn, child_conn = Pipe() p = Process(target=f, args=(child_conn,)) p.start() print(parent_conn.recv()) # 先 recv 再 join，避免死锁 p.join() 队列 Queue # 底层用锁实现的线程安全队列。
+类型 说明 multiprocessing.Queue() 进程级队列 multiprocessing.JoinableQueue() 进程级队列，额外支持 task_done() 和 join()，适合生产者消费者模式 queue.Queue() 线程级队列 queue.PriorityQueue() 线程级优先级队列，数值小的先取出 queue.LifoQueue() 线程级堆栈，后进先出 from queue import Queue q = Queue(maxsize=3) q.put(4, block=True, timeout=None) # 队列满时阻塞，None 表示一直等 q.put(4, block=False) # 队列满时直接抛出异常 q.get(block=True, timeout=None) # 队列空时阻塞 q.get(block=False) # 队列空时直接抛出异常"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:tag" content="Python"><meta property="article:tag" content="并发编程"><title>Python Ipc | 📓 dll-笔记</title><link rel=manifest href=/web-publicNotes/manifest.json><link rel=icon href=/web-publicNotes/favicon.png type=image/x-icon><link rel=stylesheet href=/web-publicNotes/book.min.ba09574c9901fece0875407bd4458ac1712ce621ddae7a3e6079311e13a7da55.css integrity="sha256-uglXTJkB/s4IdUB71EWKwXEs5iHdrno+YHkxHhOn2lU=" crossorigin=anonymous><meta charset=UTF-8><meta name=description content="
+  python-ipc
+  #
+
+IPC（Inter-Process Communication）进程间通信。
+[[python-并发编程]]
+
+  管道 Pipe（不推荐）
+  #
+
+
+Pipe() 返回两个连接对象，用于进程间双向通信
+只能在两个进程间使用，多进程需要用 Queue
+不是线程安全的
+
+
+⚠️ 死锁风险：先 join() 再 recv() 可能会死锁
+操作系统管道缓冲区有大小限制（通常约 64KB）
+子进程发送大数据时卡在 send()，等主进程 recv() 腾空间
+主进程在执行 join()，死等子进程结束 → 两者互等，死锁
+
+from multiprocessing import Process, Pipe
+
+def f(conn):
+    conn.send([42, None, 'hello'])
+    conn.close()
+
+if __name__ == '__main__':
+    parent_conn, child_conn = Pipe()
+    p = Process(target=f, args=(child_conn,))
+    p.start()
+    print(parent_conn.recv())  # 先 recv 再 join，避免死锁
+    p.join()
+
+  队列 Queue
+  #
+
+底层用锁实现的线程安全队列。
+
+  
+      
+          类型
+          说明
+      
+  
+  
+      
+          multiprocessing.Queue()
+          进程级队列
+      
+      
+          multiprocessing.JoinableQueue()
+          进程级队列，额外支持 task_done() 和 join()，适合生产者消费者模式
+      
+      
+          queue.Queue()
+          线程级队列
+      
+      
+          queue.PriorityQueue()
+          线程级优先级队列，数值小的先取出
+      
+      
+          queue.LifoQueue()
+          线程级堆栈，后进先出
+      
+  
+
+from queue import Queue
+
+q = Queue(maxsize=3)
+q.put(4, block=True, timeout=None)  # 队列满时阻塞，None 表示一直等
+q.put(4, block=False)               # 队列满时直接抛出异常
+
+q.get(block=True, timeout=None)     # 队列空时阻塞
+q.get(block=False)                  # 队列空时直接抛出异常
+"><title>📓 dll-笔记</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://dlliang14.github.io/web-publicNotes//favicon.png><link href=https://dlliang14.github.io/web-publicNotes/styles.e08ceb33360cec132feb69cfb982e2a4.min.css rel=stylesheet><link href=https://dlliang14.github.io/web-publicNotes/quartz/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/darkmode.ee7e4f92c1dc2443b05a655a898a2502.min.js></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/util.c69e233dc1cc331a30b0f670e657b425.min.js></script><script async src=https://unpkg.com/@floating-ui/core@0.7.3></script><script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script><script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://dlliang14.github.io/web-publicNotes/",fetchData=Promise.all([fetch("https://dlliang14.github.io/web-publicNotes/indices/linkIndex.1516c4d5c52f24647931b0b3043fd403.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://dlliang14.github.io/web-publicNotes/indices/contentIndex.5fb3954d589144dcdada53dad3255ca5.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addCollapsibleCallouts(),initPopover("https://dlliang14.github.io/web-publicNotes",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s;drawGraph("https://dlliang14.github.io/web-publicNotes",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}const i=document.querySelectorAll("pre > code.language-mermaid, pre > code[data-lang='mermaid']");i.forEach(e=>{const t=e.parentElement;if(!t||t.classList.contains("mermaid"))return;const n=document.createElement("pre");n.className="mermaid",n.textContent=e.textContent||"",t.replaceWith(n)});var a=document.getElementsByClassName("mermaid");a.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{"’":"'"},throwOnError:!1})}</script><script>window.Million={navigate:e=>window.location.href=e,prefetch:()=>{}},window.addEventListener("DOMContentLoaded",()=>{init(),render()})</script></head><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><header class=book-header><label for=menu-control><img src=/web-publicNotes/svg/menu.svg class=book-icon alt=Menu></label><h1 id=page-title><a href=https://dlliang14.github.io/web-publicNotes/>📓 dll-笔记</a></h1><div class=spacer></div><div id=search-icon class=quartz-search><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg>
+</label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control><main class=flex><aside class=book-menu><div class=book-menu-content><nav><div class=menu-search><div id=search-icon class=quartz-search><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div></div><ul><li><a href=/web-publicNotes/calico/>Calico</a></li><li><a href=/web-publicNotes/hugo%E5%BB%BA%E7%AB%99/>Hugo建站</a></li><li><a href=/web-publicNotes/js%E5%BC%80%E5%8F%91/>Js开发</a></li><li><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8gpu/>K8s 使用gpu</a></li><li><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8vm%E7%9B%91%E6%8E%A7/>K8s 使用vm监控</a></li><li><a href=/web-publicNotes/k8s/>K8s</a></li><li><a href=/web-publicNotes/opentelemetry/>Opentelemetry</a></li><li><a href=/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/>Python 并发编程</a></li><li><a href=/web-publicNotes/python/>Python</a></li><li><a href=/web-publicNotes/python%E5%90%8E%E7%AB%AF/>Python后端</a></li><li><a href=/web-publicNotes/victoriametrics/>Victoriametrics</a></li><li><a href=/web-publicNotes/web%E5%89%8D%E7%AB%AF/>Web前端</a></li><li><a href=/web-publicNotes/%E7%BE%A4%E8%BE%89/>群辉</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class="book-page container"><article class=markdown><h1 class=title>Python Ipc</h1><h1 id=python-ipc>python-ipc
+<a class=anchor href=#python-ipc>#</a></h1><p>IPC（Inter-Process Communication）进程间通信。</p><p><a href=/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B rel=noopener class=internal-link data-src=/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B>python-并发编程</a></p><h2 id=管道-pipe不推荐>管道 Pipe（不推荐）
+<a class=anchor href=#%e7%ae%a1%e9%81%93-pipe%e4%b8%8d%e6%8e%a8%e8%8d%90>#</a></h2><ul><li><code>Pipe()</code> 返回两个连接对象，用于进程间双向通信</li><li>只能在两个进程间使用，多进程需要用 Queue</li><li>不是线程安全的</li></ul><blockquote><p>⚠️ <strong>死锁风险</strong>：先 <code>join()</code> 再 <code>recv()</code> 可能会死锁
+操作系统管道缓冲区有大小限制（通常约 64KB）
+子进程发送大数据时卡在 <code>send()</code>，等主进程 <code>recv()</code> 腾空间
+主进程在执行 <code>join()</code>，死等子进程结束 → 两者互等，死锁</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> multiprocessing <span style=color:#f92672>import</span> Process, Pipe
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>f</span>(conn):
+</span></span><span style=display:flex><span>    conn<span style=color:#f92672>.</span>send([<span style=color:#ae81ff>42</span>, <span style=color:#66d9ef>None</span>, <span style=color:#e6db74>&#39;hello&#39;</span>])
+</span></span><span style=display:flex><span>    conn<span style=color:#f92672>.</span>close()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;__main__&#39;</span>:
+</span></span><span style=display:flex><span>    parent_conn, child_conn <span style=color:#f92672>=</span> Pipe()
+</span></span><span style=display:flex><span>    p <span style=color:#f92672>=</span> Process(target<span style=color:#f92672>=</span>f, args<span style=color:#f92672>=</span>(child_conn,))
+</span></span><span style=display:flex><span>    p<span style=color:#f92672>.</span>start()
+</span></span><span style=display:flex><span>    print(parent_conn<span style=color:#f92672>.</span>recv())  <span style=color:#75715e># 先 recv 再 join，避免死锁</span>
+</span></span><span style=display:flex><span>    p<span style=color:#f92672>.</span>join()
+</span></span></code></pre></div><h2 id=队列-queue>队列 Queue
+<a class=anchor href=#%e9%98%9f%e5%88%97-queue>#</a></h2><p>底层用锁实现的线程安全队列。</p><table><thead><tr><th>类型</th><th>说明</th></tr></thead><tbody><tr><td><code>multiprocessing.Queue()</code></td><td>进程级队列</td></tr><tr><td><code>multiprocessing.JoinableQueue()</code></td><td>进程级队列，额外支持 <code>task_done()</code> 和 <code>join()</code>，适合生产者消费者模式</td></tr><tr><td><code>queue.Queue()</code></td><td>线程级队列</td></tr><tr><td><code>queue.PriorityQueue()</code></td><td>线程级优先级队列，数值小的先取出</td></tr><tr><td><code>queue.LifoQueue()</code></td><td>线程级堆栈，后进先出</td></tr></tbody></table><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> queue <span style=color:#f92672>import</span> Queue
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>q <span style=color:#f92672>=</span> Queue(maxsize<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>)
+</span></span><span style=display:flex><span>q<span style=color:#f92672>.</span>put(<span style=color:#ae81ff>4</span>, block<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, timeout<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>)  <span style=color:#75715e># 队列满时阻塞，None 表示一直等</span>
+</span></span><span style=display:flex><span>q<span style=color:#f92672>.</span>put(<span style=color:#ae81ff>4</span>, block<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)               <span style=color:#75715e># 队列满时直接抛出异常</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>q<span style=color:#f92672>.</span>get(block<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, timeout<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>)     <span style=color:#75715e># 队列空时阻塞</span>
+</span></span><span style=display:flex><span>q<span style=color:#f92672>.</span>get(block<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)                  <span style=color:#75715e># 队列空时直接抛出异常</span>
+</span></span></code></pre></div><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li><a href=/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/ data-ctx=python-ipc data-src=/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B class=internal-link>python-并发编程</a></li><li><a href=/web-publicNotes/python-%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85/ data-ctx=python-ipc data-src=/python-%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85 class=internal-link>python-生产者消费者</a></li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/graph.3b73a5587c86252d9d006e88788bdaa1.js></script></div></div><div id=contact_buttons><footer><p>Made with <a href=https://github.com/64bitpandas/amethyst>Amethyst</a>, © 2026 dlliang14</p><ul><li><a href=https://dlliang14.github.io/web-publicNotes/>Home</a></li><li><a href=https://space.bilibili.com/4741350>BILIBILI</a></li><li><a href=https://github.com/dlliang14>GITHUB</a></li></ul></footer></div></article><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#python-ipc>python-ipc</a><ul><li><a href=#管道-pipe不推荐>管道 Pipe（不推荐）</a></li><li><a href=#队列-queue>队列 Queue</a></li></ul></li></ul></nav></div></aside></main></body></html>

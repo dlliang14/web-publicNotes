@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>前端 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%89%8D%E7%AB%AF/</link><description>Recent content in 前端 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-bom%E4%B8%8Edom/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-bom%E4%B8%8Edom/</guid><description>&lt;h1 id="js开发-bom与dom"&gt;
+ js开发-bom与dom
+ &lt;a class="anchor" href="#js%e5%bc%80%e5%8f%91-bom%e4%b8%8edom"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[js开发]]&lt;/p&gt;
+&lt;h2 id="bom浏览器对象模型"&gt;
+ BOM（浏览器对象模型）
+ &lt;a class="anchor" href="#bom%e6%b5%8f%e8%a7%88%e5%99%a8%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;window&lt;/code&gt; 可以省略，直接调用 &lt;code&gt;history&lt;/code&gt;、&lt;code&gt;location&lt;/code&gt;、&lt;code&gt;document&lt;/code&gt; 等对象。&lt;/p&gt;
+&lt;h3 id="history"&gt;
+ History
+ &lt;a class="anchor" href="#history"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;history&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;back&lt;/span&gt;(); &lt;span style="color:#75715e"&gt;// 后退
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;history&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;forward&lt;/span&gt;(); &lt;span style="color:#75715e"&gt;// 前进
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;history&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;go&lt;/span&gt;(&lt;span style="color:#f92672"&gt;-&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;); &lt;span style="color:#75715e"&gt;// 后退
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;history&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;go&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;); &lt;span style="color:#75715e"&gt;// 前进
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;history&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;go&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;); &lt;span style="color:#75715e"&gt;// 刷新当前页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="location"&gt;
+ Location
+ &lt;a class="anchor" href="#location"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;location&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;href&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// 获取或设置 URL
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;location&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;protocol&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// 获取或设置协议
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;location&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;host&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// 获取或设置主机
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;location&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;reload&lt;/span&gt;(); &lt;span style="color:#75715e"&gt;// 刷新页面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="通知弹窗"&gt;
+ 通知弹窗
+ &lt;a class="anchor" href="#%e9%80%9a%e7%9f%a5%e5%bc%b9%e7%aa%97"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;这是一个警告框&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;confirm&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;你确定要删除吗？&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;prompt&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;请输入你的名字：&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="dom文档对象模型"&gt;
+ DOM（文档对象模型）
+ &lt;a class="anchor" href="#dom%e6%96%87%e6%a1%a3%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="常用属性"&gt;
+ 常用属性
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%b1%9e%e6%80%a7"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;document.&lt;span style="color:#a6e22e"&gt;title&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// 获取或设置页面标题
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="常用选择器"&gt;
+ 常用选择器
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e9%80%89%e6%8b%a9%e5%99%a8"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;document.&lt;span style="color:#a6e22e"&gt;getElementById&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;document.&lt;span style="color:#a6e22e"&gt;getElementsByClassName&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;class&amp;#39;&lt;/span&gt;); &lt;span style="color:#75715e"&gt;// HTMLCollection
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;document.&lt;span style="color:#a6e22e"&gt;getElementsByTagName&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;tag&amp;#39;&lt;/span&gt;); &lt;span style="color:#75715e"&gt;// HTMLCollection
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;document.&lt;span style="color:#a6e22e"&gt;querySelector&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;selector&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;document.&lt;span style="color:#a6e22e"&gt;querySelectorAll&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;selector&amp;#39;&lt;/span&gt;); &lt;span style="color:#75715e"&gt;// NodeList
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="节点关系"&gt;
+ 节点关系
+ &lt;a class="anchor" href="#%e8%8a%82%e7%82%b9%e5%85%b3%e7%b3%bb"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 包含文本节点
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;childNodes&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;firstChild&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;lastChild&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;parentNode&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;previousSibling&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;nextSibling&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 仅元素节点
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;children&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;firstElementChild&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;lastElementChild&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;parentElement&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;previousElementSibling&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;element&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;nextElementSibling&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="新增节点"&gt;
+ 新增节点
+ &lt;a class="anchor" href="#%e6%96%b0%e5%a2%9e%e8%8a%82%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;newElement&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;createElement&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;div&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;newElement&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;textContent&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;Hello, World!&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;container&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementById&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;container&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;container&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;appendChild&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;newElement&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;container&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;insertBefore&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;newElement&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;container&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;firstChild&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="删除节点"&gt;
+ 删除节点
+ &lt;a class="anchor" href="#%e5%88%a0%e9%99%a4%e8%8a%82%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;elementToRemove&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementById&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;element-id&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;elementToRemove&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;parentNode&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;removeChild&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;elementToRemove&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 现代浏览器
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// elementToRemove.remove();
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="修改内容与属性"&gt;
+ 修改内容与属性
+ &lt;a class="anchor" href="#%e4%bf%ae%e6%94%b9%e5%86%85%e5%ae%b9%e4%b8%8e%e5%b1%9e%e6%80%a7"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;target&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;querySelector&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;.video-share-info-text&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;target&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;textContent&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;888&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;querySelector&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;.video-share-info&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;setAttribute&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;data-shared&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;true&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;getAttribute&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;data-shared&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;removeAttribute&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;data-shared&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;classList&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;active&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;classList&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;remove&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;active&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;classList&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;toggle&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;active&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;classList&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;contains&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;active&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;style&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;color&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;red&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;shareInfo&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;style&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;fontSize&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;16px&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-bootstrap%E5%9F%BA%E7%A1%80/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-bootstrap%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="js开发-bootstrap基础"&gt;
+ js开发-bootstrap基础
+ &lt;a class="anchor" href="#js%e5%bc%80%e5%8f%91-bootstrap%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[js开发]]&lt;/p&gt;
+&lt;h2 id="简介"&gt;
+ 简介
+ &lt;a class="anchor" href="#%e7%ae%80%e4%bb%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bootstrap 是前端 UI 框架，提供响应式布局和预定义组件&lt;/li&gt;
+&lt;li&gt;可快速搭建页面，减少重复样式开发&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*.min.css&lt;/code&gt; / &lt;code&gt;*.min.js&lt;/code&gt; 表示压缩版资源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="依赖说明"&gt;
+ 依赖说明
+ &lt;a class="anchor" href="#%e4%be%9d%e8%b5%96%e8%af%b4%e6%98%8e"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bootstrap 4 及以前常依赖 jQuery&lt;/li&gt;
+&lt;li&gt;Bootstrap 5 默认不依赖 jQuery&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="cdn-引入示例"&gt;
+ CDN 引入示例
+ &lt;a class="anchor" href="#cdn-%e5%bc%95%e5%85%a5%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;link&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;rel&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;stylesheet&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;href&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;crossorigin&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;anonymous&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;script&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;src&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;crossorigin&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;anonymous&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style="color:#f92672"&gt;script&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="模板资源"&gt;
+ 模板资源
+ &lt;a class="anchor" href="#%e6%a8%a1%e6%9d%bf%e8%b5%84%e6%ba%90"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://www.bootmb.com/" rel="noopener"&gt;BootMB 模板站&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-jquery%E5%9F%BA%E7%A1%80/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-jquery%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="js开发-jquery基础"&gt;
+ js开发-jquery基础
+ &lt;a class="anchor" href="#js%e5%bc%80%e5%8f%91-jquery%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[js开发]]&lt;/p&gt;
+&lt;h2 id="优势"&gt;
+ 优势
+ &lt;a class="anchor" href="#%e4%bc%98%e5%8a%bf"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;API 丰富，能简化 DOM、事件、AJAX 操作&lt;/li&gt;
+&lt;li&gt;支持链式调用&lt;/li&gt;
+&lt;li&gt;兼容性好，插件生态成熟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="引入"&gt;
+ 引入
+ &lt;a class="anchor" href="#%e5%bc%95%e5%85%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- CDN --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;script&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;src&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style="color:#f92672"&gt;script&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 本地 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;script&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;src&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;path/to/jquery.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style="color:#f92672"&gt;script&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="验证是否已加载"&gt;
+ 验证是否已加载
+ &lt;a class="anchor" href="#%e9%aa%8c%e8%af%81%e6%98%af%e5%90%a6%e5%b7%b2%e5%8a%a0%e8%bd%bd"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;typeof&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;jQuery&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// function: 已加载
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// undefined: 未加载
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="页面加载时机"&gt;
+ 页面加载时机
+ &lt;a class="anchor" href="#%e9%a1%b5%e9%9d%a2%e5%8a%a0%e8%bd%bd%e6%97%b6%e6%9c%ba"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;$(document).ready(fn)&lt;/code&gt;：DOM 树构建完成后执行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$(fn)&lt;/code&gt;：上面的简写&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;window.onload = fn&lt;/code&gt;：页面全部资源加载完成后执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; () {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;DOM 已加载完成&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;window.&lt;span style="color:#a6e22e"&gt;onload&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; () {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;页面资源已加载完成&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="js-对象与-jquery-对象互转"&gt;
+ JS 对象与 jQuery 对象互转
+ &lt;a class="anchor" href="#js-%e5%af%b9%e8%b1%a1%e4%b8%8e-jquery-%e5%af%b9%e8%b1%a1%e4%ba%92%e8%bd%ac"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="js-对象---jquery-对象"&gt;
+ JS 对象 -&amp;gt; jQuery 对象
+ &lt;a class="anchor" href="#js-%e5%af%b9%e8%b1%a1---jquery-%e5%af%b9%e8%b1%a1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;jsElement&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementById&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;myElement&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;jqueryElement&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;jsElement&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="jquery-对象---js-对象"&gt;
+ jQuery 对象 -&amp;gt; JS 对象
+ &lt;a class="anchor" href="#jquery-%e5%af%b9%e8%b1%a1---js-%e5%af%b9%e8%b1%a1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;jqueryElement&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;#myElement&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;jsElement1&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;jqueryElement&lt;/span&gt;[&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;jsElement2&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;jqueryElement&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;get&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-%E4%BA%8B%E4%BB%B6%E4%B8%8E%E5%AE%9A%E6%97%B6%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-%E4%BA%8B%E4%BB%B6%E4%B8%8E%E5%AE%9A%E6%97%B6%E5%99%A8/</guid><description>&lt;h1 id="js开发-事件与定时器"&gt;
+ js开发-事件与定时器
+ &lt;a class="anchor" href="#js%e5%bc%80%e5%8f%91-%e4%ba%8b%e4%bb%b6%e4%b8%8e%e5%ae%9a%e6%97%b6%e5%99%a8"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[js开发]]&lt;/p&gt;
+&lt;h2 id="事件绑定"&gt;
+ 事件绑定
+ &lt;a class="anchor" href="#%e4%ba%8b%e4%bb%b6%e7%bb%91%e5%ae%9a"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="方式1onclick"&gt;
+ 方式1：onclick
+ &lt;a class="anchor" href="#%e6%96%b9%e5%bc%8f1onclick"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;button&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementById&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;myButton&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;button&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;onclick&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; () {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;按钮被点击了&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="方式2addeventlistener推荐"&gt;
+ 方式2：addEventListener（推荐）
+ &lt;a class="anchor" href="#%e6%96%b9%e5%bc%8f2addeventlistener%e6%8e%a8%e8%8d%90"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;button&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;addEventListener&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;click&amp;#39;&lt;/span&gt;, &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; () {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;按钮被点击了&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="事件对象"&gt;
+ 事件对象
+ &lt;a class="anchor" href="#%e4%ba%8b%e4%bb%b6%e5%af%b9%e8%b1%a1"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;button&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;addEventListener&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;click&amp;#39;&lt;/span&gt;, &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;event&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;console&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;log&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;鼠标点击位置:&amp;#39;&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;event&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;clientX&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;event&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;clientY&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="事件移除"&gt;
+ 事件移除
+ &lt;a class="anchor" href="#%e4%ba%8b%e4%bb%b6%e7%a7%bb%e9%99%a4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;handleClick&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;按钮被点击了&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;button&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;addEventListener&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;click&amp;#39;&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;handleClick&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;button&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;removeEventListener&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;click&amp;#39;&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;handleClick&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="定时器"&gt;
+ 定时器
+ &lt;a class="anchor" href="#%e5%ae%9a%e6%97%b6%e5%99%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="settimeout"&gt;
+ setTimeout
+ &lt;a class="anchor" href="#settimeout"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;setTimeout&lt;/span&gt;(() =&amp;gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;console&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;log&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;Hello, world!&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}, &lt;span style="color:#ae81ff"&gt;1000&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="setinterval--clearinterval"&gt;
+ setInterval / clearInterval
+ &lt;a class="anchor" href="#setinterval--clearinterval"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;myTimer&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;setInterval&lt;/span&gt;(() =&amp;gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;console&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;log&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;Hello, world!&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}, &lt;span style="color:#ae81ff"&gt;1000&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;clearInterval&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;myTimer&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-%E8%AF%84%E8%AE%BA%E6%A1%86%E5%AE%9E%E6%88%98/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91-%E8%AF%84%E8%AE%BA%E6%A1%86%E5%AE%9E%E6%88%98/</guid><description>&lt;h1 id="js开发-评论框实战"&gt;
+ js开发-评论框实战
+ &lt;a class="anchor" href="#js%e5%bc%80%e5%8f%91-%e8%af%84%e8%ae%ba%e6%a1%86%e5%ae%9e%e6%88%98"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[js开发]]&lt;/p&gt;
+&lt;h2 id="功能点"&gt;
+ 功能点
+ &lt;a class="anchor" href="#%e5%8a%9f%e8%83%bd%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;输入评论后动态新增楼层&lt;/li&gt;
+&lt;li&gt;显示时间戳&lt;/li&gt;
+&lt;li&gt;支持删除楼层&lt;/li&gt;
+&lt;li&gt;删除后自动重排后续楼层号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="核心思路"&gt;
+ 核心思路
+ &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e8%b7%af"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;点击提交后读取 &lt;code&gt;textarea&lt;/code&gt; 内容&lt;/li&gt;
+&lt;li&gt;动态创建 &lt;code&gt;li&lt;/code&gt;、楼层信息 &lt;code&gt;p&lt;/code&gt;、评论内容 &lt;code&gt;p&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;追加到 &lt;code&gt;ul&lt;/code&gt; 列表并清空输入框&lt;/li&gt;
+&lt;li&gt;为当前“删除”按钮绑定点击事件&lt;/li&gt;
+&lt;li&gt;删除时重算后续楼层号&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="精简代码"&gt;
+ 精简代码
+ &lt;a class="anchor" href="#%e7%b2%be%e7%ae%80%e4%bb%a3%e7%a0%81"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;btn&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementById&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;btn&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;btn&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;onclick&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; () {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;content&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementById&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;content&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;val&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;content&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;value&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;trim&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#f92672"&gt;!&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;val&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ul&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementsByTagName&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;ul&amp;#39;&lt;/span&gt;)[&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;li&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;createElement&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;li&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;p1&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;createElement&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;p&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;p2&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;createElement&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;p&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;count&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementsByTagName&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;li&amp;#39;&lt;/span&gt;).&lt;span style="color:#a6e22e"&gt;length&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;d&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; Date();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p1&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;innerHTML&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;#&amp;#39;&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;lt;span class=&amp;#39;num&amp;#39;&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;count&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;&amp;lt;/span&amp;gt; &amp;#39;&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;d&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;toLocaleString&lt;/span&gt;() &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34; &amp;lt;span class=&amp;#39;del&amp;#39;&amp;gt;删除&amp;lt;/span&amp;gt;&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p2&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;innerText&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;val&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;li&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;appendChild&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;p1&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;li&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;appendChild&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;p2&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;ul&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;appendChild&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;li&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;content&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;value&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;delButtons&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementsByClassName&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;del&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;currentButton&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;delButtons&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;delButtons&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;length&lt;/span&gt; &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;currentButton&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;onclick&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; () {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;allNum&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; document.&lt;span style="color:#a6e22e"&gt;getElementsByClassName&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;num&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;currentNum&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;previousElementSibling&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;allNum&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;length&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;currentNum&lt;/span&gt; &lt;span style="color:#f92672"&gt;===&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;allNum&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;]) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;j&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;j&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;allNum&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;length&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;j&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;allNum&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;j&lt;/span&gt;].&lt;span style="color:#a6e22e"&gt;innerText&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; parseInt(&lt;span style="color:#a6e22e"&gt;allNum&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;j&lt;/span&gt;].&lt;span style="color:#a6e22e"&gt;innerText&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;) &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;ul&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;removeChild&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;parentNode&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;parentNode&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; };
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/js%E5%BC%80%E5%8F%91/</guid><description>&lt;h1 id="大纲-js开发"&gt;
+ 大纲-js开发
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-js%e5%bc%80%e5%8f%91"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="浏览器与文档模型"&gt;
+ 浏览器与文档模型
+ &lt;a class="anchor" href="#%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%8e%e6%96%87%e6%a1%a3%e6%a8%a1%e5%9e%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[js开发-bom与dom]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="交互基础"&gt;
+ 交互基础
+ &lt;a class="anchor" href="#%e4%ba%a4%e4%ba%92%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[js开发-事件与定时器]]&lt;/li&gt;
+&lt;li&gt;[[js开发-评论框实战]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="库与框架"&gt;
+ 库与框架
+ &lt;a class="anchor" href="#%e5%ba%93%e4%b8%8e%e6%a1%86%e6%9e%b6"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[js开发-jquery基础]]&lt;/li&gt;
+&lt;li&gt;[[js开发-bootstrap基础]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF-css%E5%9F%BA%E7%A1%80/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF-css%E5%9F%BA%E7%A1%80/</guid><description>&lt;h1 id="web前端-css基础"&gt;
+ web前端-css基础
+ &lt;a class="anchor" href="#web%e5%89%8d%e7%ab%af-css%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[web前端]]&lt;/p&gt;
+&lt;h2 id="四种引入方式"&gt;
+ 四种引入方式
+ &lt;a class="anchor" href="#%e5%9b%9b%e7%a7%8d%e5%bc%95%e5%85%a5%e6%96%b9%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;方式&lt;/th&gt;
+ &lt;th&gt;写法&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;内联样式&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;style=&amp;quot;...&amp;quot;&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;优先级最高，不可复用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;内部样式表&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; 标签&lt;/td&gt;
+ &lt;td&gt;仅当前页面生效&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;外部样式表&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; 引入&lt;/td&gt;
+ &lt;td&gt;推荐，可缓存可复用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;@import&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;@import url()&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;加载慢，兼容性差，不推荐&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 内联 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;h1&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;style&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;color: red;&amp;#34;&lt;/span&gt;&amp;gt;Hello&amp;lt;/&lt;span style="color:#f92672"&gt;h1&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 内部 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;style&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;p&lt;/span&gt; { &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;blue&lt;/span&gt;; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#f92672"&gt;style&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 外部（推荐） --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;link&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;rel&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;stylesheet&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;href&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;styles.css&amp;#34;&lt;/span&gt; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- @import（不推荐） --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;style&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; @&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; &lt;span style="color:#f92672"&gt;url&lt;/span&gt;&lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;styles.css&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#f92672"&gt;style&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="常用选择器"&gt;
+ 常用选择器
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e9%80%89%e6%8b%a9%e5%99%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;选择器&lt;/th&gt;
+ &lt;th&gt;示例&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;标签&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;h1&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;选所有该标签&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;类&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;.class&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;选所有该 class&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;ID&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;#id&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;选唯一元素&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;属性&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;[type=&amp;quot;text&amp;quot;]&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;按属性值匹配&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;伪类&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;a:hover&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;状态匹配&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* ID 选择器 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;#main-header {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;text-align&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;center&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;background-color&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;#333&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;white&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* 类选择器 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.&lt;span style="color:#a6e22e"&gt;danger-title&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;red&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;font-size&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;24&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* 属性选择器 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;&lt;span style="color:#f92672"&gt;type&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;text&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;border&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;solid&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;#ccc&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;padding&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* Vue scoped 特殊属性匹配 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;&lt;span style="color:#f92672"&gt;data-v-xxx&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;border&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;solid&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;#ccc&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* 伪类 - hover */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;a&lt;/span&gt;:&lt;span style="color:#a6e22e"&gt;hover&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;green&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* !important - 提高优先级，覆盖其他样式（慎用） */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.&lt;span style="color:#a6e22e"&gt;warning-title&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;color&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;orange&lt;/span&gt; &lt;span style="color:#75715e"&gt;!important&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="三大特性"&gt;
+ 三大特性
+ &lt;a class="anchor" href="#%e4%b8%89%e5%a4%a7%e7%89%b9%e6%80%a7"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;继承性&lt;/strong&gt;：&lt;code&gt;color&lt;/code&gt;、&lt;code&gt;font-*&lt;/code&gt;、&lt;code&gt;line-*&lt;/code&gt;、&lt;code&gt;text-*&lt;/code&gt; 可继承；&lt;code&gt;margin&lt;/code&gt;、&lt;code&gt;padding&lt;/code&gt;、&lt;code&gt;border&lt;/code&gt; 不继承&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;层叠性&lt;/strong&gt;：同优先级时，后定义的覆盖先定义的；继承属性按就近原则&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优先级（特异性）&lt;/strong&gt;：选择器越具体优先级越高，&lt;code&gt;id &amp;gt; class &amp;gt; 标签&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="盒子模型"&gt;
+ 盒子模型
+ &lt;a class="anchor" href="#%e7%9b%92%e5%ad%90%e6%a8%a1%e5%9e%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;box-sizing: border-box&lt;/code&gt;（推荐）：&lt;code&gt;width/height&lt;/code&gt; 包含 &lt;code&gt;padding&lt;/code&gt; 和 &lt;code&gt;border&lt;/code&gt;，不会撑大盒子&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;box-sizing: content-box&lt;/code&gt;（默认）：&lt;code&gt;width/height&lt;/code&gt; 只算内容区，加上 &lt;code&gt;padding&lt;/code&gt;/&lt;code&gt;border&lt;/code&gt; 会撑大&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.&lt;span style="color:#a6e22e"&gt;box&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;width&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;200&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;height&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;padding&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;20&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;border&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;solid&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;blue&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;margin&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;30&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;px&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;box-sizing&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;border-box&lt;/span&gt;; &lt;span style="color:#75715e"&gt;/* 总宽度 = 200px，不会超出 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;💡 &lt;strong&gt;CSS Sprite（精灵图）&lt;/strong&gt;：将多个小图合并成一张大图，通过 &lt;code&gt;background-position&lt;/code&gt; 控制显示区域，减少 HTTP 请求，提高加载速度。&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF-html%E8%A1%A8%E5%8D%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF-html%E8%A1%A8%E5%8D%95/</guid><description>&lt;h1 id="web前端-html表单"&gt;
+ web前端-html表单
+ &lt;a class="anchor" href="#web%e5%89%8d%e7%ab%af-html%e8%a1%a8%e5%8d%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[web前端]]&lt;/p&gt;
+&lt;h2 id="提交方式对比"&gt;
+ 提交方式对比
+ &lt;a class="anchor" href="#%e6%8f%90%e4%ba%a4%e6%96%b9%e5%bc%8f%e5%af%b9%e6%af%94"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;方式&lt;/th&gt;
+ &lt;th&gt;方法&lt;/th&gt;
+ &lt;th&gt;Content-Type&lt;/th&gt;
+ &lt;th&gt;适用场景&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;form multipart&lt;/td&gt;
+ &lt;td&gt;POST&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;multipart/form-data&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;文件上传&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;form urlencoded&lt;/td&gt;
+ &lt;td&gt;POST&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;普通文本（默认）&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;a 标签 / JS 跳转&lt;/td&gt;
+ &lt;td&gt;GET&lt;/td&gt;
+ &lt;td&gt;—&lt;/td&gt;
+ &lt;td&gt;简单参数拼接&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;AJAX fetch&lt;/td&gt;
+ &lt;td&gt;任意&lt;/td&gt;
+ &lt;td&gt;自定义&lt;/td&gt;
+ &lt;td&gt;异步请求（推荐）&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="form-表单"&gt;
+ form 表单
+ &lt;a class="anchor" href="#form-%e8%a1%a8%e5%8d%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="multipartform-data适合文件上传"&gt;
+ multipart/form-data（适合文件上传）
+ &lt;a class="anchor" href="#multipartform-data%e9%80%82%e5%90%88%e6%96%87%e4%bb%b6%e4%b8%8a%e4%bc%a0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;请求体为分段数据，每段包含字段名和内容。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;form&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;action&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/submit&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;method&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;post&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;enctype&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;multipart/form-data&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;input&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;type&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;text&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;name&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;name&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;value&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;11&amp;#34;&lt;/span&gt; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;input&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;type&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;email&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;name&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;email&amp;#34;&lt;/span&gt; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;input&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;type&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;submit&amp;#34;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;value&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Submit&amp;#34;&lt;/span&gt; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#f92672"&gt;form&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 请求体示例：
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;------WebKitFormBoundaryXxx
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;Content-Disposition: form-data; name=&amp;#34;name&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;11
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;------WebKitFormBoundaryXxx
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;Content-Disposition: form-data; name=&amp;#34;email&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;asdad@11
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;------WebKitFormBoundaryXxx-- --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="applicationx-www-form-urlencoded默认适合文本"&gt;
+ application/x-www-form-urlencoded（默认，适合文本）
+ &lt;a class="anchor" href="#applicationx-www-form-urlencoded%e9%bb%98%e8%ae%a4%e9%80%82%e5%90%88%e6%96%87%e6%9c%ac"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;请求体格式：&lt;code&gt;key=value&amp;amp;key=value&lt;/code&gt;&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF-html%E8%A1%A8%E6%A0%BC%E5%88%97%E8%A1%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF-html%E8%A1%A8%E6%A0%BC%E5%88%97%E8%A1%A8/</guid><description>&lt;h1 id="web前端-html表格列表"&gt;
+ web前端-html表格列表
+ &lt;a class="anchor" href="#web%e5%89%8d%e7%ab%af-html%e8%a1%a8%e6%a0%bc%e5%88%97%e8%a1%a8"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[web前端]]&lt;/p&gt;
+&lt;h2 id="表格-table"&gt;
+ 表格 &lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;
+ &lt;a class="anchor" href="#%e8%a1%a8%e6%a0%bc-table"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;tr&amp;gt;&lt;/code&gt; 表格行，&lt;code&gt;&amp;lt;th&amp;gt;&lt;/code&gt; 表头单元格，&lt;code&gt;&amp;lt;td&amp;gt;&lt;/code&gt; 数据单元格&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;border-collapse: collapse&lt;/code&gt; 合并相邻边框&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rowspan&lt;/code&gt; 单元格纵向跨行，&lt;code&gt;colspan&lt;/code&gt; 单元格横向跨列&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;table&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;style&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;border: 3px solid #5e9e26; border-collapse: collapse;&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;tr&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;th&lt;/span&gt;&amp;gt;Header 1&amp;lt;/&lt;span style="color:#f92672"&gt;th&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;th&lt;/span&gt;&amp;gt;Header 2&amp;lt;/&lt;span style="color:#f92672"&gt;th&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;th&lt;/span&gt;&amp;gt;Header 3&amp;lt;/&lt;span style="color:#f92672"&gt;th&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;/&lt;span style="color:#f92672"&gt;tr&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;tr&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;td&lt;/span&gt;&amp;gt;Data 1&amp;lt;/&lt;span style="color:#f92672"&gt;td&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;td&lt;/span&gt;&amp;gt;Data 3&amp;lt;/&lt;span style="color:#f92672"&gt;td&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;td&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;rowspan&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&amp;gt;跨2行&amp;lt;/&lt;span style="color:#f92672"&gt;td&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;/&lt;span style="color:#f92672"&gt;tr&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;tr&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;td&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;colspan&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&amp;gt;跨2列&amp;lt;/&lt;span style="color:#f92672"&gt;td&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;/&lt;span style="color:#f92672"&gt;tr&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#f92672"&gt;table&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="列表"&gt;
+ 列表
+ &lt;a class="anchor" href="#%e5%88%97%e8%a1%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;标签&lt;/th&gt;
+ &lt;th&gt;类型&lt;/th&gt;
+ &lt;th&gt;说明&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;&amp;lt;ul&amp;gt;&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;无序列表&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;list-style-type&lt;/code&gt; 控制项目符号样式&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;&amp;lt;ol&amp;gt;&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;有序列表&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;list-style-type&lt;/code&gt; 控制数字/字母样式&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;&amp;lt;dl&amp;gt;&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;定义列表&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;&amp;lt;dt&amp;gt;&lt;/code&gt; 定义术语，&lt;code&gt;&amp;lt;dd&amp;gt;&lt;/code&gt; 定义描述&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 无序列表 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;ul&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;style&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;list-style-type: square;&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;li&lt;/span&gt;&amp;gt;Item 1&amp;lt;/&lt;span style="color:#f92672"&gt;li&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;li&lt;/span&gt;&amp;gt;Item 2&amp;lt;/&lt;span style="color:#f92672"&gt;li&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#f92672"&gt;ul&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 有序列表 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;ol&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;style&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;list-style-type: upper-alpha;&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;li&lt;/span&gt;&amp;gt;Item 1&amp;lt;/&lt;span style="color:#f92672"&gt;li&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;li&lt;/span&gt;&amp;gt;Item 2&amp;lt;/&lt;span style="color:#f92672"&gt;li&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#f92672"&gt;ol&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!-- 定义列表 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;dl&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;dt&lt;/span&gt;&amp;gt;Term 1&amp;lt;/&lt;span style="color:#f92672"&gt;dt&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;dd&lt;/span&gt;&amp;gt;Description 1&amp;lt;/&lt;span style="color:#f92672"&gt;dd&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;dt&lt;/span&gt;&amp;gt;Term 2&amp;lt;/&lt;span style="color:#f92672"&gt;dt&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;dd&lt;/span&gt;&amp;gt;Description 2&amp;lt;/&lt;span style="color:#f92672"&gt;dd&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#f92672"&gt;dl&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/web%E5%89%8D%E7%AB%AF/</guid><description>&lt;h1 id="大纲-web前端"&gt;
+ 大纲-web前端
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-web%e5%89%8d%e7%ab%af"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="html"&gt;
+ HTML
+ &lt;a class="anchor" href="#html"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[web前端-html表单]]&lt;/li&gt;
+&lt;li&gt;[[web前端-html表格列表]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="css"&gt;
+ CSS
+ &lt;a class="anchor" href="#css"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[web前端-css基础]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="javascript"&gt;
+ JavaScript
+ &lt;a class="anchor" href="#javascript"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[js开发]]&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>
