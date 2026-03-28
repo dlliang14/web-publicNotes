@@ -16,8 +16,8 @@ jobs:
           submodules: recursive
           token: ${{ secrets.PUBLISH_TOKEN }}
 
-      - name: Remove Draft Notes
-        run: python3 remove_draft_notes.py
+      - name: Flatten Note Subfolders
+        run: python3 moveNotes2Content.py
 
       - name: Debug content input
         run: |

@@ -164,3 +164,20 @@ Contributions are welcome! Please make an issue or pull request if there are any
 A large portion of Amethyst's code base can be derived from the following two projects. Original attribution goes to the creators of these projects; I just put them together, squashed all the bugs, and customized the styles to fit my needs for Amethyst.
  - [Hugo Book](https://github.com/alex-shpak/hugo-book)
  - [Quartz](https://github.com/jackyzha0/quartz)
+
+## update log
+
+### 20260328
+
+- 把原始笔记通过脚本全都转移到/content目录下(因为原始笔记可以通过foam自动识别双链路径，但是前端不行)
+
+```sh
+python moveNotes2Content.py --help
+python moveNotes2Content.py --dry-run
+python moveNotes2Content.py
+```
+
+### 20260327
+
+- 修改`graph.js` 右下角取消显示不存在的双链笔记
+- 流水线不需要删除
