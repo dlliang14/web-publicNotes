@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows on</title><link>https://dlliang14.github.io/web-publicNotes/tags/windows/</link><description>Recent content in Windows on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/</guid><description>&lt;h1 id="windows命令行工具"&gt;
+ windows命令行工具
+ &lt;a class="anchor" href="#windows%e5%91%bd%e4%bb%a4%e8%a1%8c%e5%b7%a5%e5%85%b7"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="包管理器-chocolatey"&gt;
+ 包管理器 chocolatey
+ &lt;a class="anchor" href="#%e5%8c%85%e7%ae%a1%e7%90%86%e5%99%a8-chocolatey"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# windows 安装 chocolatey 和 make&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 管理员身份打开 powershell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Set-ExecutionPolicy Bypass -Scope &lt;span style="color:#66d9ef"&gt;Process&lt;/span&gt; -Force; [&lt;span style="color:#66d9ef"&gt;System.Net.ServicePointManager&lt;/span&gt;]::SecurityProtocol = [&lt;span style="color:#66d9ef"&gt;System.Net.ServicePointManager&lt;/span&gt;]::SecurityProtocol &lt;span style="color:#f92672"&gt;-bor&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;3072&lt;/span&gt;; iex ((New-Object System.Net.WebClient).DownloadString(&lt;span style="color:#e6db74"&gt;&amp;#39;https://community.chocolatey.org/install.ps1&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 看报错，做相应操作，比如删除 C:\ProgramData\chocolatey&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# C:\ProgramData\chocolatey\bin 需要加入环境变量 PATH 中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 重新打开 powershell 以加载 choco 命令&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="make-安装"&gt;
+ make 安装
+ &lt;a class="anchor" href="#make-%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 还是要在管理员的 powershell 中安装 make&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;choco install make
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="ripgrep-安装"&gt;
+ ripgrep 安装
+ &lt;a class="anchor" href="#ripgrep-%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ripgrep（命令行名称为 rg）是一款极其高效的文本搜索工具，它能够递归地在当前目录中查找指定的字符串或正则表达式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 以后也都是管理员的 powershell 中安装 ripgrep&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;choco install ripgrep -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ripgrep installed to C:\ProgramData\chocolatey\lib\ripgrep\tools
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ShimGen has successfully created a shim &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; rg.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; The install of ripgrep was successful.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Deployed to &lt;span style="color:#e6db74"&gt;&amp;#39;C:\ProgramData\chocolatey\lib\ripgrep\tools&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Chocolatey installed &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;/&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; packages.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; See the log &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; details (C:\ProgramData\chocolatey\logs\chocolatey.log).
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;主要作用与优势
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 极致的查询速度&lt;span style="color:#960050;background-color:#1e0010"&gt;：&lt;/span&gt;它是目前同类工具&lt;span style="color:#960050;background-color:#1e0010"&gt;（&lt;/span&gt;如 grep&lt;span style="color:#960050;background-color:#1e0010"&gt;、&lt;/span&gt;ack&lt;span style="color:#960050;background-color:#1e0010"&gt;、&lt;/span&gt;ag&lt;span style="color:#960050;background-color:#1e0010"&gt;）&lt;/span&gt;中性能最强的之一&lt;span style="color:#960050;background-color:#1e0010"&gt;，&lt;/span&gt;在大规模代码库中搜索几乎是瞬时的&lt;span style="color:#960050;background-color:#1e0010"&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 智能过滤&lt;span style="color:#960050;background-color:#1e0010"&gt;：&lt;/span&gt;默认会自动忽略 .gitignore 中的文件&lt;span style="color:#960050;background-color:#1e0010"&gt;、&lt;/span&gt;隐藏文件以及二进制文件&lt;span style="color:#960050;background-color:#1e0010"&gt;，&lt;/span&gt;这非常符合开发和运维人员的直觉&lt;span style="color:#960050;background-color:#1e0010"&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 跨平台支持&lt;span style="color:#960050;background-color:#1e0010"&gt;：&lt;/span&gt;在 Windows&lt;span style="color:#960050;background-color:#1e0010"&gt;、&lt;/span&gt;Linux 和 macOS 上表现高度一致&lt;span style="color:#960050;background-color:#1e0010"&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Unicode 支持&lt;span style="color:#960050;background-color:#1e0010"&gt;：&lt;/span&gt;能够很好地处理各种字符编码&lt;span style="color:#960050;background-color:#1e0010"&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>
