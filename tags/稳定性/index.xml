@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>稳定性 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/</link><description>Recent content in 稳定性 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E6%A0%B8%E5%BF%83%E7%90%86%E5%BF%B5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E6%A0%B8%E5%BF%83%E7%90%86%E5%BF%B5/</guid><description>&lt;h1 id="sre-核心理念"&gt;
+ sre-核心理念
+ &lt;a class="anchor" href="#sre-%e6%a0%b8%e5%bf%83%e7%90%86%e5%bf%b5"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="sre-关注的核心问题"&gt;
+ SRE 关注的核心问题
+ &lt;a class="anchor" href="#sre-%e5%85%b3%e6%b3%a8%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;系统如何持续提供稳定服务&lt;/li&gt;
+&lt;li&gt;故障发生后如何快速恢复&lt;/li&gt;
+&lt;li&gt;如何把一次故障转化为组织能力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="运维工作的两类形态"&gt;
+ 运维工作的两类形态
+ &lt;a class="anchor" href="#%e8%bf%90%e7%bb%b4%e5%b7%a5%e4%bd%9c%e7%9a%84%e4%b8%a4%e7%b1%bb%e5%bd%a2%e6%80%81"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="任务型工作"&gt;
+ 任务型工作
+ &lt;a class="anchor" href="#%e4%bb%bb%e5%8a%a1%e5%9e%8b%e5%b7%a5%e4%bd%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;监控与告警处理&lt;/li&gt;
+&lt;li&gt;发布与变更执行&lt;/li&gt;
+&lt;li&gt;事件响应与信息同步&lt;/li&gt;
+&lt;li&gt;事后总结&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="项目型工作"&gt;
+ 项目型工作
+ &lt;a class="anchor" href="#%e9%a1%b9%e7%9b%ae%e5%9e%8b%e5%b7%a5%e4%bd%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;系统优化与容量规划&lt;/li&gt;
+&lt;li&gt;运维自动化建设&lt;/li&gt;
+&lt;li&gt;可用性治理与架构改造&lt;/li&gt;
+&lt;li&gt;跨团队协作机制建设&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="关键认知"&gt;
+ 关键认知
+ &lt;a class="anchor" href="#%e5%85%b3%e9%94%ae%e8%ae%a4%e7%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;故障不可完全避免，但影响可被控制。&lt;/li&gt;
+&lt;li&gt;复盘不是惩罚流程，而是组织学习流程。&lt;/li&gt;
+&lt;li&gt;目标不是“零故障神话”，而是“故障可发现、可止血、可恢复、可复用经验”。&lt;/li&gt;
+&lt;/ol&gt;</description></item></channel></rss>

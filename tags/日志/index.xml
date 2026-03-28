@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>日志 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E6%97%A5%E5%BF%97/</link><description>Recent content in 日志 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="线上故障排查-日志分析"&gt;
+ 线上故障排查-日志分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="工具分工"&gt;
+ 工具分工
+ &lt;a class="anchor" href="#%e5%b7%a5%e5%85%b7%e5%88%86%e5%b7%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;less&lt;/code&gt;：交互查看大日志（推荐）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;grep&lt;/code&gt;：快速过滤关键词&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;awk&lt;/code&gt;：做统计、聚合、条件筛选&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;zgrep/zless&lt;/code&gt;：压缩日志直接分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常用套路"&gt;
+ 常用套路
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%a5%97%e8%b7%af"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="less"&gt;
+ less
+ &lt;a class="anchor" href="#less"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;less /path/to/logfile.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;log show --last 10m | less
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# /ERROR 向前搜索&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ?ERROR 向后搜索&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# f 向前翻页&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# b 向后翻页&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# g/G 跳到文件开头/结尾&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# F 跟随输出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -N 显示行号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -i 忽略大小写&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -S 不换行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -R 显示原始控制字符（如颜色）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;less&lt;/code&gt; 按需加载，适合大日志；比直接用编辑器更稳。&lt;/li&gt;
+&lt;li&gt;如果环境配置了 &lt;code&gt;lesspipe&lt;/code&gt;，压缩文件也能直接查看。&lt;/li&gt;
+&lt;li&gt;进入过滤模式后可用 &lt;code&gt;&amp;amp;&lt;/code&gt; 配合正则继续筛选当前内容。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log show --last 10m | less&lt;/code&gt; 适合先截取近 10 分钟日志，再进入交互式查看。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/ERROR&lt;/code&gt; 和 &lt;code&gt;?ERROR&lt;/code&gt; 分别是向前、向后搜索；&lt;code&gt;F&lt;/code&gt; 类似 &lt;code&gt;tail -f&lt;/code&gt;，适合追实时日志。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="grep"&gt;
+ grep
+ &lt;a class="anchor" href="#grep"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep -iE &lt;span style="color:#e6db74"&gt;&amp;#34;error|timeout|refused&amp;#34;&lt;/span&gt; app.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep -A &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt; -B &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt; app.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;log stream | grep -iE &lt;span style="color:#e6db74"&gt;&amp;#34;proxy|kernel&amp;#34;&lt;/span&gt; --line-buffered | grep -v &lt;span style="color:#e6db74"&gt;&amp;#34;debug&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt; 反向匹配，排除噪音行。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-i&lt;/code&gt; 忽略大小写，适合不确定日志格式的场景。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-w&lt;/code&gt; 只匹配完整单词，避免误匹配。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--line-buffered&lt;/code&gt; 适合实时流式日志，否则 grep 可能攒一批再输出。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-E&lt;/code&gt; 开启扩展正则，便于写 &lt;code&gt;error|timeout|refused&lt;/code&gt; 这种多条件匹配。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-A 3 -B 2&lt;/code&gt; 适合报错场景，把前后文一起打出来，避免只看到单行异常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="awk"&gt;
+ awk
+ &lt;a class="anchor" href="#awk"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;awk &lt;span style="color:#e6db74"&gt;&amp;#39;$9 &amp;gt;= 500 {print $0}&amp;#39;&lt;/span&gt; access.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;awk &lt;span style="color:#e6db74"&gt;&amp;#39;{print $9}&amp;#39;&lt;/span&gt; access.log | sort | uniq -c | sort -nr
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat /path/to/logfile.log | awk -v RS&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;/Broken pipe/&amp;#39;&lt;/span&gt; | less
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-F&lt;/code&gt; 指定列分隔符，默认空格或制表符。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RS&lt;/code&gt; 控制记录分隔符，&lt;code&gt;-v RS=''&lt;/code&gt; 可按空行分块查看 Java 异常堆栈。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NF&lt;/code&gt; 表示列数，&lt;code&gt;NR&lt;/code&gt; 表示记录号，&lt;code&gt;$0&lt;/code&gt; 是整行，&lt;code&gt;$1/$2/...&lt;/code&gt; 是具体列。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;awk&lt;/code&gt; 比 &lt;code&gt;grep&lt;/code&gt; 更适合做数值比较、字段统计和组合条件筛选。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这几个示例分别在做什么：&lt;/p&gt;</description></item></channel></rss>

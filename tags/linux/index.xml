@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on</title><link>https://dlliang14.github.io/web-publicNotes/tags/linux/</link><description>Recent content in Linux on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</guid><description>&lt;h1 id="线上故障排查-60秒定位法"&gt;
+ 线上故障排查-60秒定位法
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-60%e7%a7%92%e5%ae%9a%e4%bd%8d%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="核心目标"&gt;
+ 核心目标
+ &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;在前 60 秒快速判断故障属于哪一类：CPU、内存、磁盘、网络、进程。&lt;/p&gt;
+&lt;h2 id="十条高频命令"&gt;
+ 十条高频命令
+ &lt;a class="anchor" href="#%e5%8d%81%e6%9d%a1%e9%ab%98%e9%a2%91%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;部分命令来自 &lt;code&gt;sysstat&lt;/code&gt;，机器上没有时需要先安装。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uptime
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dmesg | tail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vmstat &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mpstat -P ALL &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pidstat &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iostat -xz &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;free -m
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sar -n DEV &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sar -n TCP,ETCP &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;top
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="观察重点"&gt;
+ 观察重点
+ &lt;a class="anchor" href="#%e8%a7%82%e5%af%9f%e9%87%8d%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;先看错误和饱和，再看利用率。&lt;/li&gt;
+&lt;li&gt;“饱和”可以理解为资源请求量已经超过处理能力，常表现为等待队列变长或等待时间升高。&lt;/li&gt;
+&lt;li&gt;这套方法适合在最初一分钟内先把问题定到 CPU、内存、磁盘、网络、进程中的某一层。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="快速判断逻辑"&gt;
+ 快速判断逻辑
+ &lt;a class="anchor" href="#%e5%bf%ab%e9%80%9f%e5%88%a4%e6%96%ad%e9%80%bb%e8%be%91"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;先看 &lt;code&gt;uptime/load average&lt;/code&gt;，判断是否满载。&lt;/li&gt;
+&lt;li&gt;再看 &lt;code&gt;vmstat&lt;/code&gt; 的 &lt;code&gt;r/b&lt;/code&gt;，区分 CPU 饱和还是 IO 饱和。&lt;/li&gt;
+&lt;li&gt;看 &lt;code&gt;top/pidstat&lt;/code&gt; 找到具体进程。&lt;/li&gt;
+&lt;li&gt;看 &lt;code&gt;iostat/sar&lt;/code&gt; 判断是磁盘瓶颈还是网络瓶颈。&lt;/li&gt;
+&lt;li&gt;最后结合日志与变更记录确认根因。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战原则"&gt;
+ 实战原则
+ &lt;a class="anchor" href="#%e5%ae%9e%e6%88%98%e5%8e%9f%e5%88%99"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;先定界，再深入。&lt;/li&gt;
+&lt;li&gt;先恢复，再优化。&lt;/li&gt;
+&lt;li&gt;证据驱动，避免主观猜测。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="线上故障排查-系统资源分析"&gt;
+ 线上故障排查-系统资源分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e7%b3%bb%e7%bb%9f%e8%b5%84%e6%ba%90%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="cpu-与负载"&gt;
+ CPU 与负载
+ &lt;a class="anchor" href="#cpu-%e4%b8%8e%e8%b4%9f%e8%bd%bd"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;top&lt;/code&gt;：看进程/线程热点&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vmstat -w 1&lt;/code&gt;：看运行队列与阻塞&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mpstat -P ALL 1&lt;/code&gt;：看各核是否倾斜&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="常用命令怎么用"&gt;
+ 常用命令怎么用
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4%e6%80%8e%e4%b9%88%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uptime
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dmesg | tail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mpstat -P ALL &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;free -m
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;top
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;uptime&lt;/code&gt;：最快速看 &lt;code&gt;load average 1/5/15&lt;/code&gt;，适合先判断机器是否整体过载。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dmesg | tail&lt;/code&gt;：看最近内核日志，常用于确认 OOM、磁盘报错、网卡异常、文件系统错误。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mpstat -P ALL 1&lt;/code&gt;：&lt;code&gt;-P ALL&lt;/code&gt; 表示看所有 CPU 核；后面的 &lt;code&gt;1&lt;/code&gt; 表示每 1 秒刷一次，适合看是否单核打满或负载倾斜。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;free -m&lt;/code&gt;：&lt;code&gt;-m&lt;/code&gt; 以 MB 展示，适合快速看可用内存、缓存和 swap。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;top&lt;/code&gt;：综合观察入口，适合先锁定异常进程，再决定是否切到线程或磁盘/网络维度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="top-常用交互"&gt;
+ top 常用交互
+ &lt;a class="anchor" href="#top-%e5%b8%b8%e7%94%a8%e4%ba%a4%e4%ba%92"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;1&lt;/code&gt;：展开或折叠多核 CPU 视图&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt;：按 CPU 排序&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;M&lt;/code&gt;：按内存排序&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;c&lt;/code&gt;：显示完整命令路径&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;H&lt;/code&gt;：切换线程模式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;&lt;/code&gt;、&lt;code&gt;&amp;gt;&lt;/code&gt;、&lt;code&gt;R&lt;/code&gt;：切换排序列和排序方向&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;o&lt;/code&gt;：自定义过滤器，例如 &lt;code&gt;COMMAND=java&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关键字段：&lt;/p&gt;</description></item></channel></rss>

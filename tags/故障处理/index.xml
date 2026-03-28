@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>故障处理 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86/</link><description>Recent content in 故障处理 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E6%95%85%E9%9A%9C%E5%BA%94%E6%80%A5%E6%B5%81%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E6%95%85%E9%9A%9C%E5%BA%94%E6%80%A5%E6%B5%81%E7%A8%8B/</guid><description>&lt;h1 id="sre-故障应急流程"&gt;
+ sre-故障应急流程
+ &lt;a class="anchor" href="#sre-%e6%95%85%e9%9a%9c%e5%ba%94%e6%80%a5%e6%b5%81%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="六步框架"&gt;
+ 六步框架
+ &lt;a class="anchor" href="#%e5%85%ad%e6%ad%a5%e6%a1%86%e6%9e%b6"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;定界：确认真实影响范围与故障级别。&lt;/li&gt;
+&lt;li&gt;止血：优先做回滚、重启、扩容、限流、降级。&lt;/li&gt;
+&lt;li&gt;同步：统一对内信息与对外通报口径。&lt;/li&gt;
+&lt;li&gt;找证据：收集日志、监控、链路与变更证据。&lt;/li&gt;
+&lt;li&gt;验证：验证修复是否有效，避免假恢复。&lt;/li&gt;
+&lt;li&gt;复盘：给出根因、影响面、改进项与责任到人到时点。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="发布四件套"&gt;
+ 发布四件套
+ &lt;a class="anchor" href="#%e5%8f%91%e5%b8%83%e5%9b%9b%e4%bb%b6%e5%a5%97"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;构建&lt;/li&gt;
+&lt;li&gt;测试&lt;/li&gt;
+&lt;li&gt;部署&lt;/li&gt;
+&lt;li&gt;监控&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;发布不是“上线完成”，而是“风险可控 + 可观测 + 可回退”。&lt;/p&gt;
+&lt;h2 id="响应组织建议"&gt;
+ 响应组织建议
+ &lt;a class="anchor" href="#%e5%93%8d%e5%ba%94%e7%bb%84%e7%bb%87%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;明确值班分工：监控观察、操作执行、对外通报、记录员。&lt;/li&gt;
+&lt;li&gt;统一指挥通道：避免多人并行操作互相覆盖。&lt;/li&gt;
+&lt;li&gt;关键时间戳强制记录：用于后续复盘与流程改进。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%8E%92%E9%9A%9C%E6%80%BB%E6%B5%81%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%8E%92%E9%9A%9C%E6%80%BB%E6%B5%81%E7%A8%8B/</guid><description>&lt;h1 id="线上故障排查-排障总流程"&gt;
+ 线上故障排查-排障总流程
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%8e%92%e9%9a%9c%e6%80%bb%e6%b5%81%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="统一排障路径"&gt;
+ 统一排障路径
+ &lt;a class="anchor" href="#%e7%bb%9f%e4%b8%80%e6%8e%92%e9%9a%9c%e8%b7%af%e5%be%84"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;看日志：优先找 ERROR、超时、拒绝连接等直接证据。&lt;/li&gt;
+&lt;li&gt;看资源：CPU/内存/磁盘/网络是否出现饱和。&lt;/li&gt;
+&lt;li&gt;看依赖：数据库、缓存、中间件、下游接口是否异常。&lt;/li&gt;
+&lt;li&gt;看线程与调用：确认是否死锁、阻塞、慢调用。&lt;/li&gt;
+&lt;li&gt;看变更：近期发布、配置、流量峰值、依赖升级。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="两种观察视角"&gt;
+ 两种观察视角
+ &lt;a class="anchor" href="#%e4%b8%a4%e7%a7%8d%e8%a7%82%e5%af%9f%e8%a7%86%e8%a7%92"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="自底向上偏运维"&gt;
+ 自底向上（偏运维）
+ &lt;a class="anchor" href="#%e8%87%aa%e5%ba%95%e5%90%91%e4%b8%8a%e5%81%8f%e8%bf%90%e7%bb%b4"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;进程与线程占用&lt;/li&gt;
+&lt;li&gt;系统调用与内核事件&lt;/li&gt;
+&lt;li&gt;资源瓶颈位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="负载视角偏开发"&gt;
+ 负载视角（偏开发）
+ &lt;a class="anchor" href="#%e8%b4%9f%e8%bd%bd%e8%a7%86%e8%a7%92%e5%81%8f%e5%bc%80%e5%8f%91"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;接口 QPS、耗时、错误率&lt;/li&gt;
+&lt;li&gt;Controller/Mapper/SQL 热点&lt;/li&gt;
+&lt;li&gt;慢查询与慢外部调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常规排查工具分层"&gt;
+ 常规排查工具分层
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%84%e6%8e%92%e6%9f%a5%e5%b7%a5%e5%85%b7%e5%88%86%e5%b1%82"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;用户态：&lt;code&gt;jstack&lt;/code&gt;、&lt;code&gt;arthas&lt;/code&gt;、&lt;code&gt;strace&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;内核态：&lt;code&gt;perf&lt;/code&gt;、&lt;code&gt;bpftrace&lt;/code&gt;、&lt;code&gt;bcc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指标面：&lt;code&gt;top&lt;/code&gt;、&lt;code&gt;htop&lt;/code&gt;、&lt;code&gt;iostat&lt;/code&gt;、&lt;code&gt;vmstat&lt;/code&gt;、&lt;code&gt;free&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;剖析面：&lt;code&gt;jstack&lt;/code&gt;、&lt;code&gt;jmap&lt;/code&gt; 看线程堆栈和对象占用&lt;/li&gt;
+&lt;li&gt;追踪面：&lt;code&gt;arthas&lt;/code&gt;、&lt;code&gt;bpftrace&lt;/code&gt;、&lt;code&gt;tcpdump&lt;/code&gt; 看调用、参数和数据包&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战补充"&gt;
+ 实战补充
+ &lt;a class="anchor" href="#%e5%ae%9e%e6%88%98%e8%a1%a5%e5%85%85"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;日志通常是第一入口，很多问题能直接定位到报错栈、超时点或依赖异常。&lt;/li&gt;
+&lt;li&gt;如果发现资源不足，再顺着“系统 -&amp;gt; 进程 -&amp;gt; 线程 -&amp;gt; 代码”继续下钻。&lt;/li&gt;
+&lt;li&gt;真正的根因往往需要日志、指标、调用链三类证据交叉验证。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见误区"&gt;
+ 常见误区
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e8%af%af%e5%8c%ba"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;只盯一个指标，不做交叉验证&lt;/li&gt;
+&lt;li&gt;只追“最后报错”，忽略前序信号&lt;/li&gt;
+&lt;li&gt;只修现象，不修根因&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

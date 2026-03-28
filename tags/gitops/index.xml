@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gitops on</title><link>https://dlliang14.github.io/web-publicNotes/tags/gitops/</link><description>Recent content in Gitops on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/gitops/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd-%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd-%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="argocd-介绍与安装"&gt;
+ argocd-介绍与安装
+ &lt;a class="anchor" href="#argocd-%e4%bb%8b%e7%bb%8d%e4%b8%8e%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[argocd]]&lt;/p&gt;
+&lt;h2 id="argocd-是什么"&gt;
+ ArgoCD 是什么
+ &lt;a class="anchor" href="#argocd-%e6%98%af%e4%bb%80%e4%b9%88"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;ArgoCD 是 Kubernetes GitOps 持续交付工具，核心价值是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;声明式部署&lt;/li&gt;
+&lt;li&gt;自动化同步&lt;/li&gt;
+&lt;li&gt;变更可审计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="官方文档"&gt;
+ 官方文档
+ &lt;a class="anchor" href="#%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://argo-cd.readthedocs.io/en/stable/" rel="noopener"&gt;ArgoCD 文档&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="安装步骤"&gt;
+ 安装步骤
+ &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e6%ad%a5%e9%aa%a4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl create ns argocd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -n argocd -f install.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="注意事项"&gt;
+ 注意事项
+ &lt;a class="anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;安装清单中的 ClusterRoleBinding 引用 &lt;code&gt;argocd&lt;/code&gt; 命名空间&lt;/li&gt;
+&lt;li&gt;命名空间错配会导致删除/回收困难&lt;/li&gt;
+&lt;li&gt;默认常见自签证书场景，需要结合访问方式配置 &lt;code&gt;--insecure&lt;/code&gt; 或正确 TLS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="删除卡住排查"&gt;
+ 删除卡住排查
+ &lt;a class="anchor" href="#%e5%88%a0%e9%99%a4%e5%8d%a1%e4%bd%8f%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; api in &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;kubectl api-resources --verbs&lt;span style="color:#f92672"&gt;=&lt;/span&gt;list --namespaced -o name&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; kubectl get $api --ignore-not-found
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl get pods | grep Terminating | awk &lt;span style="color:#e6db74"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | xargs -r -n1 kubectl delete pod --force --grace-period&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd-%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd-%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83/</guid><description>&lt;h1 id="argocd-应用发布"&gt;
+ argocd-应用发布
+ &lt;a class="anchor" href="#argocd-%e5%ba%94%e7%94%a8%e5%8f%91%e5%b8%83"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[argocd]]&lt;/p&gt;
+&lt;h2 id="创建应用示例"&gt;
+ 创建应用示例
+ &lt;a class="anchor" href="#%e5%88%9b%e5%bb%ba%e5%ba%94%e7%94%a8%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd app create guestbook &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --repo https://github.com/argoproj/argocd-example-apps.git &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --path guestbook &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --dest-server https://kubernetes.default.svc &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --dest-namespace default
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="查询与验证"&gt;
+ 查询与验证
+ &lt;a class="anchor" href="#%e6%9f%a5%e8%af%a2%e4%b8%8e%e9%aa%8c%e8%af%81"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd app list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd app get guestbook
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="发布实践建议"&gt;
+ 发布实践建议
+ &lt;a class="anchor" href="#%e5%8f%91%e5%b8%83%e5%ae%9e%e8%b7%b5%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;使用独立分支 + PR 审核触发 GitOps&lt;/li&gt;
+&lt;li&gt;将 &lt;code&gt;syncPolicy&lt;/code&gt; 与 &lt;code&gt;health check&lt;/code&gt; 纳入发布门禁&lt;/li&gt;
+&lt;li&gt;关键应用先手动同步，验证后再自动同步&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="gitlab-集成"&gt;
+ GitLab 集成
+ &lt;a class="anchor" href="#gitlab-%e9%9b%86%e6%88%90"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;私有 GitLab 仓库可作为 &lt;code&gt;repo&lt;/code&gt; 源&lt;/li&gt;
+&lt;li&gt;建议使用 deploy token 或机器人账号，避免个人账号直连&lt;/li&gt;
+&lt;li&gt;凭据统一放 Secret，不写入公开笔记&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd/</guid><description>&lt;h1 id="大纲-argocd"&gt;
+ 大纲-argocd
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-argocd"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="基础"&gt;
+ 基础
+ &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[argocd-介绍与安装]]&lt;/li&gt;
+&lt;li&gt;[[argocd-ingress与访问]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="使用"&gt;
+ 使用
+ &lt;a class="anchor" href="#%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[argocd-多集群管理]]&lt;/li&gt;
+&lt;li&gt;[[argocd-应用发布]]&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

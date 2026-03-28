@@ -76,4 +76,11 @@
 &lt;li&gt;为了hugo自动识别，外加我是foam，不是obisidian，只能把需要发布的全放到根目录&lt;/li&gt;
 &lt;li&gt;hugo的模板识别，需要以下frontmatter：&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>
+&lt;h2 id="自动归档指定tag的脚本"&gt;
+ 自动归档指定tag的脚本
+ &lt;a class="anchor" href="#%e8%87%aa%e5%8a%a8%e5%bd%92%e6%a1%a3%e6%8c%87%e5%ae%9atag%e7%9a%84%e8%84%9a%e6%9c%ac"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;python move_outline_notes.py -h
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;python move_outline_notes.py --target-path 大纲 --tag-name 大纲 --dry-run
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;python move_outline_notes.py --target-path 草稿 --tag-name 灵感 --dry-run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

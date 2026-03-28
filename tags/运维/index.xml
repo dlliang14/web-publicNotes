@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>运维 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E8%BF%90%E7%BB%B4/</link><description>Recent content in 运维 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E6%A1%88%E4%BE%8B-%E8%BF%90%E7%BB%B4%E6%95%85%E9%9A%9C%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E6%A1%88%E4%BE%8B-%E8%BF%90%E7%BB%B4%E6%95%85%E9%9A%9C%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h1 id="sre-案例-运维故障模式"&gt;
+ sre-案例-运维故障模式
+ &lt;a class="anchor" href="#sre-%e6%a1%88%e4%be%8b-%e8%bf%90%e7%bb%b4%e6%95%85%e9%9a%9c%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="常见模式一冗余失效"&gt;
+ 常见模式一：冗余失效
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%b8%80%e5%86%97%e4%bd%99%e5%a4%b1%e6%95%88"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;表面是双活/双控，实际只有单链路承载真实流量，故障时无法自动切换。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;监控不仅看链路活性，还要看链路真实流量。&lt;/li&gt;
+&lt;li&gt;周期性做切换演练，验证“可切”而不是“看起来可切”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见模式二变更时机错误"&gt;
+ 常见模式二：变更时机错误
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%ba%8c%e5%8f%98%e6%9b%b4%e6%97%b6%e6%9c%ba%e9%94%99%e8%af%af"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;在业务高峰执行高风险变更，导致局部问题扩大。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;盘中变更禁令与审批门禁。&lt;/li&gt;
+&lt;li&gt;高风险操作必须双人复核。&lt;/li&gt;
+&lt;li&gt;新同学上岗采用分级授权。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见模式三外部依赖单点"&gt;
+ 常见模式三：外部依赖单点
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%b8%89%e5%a4%96%e9%83%a8%e4%be%9d%e8%b5%96%e5%8d%95%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;外部系统只提供单链路或单设备，内部虽冗余仍可能整体不可用。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;外部依赖纳入同等冗余审计。&lt;/li&gt;
+&lt;li&gt;对关键依赖建立替代路径与降级路径。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见模式四配置隔离不充分"&gt;
+ 常见模式四：配置隔离不充分
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e5%9b%9b%e9%85%8d%e7%bd%ae%e9%9a%94%e7%a6%bb%e4%b8%8d%e5%85%85%e5%88%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;收费/免费、主/备、环境/租户隔离边界不清，故障时相互影响。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;明确隔离边界并做配置基线检查。&lt;/li&gt;
+&lt;li&gt;建立灰度验证与回滚脚本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见模式五可观测性不足"&gt;
+ 常见模式五：可观测性不足
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%ba%94%e5%8f%af%e8%a7%82%e6%b5%8b%e6%80%a7%e4%b8%8d%e8%b6%b3"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;知道“出问题了”，但不知道“哪里先坏、为什么坏”。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;指标、日志、链路统一关联。&lt;/li&gt;
+&lt;li&gt;对关键链路建立分钟级定位能力。&lt;/li&gt;
+&lt;li&gt;故障演练要覆盖“定位速度”指标。&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

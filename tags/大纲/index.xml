@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>大纲 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/</link><description>Recent content in 大纲 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico/</guid><description>&lt;h1 id="大纲-calico"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>大纲 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/</link><description>Recent content in 大纲 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd/</guid><description>&lt;h1 id="大纲-argocd"&gt;
+ 大纲-argocd
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-argocd"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="基础"&gt;
+ 基础
+ &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[argocd-介绍与安装]]&lt;/li&gt;
+&lt;li&gt;[[argocd-ingress与访问]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="使用"&gt;
+ 使用
+ &lt;a class="anchor" href="#%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[argocd-多集群管理]]&lt;/li&gt;
+&lt;li&gt;[[argocd-应用发布]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico/</guid><description>&lt;h1 id="大纲-calico"&gt;
  大纲-calico
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-calico"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -215,6 +234,8 @@
 &lt;li&gt;[[k8s-日志收集]]&lt;/li&gt;
 &lt;li&gt;[[k8s-监控告警]]&lt;/li&gt;
 &lt;li&gt;[[k8s-使用vm监控]]&lt;/li&gt;
+&lt;li&gt;[[k8s-服务网格istio]]&lt;/li&gt;
+&lt;li&gt;[[argocd]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="k8s-故障处理"&gt;
  k8s 故障处理
@@ -326,6 +347,33 @@
 &lt;ul&gt;
 &lt;li&gt;[[python后端-环境安装]]&lt;/li&gt;
 &lt;li&gt;[[python后端-依赖管理]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre/</guid><description>&lt;h1 id="大纲-sre"&gt;
+ 大纲-sre
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-sre"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="方法论"&gt;
+ 方法论
+ &lt;a class="anchor" href="#%e6%96%b9%e6%b3%95%e8%ae%ba"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[sre-核心理念]]&lt;/li&gt;
+&lt;li&gt;[[sre-故障应急流程]]&lt;/li&gt;
+&lt;li&gt;[[sre-复盘方法]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="案例"&gt;
+ 案例
+ &lt;a class="anchor" href="#%e6%a1%88%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[sre-案例-码表故障]]&lt;/li&gt;
+&lt;li&gt;[[sre-案例-运维故障模式]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="排障"&gt;
+ 排障
+ &lt;a class="anchor" href="#%e6%8e%92%e9%9a%9c"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查]]&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/victoriametrics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/victoriametrics/</guid><description>&lt;h1 id="大纲-victoriametrics"&gt;
  大纲-victoriametrics
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-victoriametrics"&gt;#&lt;/a&gt;
@@ -361,6 +409,33 @@
 &lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[[js开发]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</guid><description>&lt;h1 id="大纲-线上故障排查"&gt;
+ 大纲-线上故障排查
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="入口方法"&gt;
+ 入口方法
+ &lt;a class="anchor" href="#%e5%85%a5%e5%8f%a3%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-60秒定位法]]&lt;/li&gt;
+&lt;li&gt;[[线上故障排查-排障总流程]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常用技术栈"&gt;
+ 常用技术栈
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e6%8a%80%e6%9c%af%e6%a0%88"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-日志分析]]&lt;/li&gt;
+&lt;li&gt;[[线上故障排查-系统资源分析]]&lt;/li&gt;
+&lt;li&gt;[[线上故障排查-进程与内核观测]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="实战场景"&gt;
+ 实战场景
+ &lt;a class="anchor" href="#%e5%ae%9e%e6%88%98%e5%9c%ba%e6%99%af"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-数据库与缓存案例]]&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89/</guid><description>&lt;h1 id="大纲-群辉使用"&gt;
  大纲-群辉使用
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-%e7%be%a4%e8%be%89%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;

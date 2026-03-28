@@ -22,4 +22,55 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bpftool prog dump xlated id &lt;span style="color:#ae81ff"&gt;441&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 查看管理了什么map&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bpftool prog show &lt;span style="color:#ae81ff"&gt;441&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E8%A7%82%E6%B5%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E8%A7%82%E6%B5%8B/</guid><description>&lt;h1 id="线上故障排查-进程与内核观测"&gt;
+ 线上故障排查-进程与内核观测
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e8%bf%9b%e7%a8%8b%e4%b8%8e%e5%86%85%e6%a0%b8%e8%a7%82%e6%b5%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="进程层工具"&gt;
+ 进程层工具
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e5%b1%82%e5%b7%a5%e5%85%b7"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pidstat&lt;/code&gt;：CPU/内存/线程/上下文切换&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ps&lt;/code&gt;：进程树与线程视角&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;lsof&lt;/code&gt;：文件、端口、句柄、删除文件占用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="pidstat-常用选项"&gt;
+ pidstat 常用选项
+ &lt;a class="anchor" href="#pidstat-%e5%b8%b8%e7%94%a8%e9%80%89%e9%a1%b9"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pidstat -t -G kubelet &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pidstat -wv -p &lt;span style="color:#ae81ff"&gt;1366&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-u&lt;/code&gt;：CPU 使用率&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-t&lt;/code&gt;：线程级视角&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-G pattern&lt;/code&gt;：按进程名匹配&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-r&lt;/code&gt;：内存使用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-p pid&lt;/code&gt;：指定 PID&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-w&lt;/code&gt;：上下文切换&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt;：线程数和文件描述符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;两个示例分别适合：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pidstat -t -G kubelet 1&lt;/code&gt;：每秒观察名为 &lt;code&gt;kubelet&lt;/code&gt; 的进程及其线程消耗，适合看线程热点。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pidstat -wv -p 1366 1&lt;/code&gt;：盯住某个 PID 的上下文切换、线程数、FD 数，适合进一步判断是否存在锁竞争或线程爆炸。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;输出中 &lt;code&gt;TGID&lt;/code&gt; 通常可视为进程 ID，&lt;code&gt;TID&lt;/code&gt; 是线程 ID。&lt;/p&gt;
+&lt;h3 id="ps-常用方式"&gt;
+ ps 常用方式
+ &lt;a class="anchor" href="#ps-%e5%b8%b8%e7%94%a8%e6%96%b9%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps aux
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps -elf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps -fC java
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps -fq &lt;span style="color:#ae81ff"&gt;1366&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps uc -Lq &lt;span style="color:#ae81ff"&gt;1366&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;top -H -i -b -d &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; -n2 -p &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ps aux&lt;/code&gt; 看全量进程&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ps -elf&lt;/code&gt; 看长格式和进程树&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ps uc -Lq &amp;lt;pid&amp;gt;&lt;/code&gt; 看指定进程下的线程&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;top -H&lt;/code&gt; 在线程视角定位活跃线程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;命令含义：&lt;/p&gt;</description></item></channel></rss>

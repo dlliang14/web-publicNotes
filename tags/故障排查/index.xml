@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>故障排查 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</link><description>Recent content in 故障排查 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</guid><description>&lt;h1 id="线上故障排查-60秒定位法"&gt;
+ 线上故障排查-60秒定位法
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-60%e7%a7%92%e5%ae%9a%e4%bd%8d%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="核心目标"&gt;
+ 核心目标
+ &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;在前 60 秒快速判断故障属于哪一类：CPU、内存、磁盘、网络、进程。&lt;/p&gt;
+&lt;h2 id="十条高频命令"&gt;
+ 十条高频命令
+ &lt;a class="anchor" href="#%e5%8d%81%e6%9d%a1%e9%ab%98%e9%a2%91%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;部分命令来自 &lt;code&gt;sysstat&lt;/code&gt;，机器上没有时需要先安装。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uptime
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dmesg | tail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vmstat &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mpstat -P ALL &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pidstat &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iostat -xz &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;free -m
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sar -n DEV &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sar -n TCP,ETCP &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;top
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="观察重点"&gt;
+ 观察重点
+ &lt;a class="anchor" href="#%e8%a7%82%e5%af%9f%e9%87%8d%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;先看错误和饱和，再看利用率。&lt;/li&gt;
+&lt;li&gt;“饱和”可以理解为资源请求量已经超过处理能力，常表现为等待队列变长或等待时间升高。&lt;/li&gt;
+&lt;li&gt;这套方法适合在最初一分钟内先把问题定到 CPU、内存、磁盘、网络、进程中的某一层。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="快速判断逻辑"&gt;
+ 快速判断逻辑
+ &lt;a class="anchor" href="#%e5%bf%ab%e9%80%9f%e5%88%a4%e6%96%ad%e9%80%bb%e8%be%91"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;先看 &lt;code&gt;uptime/load average&lt;/code&gt;，判断是否满载。&lt;/li&gt;
+&lt;li&gt;再看 &lt;code&gt;vmstat&lt;/code&gt; 的 &lt;code&gt;r/b&lt;/code&gt;，区分 CPU 饱和还是 IO 饱和。&lt;/li&gt;
+&lt;li&gt;看 &lt;code&gt;top/pidstat&lt;/code&gt; 找到具体进程。&lt;/li&gt;
+&lt;li&gt;看 &lt;code&gt;iostat/sar&lt;/code&gt; 判断是磁盘瓶颈还是网络瓶颈。&lt;/li&gt;
+&lt;li&gt;最后结合日志与变更记录确认根因。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战原则"&gt;
+ 实战原则
+ &lt;a class="anchor" href="#%e5%ae%9e%e6%88%98%e5%8e%9f%e5%88%99"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;先定界，再深入。&lt;/li&gt;
+&lt;li&gt;先恢复，再优化。&lt;/li&gt;
+&lt;li&gt;证据驱动，避免主观猜测。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</guid><description>&lt;h1 id="大纲-线上故障排查"&gt;
+ 大纲-线上故障排查
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="入口方法"&gt;
+ 入口方法
+ &lt;a class="anchor" href="#%e5%85%a5%e5%8f%a3%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-60秒定位法]]&lt;/li&gt;
+&lt;li&gt;[[线上故障排查-排障总流程]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常用技术栈"&gt;
+ 常用技术栈
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e6%8a%80%e6%9c%af%e6%a0%88"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-日志分析]]&lt;/li&gt;
+&lt;li&gt;[[线上故障排查-系统资源分析]]&lt;/li&gt;
+&lt;li&gt;[[线上故障排查-进程与内核观测]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="实战场景"&gt;
+ 实战场景
+ &lt;a class="anchor" href="#%e5%ae%9e%e6%88%98%e5%9c%ba%e6%99%af"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-数据库与缓存案例]]&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>复盘 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%8D%E7%9B%98/</link><description>Recent content in 复盘 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%8D%E7%9B%98/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E5%A4%8D%E7%9B%98%E6%96%B9%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E5%A4%8D%E7%9B%98%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="sre-复盘方法"&gt;
+ sre-复盘方法
+ &lt;a class="anchor" href="#sre-%e5%a4%8d%e7%9b%98%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="复盘目标"&gt;
+ 复盘目标
+ &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;从失败中学习，避免重复犯错&lt;/li&gt;
+&lt;li&gt;提炼跨团队可复用的工程改进项&lt;/li&gt;
+&lt;li&gt;把经验沉淀为流程、工具和规范&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一份高质量复盘应包含"&gt;
+ 一份高质量复盘应包含
+ &lt;a class="anchor" href="#%e4%b8%80%e4%bb%bd%e9%ab%98%e8%b4%a8%e9%87%8f%e5%a4%8d%e7%9b%98%e5%ba%94%e5%8c%85%e5%90%ab"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;背景与上下文&lt;/li&gt;
+&lt;li&gt;故障现象与影响范围&lt;/li&gt;
+&lt;li&gt;完整时间线&lt;/li&gt;
+&lt;li&gt;根因分析（直接原因 + 系统性原因）&lt;/li&gt;
+&lt;li&gt;处置动作与效果验证&lt;/li&gt;
+&lt;li&gt;短期止血方案&lt;/li&gt;
+&lt;li&gt;中长期治理方案&lt;/li&gt;
+&lt;li&gt;负责人、截止时间、验收指标&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="复盘文化建议"&gt;
+ 复盘文化建议
+ &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e6%96%87%e5%8c%96%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;不做甩锅复盘，做系统复盘&lt;/li&gt;
+&lt;li&gt;不做口号复盘，做可执行复盘&lt;/li&gt;
+&lt;li&gt;不做一次性复盘，做周期性回看&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见反模式"&gt;
+ 常见反模式
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e5%8f%8d%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;只写现象，不写根因&lt;/li&gt;
+&lt;li&gt;只有结论，没有证据&lt;/li&gt;
+&lt;li&gt;只有建议，没有责任人和完成时间&lt;/li&gt;
+&lt;li&gt;问题修在当前系统，不做同类系统排查&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

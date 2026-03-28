@@ -1,4 +1,236 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title/><link>https://dlliang14.github.io/web-publicNotes/</link><description>Recent content on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico-bgp%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico-bgp%E9%85%8D%E7%BD%AE/</guid><description>&lt;h1 id="calico-bgp配置"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title/><link>https://dlliang14.github.io/web-publicNotes/</link><description>Recent content on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd-ingress%E4%B8%8E%E8%AE%BF%E9%97%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd-ingress%E4%B8%8E%E8%AE%BF%E9%97%AE/</guid><description>&lt;h1 id="argocd-ingress与访问"&gt;
+ argocd-ingress与访问
+ &lt;a class="anchor" href="#argocd-ingress%e4%b8%8e%e8%ae%bf%e9%97%ae"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[argocd]]&lt;/p&gt;
+&lt;h2 id="入口策略"&gt;
+ 入口策略
+ &lt;a class="anchor" href="#%e5%85%a5%e5%8f%a3%e7%ad%96%e7%95%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Web 入口：HTTPS&lt;/li&gt;
+&lt;li&gt;CLI 入口：gRPC（通常单独域名）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="web-ingress-示例"&gt;
+ Web Ingress 示例
+ &lt;a class="anchor" href="#web-ingress-%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;apiVersion&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;networking.k8s.io/v1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;kind&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;Ingress&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;argocd-ingress&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;namespace&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;argocd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;annotations&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;kubernetes.io/ingress.class&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;nginx&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;nginx.ingress.kubernetes.io/force-ssl-redirect&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;true&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;nginx.ingress.kubernetes.io/backend-protocol&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;HTTP&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;spec&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;ingressClassName&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;nginx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;rules&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;host&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;argocd.example.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;http&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;paths&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;path&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;pathType&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;Prefix&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;backend&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;service&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;argocd-server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;port&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;number&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="grpc-ingress-示例"&gt;
+ gRPC Ingress 示例
+ &lt;a class="anchor" href="#grpc-ingress-%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;apiVersion&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;networking.k8s.io/v1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;kind&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;Ingress&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;argocd-ingress-grpc&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;namespace&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;argocd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;annotations&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;kubernetes.io/ingress.class&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;nginx&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;nginx.ingress.kubernetes.io/backend-protocol&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;GRPC&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;spec&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;ingressClassName&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;nginx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;rules&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;host&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;argocd-grpc.example.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;http&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;paths&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;path&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;pathType&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;Prefix&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;backend&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;service&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;argocd-server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;port&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;number&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;443&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="cli-使用"&gt;
+ CLI 使用
+ &lt;a class="anchor" href="#cli-%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/argoproj/argo-cd" rel="noopener"&gt;argocd-cli 下载&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd login argocd-grpc.example.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="安全实践"&gt;
+ 安全实践
+ &lt;a class="anchor" href="#%e5%ae%89%e5%85%a8%e5%ae%9e%e8%b7%b5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;初始密码仅用于首次登录，登录后立即修改&lt;/li&gt;
+&lt;li&gt;笔记中不记录明文密码，改为命令或占位符&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd-%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd-%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="argocd-介绍与安装"&gt;
+ argocd-介绍与安装
+ &lt;a class="anchor" href="#argocd-%e4%bb%8b%e7%bb%8d%e4%b8%8e%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[argocd]]&lt;/p&gt;
+&lt;h2 id="argocd-是什么"&gt;
+ ArgoCD 是什么
+ &lt;a class="anchor" href="#argocd-%e6%98%af%e4%bb%80%e4%b9%88"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;ArgoCD 是 Kubernetes GitOps 持续交付工具，核心价值是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;声明式部署&lt;/li&gt;
+&lt;li&gt;自动化同步&lt;/li&gt;
+&lt;li&gt;变更可审计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="官方文档"&gt;
+ 官方文档
+ &lt;a class="anchor" href="#%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://argo-cd.readthedocs.io/en/stable/" rel="noopener"&gt;ArgoCD 文档&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="安装步骤"&gt;
+ 安装步骤
+ &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e6%ad%a5%e9%aa%a4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl create ns argocd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -n argocd -f install.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="注意事项"&gt;
+ 注意事项
+ &lt;a class="anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;安装清单中的 ClusterRoleBinding 引用 &lt;code&gt;argocd&lt;/code&gt; 命名空间&lt;/li&gt;
+&lt;li&gt;命名空间错配会导致删除/回收困难&lt;/li&gt;
+&lt;li&gt;默认常见自签证书场景，需要结合访问方式配置 &lt;code&gt;--insecure&lt;/code&gt; 或正确 TLS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="删除卡住排查"&gt;
+ 删除卡住排查
+ &lt;a class="anchor" href="#%e5%88%a0%e9%99%a4%e5%8d%a1%e4%bd%8f%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; api in &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;kubectl api-resources --verbs&lt;span style="color:#f92672"&gt;=&lt;/span&gt;list --namespaced -o name&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; kubectl get $api --ignore-not-found
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl get pods | grep Terminating | awk &lt;span style="color:#e6db74"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | xargs -r -n1 kubectl delete pod --force --grace-period&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd-%E5%A4%9A%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd-%E5%A4%9A%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86/</guid><description>&lt;h1 id="argocd-多集群管理"&gt;
+ argocd-多集群管理
+ &lt;a class="anchor" href="#argocd-%e5%a4%9a%e9%9b%86%e7%be%a4%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[argocd]]&lt;/p&gt;
+&lt;h2 id="目标"&gt;
+ 目标
+ &lt;a class="anchor" href="#%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;让一个 ArgoCD 实例管理多个 Kubernetes 集群。&lt;/p&gt;
+&lt;h2 id="kubeconfig-组织"&gt;
+ kubeconfig 组织
+ &lt;a class="anchor" href="#kubeconfig-%e7%bb%84%e7%bb%87"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;apiVersion&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;v1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;clusters&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;- &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;in-cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;cluster&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;server&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;https://192.168.100.110:6443&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;- &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;another-cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;cluster&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;server&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;https://192.168.100.120:6443&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;contexts&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;- &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;in-cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;context&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;cluster&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;in-cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;user&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;admin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;- &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;another-cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;context&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;cluster&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;another-cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;user&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;admin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;current-context&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;in-cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="添加集群"&gt;
+ 添加集群
+ &lt;a class="anchor" href="#%e6%b7%bb%e5%8a%a0%e9%9b%86%e7%be%a4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd cluster add in-cluster
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd cluster add another-cluster --kubeconfig ~/.kube/config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="建议"&gt;
+ 建议
+ &lt;a class="anchor" href="#%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;集群命名统一规范（环境-区域-用途）&lt;/li&gt;
+&lt;li&gt;每个集群最小化权限授权&lt;/li&gt;
+&lt;li&gt;新增集群后先做只读验证再开自动同步&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd-%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd-%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83/</guid><description>&lt;h1 id="argocd-应用发布"&gt;
+ argocd-应用发布
+ &lt;a class="anchor" href="#argocd-%e5%ba%94%e7%94%a8%e5%8f%91%e5%b8%83"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[argocd]]&lt;/p&gt;
+&lt;h2 id="创建应用示例"&gt;
+ 创建应用示例
+ &lt;a class="anchor" href="#%e5%88%9b%e5%bb%ba%e5%ba%94%e7%94%a8%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd app create guestbook &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --repo https://github.com/argoproj/argocd-example-apps.git &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --path guestbook &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --dest-server https://kubernetes.default.svc &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --dest-namespace default
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="查询与验证"&gt;
+ 查询与验证
+ &lt;a class="anchor" href="#%e6%9f%a5%e8%af%a2%e4%b8%8e%e9%aa%8c%e8%af%81"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd app list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd app get guestbook
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="发布实践建议"&gt;
+ 发布实践建议
+ &lt;a class="anchor" href="#%e5%8f%91%e5%b8%83%e5%ae%9e%e8%b7%b5%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;使用独立分支 + PR 审核触发 GitOps&lt;/li&gt;
+&lt;li&gt;将 &lt;code&gt;syncPolicy&lt;/code&gt; 与 &lt;code&gt;health check&lt;/code&gt; 纳入发布门禁&lt;/li&gt;
+&lt;li&gt;关键应用先手动同步，验证后再自动同步&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="gitlab-集成"&gt;
+ GitLab 集成
+ &lt;a class="anchor" href="#gitlab-%e9%9b%86%e6%88%90"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;私有 GitLab 仓库可作为 &lt;code&gt;repo&lt;/code&gt; 源&lt;/li&gt;
+&lt;li&gt;建议使用 deploy token 或机器人账号，避免个人账号直连&lt;/li&gt;
+&lt;li&gt;凭据统一放 Secret，不写入公开笔记&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd/</guid><description>&lt;h1 id="大纲-argocd"&gt;
+ 大纲-argocd
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-argocd"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="基础"&gt;
+ 基础
+ &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[argocd-介绍与安装]]&lt;/li&gt;
+&lt;li&gt;[[argocd-ingress与访问]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="使用"&gt;
+ 使用
+ &lt;a class="anchor" href="#%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[argocd-多集群管理]]&lt;/li&gt;
+&lt;li&gt;[[argocd-应用发布]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico-bgp%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico-bgp%E9%85%8D%E7%BD%AE/</guid><description>&lt;h1 id="calico-bgp配置"&gt;
  calico-bgp配置
  &lt;a class="anchor" href="#calico-bgp%e9%85%8d%e7%bd%ae"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -1840,6 +2072,47 @@
 &lt;li&gt;需要强隔离、稳定 QoS：优先 MIG&lt;/li&gt;
 &lt;li&gt;需要更高密度和灵活超分：优先 vGPU/HAMI&lt;/li&gt;
 &lt;li&gt;追求简单上线与兼容：先用直通，再演进到 Operator/HAMI&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-istio-%E4%BB%8B%E7%BB%8D/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-istio-%E4%BB%8B%E7%BB%8D/</guid><description>&lt;h1 id="k8s-istio-介绍"&gt;
+ k8s-istio-介绍
+ &lt;a class="anchor" href="#k8s-istio-%e4%bb%8b%e7%bb%8d"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[k8s-服务网格istio]]&lt;/p&gt;
+&lt;h2 id="官方资料"&gt;
+ 官方资料
+ &lt;a class="anchor" href="#%e5%ae%98%e6%96%b9%e8%b5%84%e6%96%99"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://istio.io/" rel="noopener"&gt;Istio 官网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://istio.io/latest/docs/ops/deployment/architecture/" rel="noopener"&gt;Istio 架构图&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="两种数据平面模式"&gt;
+ 两种数据平面模式
+ &lt;a class="anchor" href="#%e4%b8%a4%e7%a7%8d%e6%95%b0%e6%8d%ae%e5%b9%b3%e9%9d%a2%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Sidecar 模式
+&lt;ul&gt;
+&lt;li&gt;每个 Pod 注入一个 Sidecar（通常是 Envoy）&lt;/li&gt;
+&lt;li&gt;负责该 Pod 的入站和出站流量治理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;网关模式
+&lt;ul&gt;
+&lt;li&gt;在集群边界部署网关&lt;/li&gt;
+&lt;li&gt;统一承接外部流量入口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="选型建议"&gt;
+ 选型建议
+ &lt;a class="anchor" href="#%e9%80%89%e5%9e%8b%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;细粒度服务治理优先 Sidecar&lt;/li&gt;
+&lt;li&gt;边界统一接入优先网关&lt;/li&gt;
+&lt;li&gt;混合架构常见：集群内 Sidecar，边界用 Ingress/Egress Gateway&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-port-forward/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-port-forward/</guid><description>&lt;h1 id="k8s-port-forward"&gt;
  k8s-port-forward
  &lt;a class="anchor" href="#k8s-port-forward"&gt;#&lt;/a&gt;
@@ -2382,6 +2655,13 @@
  k8s-服务网格istio
  &lt;a class="anchor" href="#k8s-%e6%9c%8d%e5%8a%a1%e7%bd%91%e6%a0%bcistio"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
+&lt;h2 id="基础"&gt;
+ 基础
+ &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[k8s-istio-介绍]]&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="istio-路由情况"&gt;
  istio 路由情况
  &lt;a class="anchor" href="#istio-%e8%b7%af%e7%94%b1%e6%83%85%e5%86%b5"&gt;#&lt;/a&gt;
@@ -2402,75 +2682,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;istioctl proxy-config networking &amp;lt;pod-name&amp;gt; &lt;span style="color:#75715e"&gt;# 查看 Istio 生成的配置逻辑&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
 
-&lt;img src="https://img.180007.xyz/20260207223256.png" width="auto" alt="istio-路由情况" /&gt;&lt;/p&gt;
-&lt;h2 id="优雅下线"&gt;
- 优雅下线
- &lt;a class="anchor" href="#%e4%bc%98%e9%9b%85%e4%b8%8b%e7%ba%bf"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 新版istio 老版本1.5默认5秒，可能不够&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;spec&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;template&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;annotations&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 让 Envoy 自己等待所有活动连接关闭后再退出&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;proxy.istio.io/config&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#39;{ &amp;#34;terminationDrainDuration&amp;#34;: &amp;#34;30s&amp;#34; }&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 老版本 sidecar 添加 prestop 示例&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;kubectl -n istio-system edit configmap istio-sidecar-injector&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{{- &lt;span style="color:#ae81ff"&gt;if (eq (annotation .ObjectMeta `sidecar.istio.io/preStop` &amp;#34;false&amp;#34;) &amp;#34;true&amp;#34;) }}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;lifecycle&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;preStop&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;exec&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;command&lt;/span&gt;: [&lt;span style="color:#e6db74"&gt;&amp;#34;/bin/sh&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;-c&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;while [ $(netstat -plunt | grep &amp;#39;tcp&amp;#39; | grep -v envoy | wc -l | xargs) -gt 0 ]; 从nacos下线的脚本 ; sleep 1; done&amp;#34;&lt;/span&gt;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{{- &lt;span style="color:#ae81ff"&gt;end }}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# deployment 添加 annotation&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;spec&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;template&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;annotations&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;sidecar.istio.io/preStop&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;true&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="grpc-长连接-负载均衡"&gt;
- grpc 长连接 负载均衡
- &lt;a class="anchor" href="#grpc-%e9%95%bf%e8%bf%9e%e6%8e%a5-%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;默认算法 轮询 ROUND_ROBIN&lt;/li&gt;
-&lt;li&gt;推荐 最少请求数 &lt;strong&gt;LEAST_REQUEST&lt;/strong&gt; 适合请求处理时间不均的场景。&lt;/li&gt;
-&lt;li&gt;不需要特殊配置就能获得 gRPC 负载均衡，只要满足以下两点即可：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;端口命名符合规范&lt;/strong&gt; &lt;code&gt;&amp;lt;protocol&amp;gt;[-&amp;lt;suffix&amp;gt;]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;appProtocol&lt;/strong&gt;字段指定为 grpc&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;apiVersion&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;networking.istio.io/v1alpha3&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;kind&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;DestinationRule&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;grpc-lb-settings&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;spec&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;host&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;my-grpc-service&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;trafficPolicy&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;loadBalancer&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;simple&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;LEAST_REQUEST&lt;/span&gt; &lt;span style="color:#75715e"&gt;# 推荐 gRPC 使用最少请求数算法&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;---
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;kind&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;Service&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;my-grpc-service&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;spec&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;ports&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;port&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;9000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;targetPort&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;9000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;grpc &lt;/span&gt; &lt;span style="color:#75715e"&gt;# 纯协议名，推荐&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;port&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;9001&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;targetPort&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;9001&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;grpc-payload &lt;/span&gt; &lt;span style="color:#75715e"&gt;# 协议名+后缀，推荐&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;port&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;80&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;http-web &lt;/span&gt; &lt;span style="color:#75715e"&gt;# HTTP 协议同理&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;port&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;50051&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;appProtocol&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;grpc &lt;/span&gt; &lt;span style="color:#75715e"&gt;# 直接指定协议名，优先级更高&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;custom-name &lt;/span&gt; &lt;span style="color:#75715e"&gt;# 名字随便起&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6/</guid><description>&lt;h1 id="k8s-监控告警"&gt;
+&lt;img src="https://img.180007.xyz/20260207223256.png" width="auto" alt="istio-路由情况" /&gt;&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6/</guid><description>&lt;h1 id="k8s-监控告警"&gt;
  k8s-监控告警
  &lt;a class="anchor" href="#k8s-%e7%9b%91%e6%8e%a7%e5%91%8a%e8%ad%a6"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -3136,6 +3348,8 @@
 &lt;li&gt;[[k8s-日志收集]]&lt;/li&gt;
 &lt;li&gt;[[k8s-监控告警]]&lt;/li&gt;
 &lt;li&gt;[[k8s-使用vm监控]]&lt;/li&gt;
+&lt;li&gt;[[k8s-服务网格istio]]&lt;/li&gt;
+&lt;li&gt;[[argocd]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="k8s-故障处理"&gt;
  k8s 故障处理
@@ -4146,7 +4360,273 @@
 &lt;li&gt;为了hugo自动识别，外加我是foam，不是obisidian，只能把需要发布的全放到根目录&lt;/li&gt;
 &lt;li&gt;hugo的模板识别，需要以下frontmatter：&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</guid><description>&lt;h1 id="tcp-配置优化"&gt;
+&lt;h2 id="自动归档指定tag的脚本"&gt;
+ 自动归档指定tag的脚本
+ &lt;a class="anchor" href="#%e8%87%aa%e5%8a%a8%e5%bd%92%e6%a1%a3%e6%8c%87%e5%ae%9atag%e7%9a%84%e8%84%9a%e6%9c%ac"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;python move_outline_notes.py -h
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;python move_outline_notes.py --target-path 大纲 --tag-name 大纲 --dry-run
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;python move_outline_notes.py --target-path 草稿 --tag-name 灵感 --dry-run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E5%A4%8D%E7%9B%98%E6%96%B9%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E5%A4%8D%E7%9B%98%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="sre-复盘方法"&gt;
+ sre-复盘方法
+ &lt;a class="anchor" href="#sre-%e5%a4%8d%e7%9b%98%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="复盘目标"&gt;
+ 复盘目标
+ &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;从失败中学习，避免重复犯错&lt;/li&gt;
+&lt;li&gt;提炼跨团队可复用的工程改进项&lt;/li&gt;
+&lt;li&gt;把经验沉淀为流程、工具和规范&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一份高质量复盘应包含"&gt;
+ 一份高质量复盘应包含
+ &lt;a class="anchor" href="#%e4%b8%80%e4%bb%bd%e9%ab%98%e8%b4%a8%e9%87%8f%e5%a4%8d%e7%9b%98%e5%ba%94%e5%8c%85%e5%90%ab"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;背景与上下文&lt;/li&gt;
+&lt;li&gt;故障现象与影响范围&lt;/li&gt;
+&lt;li&gt;完整时间线&lt;/li&gt;
+&lt;li&gt;根因分析（直接原因 + 系统性原因）&lt;/li&gt;
+&lt;li&gt;处置动作与效果验证&lt;/li&gt;
+&lt;li&gt;短期止血方案&lt;/li&gt;
+&lt;li&gt;中长期治理方案&lt;/li&gt;
+&lt;li&gt;负责人、截止时间、验收指标&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="复盘文化建议"&gt;
+ 复盘文化建议
+ &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e6%96%87%e5%8c%96%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;不做甩锅复盘，做系统复盘&lt;/li&gt;
+&lt;li&gt;不做口号复盘，做可执行复盘&lt;/li&gt;
+&lt;li&gt;不做一次性复盘，做周期性回看&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见反模式"&gt;
+ 常见反模式
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e5%8f%8d%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;只写现象，不写根因&lt;/li&gt;
+&lt;li&gt;只有结论，没有证据&lt;/li&gt;
+&lt;li&gt;只有建议，没有责任人和完成时间&lt;/li&gt;
+&lt;li&gt;问题修在当前系统，不做同类系统排查&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E6%95%85%E9%9A%9C%E5%BA%94%E6%80%A5%E6%B5%81%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E6%95%85%E9%9A%9C%E5%BA%94%E6%80%A5%E6%B5%81%E7%A8%8B/</guid><description>&lt;h1 id="sre-故障应急流程"&gt;
+ sre-故障应急流程
+ &lt;a class="anchor" href="#sre-%e6%95%85%e9%9a%9c%e5%ba%94%e6%80%a5%e6%b5%81%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="六步框架"&gt;
+ 六步框架
+ &lt;a class="anchor" href="#%e5%85%ad%e6%ad%a5%e6%a1%86%e6%9e%b6"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;定界：确认真实影响范围与故障级别。&lt;/li&gt;
+&lt;li&gt;止血：优先做回滚、重启、扩容、限流、降级。&lt;/li&gt;
+&lt;li&gt;同步：统一对内信息与对外通报口径。&lt;/li&gt;
+&lt;li&gt;找证据：收集日志、监控、链路与变更证据。&lt;/li&gt;
+&lt;li&gt;验证：验证修复是否有效，避免假恢复。&lt;/li&gt;
+&lt;li&gt;复盘：给出根因、影响面、改进项与责任到人到时点。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="发布四件套"&gt;
+ 发布四件套
+ &lt;a class="anchor" href="#%e5%8f%91%e5%b8%83%e5%9b%9b%e4%bb%b6%e5%a5%97"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;构建&lt;/li&gt;
+&lt;li&gt;测试&lt;/li&gt;
+&lt;li&gt;部署&lt;/li&gt;
+&lt;li&gt;监控&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;发布不是“上线完成”，而是“风险可控 + 可观测 + 可回退”。&lt;/p&gt;
+&lt;h2 id="响应组织建议"&gt;
+ 响应组织建议
+ &lt;a class="anchor" href="#%e5%93%8d%e5%ba%94%e7%bb%84%e7%bb%87%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;明确值班分工：监控观察、操作执行、对外通报、记录员。&lt;/li&gt;
+&lt;li&gt;统一指挥通道：避免多人并行操作互相覆盖。&lt;/li&gt;
+&lt;li&gt;关键时间戳强制记录：用于后续复盘与流程改进。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E6%A0%B8%E5%BF%83%E7%90%86%E5%BF%B5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E6%A0%B8%E5%BF%83%E7%90%86%E5%BF%B5/</guid><description>&lt;h1 id="sre-核心理念"&gt;
+ sre-核心理念
+ &lt;a class="anchor" href="#sre-%e6%a0%b8%e5%bf%83%e7%90%86%e5%bf%b5"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="sre-关注的核心问题"&gt;
+ SRE 关注的核心问题
+ &lt;a class="anchor" href="#sre-%e5%85%b3%e6%b3%a8%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;系统如何持续提供稳定服务&lt;/li&gt;
+&lt;li&gt;故障发生后如何快速恢复&lt;/li&gt;
+&lt;li&gt;如何把一次故障转化为组织能力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="运维工作的两类形态"&gt;
+ 运维工作的两类形态
+ &lt;a class="anchor" href="#%e8%bf%90%e7%bb%b4%e5%b7%a5%e4%bd%9c%e7%9a%84%e4%b8%a4%e7%b1%bb%e5%bd%a2%e6%80%81"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="任务型工作"&gt;
+ 任务型工作
+ &lt;a class="anchor" href="#%e4%bb%bb%e5%8a%a1%e5%9e%8b%e5%b7%a5%e4%bd%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;监控与告警处理&lt;/li&gt;
+&lt;li&gt;发布与变更执行&lt;/li&gt;
+&lt;li&gt;事件响应与信息同步&lt;/li&gt;
+&lt;li&gt;事后总结&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="项目型工作"&gt;
+ 项目型工作
+ &lt;a class="anchor" href="#%e9%a1%b9%e7%9b%ae%e5%9e%8b%e5%b7%a5%e4%bd%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;系统优化与容量规划&lt;/li&gt;
+&lt;li&gt;运维自动化建设&lt;/li&gt;
+&lt;li&gt;可用性治理与架构改造&lt;/li&gt;
+&lt;li&gt;跨团队协作机制建设&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="关键认知"&gt;
+ 关键认知
+ &lt;a class="anchor" href="#%e5%85%b3%e9%94%ae%e8%ae%a4%e7%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;故障不可完全避免，但影响可被控制。&lt;/li&gt;
+&lt;li&gt;复盘不是惩罚流程，而是组织学习流程。&lt;/li&gt;
+&lt;li&gt;目标不是“零故障神话”，而是“故障可发现、可止血、可恢复、可复用经验”。&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E6%A1%88%E4%BE%8B-%E7%A0%81%E8%A1%A8%E6%95%85%E9%9A%9C/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E6%A1%88%E4%BE%8B-%E7%A0%81%E8%A1%A8%E6%95%85%E9%9A%9C/</guid><description>&lt;h1 id="sre-案例-码表故障"&gt;
+ sre-案例-码表故障
+ &lt;a class="anchor" href="#sre-%e6%a1%88%e4%be%8b-%e7%a0%81%e8%a1%a8%e6%95%85%e9%9a%9c"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="事件摘要"&gt;
+ 事件摘要
+ &lt;a class="anchor" href="#%e4%ba%8b%e4%bb%b6%e6%91%98%e8%a6%81"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;某核心业务因外部数据中的特殊字符触发历史解析逻辑缺陷，导致全局服务异常，出现大面积 502 与用户投诉。&lt;/p&gt;
+&lt;h2 id="直接原因"&gt;
+ 直接原因
+ &lt;a class="anchor" href="#%e7%9b%b4%e6%8e%a5%e5%8e%9f%e5%9b%a0"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;上游数据出现历史未覆盖的特殊字符。&lt;/li&gt;
+&lt;li&gt;该字符与本地码表组件关键分隔逻辑冲突。&lt;/li&gt;
+&lt;li&gt;解析失败后无法生成正确码表文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="系统性原因"&gt;
+ 系统性原因
+ &lt;a class="anchor" href="#%e7%b3%bb%e7%bb%9f%e6%80%a7%e5%8e%9f%e5%9b%a0"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;历史代码风险长期未清理。&lt;/li&gt;
+&lt;li&gt;核心模块架构耦合过深，单点异常容易扩散。&lt;/li&gt;
+&lt;li&gt;缺少可用的最终兜底能力（静态/降级方案不完整）。&lt;/li&gt;
+&lt;li&gt;对上游数据质量与内部关键依赖监控不足。&lt;/li&gt;
+&lt;li&gt;演练不足，工具链在大规模修复场景下效率不够。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="处置路径抽象"&gt;
+ 处置路径（抽象）
+ &lt;a class="anchor" href="#%e5%a4%84%e7%bd%ae%e8%b7%af%e5%be%84%e6%8a%bd%e8%b1%a1"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;先排查全局组件与网络面。&lt;/li&gt;
+&lt;li&gt;再定位核心依赖模块异常。&lt;/li&gt;
+&lt;li&gt;手动清理错误数据并批量下发修复文件。&lt;/li&gt;
+&lt;li&gt;逐步恢复服务，随后补数据与一致性修复。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="可复用经验"&gt;
+ 可复用经验
+ &lt;a class="anchor" href="#%e5%8f%af%e5%a4%8d%e7%94%a8%e7%bb%8f%e9%aa%8c"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;历史风险“已知不改”会放大为系统性事故。&lt;/li&gt;
+&lt;li&gt;核心基础模块必须设计隔离与回退能力。&lt;/li&gt;
+&lt;li&gt;故障恢复速度取决于工具链成熟度，而不仅是人力投入。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E6%A1%88%E4%BE%8B-%E8%BF%90%E7%BB%B4%E6%95%85%E9%9A%9C%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E6%A1%88%E4%BE%8B-%E8%BF%90%E7%BB%B4%E6%95%85%E9%9A%9C%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h1 id="sre-案例-运维故障模式"&gt;
+ sre-案例-运维故障模式
+ &lt;a class="anchor" href="#sre-%e6%a1%88%e4%be%8b-%e8%bf%90%e7%bb%b4%e6%95%85%e9%9a%9c%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="常见模式一冗余失效"&gt;
+ 常见模式一：冗余失效
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%b8%80%e5%86%97%e4%bd%99%e5%a4%b1%e6%95%88"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;表面是双活/双控，实际只有单链路承载真实流量，故障时无法自动切换。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;监控不仅看链路活性，还要看链路真实流量。&lt;/li&gt;
+&lt;li&gt;周期性做切换演练，验证“可切”而不是“看起来可切”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见模式二变更时机错误"&gt;
+ 常见模式二：变更时机错误
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%ba%8c%e5%8f%98%e6%9b%b4%e6%97%b6%e6%9c%ba%e9%94%99%e8%af%af"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;在业务高峰执行高风险变更，导致局部问题扩大。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;盘中变更禁令与审批门禁。&lt;/li&gt;
+&lt;li&gt;高风险操作必须双人复核。&lt;/li&gt;
+&lt;li&gt;新同学上岗采用分级授权。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见模式三外部依赖单点"&gt;
+ 常见模式三：外部依赖单点
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%b8%89%e5%a4%96%e9%83%a8%e4%be%9d%e8%b5%96%e5%8d%95%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;外部系统只提供单链路或单设备，内部虽冗余仍可能整体不可用。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;外部依赖纳入同等冗余审计。&lt;/li&gt;
+&lt;li&gt;对关键依赖建立替代路径与降级路径。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见模式四配置隔离不充分"&gt;
+ 常见模式四：配置隔离不充分
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e5%9b%9b%e9%85%8d%e7%bd%ae%e9%9a%94%e7%a6%bb%e4%b8%8d%e5%85%85%e5%88%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;收费/免费、主/备、环境/租户隔离边界不清，故障时相互影响。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;明确隔离边界并做配置基线检查。&lt;/li&gt;
+&lt;li&gt;建立灰度验证与回滚脚本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见模式五可观测性不足"&gt;
+ 常见模式五：可观测性不足
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%ba%94%e5%8f%af%e8%a7%82%e6%b5%8b%e6%80%a7%e4%b8%8d%e8%b6%b3"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;知道“出问题了”，但不知道“哪里先坏、为什么坏”。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;指标、日志、链路统一关联。&lt;/li&gt;
+&lt;li&gt;对关键链路建立分钟级定位能力。&lt;/li&gt;
+&lt;li&gt;故障演练要覆盖“定位速度”指标。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre/</guid><description>&lt;h1 id="大纲-sre"&gt;
+ 大纲-sre
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-sre"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="方法论"&gt;
+ 方法论
+ &lt;a class="anchor" href="#%e6%96%b9%e6%b3%95%e8%ae%ba"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[sre-核心理念]]&lt;/li&gt;
+&lt;li&gt;[[sre-故障应急流程]]&lt;/li&gt;
+&lt;li&gt;[[sre-复盘方法]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="案例"&gt;
+ 案例
+ &lt;a class="anchor" href="#%e6%a1%88%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[sre-案例-码表故障]]&lt;/li&gt;
+&lt;li&gt;[[sre-案例-运维故障模式]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="排障"&gt;
+ 排障
+ &lt;a class="anchor" href="#%e6%8e%92%e9%9a%9c"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/tcp-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96/</guid><description>&lt;h1 id="tcp-配置优化"&gt;
  tcp-配置优化
  &lt;a class="anchor" href="#tcp-%e9%85%8d%e7%bd%ae%e4%bc%98%e5%8c%96"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -4724,6 +5204,420 @@
 &lt;li&gt;[[calico-介绍|calico的typha]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</guid><description>&lt;h1 id="线上故障排查-60秒定位法"&gt;
+ 线上故障排查-60秒定位法
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-60%e7%a7%92%e5%ae%9a%e4%bd%8d%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="核心目标"&gt;
+ 核心目标
+ &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;在前 60 秒快速判断故障属于哪一类：CPU、内存、磁盘、网络、进程。&lt;/p&gt;
+&lt;h2 id="十条高频命令"&gt;
+ 十条高频命令
+ &lt;a class="anchor" href="#%e5%8d%81%e6%9d%a1%e9%ab%98%e9%a2%91%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;部分命令来自 &lt;code&gt;sysstat&lt;/code&gt;，机器上没有时需要先安装。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uptime
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dmesg | tail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vmstat &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mpstat -P ALL &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pidstat &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iostat -xz &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;free -m
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sar -n DEV &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sar -n TCP,ETCP &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;top
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="观察重点"&gt;
+ 观察重点
+ &lt;a class="anchor" href="#%e8%a7%82%e5%af%9f%e9%87%8d%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;先看错误和饱和，再看利用率。&lt;/li&gt;
+&lt;li&gt;“饱和”可以理解为资源请求量已经超过处理能力，常表现为等待队列变长或等待时间升高。&lt;/li&gt;
+&lt;li&gt;这套方法适合在最初一分钟内先把问题定到 CPU、内存、磁盘、网络、进程中的某一层。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="快速判断逻辑"&gt;
+ 快速判断逻辑
+ &lt;a class="anchor" href="#%e5%bf%ab%e9%80%9f%e5%88%a4%e6%96%ad%e9%80%bb%e8%be%91"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;先看 &lt;code&gt;uptime/load average&lt;/code&gt;，判断是否满载。&lt;/li&gt;
+&lt;li&gt;再看 &lt;code&gt;vmstat&lt;/code&gt; 的 &lt;code&gt;r/b&lt;/code&gt;，区分 CPU 饱和还是 IO 饱和。&lt;/li&gt;
+&lt;li&gt;看 &lt;code&gt;top/pidstat&lt;/code&gt; 找到具体进程。&lt;/li&gt;
+&lt;li&gt;看 &lt;code&gt;iostat/sar&lt;/code&gt; 判断是磁盘瓶颈还是网络瓶颈。&lt;/li&gt;
+&lt;li&gt;最后结合日志与变更记录确认根因。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战原则"&gt;
+ 实战原则
+ &lt;a class="anchor" href="#%e5%ae%9e%e6%88%98%e5%8e%9f%e5%88%99"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;先定界，再深入。&lt;/li&gt;
+&lt;li&gt;先恢复，再优化。&lt;/li&gt;
+&lt;li&gt;证据驱动，避免主观猜测。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%8E%92%E9%9A%9C%E6%80%BB%E6%B5%81%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%8E%92%E9%9A%9C%E6%80%BB%E6%B5%81%E7%A8%8B/</guid><description>&lt;h1 id="线上故障排查-排障总流程"&gt;
+ 线上故障排查-排障总流程
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%8e%92%e9%9a%9c%e6%80%bb%e6%b5%81%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="统一排障路径"&gt;
+ 统一排障路径
+ &lt;a class="anchor" href="#%e7%bb%9f%e4%b8%80%e6%8e%92%e9%9a%9c%e8%b7%af%e5%be%84"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;看日志：优先找 ERROR、超时、拒绝连接等直接证据。&lt;/li&gt;
+&lt;li&gt;看资源：CPU/内存/磁盘/网络是否出现饱和。&lt;/li&gt;
+&lt;li&gt;看依赖：数据库、缓存、中间件、下游接口是否异常。&lt;/li&gt;
+&lt;li&gt;看线程与调用：确认是否死锁、阻塞、慢调用。&lt;/li&gt;
+&lt;li&gt;看变更：近期发布、配置、流量峰值、依赖升级。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="两种观察视角"&gt;
+ 两种观察视角
+ &lt;a class="anchor" href="#%e4%b8%a4%e7%a7%8d%e8%a7%82%e5%af%9f%e8%a7%86%e8%a7%92"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="自底向上偏运维"&gt;
+ 自底向上（偏运维）
+ &lt;a class="anchor" href="#%e8%87%aa%e5%ba%95%e5%90%91%e4%b8%8a%e5%81%8f%e8%bf%90%e7%bb%b4"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;进程与线程占用&lt;/li&gt;
+&lt;li&gt;系统调用与内核事件&lt;/li&gt;
+&lt;li&gt;资源瓶颈位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="负载视角偏开发"&gt;
+ 负载视角（偏开发）
+ &lt;a class="anchor" href="#%e8%b4%9f%e8%bd%bd%e8%a7%86%e8%a7%92%e5%81%8f%e5%bc%80%e5%8f%91"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;接口 QPS、耗时、错误率&lt;/li&gt;
+&lt;li&gt;Controller/Mapper/SQL 热点&lt;/li&gt;
+&lt;li&gt;慢查询与慢外部调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常规排查工具分层"&gt;
+ 常规排查工具分层
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%84%e6%8e%92%e6%9f%a5%e5%b7%a5%e5%85%b7%e5%88%86%e5%b1%82"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;用户态：&lt;code&gt;jstack&lt;/code&gt;、&lt;code&gt;arthas&lt;/code&gt;、&lt;code&gt;strace&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;内核态：&lt;code&gt;perf&lt;/code&gt;、&lt;code&gt;bpftrace&lt;/code&gt;、&lt;code&gt;bcc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指标面：&lt;code&gt;top&lt;/code&gt;、&lt;code&gt;htop&lt;/code&gt;、&lt;code&gt;iostat&lt;/code&gt;、&lt;code&gt;vmstat&lt;/code&gt;、&lt;code&gt;free&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;剖析面：&lt;code&gt;jstack&lt;/code&gt;、&lt;code&gt;jmap&lt;/code&gt; 看线程堆栈和对象占用&lt;/li&gt;
+&lt;li&gt;追踪面：&lt;code&gt;arthas&lt;/code&gt;、&lt;code&gt;bpftrace&lt;/code&gt;、&lt;code&gt;tcpdump&lt;/code&gt; 看调用、参数和数据包&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实战补充"&gt;
+ 实战补充
+ &lt;a class="anchor" href="#%e5%ae%9e%e6%88%98%e8%a1%a5%e5%85%85"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;日志通常是第一入口，很多问题能直接定位到报错栈、超时点或依赖异常。&lt;/li&gt;
+&lt;li&gt;如果发现资源不足，再顺着“系统 -&amp;gt; 进程 -&amp;gt; 线程 -&amp;gt; 代码”继续下钻。&lt;/li&gt;
+&lt;li&gt;真正的根因往往需要日志、指标、调用链三类证据交叉验证。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常见误区"&gt;
+ 常见误区
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e8%af%af%e5%8c%ba"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;只盯一个指标，不做交叉验证&lt;/li&gt;
+&lt;li&gt;只追“最后报错”，忽略前序信号&lt;/li&gt;
+&lt;li&gt;只修现象，不修根因&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98%E6%A1%88%E4%BE%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98%E6%A1%88%E4%BE%8B/</guid><description>&lt;h1 id="线上故障排查-数据库与缓存案例"&gt;
+ 线上故障排查-数据库与缓存案例
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%95%b0%e6%8d%ae%e5%ba%93%e4%b8%8e%e7%bc%93%e5%ad%98%e6%a1%88%e4%be%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="mysql"&gt;
+ MySQL
+ &lt;a class="anchor" href="#mysql"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="死锁"&gt;
+ 死锁
+ &lt;a class="anchor" href="#%e6%ad%bb%e9%94%81"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SHOW&lt;/span&gt; ENGINE INNODB STATUS&lt;span style="color:#960050;background-color:#1e0010"&gt;\&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;G&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;从 &lt;code&gt;LATEST DETECTED DEADLOCK&lt;/code&gt; 定位冲突 SQL 与锁关系&lt;/li&gt;
+&lt;li&gt;结合事务隔离级别评估是否需要调整&lt;/li&gt;
+&lt;li&gt;可先确认事务隔离级别：&lt;code&gt;SELECT @@tx_isolation;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;监控上可关注递增指标 &lt;code&gt;mysql_global_status_innodb_deadlocks&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="慢-sql"&gt;
+ 慢 SQL
+ &lt;a class="anchor" href="#%e6%85%a2-sql"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;关注执行计划与索引命中&lt;/li&gt;
+&lt;li&gt;优先优化高频慢 SQL，再看长尾&lt;/li&gt;
+&lt;li&gt;必要时配合应用侧限流/降级&lt;/li&gt;
+&lt;li&gt;乐观锁更新场景可检查是否存在“先查版本，再带版本条件更新”的缺失&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="redis"&gt;
+ Redis
+ &lt;a class="anchor" href="#redis"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="部署与配置"&gt;
+ 部署与配置
+ &lt;a class="anchor" href="#%e9%83%a8%e7%bd%b2%e4%b8%8e%e9%85%8d%e7%bd%ae"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;高可用方案按规模选择哨兵或集群。&lt;/li&gt;
+&lt;li&gt;副本数通常保持奇数更利于故障仲裁。&lt;/li&gt;
+&lt;li&gt;建议关闭透明大页：&lt;code&gt;echo never &amp;gt; /sys/kernel/mm/transparent_hugepage/enabled&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;建议开启 &lt;code&gt;vm.overcommit_memory=1&lt;/code&gt;，避免创建 RDB 快照时内存申请失败。&lt;/li&gt;
+&lt;li&gt;内存一般不要打满，常见经验值是控制在物理内存的 60% 左右。&lt;/li&gt;
+&lt;li&gt;根据场景配置淘汰策略、AOF、慢日志阈值和危险命令安全加固。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="淘汰策略"&gt;
+ 淘汰策略
+ &lt;a class="anchor" href="#%e6%b7%98%e6%b1%b0%e7%ad%96%e7%95%a5"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;noeviction&lt;/code&gt;：默认不淘汰&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;allkeys-lru&lt;/code&gt;：适合缓存场景&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;allkeys-lfu&lt;/code&gt;：更适合热点明显的场景&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;volatile-lru&lt;/code&gt;：只淘汰设置过期时间的 key&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="大-key"&gt;
+ 大 Key
+ &lt;a class="anchor" href="#%e5%a4%a7-key"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;典型问题：内存占用高、阻塞严重&lt;/li&gt;
+&lt;li&gt;处理建议：拆分 key、渐进删除（优先 &lt;code&gt;UNLINK&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;业务侧通常要从模型设计解决，比如按 UID 分桶或拆分结构&lt;/li&gt;
+&lt;li&gt;可借助 &lt;code&gt;rdbtool&lt;/code&gt; 等方式分析大 key 分布&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="热-key"&gt;
+ 热 Key
+ &lt;a class="anchor" href="#%e7%83%ad-key"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;典型问题：打满单节点 CPU/网卡&lt;/li&gt;
+&lt;li&gt;处理建议：本地缓存、读写分离、限流、散列拆分&lt;/li&gt;
+&lt;li&gt;监控最好在业务 SDK 或客户端拦截器侧提前做频率统计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="连接数过高"&gt;
+ 连接数过高
+ &lt;a class="anchor" href="#%e8%bf%9e%e6%8e%a5%e6%95%b0%e8%bf%87%e9%ab%98"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;检查 &lt;code&gt;maxclients&lt;/code&gt; 与连接生命周期&lt;/li&gt;
+&lt;li&gt;避免短连接风暴，优先连接池治理&lt;/li&gt;
+&lt;li&gt;可临时查看或调整：&lt;code&gt;CONFIG GET maxclients&lt;/code&gt;、&lt;code&gt;CONFIG SET maxclients 100000&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="节点故障处理"&gt;
+ 节点故障处理
+ &lt;a class="anchor" href="#%e8%8a%82%e7%82%b9%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;cluster nodes&lt;/code&gt; 查看集群状态&lt;/li&gt;
+&lt;li&gt;节点损坏后可先 &lt;code&gt;cluster forget &amp;lt;node_id&amp;gt;&lt;/code&gt; 从其他节点移除视图&lt;/li&gt;
+&lt;li&gt;重建前要清理节点上的 &lt;code&gt;rdb&lt;/code&gt;、&lt;code&gt;aof&lt;/code&gt;、&lt;code&gt;nodes.conf&lt;/code&gt; 等旧状态文件&lt;/li&gt;
+&lt;li&gt;再将新节点重新加入集群并补齐主从关系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="复盘要点"&gt;
+ 复盘要点
+ &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e8%a6%81%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;哪个指标最早异常&lt;/li&gt;
+&lt;li&gt;哪个动作真正止血&lt;/li&gt;
+&lt;li&gt;是否能沉淀成自动化检测规则&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="线上故障排查-日志分析"&gt;
+ 线上故障排查-日志分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="工具分工"&gt;
+ 工具分工
+ &lt;a class="anchor" href="#%e5%b7%a5%e5%85%b7%e5%88%86%e5%b7%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;less&lt;/code&gt;：交互查看大日志（推荐）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;grep&lt;/code&gt;：快速过滤关键词&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;awk&lt;/code&gt;：做统计、聚合、条件筛选&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;zgrep/zless&lt;/code&gt;：压缩日志直接分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常用套路"&gt;
+ 常用套路
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%a5%97%e8%b7%af"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="less"&gt;
+ less
+ &lt;a class="anchor" href="#less"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;less /path/to/logfile.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;log show --last 10m | less
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# /ERROR 向前搜索&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ?ERROR 向后搜索&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# f 向前翻页&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# b 向后翻页&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# g/G 跳到文件开头/结尾&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# F 跟随输出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -N 显示行号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -i 忽略大小写&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -S 不换行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -R 显示原始控制字符（如颜色）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;less&lt;/code&gt; 按需加载，适合大日志；比直接用编辑器更稳。&lt;/li&gt;
+&lt;li&gt;如果环境配置了 &lt;code&gt;lesspipe&lt;/code&gt;，压缩文件也能直接查看。&lt;/li&gt;
+&lt;li&gt;进入过滤模式后可用 &lt;code&gt;&amp;amp;&lt;/code&gt; 配合正则继续筛选当前内容。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log show --last 10m | less&lt;/code&gt; 适合先截取近 10 分钟日志，再进入交互式查看。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/ERROR&lt;/code&gt; 和 &lt;code&gt;?ERROR&lt;/code&gt; 分别是向前、向后搜索；&lt;code&gt;F&lt;/code&gt; 类似 &lt;code&gt;tail -f&lt;/code&gt;，适合追实时日志。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="grep"&gt;
+ grep
+ &lt;a class="anchor" href="#grep"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep -iE &lt;span style="color:#e6db74"&gt;&amp;#34;error|timeout|refused&amp;#34;&lt;/span&gt; app.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep -A &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt; -B &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt; app.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;log stream | grep -iE &lt;span style="color:#e6db74"&gt;&amp;#34;proxy|kernel&amp;#34;&lt;/span&gt; --line-buffered | grep -v &lt;span style="color:#e6db74"&gt;&amp;#34;debug&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt; 反向匹配，排除噪音行。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-i&lt;/code&gt; 忽略大小写，适合不确定日志格式的场景。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-w&lt;/code&gt; 只匹配完整单词，避免误匹配。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--line-buffered&lt;/code&gt; 适合实时流式日志，否则 grep 可能攒一批再输出。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-E&lt;/code&gt; 开启扩展正则，便于写 &lt;code&gt;error|timeout|refused&lt;/code&gt; 这种多条件匹配。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-A 3 -B 2&lt;/code&gt; 适合报错场景，把前后文一起打出来，避免只看到单行异常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="awk"&gt;
+ awk
+ &lt;a class="anchor" href="#awk"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;awk &lt;span style="color:#e6db74"&gt;&amp;#39;$9 &amp;gt;= 500 {print $0}&amp;#39;&lt;/span&gt; access.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;awk &lt;span style="color:#e6db74"&gt;&amp;#39;{print $9}&amp;#39;&lt;/span&gt; access.log | sort | uniq -c | sort -nr
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat /path/to/logfile.log | awk -v RS&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;/Broken pipe/&amp;#39;&lt;/span&gt; | less
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-F&lt;/code&gt; 指定列分隔符，默认空格或制表符。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RS&lt;/code&gt; 控制记录分隔符，&lt;code&gt;-v RS=''&lt;/code&gt; 可按空行分块查看 Java 异常堆栈。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NF&lt;/code&gt; 表示列数，&lt;code&gt;NR&lt;/code&gt; 表示记录号，&lt;code&gt;$0&lt;/code&gt; 是整行，&lt;code&gt;$1/$2/...&lt;/code&gt; 是具体列。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;awk&lt;/code&gt; 比 &lt;code&gt;grep&lt;/code&gt; 更适合做数值比较、字段统计和组合条件筛选。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这几个示例分别在做什么：&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="线上故障排查-系统资源分析"&gt;
+ 线上故障排查-系统资源分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e7%b3%bb%e7%bb%9f%e8%b5%84%e6%ba%90%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="cpu-与负载"&gt;
+ CPU 与负载
+ &lt;a class="anchor" href="#cpu-%e4%b8%8e%e8%b4%9f%e8%bd%bd"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;top&lt;/code&gt;：看进程/线程热点&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vmstat -w 1&lt;/code&gt;：看运行队列与阻塞&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mpstat -P ALL 1&lt;/code&gt;：看各核是否倾斜&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="常用命令怎么用"&gt;
+ 常用命令怎么用
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4%e6%80%8e%e4%b9%88%e7%94%a8"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uptime
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dmesg | tail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mpstat -P ALL &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;free -m
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;top
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;uptime&lt;/code&gt;：最快速看 &lt;code&gt;load average 1/5/15&lt;/code&gt;，适合先判断机器是否整体过载。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dmesg | tail&lt;/code&gt;：看最近内核日志，常用于确认 OOM、磁盘报错、网卡异常、文件系统错误。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mpstat -P ALL 1&lt;/code&gt;：&lt;code&gt;-P ALL&lt;/code&gt; 表示看所有 CPU 核；后面的 &lt;code&gt;1&lt;/code&gt; 表示每 1 秒刷一次，适合看是否单核打满或负载倾斜。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;free -m&lt;/code&gt;：&lt;code&gt;-m&lt;/code&gt; 以 MB 展示，适合快速看可用内存、缓存和 swap。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;top&lt;/code&gt;：综合观察入口，适合先锁定异常进程，再决定是否切到线程或磁盘/网络维度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="top-常用交互"&gt;
+ top 常用交互
+ &lt;a class="anchor" href="#top-%e5%b8%b8%e7%94%a8%e4%ba%a4%e4%ba%92"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;1&lt;/code&gt;：展开或折叠多核 CPU 视图&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt;：按 CPU 排序&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;M&lt;/code&gt;：按内存排序&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;c&lt;/code&gt;：显示完整命令路径&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;H&lt;/code&gt;：切换线程模式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;&lt;/code&gt;、&lt;code&gt;&amp;gt;&lt;/code&gt;、&lt;code&gt;R&lt;/code&gt;：切换排序列和排序方向&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;o&lt;/code&gt;：自定义过滤器，例如 &lt;code&gt;COMMAND=java&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关键字段：&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E8%A7%82%E6%B5%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E8%A7%82%E6%B5%8B/</guid><description>&lt;h1 id="线上故障排查-进程与内核观测"&gt;
+ 线上故障排查-进程与内核观测
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e8%bf%9b%e7%a8%8b%e4%b8%8e%e5%86%85%e6%a0%b8%e8%a7%82%e6%b5%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[线上故障排查]]&lt;/p&gt;
+&lt;h2 id="进程层工具"&gt;
+ 进程层工具
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e5%b1%82%e5%b7%a5%e5%85%b7"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pidstat&lt;/code&gt;：CPU/内存/线程/上下文切换&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ps&lt;/code&gt;：进程树与线程视角&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;lsof&lt;/code&gt;：文件、端口、句柄、删除文件占用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="pidstat-常用选项"&gt;
+ pidstat 常用选项
+ &lt;a class="anchor" href="#pidstat-%e5%b8%b8%e7%94%a8%e9%80%89%e9%a1%b9"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pidstat -t -G kubelet &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pidstat -wv -p &lt;span style="color:#ae81ff"&gt;1366&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-u&lt;/code&gt;：CPU 使用率&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-t&lt;/code&gt;：线程级视角&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-G pattern&lt;/code&gt;：按进程名匹配&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-r&lt;/code&gt;：内存使用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-p pid&lt;/code&gt;：指定 PID&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-w&lt;/code&gt;：上下文切换&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt;：线程数和文件描述符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;两个示例分别适合：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pidstat -t -G kubelet 1&lt;/code&gt;：每秒观察名为 &lt;code&gt;kubelet&lt;/code&gt; 的进程及其线程消耗，适合看线程热点。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pidstat -wv -p 1366 1&lt;/code&gt;：盯住某个 PID 的上下文切换、线程数、FD 数，适合进一步判断是否存在锁竞争或线程爆炸。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;输出中 &lt;code&gt;TGID&lt;/code&gt; 通常可视为进程 ID，&lt;code&gt;TID&lt;/code&gt; 是线程 ID。&lt;/p&gt;
+&lt;h3 id="ps-常用方式"&gt;
+ ps 常用方式
+ &lt;a class="anchor" href="#ps-%e5%b8%b8%e7%94%a8%e6%96%b9%e5%bc%8f"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps aux
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps -elf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps -fC java
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps -fq &lt;span style="color:#ae81ff"&gt;1366&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ps uc -Lq &lt;span style="color:#ae81ff"&gt;1366&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;top -H -i -b -d &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; -n2 -p &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ps aux&lt;/code&gt; 看全量进程&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ps -elf&lt;/code&gt; 看长格式和进程树&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ps uc -Lq &amp;lt;pid&amp;gt;&lt;/code&gt; 看指定进程下的线程&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;top -H&lt;/code&gt; 在线程视角定位活跃线程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;命令含义：&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</guid><description>&lt;h1 id="大纲-线上故障排查"&gt;
+ 大纲-线上故障排查
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="入口方法"&gt;
+ 入口方法
+ &lt;a class="anchor" href="#%e5%85%a5%e5%8f%a3%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-60秒定位法]]&lt;/li&gt;
+&lt;li&gt;[[线上故障排查-排障总流程]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="常用技术栈"&gt;
+ 常用技术栈
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e6%8a%80%e6%9c%af%e6%a0%88"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-日志分析]]&lt;/li&gt;
+&lt;li&gt;[[线上故障排查-系统资源分析]]&lt;/li&gt;
+&lt;li&gt;[[线上故障排查-进程与内核观测]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="实战场景"&gt;
+ 实战场景
+ &lt;a class="anchor" href="#%e5%ae%9e%e6%88%98%e5%9c%ba%e6%99%af"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-数据库与缓存案例]]&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89-%E5%9B%9E%E6%94%B6%E7%AB%99/</guid><description>&lt;h1 id="群辉-回收站"&gt;
  群辉-回收站
  &lt;a class="anchor" href="#%e7%be%a4%e8%be%89-%e5%9b%9e%e6%94%b6%e7%ab%99"&gt;#&lt;/a&gt;
