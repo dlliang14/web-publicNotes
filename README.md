@@ -167,9 +167,13 @@ A large portion of Amethyst's code base can be derived from the following two pr
 
 ## update log
 
+### 20260329
+
+- 添加能跳转到对应笔记相关标题行的功能，比如双链 [[大纲/python#并发编程]] (这是foam已有功能，但是hugo没有)
+
 ### 20260328
 
-- 把原始笔记通过脚本全都转移到/content目录下(因为原始笔记可以通过foam自动识别双链路径，但是前端不行)
+- 把原始笔记通过脚本全都转移到/content目录下(因为原始笔记可以通过foam自动识别双链路径，但是hugo没有)
 
 ```sh
 python moveNotes2Content.py --help
