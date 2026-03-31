@@ -1,106 +1,205 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gitops on</title><link>https://dlliang14.github.io/web-publicNotes/tags/gitops/</link><description>Recent content in Gitops on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/gitops/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd-%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd-%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="argocd-介绍与安装"&gt;
- argocd-介绍与安装
- &lt;a class="anchor" href="#argocd-%e4%bb%8b%e7%bb%8d%e4%b8%8e%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gitops on</title><link>https://dlliang14.github.io/web-publicNotes/tags/gitops/</link><description>Recent content in Gitops on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/gitops/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd/</guid><description>&lt;h1 id="argocd"&gt;
+ argocd
+ &lt;a class="anchor" href="#argocd"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
-&lt;p&gt;[[argocd]]&lt;/p&gt;
-&lt;h2 id="argocd-是什么"&gt;
- ArgoCD 是什么
- &lt;a class="anchor" href="#argocd-%e6%98%af%e4%bb%80%e4%b9%88"&gt;#&lt;/a&gt;
+&lt;h2 id="argo介绍"&gt;
+ argo介绍
+ &lt;a class="anchor" href="#argo%e4%bb%8b%e7%bb%8d"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
-&lt;p&gt;ArgoCD 是 Kubernetes GitOps 持续交付工具，核心价值是：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;声明式部署&lt;/li&gt;
-&lt;li&gt;自动化同步&lt;/li&gt;
-&lt;li&gt;变更可审计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="官方文档"&gt;
- 官方文档
- &lt;a class="anchor" href="#%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
+&lt;!-- \\pve-qunhui\alist_local\马士兵云原生-2024\21-DevOps项目发布一体化平台构建及应用实践\3-云原生多云持续交付GitOps --&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;a href="https://argo-cd.readthedocs.io/en/stable/" rel="noopener"&gt;ArgoCD 文档&lt;/a&gt;&lt;/li&gt;
+&lt;p&gt;自动化，可审计，易于理解的声明式资源&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务模式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;工作流模式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;基于事件的模式&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="安装步骤"&gt;
- 安装步骤
- &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e6%ad%a5%e9%aa%a4"&gt;#&lt;/a&gt;
+&lt;h2 id="argo安装"&gt;
+ argo安装
+ &lt;a class="anchor" href="#argo%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl create ns argocd
+&lt;p&gt;
+&lt;a href="https://argo-cd.readthedocs.io/en/stable/" rel="noopener"&gt;官网&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="argo资源安装"&gt;
+ argo资源安装
+ &lt;a class="anchor" href="#argo%e8%b5%84%e6%ba%90%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装清单包含ClusterRoleBinding引用命名空间的资源argocd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 所以必须使用命名空间argocd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl delete ns argo
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl create ns argocd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 默认使用自签证书，必须开启不安全模式来访问&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Deployment-argocd-server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 25788 - args:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 25789 - /usr/local/bin/argocd-server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 25790 - --insecure&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 一定记得指定名称空间！&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -n argocd -f install.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="注意事项"&gt;
- 注意事项
- &lt;a class="anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="安装结果-备份"&gt;
+ 安装结果-备份
+ &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e7%bb%93%e6%9e%9c-%e5%a4%87%e4%bb%bd"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;customresourcedefinition.apiextensions.k8s.io/applications.argoproj.io created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;customresourcedefinition.apiextensions.k8s.io/applicationsets.argoproj.io created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;customresourcedefinition.apiextensions.k8s.io/appprojects.argoproj.io created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;serviceaccount/argocd-application-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;serviceaccount/argocd-applicationset-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;serviceaccount/argocd-dex-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;serviceaccount/argocd-notifications-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;serviceaccount/argocd-redis created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;serviceaccount/argocd-repo-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;serviceaccount/argocd-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;role.rbac.authorization.k8s.io/argocd-application-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;role.rbac.authorization.k8s.io/argocd-applicationset-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;role.rbac.authorization.k8s.io/argocd-dex-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;role.rbac.authorization.k8s.io/argocd-notifications-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;role.rbac.authorization.k8s.io/argocd-redis created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;role.rbac.authorization.k8s.io/argocd-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clusterrole.rbac.authorization.k8s.io/argocd-application-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clusterrole.rbac.authorization.k8s.io/argocd-applicationset-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clusterrole.rbac.authorization.k8s.io/argocd-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rolebinding.rbac.authorization.k8s.io/argocd-application-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rolebinding.rbac.authorization.k8s.io/argocd-applicationset-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rolebinding.rbac.authorization.k8s.io/argocd-dex-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rolebinding.rbac.authorization.k8s.io/argocd-notifications-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rolebinding.rbac.authorization.k8s.io/argocd-redis created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rolebinding.rbac.authorization.k8s.io/argocd-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clusterrolebinding.rbac.authorization.k8s.io/argocd-application-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clusterrolebinding.rbac.authorization.k8s.io/argocd-applicationset-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clusterrolebinding.rbac.authorization.k8s.io/argocd-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;configmap/argocd-cm created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;configmap/argocd-cmd-params-cm created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;configmap/argocd-gpg-keys-cm created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;configmap/argocd-notifications-cm created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;configmap/argocd-rbac-cm created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;configmap/argocd-ssh-known-hosts-cm created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;configmap/argocd-tls-certs-cm created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;secret/argocd-notifications-secret created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;secret/argocd-secret created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service/argocd-applicationset-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service/argocd-dex-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service/argocd-metrics created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service/argocd-notifications-controller-metrics created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service/argocd-redis created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service/argocd-repo-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service/argocd-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service/argocd-server-metrics created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;deployment.apps/argocd-applicationset-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;deployment.apps/argocd-dex-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;deployment.apps/argocd-notifications-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;deployment.apps/argocd-redis created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;deployment.apps/argocd-repo-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;deployment.apps/argocd-server created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;statefulset.apps/argocd-application-controller created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;networkpolicy.networking.k8s.io/argocd-application-controller-network-policy created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;networkpolicy.networking.k8s.io/argocd-applicationset-controller-network-policy created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;networkpolicy.networking.k8s.io/argocd-dex-server-network-policy created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;networkpolicy.networking.k8s.io/argocd-notifications-controller-network-policy created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;networkpolicy.networking.k8s.io/argocd-redis-network-policy created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;networkpolicy.networking.k8s.io/argocd-repo-server-network-policy created
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;networkpolicy.networking.k8s.io/argocd-server-network-policy created
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="删除失败的补救"&gt;
+ 删除失败的补救
+ &lt;a class="anchor" href="#%e5%88%a0%e9%99%a4%e5%a4%b1%e8%b4%a5%e7%9a%84%e8%a1%a5%e6%95%91"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;安装清单中的 ClusterRoleBinding 引用 &lt;code&gt;argocd&lt;/code&gt; 命名空间&lt;/li&gt;
-&lt;li&gt;命名空间错配会导致删除/回收困难&lt;/li&gt;
-&lt;li&gt;默认常见自签证书场景，需要结合访问方式配置 &lt;code&gt;--insecure&lt;/code&gt; 或正确 TLS&lt;/li&gt;
+&lt;li&gt;忘记指定名称空间，想要删除argocd&lt;/li&gt;
+&lt;li&gt;但是一直卡在terminating状态&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="删除卡住排查"&gt;
- 删除卡住排查
- &lt;a class="anchor" href="#%e5%88%a0%e9%99%a4%e5%8d%a1%e4%bd%8f%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; api in &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;kubectl api-resources --verbs&lt;span style="color:#f92672"&gt;=&lt;/span&gt;list --namespaced -o name&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 查看资源&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; api in &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;kubectl api-resources --verbs&lt;span style="color:#f92672"&gt;=&lt;/span&gt;list --namespaced -o name&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; kubectl get $api --ignore-not-found
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;done&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 强制删除指定阶段的资源 默认名称空间 Terminating&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl get pods | grep Terminating | awk &lt;span style="color:#e6db74"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | xargs -r -n1 kubectl delete pod --force --grace-period&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd-%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd-%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83/</guid><description>&lt;h1 id="argocd-应用发布"&gt;
- argocd-应用发布
- &lt;a class="anchor" href="#argocd-%e5%ba%94%e7%94%a8%e5%8f%91%e5%b8%83"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;[[argocd]]&lt;/p&gt;
-&lt;h2 id="创建应用示例"&gt;
- 创建应用示例
- &lt;a class="anchor" href="#%e5%88%9b%e5%bb%ba%e5%ba%94%e7%94%a8%e7%a4%ba%e4%be%8b"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd app create guestbook &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --repo https://github.com/argoproj/argocd-example-apps.git &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --path guestbook &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --dest-server https://kubernetes.default.svc &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --dest-namespace default
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="查询与验证"&gt;
- 查询与验证
- &lt;a class="anchor" href="#%e6%9f%a5%e8%af%a2%e4%b8%8e%e9%aa%8c%e8%af%81"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd app list
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;argocd app get guestbook
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="发布实践建议"&gt;
- 发布实践建议
- &lt;a class="anchor" href="#%e5%8f%91%e5%b8%83%e5%ae%9e%e8%b7%b5%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="argo路由"&gt;
+ argo路由
+ &lt;a class="anchor" href="#argo%e8%b7%af%e7%94%b1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;使用独立分支 + PR 审核触发 GitOps&lt;/li&gt;
-&lt;li&gt;将 &lt;code&gt;syncPolicy&lt;/code&gt; 与 &lt;code&gt;health check&lt;/code&gt; 纳入发布门禁&lt;/li&gt;
-&lt;li&gt;关键应用先手动同步，验证后再自动同步&lt;/li&gt;
+&lt;li&gt;强制https&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="gitlab-集成"&gt;
- GitLab 集成
- &lt;a class="anchor" href="#gitlab-%e9%9b%86%e6%88%90"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;私有 GitLab 仓库可作为 &lt;code&gt;repo&lt;/code&gt; 源&lt;/li&gt;
-&lt;li&gt;建议使用 deploy token 或机器人账号，避免个人账号直连&lt;/li&gt;
-&lt;li&gt;凭据统一放 Secret，不写入公开笔记&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd/</guid><description>&lt;h1 id="大纲-argocd"&gt;
- 大纲-argocd
- &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-argocd"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h2 id="基础"&gt;
- 基础
- &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;[[argocd-介绍与安装]]&lt;/li&gt;
-&lt;li&gt;[[argocd-ingress与访问]]&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="使用"&gt;
- 使用
- &lt;a class="anchor" href="#%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;[[argocd-多集群管理]]&lt;/li&gt;
-&lt;li&gt;[[argocd-应用发布]]&lt;/li&gt;
-&lt;/ul&gt;</description></item></channel></rss>
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 使用nginx的ingress路由&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 域名选择 argocd.180007.xyz&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat &amp;gt; argocd-ingress.yaml &lt;span style="color:#e6db74"&gt;&amp;lt;&amp;lt;EOF
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;# argocd-ingress.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;apiVersion: networking.k8s.io/v1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;kind: Ingress
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;metadata:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; name: argocd-ingress
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; namespace: argocd
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; annotations:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; kubernetes.io/ingress.class: &amp;#34;nginx&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; nginx.ingress.kubernetes.io/force-ssl-redirect: &amp;#34;true&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; nginx.ingress.kubernetes.io/backend-protocol: &amp;#34;HTTP&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; cert-manager.io/cluster-issuer: &amp;#34;cloudflare-prod-issue&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;spec:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; ingressClassName: nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; rules:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - host: argocd.180007.xyz
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; http:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; paths:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - path: /
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; pathType: Prefix
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; backend:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; service:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; name: argocd-server
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; port:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; number: 80
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; tls:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - hosts:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - argocd.180007.xyz
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; secretName: argocd-tls-secret
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -f argocd-ingress.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# grpc访问&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat &amp;gt; argocd-ingress-grpc.yaml &lt;span style="color:#e6db74"&gt;&amp;lt;&amp;lt;EOF
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;# argocd-ingress-grpc.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;apiVersion: networking.k8s.io/v1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;kind: Ingress
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;metadata:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; name: argocd-ingress-grpc
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; namespace: argocd
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; annotations:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; kubernetes.io/ingress.class: &amp;#34;nginx&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; nginx.ingress.kubernetes.io/backend-protocol: &amp;#34;GRPC&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; cert-manager.io/cluster-issuer: &amp;#34;cloudflare-prod-issue&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;spec:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; ingressClassName: nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; rules:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - host: argocd-grpc.180007.xyz
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; http:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; paths:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - path: /
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; pathType: Prefix
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; backend:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; service:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; name: argocd-server
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; port:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; number: 443
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; tls:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - hosts:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - argocd-grpc.180007.xyz
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; secretName: argocd-tls-secret-grpc
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -f argocd-ingress-grpc.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="访问地址"&gt;
+ 访问地址
+ &lt;a class="anchor" href="#%e8%ae%bf%e9%97%ae%e5%9c%b0%e5%9d%80"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+&lt;a href="https://github.com/argoproj/argo-cd" rel="noopener"&gt;argocd-cli&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

@@ -53,10 +53,13 @@
  &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;p&gt;在前 60 秒快速判断故障属于哪一类：CPU、内存、磁盘、网络、进程。&lt;/p&gt;
-&lt;h2 id="十条高频命令"&gt;
- 十条高频命令
- &lt;a class="anchor" href="#%e5%8d%81%e6%9d%a1%e9%ab%98%e9%a2%91%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;h2 id="最应该排查的性能指标"&gt;
+ 最应该排查的性能指标
+ &lt;a class="anchor" href="#%e6%9c%80%e5%ba%94%e8%af%a5%e6%8e%92%e6%9f%a5%e7%9a%84%e6%80%a7%e8%83%bd%e6%8c%87%e6%a0%87"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
+&lt;p&gt;
+&lt;a href="https://www.cnblogs.com/276815076/p/17163639.html" rel="noopener"&gt;参考链接&lt;/a&gt;
+在这篇文章中，Netflix 的性能工程团队将会为你展示如何在最初的 60 秒内通过命令行做性能排查，这个过程中，会使用一些标准的 Linux 工具。在 60 秒内，你可以通过运行以下十个命令来大致了解系统资源使用情况和正在运行的进程。寻找错误和饱和度指标，然后是资源利用率相关的指标。饱和度这个词可能不易理解，大家可以Google一下USE方法，所谓了饱和了，是资源的负载超过其处理能力了，可以表现为请求队列的长度或等待时间。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;部分命令来自 &lt;code&gt;sysstat&lt;/code&gt;，机器上没有时需要先安装。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -102,6 +105,14 @@
  大纲-线上故障排查
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://www.bilibili.com/cheese/play/ep1135127" rel="noopener"&gt;参考链接1-b站孟小哥抓虫课程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/moooofly/MarkSomethingDownLLS/blob/master/%e5%90%84%e5%a4%a7%e4%ba%92%e8%81%94%e7%bd%91%e5%85%ac%e5%8f%b8%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86%e8%b5%84%e6%96%99%e6%b1%87%e6%80%bb.md" rel="noopener"&gt;参考链接2-github分享-里面还有3个案例&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://www.bilibili.com/video/BV1be4y1f79F" rel="noopener"&gt;参考链接3-b站阿里云技巧分享&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="入口方法"&gt;
  入口方法
  &lt;a class="anchor" href="#%e5%85%a5%e5%8f%a3%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
@@ -114,8 +125,73 @@
  常用技术栈
  &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e6%8a%80%e6%9c%af%e6%a0%88"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
+&lt;h3 id="线上故障排查-日志分析"&gt;
+ 线上故障排查-日志分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="常用命令"&gt;
+ 常用命令
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;[[线上故障排查-日志分析]]&lt;/li&gt;
+&lt;li&gt;[[less]] ：交互查看大日志（推荐）&lt;/li&gt;
+&lt;li&gt;[[grep]]：快速过滤关键词&lt;/li&gt;
+&lt;li&gt;[[awk]]：做统计、聚合、条件筛选&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="其他命令"&gt;
+ 其他命令
+ &lt;a class="anchor" href="#%e5%85%b6%e4%bb%96%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;cat、head、tail：输出日志&lt;/li&gt;
+&lt;li&gt;wc：统计行数、单词数、字节数&lt;/li&gt;
+&lt;li&gt;sort：排序&lt;/li&gt;
+&lt;li&gt;uniq：去重&lt;/li&gt;
+&lt;li&gt;gzip 压缩包需要换成 zless zgrep zcat&lt;/li&gt;
+&lt;li&gt;man 可以查看命令的使用说明和选项参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 输出日志&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;head -n &lt;span style="color:#ae81ff"&gt;1000&lt;/span&gt; /path/to/logfile.log | grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tail -n &lt;span style="color:#ae81ff"&gt;1000&lt;/span&gt; -f /path/to/logfile.log | grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 统计行数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wc -l /path/to/logfile.log 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 默认显示行数、单词数、字节数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sam@samdeMac-mini logs % wc gateway.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;278&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1837&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;27745&lt;/span&gt; gateway.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# sort 排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -n 按照数值排序 默认按照字典序排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -k 5 按照第5列排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -r 反向排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -u 去重,但性能较差，一般排序后使用 uniq 去重&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -t 指定分隔符 默认空格/制表符分隔&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# uniq 去重&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -c 最常用！统计每行出现的次数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -d 只显示重复的行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -u 只显示不重复的行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 综合案例&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&amp;#34;1 aaa AA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;9 sss SS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;9 sss SS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;2 bbb BB
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;2 bbb XX
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;2 bbb BB
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;3 ccc CC
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;| awk &lt;span style="color:#e6db74"&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt; | sort -nr | uniq -c | sort -nr
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 解压后分析日志&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gzip -d /path/to/logfile.log.gz -c | grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt; | less
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -d 解压&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -c 输出到标准输出 不修改原文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="线上故障排查-资源分析"&gt;
+ 线上故障排查-资源分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e8%b5%84%e6%ba%90%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;[[线上故障排查-系统资源分析]]&lt;/li&gt;
 &lt;li&gt;[[线上故障排查-进程与内核观测]]&lt;/li&gt;
 &lt;/ul&gt;
@@ -125,4 +201,13 @@
 &lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[[线上故障排查-数据库与缓存案例]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="复盘要点"&gt;
+ 复盘要点
+ &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e8%a6%81%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;哪个指标最早异常&lt;/li&gt;
+&lt;li&gt;哪个动作真正止血&lt;/li&gt;
+&lt;li&gt;是否能沉淀成自动化检测规则&lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>

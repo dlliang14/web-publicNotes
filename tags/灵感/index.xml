@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>灵感 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E7%81%B5%E6%84%9F/</link><description>Recent content in 灵感 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E7%81%B5%E6%84%9F/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/comfyui-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8A%82%E7%82%B9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/comfyui-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8A%82%E7%82%B9/</guid><description>&lt;h1 id="comfyui-自定义节点"&gt;
+ comfyui-自定义节点
+ &lt;a class="anchor" href="#comfyui-%e8%87%aa%e5%ae%9a%e4%b9%89%e8%8a%82%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="安装自定义节点"&gt;
+ 安装自定义节点
+ &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e8%87%aa%e5%ae%9a%e4%b9%89%e8%8a%82%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+&lt;a href="https://www.youtube.com/watch?v=WhOZZOgBggU" rel="noopener"&gt;参考视频&lt;/a&gt;
+
+&lt;a href="https://github.com/Comfy-Org/publish-node-action" rel="noopener"&gt;自动更新流水线&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 注册到 ComfyUI 的 Custom Nodes Manager 中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;liang14
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.secret
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install comfy-cli
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 创建 pyproject.toml 填注册名&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;comfy node init
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 注册 需要输入秘钥&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;comfy node publish
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="手动更新自定义节点"&gt;
+ 手动更新自定义节点
+ &lt;a class="anchor" href="#%e6%89%8b%e5%8a%a8%e6%9b%b4%e6%96%b0%e8%87%aa%e5%ae%9a%e4%b9%89%e8%8a%82%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;上面的自动更新不知道是延迟还是什么问题，版本不更新&lt;/li&gt;
+&lt;li&gt;下面是手动更新自定义节点目录的命令&lt;/li&gt;
+&lt;li&gt;因为要大量调试，使用的是测试分支&lt;code&gt;dll-test&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Custom Nodes Manager 安装的时候会自动识别根目录的 requirements.txt 并安装依赖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 通过手动输入url来安装 但是不会显示在已安装列表里，可以在启动命令里查看到&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;https://github.com/dlliang14/dll-comfyui-node.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 手动安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /root/ComfyUI/custom_nodes
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://github.com/dlliang14/dll-comfyui-node.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd dll-comfyui-node
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git checkout -t origin/dll-test
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git pull
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install -r requirements.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 节点路径在 dlliang14/xx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 文件名可能会乱码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="调试"&gt;
+ 调试
+ &lt;a class="anchor" href="#%e8%b0%83%e8%af%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;必须要有终结输出节点
+&lt;ul&gt;
+&lt;li&gt;一个类定义了 OUTPUT_NODE = True，它就是一个合法的终点&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;comfy-core/PreviewAny&lt;/code&gt; 就是一个合法的终点 把输出结果打印出来&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/grep/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/grep/</guid><description>&lt;h1 id="grep"&gt;
+ grep
+ &lt;a class="anchor" href="#grep"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="grep-使用说明"&gt;
+ grep 使用说明
+ &lt;a class="anchor" href="#grep-%e4%bd%bf%e7%94%a8%e8%af%b4%e6%98%8e"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;grep 不懂数字大小写法 只能匹配字符串&lt;/li&gt;
+&lt;li&gt;line-buffered 适合实时流式日志，否则 grep 可能攒一批再输出。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# grep&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt; /path/to/logfile.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -i &lt;span style="color:#75715e"&gt;# 忽略大小写&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -E &lt;span style="color:#75715e"&gt;# 使用扩展正则表达式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -v &lt;span style="color:#75715e"&gt;# 反转匹配，显示不包含 ERROR 的行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -e &lt;span style="color:#75715e"&gt;# 配合-v 使用，多个反转匹配&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -A &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt; &lt;span style="color:#75715e"&gt;# 显示匹配行及其后3行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -w &lt;span style="color:#75715e"&gt;# 只匹配整个单词 ERROR，而不是 ERROR123 或 myERROR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="grep-实战"&gt;
+ grep 实战
+ &lt;a class="anchor" href="#grep-%e5%ae%9e%e6%88%98"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="实时监控mac日志"&gt;
+ 实时监控mac日志
+ &lt;a class="anchor" href="#%e5%ae%9e%e6%97%b6%e7%9b%91%e6%8e%a7mac%e6%97%a5%e5%bf%97"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;log stream | grep -iE &lt;span style="color:#e6db74"&gt;&amp;#34;proxy|kernel&amp;#34;&lt;/span&gt; --line-buffered | grep -v &lt;span style="color:#e6db74"&gt;&amp;#34;debug&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# log stream 是 macOS 的命令，类似于 Linux 的 tail -f，可以实时输出日志流。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# --line-buffered 选项可以让 grep 在处理输入时逐行输出结果，而不是等待缓冲区满了才输出。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -iE &amp;#34;proxy|kernel&amp;#34; 正则匹配包含 &amp;#34;proxy&amp;#34; 或 &amp;#34;kernel&amp;#34; 的行，忽略大小写。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -v &amp;#34;debug&amp;#34; 反转匹配，排除包含 &amp;#34;debug&amp;#34; 的行。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E6%B5%81%E7%A8%8B/</guid><description>&lt;h1 id="k8s-删除节点流程"&gt;
+ k8s-删除节点流程
+ &lt;a class="anchor" href="#k8s-%e5%88%a0%e9%99%a4%e8%8a%82%e7%82%b9%e6%b5%81%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;通知业务&lt;/li&gt;
+&lt;li&gt;节点排水 drain&lt;/li&gt;
+&lt;li&gt;删除节点 delete node&lt;/li&gt;
+&lt;li&gt;清除数据&lt;/li&gt;
+&lt;li&gt;cmdb 下线&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</guid><description>&lt;h1 id="k8s-存储方案"&gt;
+ k8s-存储方案
+ &lt;a class="anchor" href="#k8s-%e5%ad%98%e5%82%a8%e6%96%b9%e6%a1%88"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="存储方案"&gt;
+ 存储方案
+ &lt;a class="anchor" href="#%e5%ad%98%e5%82%a8%e6%96%b9%e6%a1%88"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;节点本地盘&lt;/li&gt;
+&lt;li&gt;NFS&lt;/li&gt;
+&lt;li&gt;Rook-ceph&lt;/li&gt;
+&lt;li&gt;自建 GlusterFS&lt;/li&gt;
+&lt;li&gt;云上解决方案&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-%E9%83%A8%E7%BD%B2-%E5%B8%B8%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7/</guid><description>&lt;h1 id="k8s-部署-常用工具"&gt;
+ k8s-部署-常用工具
+ &lt;a class="anchor" href="#k8s-%e9%83%a8%e7%bd%b2-%e5%b8%b8%e7%94%a8%e5%b7%a5%e5%85%b7"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="集群部署常用工具"&gt;
+ 集群部署常用工具
+ &lt;a class="anchor" href="#%e9%9b%86%e7%be%a4%e9%83%a8%e7%bd%b2%e5%b8%b8%e7%94%a8%e5%b7%a5%e5%85%b7"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;kubeadm&lt;/li&gt;
+&lt;li&gt;kops&lt;/li&gt;
+&lt;li&gt;kubespray&lt;/li&gt;
+&lt;li&gt;[[kubekey]]&lt;/li&gt;
+&lt;li&gt;minikube&lt;/li&gt;
+&lt;li&gt;ansible Playbook&lt;/li&gt;
+&lt;li&gt;[[sealos]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="集群部署部署形态"&gt;
+ 集群部署部署形态
+ &lt;a class="anchor" href="#%e9%9b%86%e7%be%a4%e9%83%a8%e7%bd%b2%e9%83%a8%e7%bd%b2%e5%bd%a2%e6%80%81"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;RPM 包部署&lt;/li&gt;
+&lt;li&gt;二进制&lt;/li&gt;
+&lt;li&gt;static Pod&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/less/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/less/</guid><description>&lt;h1 id="less"&gt;
+ less
+ &lt;a class="anchor" href="#less"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="less-常见用法"&gt;
+ [[less]] 常见用法
+ &lt;a class="anchor" href="#less-%e5%b8%b8%e8%a7%81%e7%94%a8%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;less /path/to/logfile.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;log show --last 10m | less
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# /ERROR 向前搜索&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ?ERROR 向后搜索&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# f 向前翻页&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# b 向后翻页&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# g/G 跳到文件开头/结尾&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# F 跟随输出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -N 显示行号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -i 忽略大小写&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -S 不换行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -R 显示原始控制字符（如颜色）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# &amp;amp;pattern 过滤当前内容，经常和!一起反向过滤噪音行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;less&lt;/code&gt; 按需加载，适合大日志；比直接用编辑器更稳。&lt;/li&gt;
+&lt;li&gt;如果环境配置了 &lt;code&gt;lesspipe&lt;/code&gt;，压缩文件也能直接查看。&lt;/li&gt;
+&lt;li&gt;进入过滤模式后可用 &lt;code&gt;&amp;amp;&lt;/code&gt; 配合正则继续筛选当前内容。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log show --last 10m | less&lt;/code&gt; 适合先截取近 10 分钟日志，再进入交互式查看。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/ERROR&lt;/code&gt; 和 &lt;code&gt;?ERROR&lt;/code&gt; 分别是向前、向后搜索；&lt;code&gt;F&lt;/code&gt; 类似 &lt;code&gt;tail -f&lt;/code&gt;，适合追实时日志。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/mysql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/mysql/</guid><description>&lt;h1 id="mysql"&gt;
+ mysql
+ &lt;a class="anchor" href="#mysql"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="故障排查"&gt;
+ 故障排查
+ &lt;a class="anchor" href="#%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-数据库与缓存案例#mysql]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/redis/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/redis/</guid><description>&lt;h1 id="redis"&gt;
+ redis
+ &lt;a class="anchor" href="#redis"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="基础知识"&gt;
+ 基础知识
+ &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="部署与配置"&gt;
+ 部署与配置
+ &lt;a class="anchor" href="#%e9%83%a8%e7%bd%b2%e4%b8%8e%e9%85%8d%e7%bd%ae"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;高可用方案按规模选择哨兵或集群。&lt;/li&gt;
+&lt;li&gt;副本数通常保持奇数更利于故障仲裁。&lt;/li&gt;
+&lt;li&gt;建议关闭透明大页：&lt;code&gt;echo never &amp;gt; /sys/kernel/mm/transparent_hugepage/enabled&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;建议开启 &lt;code&gt;vm.overcommit_memory=1&lt;/code&gt;，避免创建 RDB 快照时内存申请失败。&lt;/li&gt;
+&lt;li&gt;内存一般不要打满，常见经验值是控制在物理内存的 60% 左右。&lt;/li&gt;
+&lt;li&gt;根据场景配置淘汰策略、AOF、慢日志阈值和危险命令安全加固。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="淘汰策略"&gt;
+ 淘汰策略
+ &lt;a class="anchor" href="#%e6%b7%98%e6%b1%b0%e7%ad%96%e7%95%a5"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;noeviction&lt;/code&gt;：默认不淘汰&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;allkeys-lru&lt;/code&gt;：适合缓存场景&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;allkeys-lfu&lt;/code&gt;：更适合热点明显的场景&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;volatile-lru&lt;/code&gt;：只淘汰设置过期时间的 key&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="故障排查"&gt;
+ 故障排查
+ &lt;a class="anchor" href="#%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[线上故障排查-数据库与缓存案例#redis]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/tcp-%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/tcp-%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81/</guid><description>&lt;h1 id="tcp-连接状态"&gt;
+ tcp-连接状态
+ &lt;a class="anchor" href="#tcp-%e8%bf%9e%e6%8e%a5%e7%8a%b6%e6%80%81"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="连接状态图"&gt;
+ 连接状态图
+ &lt;a class="anchor" href="#%e8%bf%9e%e6%8e%a5%e7%8a%b6%e6%80%81%e5%9b%be"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+
+&lt;img src="https://images2015.cnblogs.com/blog/816045/201611/816045-20161105220355065-482198403.png" width="auto" alt="状态图" /&gt;&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/victoriametrics-%E4%BB%8B%E7%BB%8D/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/victoriametrics-%E4%BB%8B%E7%BB%8D/</guid><description>&lt;h1 id="victoriametrics-介绍"&gt;
+ victoriametrics-介绍
+ &lt;a class="anchor" href="#victoriametrics-%e4%bb%8b%e7%bb%8d"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="组件介绍"&gt;
+ 组件介绍
+ &lt;a class="anchor" href="#%e7%bb%84%e4%bb%b6%e4%bb%8b%e7%bb%8d"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;组件名称&lt;/th&gt;
+ &lt;th&gt;核心 Workload 类型&lt;/th&gt;
+ &lt;th&gt;职责说明&lt;/th&gt;
+ &lt;th&gt;读写角色&lt;/th&gt;
+ &lt;th&gt;状态属性&lt;/th&gt;
+ &lt;th&gt;包含 Sidecar 的常见原因&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;vmstorage&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;StatefulSet&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;核心存储&lt;/strong&gt;：负责监控指标数据的持久化存储和索引查询。&lt;/td&gt;
+ &lt;td&gt;读写落盘&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;有状态&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;存储扩容、磁盘健康检查。&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;vminsert&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;Deployment&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;写入代理&lt;/strong&gt;：接收来自采集器的数据，按 Hash 算法分片发送给 storage。&lt;/td&gt;
+ &lt;td&gt;只写&lt;/td&gt;
+ &lt;td&gt;无状态&lt;/td&gt;
+ &lt;td&gt;无&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;vmselect&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;Deployment&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;查询代理&lt;/strong&gt;：从所有 storage 节点拉取数据并聚合，返回给 Grafana。&lt;/td&gt;
+ &lt;td&gt;只读&lt;/td&gt;
+ &lt;td&gt;无状态&lt;/td&gt;
+ &lt;td&gt;无&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;vmagent&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;Deployment/STS&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;数据采集&lt;/strong&gt;：轻量级采集器，负责 Pull 目标指标并 Push 给 insert，也能临时。&lt;/td&gt;
+ &lt;td&gt;生产端&lt;/td&gt;
+ &lt;td&gt;无状态&lt;/td&gt;
+ &lt;td&gt;配置自动重载 (Config-reloader)。&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;vmauth&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;Deployment&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;安全网关&lt;/strong&gt;：统一入口，负责多租户隔离、路由转发及鉴权。&lt;/td&gt;
+ &lt;td&gt;代理层&lt;/td&gt;
+ &lt;td&gt;无状态&lt;/td&gt;
+ &lt;td&gt;证书管理、日志审计。&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;vmalert&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;Deployment&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;告警计算&lt;/strong&gt;：定期执行 PromQL，根据规则判断是否触发告警。&lt;/td&gt;
+ &lt;td&gt;读取/判断&lt;/td&gt;
+ &lt;td&gt;无状态&lt;/td&gt;
+ &lt;td&gt;告警规则热更新。&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;vmalertmanager&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;StatefulSet&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;告警中心&lt;/strong&gt;：接收 vmalert 的通知，进行分组、静默并发送告警。&lt;/td&gt;
+ &lt;td&gt;接收/分发&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;有状态&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;告警通知模板管理。&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;vmoperator&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;Deployment&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;运维大脑&lt;/strong&gt;：监听自定义资源 (CRD)，自动部署和维护上述所有组件。&lt;/td&gt;
+ &lt;td&gt;管理层&lt;/td&gt;
+ &lt;td&gt;无状态&lt;/td&gt;
+ &lt;td&gt;无&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;vmoperator-victoria-metrics-xxx-xxx&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;下面大部分都是上面控制器根据 CR 创建的&lt;/li&gt;
+&lt;li&gt;vmselect-vmcluster-1&lt;/li&gt;
+&lt;li&gt;vmstorage-vmcluster-1&lt;/li&gt;
+&lt;li&gt;vminsert-vmcluster-xxx-xxx&lt;/li&gt;
+&lt;li&gt;vmagent-vmagent-1-0 有sidecar&lt;/li&gt;
+&lt;li&gt;vmalert-alert-xxx-xxx 有sidecar&lt;/li&gt;
+&lt;li&gt;vmalertmanager-alertmanager-1 有sidecar&lt;/li&gt;
+&lt;li&gt;vmauth-router-xxx-xxx 有sidecar&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%AC%94%E8%AE%B0%E6%96%B9%E6%B3%95%E5%92%8C%E6%80%9D%E8%80%83/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%AC%94%E8%AE%B0%E6%96%B9%E6%B3%95%E5%92%8C%E6%80%9D%E8%80%83/</guid><description>&lt;h1 id="笔记方法和思考"&gt;
+ 笔记方法和思考
+ &lt;a class="anchor" href="#%e7%ac%94%e8%ae%b0%e6%96%b9%e6%b3%95%e5%92%8c%e6%80%9d%e8%80%83"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="我的思考"&gt;
+ 我的思考
+ &lt;a class="anchor" href="#%e6%88%91%e7%9a%84%e6%80%9d%e8%80%83"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="20260328"&gt;
+ 20260328
+ &lt;a class="anchor" href="#20260328"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;笔记到底该如何写？这个问题困扰我很久了，特别是我之前经常一个笔记写几千行。但是写完之后就很少看了。这种就不算笔记，而是知识的坟墓，参考这个
+&lt;a href="https://www.bilibili.com/video/BV1c3igBpE5W" rel="noopener"&gt;视频&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;还有一些情况，就是同一个内容，比如k8s集群的搭建，我可能写了好几篇笔记，每搭建一个新集群都复制修改修改，而老的那份可能已经过时了。&lt;/li&gt;
+&lt;li&gt;所以我想借此机会，把我笔记整理一下。整理的过程其实比较痛苦。
+&lt;ul&gt;
+&lt;li&gt;因为整理的标准还不太清晰，没找到最佳实践。&lt;/li&gt;
+&lt;li&gt;我一方面舍不得删掉之前写的内容啊啊啊啊啊！！！！QAQ&lt;/li&gt;
+&lt;li&gt;但另一方面又感觉很多内容其实没有用，非常乱，除了我应该都看不懂，而官网里写的更全。&lt;/li&gt;
+&lt;li&gt;还有的笔记只是简单了解，并没有学完，我就换一个新的学习方向。导致有很多留白空间等着补全。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;总之，我目前的想法是把26年的笔记，重新组织成方便别人看的形式，尽可能的做成原子笔记，通过双链把知识点联系起来。
+笔记还是要经常回看修改，经常做&lt;strong&gt;思想&lt;/strong&gt;的迭代。
+如果只是单纯复制粘贴，或者把别人的笔记做个引用，没有做自己的思考整理，那只是垃圾而已。顶多也就节约去网上搜索的时间！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="20260329"&gt;
+ 20260329
+ &lt;a class="anchor" href="#20260329"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;实践后发现，这种记笔记的方法，有点像编程里的设计模式了。而重构笔记的过程，就像重构代码一样，也很痛苦。特别是我想写成别人也能看懂的形式。&lt;/li&gt;
+&lt;li&gt;需要先想好结构，想好标题，想好内容，再写进去。经常会写了之后，感觉不太好，一直再修改笔记的结构。&lt;/li&gt;
+&lt;li&gt;另外就是，因为一直在修改笔记，而不是真正的使用笔记，也无法真正的检验笔记的质量。就好像重构代码一样，如果没有测试用例，重构完了之后可能会发现功能不对了。&lt;/li&gt;
+&lt;li&gt;今天继续学习笔记，看的这个
+&lt;a href="https://www.bilibili.com/video/BV19W4y1471S" rel="noopener"&gt;教学&lt;/a&gt;，而这个教学又是参考了
+&lt;a href="https://notes.andymatuschak.org/About_these_notes" rel="noopener"&gt;andy的笔记&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;学习后的思考如下：
+&lt;ol&gt;
+&lt;li&gt;不能极端化，把每个词都原子化笔记。这个没有任何意义，没有观点表达，没有思考连接。&lt;/li&gt;
+&lt;li&gt;别用标签和文件夹来管理笔记。这会只停留在管理笔记层面，而没有到达创作笔记。&lt;/li&gt;
+&lt;li&gt;笔记写的多并没有用，要有总结，而不是记录全部思考或者操作过程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;但是这些笔记方法，和我的需求还不一样。他们更多还是文学创作，而我更需要的是技术笔记，可能需要一些适合技术笔记的写法。&lt;/li&gt;
+&lt;li&gt;我更多还是记录了我遇到了什么问题，然后把中间搜到的资源，做的操作记录下来，没有什么思考的结晶。包括我现在写的，也更多的还是描述现象和我的感觉。&lt;/li&gt;
+&lt;li&gt;还有一部分笔记是对网课的纪录，方便快速回顾。从实用性的角度来说，这些笔记还是有用的。所以我感觉需要做分类讨论。&lt;/li&gt;
+&lt;li&gt;主要还是对自己之前写的笔记不太自信。运维的知识点实在太多了，我肯定不可能全都扩展，也没有这个精力。&lt;/li&gt;
+&lt;li&gt;上面的这些思考，有点流水账，纪录方式还是原始的，比如这篇就可能以后再也不看了。&lt;/li&gt;
+&lt;li&gt;总之，只要不停止思考，不停止记录，实践才能出真知。没必要一开始就追求完美的笔记方法。&lt;/li&gt;
+&lt;li&gt;我准备后续还是根据专题来迁移笔记，而不是之前把26年之后的笔记先改造完毕，这样整理出来的太碎片化了，也没什么深度。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="我的方法"&gt;
+ 我的方法
+ &lt;a class="anchor" href="#%e6%88%91%e7%9a%84%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="笔记工具介绍-vscode--foam--picgo"&gt;
+ 笔记工具介绍 vscode + foam + PicGo
+ &lt;a class="anchor" href="#%e7%ac%94%e8%ae%b0%e5%b7%a5%e5%85%b7%e4%bb%8b%e7%bb%8d-vscode--foam--picgo"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;因为从开发就一直在用vscode，对于快捷键、个人配置、插件市场等都非常熟悉(相比之obsidian)，所以我选择了vscode作为我的笔记工具。&lt;/li&gt;
+&lt;li&gt;但是我一直非常馋obsidian的双向链接和图表功能，最近发现vscode也有类似的插件，叫做 Foam，支持的还算不错。&lt;/li&gt;
+&lt;li&gt;另外还有一个原因，就是我有github-copilot，vscode的插件，可以在我写笔记的时候提供智能补全，甚至帮我生成一些内容，这个功能在obsidian里虽然也有，但是好像不是一个产品，需要另外付费。&lt;/li&gt;
+&lt;li&gt;图床我用的是PicGo。相比最开始笔记保存在本地，好太多了，但是需要配置，比如我用的是cf的r2存储。&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

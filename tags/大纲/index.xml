@@ -1,23 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>大纲 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/</link><description>Recent content in 大纲 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/argocd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/argocd/</guid><description>&lt;h1 id="大纲-argocd"&gt;
- 大纲-argocd
- &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-argocd"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h2 id="基础"&gt;
- 基础
- &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;[[argocd-介绍与安装]]&lt;/li&gt;
-&lt;li&gt;[[argocd-ingress与访问]]&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="使用"&gt;
- 使用
- &lt;a class="anchor" href="#%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;[[argocd-多集群管理]]&lt;/li&gt;
-&lt;li&gt;[[argocd-应用发布]]&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico/</guid><description>&lt;h1 id="大纲-calico"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>大纲 on</title><link>https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/</link><description>Recent content in 大纲 on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/%E5%A4%A7%E7%BA%B2/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico/</guid><description>&lt;h1 id="大纲-calico"&gt;
  大纲-calico
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-calico"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -32,6 +13,29 @@
 &lt;li&gt;[[calico-数据平面]]&lt;/li&gt;
 &lt;li&gt;[[calico-ebpf模式]]&lt;/li&gt;
 &lt;li&gt;[[calico-可观测]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/comfyui/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/comfyui/</guid><description>&lt;h1 id="大纲-comfyui"&gt;
+ 大纲-comfyui
+ &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-comfyui"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="gpu-部署"&gt;
+ gpu 部署
+ &lt;a class="anchor" href="#gpu-%e9%83%a8%e7%bd%b2"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[k8s-gpu-comfyui部署]]
+&lt;ul&gt;
+&lt;li&gt;需要先安装&lt;code&gt;device-plugin&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;最好把各种目录挂载出来，特别是输入输出&lt;/li&gt;
+&lt;li&gt;还有pip install 的路径 &lt;code&gt;/usr/local/lib/python*/site-packages&lt;/code&gt; 并没有持久化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="自定义节点"&gt;
+ 自定义节点
+ &lt;a class="anchor" href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e8%8a%82%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[comfyui-自定义节点]]&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/hugo%E5%BB%BA%E7%AB%99/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/hugo%E5%BB%BA%E7%AB%99/</guid><description>&lt;h1 id="大纲-hugo建站"&gt;
  大纲-hugo建站
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-hugo%e5%bb%ba%e7%ab%99"&gt;#&lt;/a&gt;
@@ -126,7 +130,7 @@
 &lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[[k8s-gpu-hami部署]]&lt;/li&gt;
-&lt;li&gt;[[k8s-gpu-runtimeclass-containerd]]&lt;/li&gt;
+&lt;li&gt;[[k8s-gpu-自定义运行时]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="operator-方案"&gt;
  Operator 方案
@@ -206,7 +210,7 @@
  &lt;a class="anchor" href="#k8s-%e9%83%a8%e7%bd%b2"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;[[k8s-部署-通用注意点]]&lt;/li&gt;
+&lt;li&gt;[[k8s-部署-节点初始化]]&lt;/li&gt;
 &lt;li&gt;[[k8s-部署-高可用方案]]&lt;/li&gt;
 &lt;li&gt;[[k8s-部署-常用部署工具]]&lt;/li&gt;
 &lt;/ul&gt;
@@ -234,33 +238,13 @@
 &lt;li&gt;[[k8s-日志收集]]&lt;/li&gt;
 &lt;li&gt;[[k8s-监控告警]]&lt;/li&gt;
 &lt;li&gt;[[k8s-使用vm监控]]&lt;/li&gt;
-&lt;li&gt;[[k8s-服务网格istio]]&lt;/li&gt;
+&lt;li&gt;[[k8s-istio]]&lt;/li&gt;
 &lt;li&gt;[[argocd]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="k8s-故障处理"&gt;
  k8s 故障处理
  &lt;a class="anchor" href="#k8s-%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86"&gt;#&lt;/a&gt;
-&lt;/h2&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/opentelemetry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/opentelemetry/</guid><description>&lt;h1 id="大纲-opentelemetry"&gt;
- 大纲-opentelemetry
- &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-opentelemetry"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h2 id="核心概念"&gt;
- 核心概念
- &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;[[opentelemetry-collector基础]]&lt;/li&gt;
-&lt;li&gt;[[opentelemetry-collector扩展]]&lt;/li&gt;
-&lt;li&gt;[[opentelemetry-历史与对比]]&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="实践落地"&gt;
- 实践落地
- &lt;a class="anchor" href="#%e5%ae%9e%e8%b7%b5%e8%90%bd%e5%9c%b0"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;[[opentelemetry-部署入门]]&lt;/li&gt;
-&lt;li&gt;[[opentelemetry-监控体系设计]]&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</guid><description>&lt;h1 id="大纲-python-并发编程"&gt;
+&lt;/h2&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</guid><description>&lt;h1 id="大纲-python-并发编程"&gt;
  大纲-python 并发编程
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-python-%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -315,6 +299,10 @@
  基础知识
  &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-环境安装]]&lt;/li&gt;
+&lt;li&gt;[[python-依赖管理]]&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="网络开发"&gt;
  网络开发
  &lt;a class="anchor" href="#%e7%bd%91%e7%bb%9c%e5%bc%80%e5%8f%91"&gt;#&lt;/a&gt;
@@ -330,23 +318,12 @@
 &lt;ul&gt;
 &lt;li&gt;[[python-并发编程]]&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="后端开发"&gt;
- 后端开发
- &lt;a class="anchor" href="#%e5%90%8e%e7%ab%af%e5%bc%80%e5%8f%91"&gt;#&lt;/a&gt;
+&lt;h2 id="cicd"&gt;
+ CICD
+ &lt;a class="anchor" href="#cicd"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;[[python后端]]&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF/</guid><description>&lt;h1 id="大纲-python后端"&gt;
- 大纲-python后端
- &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-python%e5%90%8e%e7%ab%af"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h2 id="环境与依赖"&gt;
- 环境与依赖
- &lt;a class="anchor" href="#%e7%8e%af%e5%a2%83%e4%b8%8e%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;[[python后端-环境安装]]&lt;/li&gt;
-&lt;li&gt;[[python后端-依赖管理]]&lt;/li&gt;
+&lt;li&gt;[[python-cicd]]&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre/</guid><description>&lt;h1 id="大纲-sre"&gt;
  大纲-sre
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-sre"&gt;#&lt;/a&gt;
@@ -366,7 +343,7 @@
 &lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[[sre-案例-码表故障]]&lt;/li&gt;
-&lt;li&gt;[[sre-案例-运维故障模式]]&lt;/li&gt;
+&lt;li&gt;[[sre-东方财富运维故障历史复盘]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="排障"&gt;
  排障
@@ -413,6 +390,14 @@
  大纲-线上故障排查
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://www.bilibili.com/cheese/play/ep1135127" rel="noopener"&gt;参考链接1-b站孟小哥抓虫课程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/moooofly/MarkSomethingDownLLS/blob/master/%e5%90%84%e5%a4%a7%e4%ba%92%e8%81%94%e7%bd%91%e5%85%ac%e5%8f%b8%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86%e8%b5%84%e6%96%99%e6%b1%87%e6%80%bb.md" rel="noopener"&gt;参考链接2-github分享-里面还有3个案例&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://www.bilibili.com/video/BV1be4y1f79F" rel="noopener"&gt;参考链接3-b站阿里云技巧分享&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="入口方法"&gt;
  入口方法
  &lt;a class="anchor" href="#%e5%85%a5%e5%8f%a3%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
@@ -425,8 +410,73 @@
  常用技术栈
  &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e6%8a%80%e6%9c%af%e6%a0%88"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
+&lt;h3 id="线上故障排查-日志分析"&gt;
+ 线上故障排查-日志分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="常用命令"&gt;
+ 常用命令
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;[[线上故障排查-日志分析]]&lt;/li&gt;
+&lt;li&gt;[[less]] ：交互查看大日志（推荐）&lt;/li&gt;
+&lt;li&gt;[[grep]]：快速过滤关键词&lt;/li&gt;
+&lt;li&gt;[[awk]]：做统计、聚合、条件筛选&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="其他命令"&gt;
+ 其他命令
+ &lt;a class="anchor" href="#%e5%85%b6%e4%bb%96%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;cat、head、tail：输出日志&lt;/li&gt;
+&lt;li&gt;wc：统计行数、单词数、字节数&lt;/li&gt;
+&lt;li&gt;sort：排序&lt;/li&gt;
+&lt;li&gt;uniq：去重&lt;/li&gt;
+&lt;li&gt;gzip 压缩包需要换成 zless zgrep zcat&lt;/li&gt;
+&lt;li&gt;man 可以查看命令的使用说明和选项参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 输出日志&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;head -n &lt;span style="color:#ae81ff"&gt;1000&lt;/span&gt; /path/to/logfile.log | grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tail -n &lt;span style="color:#ae81ff"&gt;1000&lt;/span&gt; -f /path/to/logfile.log | grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 统计行数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wc -l /path/to/logfile.log 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 默认显示行数、单词数、字节数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sam@samdeMac-mini logs % wc gateway.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;278&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1837&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;27745&lt;/span&gt; gateway.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# sort 排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -n 按照数值排序 默认按照字典序排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -k 5 按照第5列排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -r 反向排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -u 去重,但性能较差，一般排序后使用 uniq 去重&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -t 指定分隔符 默认空格/制表符分隔&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# uniq 去重&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -c 最常用！统计每行出现的次数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -d 只显示重复的行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -u 只显示不重复的行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 综合案例&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&amp;#34;1 aaa AA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;9 sss SS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;9 sss SS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;2 bbb BB
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;2 bbb XX
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;2 bbb BB
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;3 ccc CC
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;| awk &lt;span style="color:#e6db74"&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt; | sort -nr | uniq -c | sort -nr
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 解压后分析日志&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gzip -d /path/to/logfile.log.gz -c | grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt; | less
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -d 解压&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -c 输出到标准输出 不修改原文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="线上故障排查-资源分析"&gt;
+ 线上故障排查-资源分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e8%b5%84%e6%ba%90%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;[[线上故障排查-系统资源分析]]&lt;/li&gt;
 &lt;li&gt;[[线上故障排查-进程与内核观测]]&lt;/li&gt;
 &lt;/ul&gt;
@@ -436,6 +486,15 @@
 &lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[[线上故障排查-数据库与缓存案例]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="复盘要点"&gt;
+ 复盘要点
+ &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e8%a6%81%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;哪个指标最早异常&lt;/li&gt;
+&lt;li&gt;哪个动作真正止血&lt;/li&gt;
+&lt;li&gt;是否能沉淀成自动化检测规则&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BE%A4%E8%BE%89/</guid><description>&lt;h1 id="大纲-群辉使用"&gt;
  大纲-群辉使用
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-%e7%be%a4%e8%be%89%e4%bd%bf%e7%94%a8"&gt;#&lt;/a&gt;

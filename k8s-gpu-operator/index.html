@@ -1,11 +1,11 @@
-<!doctype html><html lang=en dir=ltr><head><meta property="og:url" content="https://dlliang14.github.io/web-publicNotes/k8s-gpu-operator/"><meta property="og:site_name" content="📓 dll-笔记"><meta property="og:title" content="📓 dll-笔记"><meta property="og:description" content="k8s-gpu-operator # [[k8s-使用gpu]]
-文档入口 # GPU Operator GitHub GPU Operator 官方文档 组件分层理解 # 核心控制层：gpu-operator Deployment 硬件发现层：NFD + gpu-feature-discovery 基础注入层：driver/container-toolkit/device-plugin 验证监控层：validator/cuda-validator/dcgm-exporter 安装 # helm repo add nvidia https://helm.ngc.nvidia.com/nvidia helm repo update helm pull --untar nvidia/gpu-operator helm install gpu-operator . -n gpu-operator --create-namespace 常见故障：Secure Boot # 现象：modprobe: ERROR: could not insert 'nvidia': Key was rejected by service 根因：宿主机开启 Secure Boot 导致内核模块签名校验失败 处理：在 BIOS/UEFI 关闭 Secure Boot 后重启，再重新验证 mokutil --sb-state"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:tag" content="K8s"><meta property="article:tag" content="Gpu"><meta property="article:tag" content="Operator"><title>K8s Gpu Operator | 📓 dll-笔记</title><link rel=manifest href=/web-publicNotes/manifest.json><link rel=icon href=/web-publicNotes/favicon.png type=image/x-icon><link rel=stylesheet href=/web-publicNotes/book.min.87a75ce34ba141bbe0d0011af62a81541949d0ca1a836c28fe7f8e8d0d77396d.css integrity="sha256-h6dc40uhQbvg0AEa9iqBVBlJ0Moag2wo/n+OjQ13OW0=" crossorigin=anonymous><meta charset=UTF-8><meta name=description content="
+<!doctype html><html lang=en dir=ltr><head><meta property="og:url" content="https://dlliang14.github.io/web-publicNotes/k8s-gpu-operator/"><meta property="og:site_name" content="📓 dll-笔记"><meta property="og:title" content="📓 dll-笔记"><meta property="og:description" content='k8s-gpu-operator # [[k8s-使用gpu]]
+1. 文档入口 # GPU Operator GitHub GPU Operator 官方文档 2. 组件分层理解 # 2.1. 核心控制层 (The Brain) # gpu-operator-xxx (Deployment)：核心控制器，负责监控 GPU 资源状态并协调其他组件的部署和更新。 2.2. 硬件感知层 (NFD: Node Feature Discovery) # gpu-operator-node-feature-discovery-master-xxx (Deployment)：NFD 的中心节点，负责收集汇总所有 Worker 节点上报的硬件信息 gpu-operator-node-feature-discovery-worker-xxx (DaemonSet)：在每个节点上运行，探测物理硬件（PCI 设备、CPU 指令集等）。它会发现节点上显卡，并给节点打上标签（如 feature.node.kubernetes.io/pci-10de.present=true） gpu-operator-node-feature-discovery-gc-xxx (Deployment)：垃圾回收，负责清理过时或无用的节点标签。 gpu-feature-discovery-xxx (DaemonSet)：专门针对 NVIDIA GPU 的标签生成器。它会将显卡型号、显存大小等详细信息变成节点标签（例如 nvidia.com/gpu.product=GeForce-RTX-3070） 2.3. 基础架构注入层 (The Heavy Lifters) # nvidia-driver-daemonset-xxx (DaemonSet)：安装驱动。它在容器里编译并向宿主机内核加载 NVIDIA 内核模块。这就是你之前报错“Secure Boot”的地方。 nvidia-container-toolkit-daemonset-xxx (DaemonSet)：安装容器运行时。它把 nvidia-container-runtime 塞进宿主机，并修改 containerd 的配置文件，让容器能调用显卡。 nvidia-device-plugin-daemonset-xxx (DaemonSet)：GPU 资源暴露。它告诉 K8s 调度器：“这台机器有 1 个可用 GPU”。没有它，你的 Pod 就会卡在 Pending 状态。 2.4. 验证与监控层 (Quality Assurance) # nvidia-operator-validator-xxx (Deployment)：综合自检。它会等待驱动和工具箱装好，然后运行一系列检查，确保整个链条是通的。 nvidia-cuda-validator-xxx (Job)：CUDA 测试。它会运行一个小的 CUDA 程序，验证 GPU 是否能正常执行计算任务。 nvidia-dcgm-exporter-xxx (DaemonSet)：性能监控。它部署 NVIDIA DCGM（Data Center GPU Manager）Exporter，收集 GPU 的性能指标并暴露给 Prometheus。 2.5. 参考 - 注入containerd的配置 # version = 2 [plugins] [plugins."io.containerd.grpc.v1.cri"] cdi_spec_dirs = ["/etc/cdi", "/var/run/cdi"] device_ownership_from_security_context = false disable_apparmor = false disable_cgroup = false disable_hugetlb_controller = true disable_proc_mount = false disable_tcp_service = true drain_exec_sync_io_timeout = "0s" enable_cdi = true enable_selinux = false enable_tls_streaming = false enable_unprivileged_icmp = false enable_unprivileged_ports = false ignore_image_defined_volumes = false image_pull_progress_timeout = "5m0s" max_concurrent_downloads = 3 max_container_log_line_size = 16384 netns_mounts_under_state_dir = false restrict_oom_score_adj = false sandbox_image = "registry.cn-beijing.aliyuncs.com/kubesphereio/pause:3.9" selinux_category_range = 1024 stats_collect_period = 10 stream_idle_timeout = "4h0m0s" stream_server_address = "127.0.0.1" stream_server_port = "0" systemd_cgroup = false tolerate_missing_hugetlb_controller = true unset_seccomp_profile = "" [plugins."io.containerd.grpc.v1.cri".cni] bin_dir = "/opt/cni/bin" conf_dir = "/etc/cni/net.d" conf_template = "" ip_pref = "" max_conf_num = 1 setup_serially = false [plugins."io.containerd.grpc.v1.cri".containerd] default_runtime_name = "runc" disable_snapshot_annotations = true discard_unpacked_layers = false ignore_blockio_not_enabled_errors = false ignore_rdt_not_enabled_errors = false no_pivot = false snapshotter = "overlayfs" [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime] base_runtime_spec = "" cni_conf_dir = "" cni_max_conf_num = 0 container_annotations = [] pod_annotations = [] privileged_without_host_devices = false privileged_without_host_devices_all_devices_allowed = false runtime_engine = "" runtime_path = "" runtime_root = "" runtime_type = "" sandbox_mode = "" snapshotter = "" [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options] [plugins."io.containerd.grpc.v1.cri".containerd.runtimes] [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia] base_runtime_spec = "" cni_conf_dir = "" cni_max_conf_num = 0 container_annotations = [] pod_annotations = [] privileged_without_host_devices = false privileged_without_host_devices_all_devices_allowed = false runtime_engine = "" runtime_path = "" runtime_root = "" runtime_type = "io.containerd.runc.v2" sandbox_mode = "" snapshotter = "" [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia.options] BinaryName = "/usr/local/nvidia/toolkit/nvidia-container-runtime" SystemdCgroup = true [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia-cdi] base_runtime_spec = "" cni_conf_dir = "" cni_max_conf_num = 0 container_annotations = [] pod_annotations = [] privileged_without_host_devices = false privileged_without_host_devices_all_devices_allowed = false runtime_engine = "" runtime_path = "" runtime_root = "" runtime_type = "io.containerd.runc.v2" sandbox_mode = "" snapshotter = "" [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia-cdi.options] BinaryName = "/usr/local/nvidia/toolkit/nvidia-container-runtime.cdi" SystemdCgroup = true [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia-legacy] base_runtime_spec = "" cni_conf_dir = "" cni_max_conf_num = 0 container_annotations = [] pod_annotations = [] privileged_without_host_devices = false privileged_without_host_devices_all_devices_allowed = false runtime_engine = "" runtime_path = "" runtime_root = "" runtime_type = "io.containerd.runc.v2" sandbox_mode = "" snapshotter = "" [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia-legacy.options] BinaryName = "/usr/local/nvidia/toolkit/nvidia-container-runtime.legacy" SystemdCgroup = true [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc] base_runtime_spec = "" cni_conf_dir = "" cni_max_conf_num = 0 container_annotations = [] pod_annotations = [] privileged_without_host_devices = false privileged_without_host_devices_all_devices_allowed = false runtime_engine = "" runtime_path = "" runtime_root = "" runtime_type = "io.containerd.runc.v2" sandbox_mode = "" snapshotter = "" [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options] SystemdCgroup = true [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime] base_runtime_spec = "" cni_conf_dir = "" cni_max_conf_num = 0 container_annotations = [] pod_annotations = [] privileged_without_host_devices = false privileged_without_host_devices_all_devices_allowed = false runtime_engine = "" runtime_path = "" runtime_root = "" runtime_type = "" sandbox_mode = "" snapshotter = "" [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options] [plugins."io.containerd.grpc.v1.cri".image_decryption] key_model = "node" [plugins."io.containerd.grpc.v1.cri".registry] config_path = "" [plugins."io.containerd.grpc.v1.cri".registry.auths] [plugins."io.containerd.grpc.v1.cri".registry.configs] [plugins."io.containerd.grpc.v1.cri".registry.headers] [plugins."io.containerd.grpc.v1.cri".registry.mirrors] [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"] endpoint = ["https://registry-1.docker.io"] [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming] tls_cert_file = "" tls_key_file = "" 3. 安装 # helm repo add nvidia https://helm.ngc.nvidia.com/nvidia helm repo update helm pull --untar nvidia/gpu-operator helm install gpu-operator . -n gpu-operator --create-namespace 4. 常见故障：Secure Boot # 现象：modprobe: ERROR: could not insert &#39;nvidia&#39;: Key was rejected by service 根因：宿主机开启 Secure Boot 导致内核模块签名校验失败 处理：在 BIOS/UEFI 关闭 Secure Boot 后重启，再重新验证 Logs(gpu-operator/nvidia-driver-daemonset-d2cnd:nvidia-driver-ctr)[tail] modprobe: ERROR: could not insert &#39;nvidia&#39;: Key was rejected by service # 目前配置 root@prod-m1:/data/soft/gpu-operator# mokutil --sb-state SecureBoot enabled # 解决方法： # 重启进入BIOS，找到Secure Boot选项，选择Disable，保存并退出即可。 # 在虚拟机启动出现 Proxmox 标志（或 TianoCore 标志）时，连续狂按 ESC 键进入 UEFI 设置界面。 # 使用方向键找到 Device Manager -> Secure Boot Configuration。 # 将 Attempt Secure Boot 这一项的勾选去掉（变成 [ ]）。 # 按 F10 保存，按 ESC 退出并重启。 # 重启后验证 root@prod-m1:~# mokutil --sb-state SecureBoot disabled comfyui 部署参考 # [[k8s-gpu-comfyui部署]]'><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:tag" content="K8s"><meta property="article:tag" content="Gpu"><meta property="article:tag" content="Operator"><title>K8s Gpu Operator | 📓 dll-笔记</title><link rel=manifest href=/web-publicNotes/manifest.json><link rel=icon href=/web-publicNotes/favicon.png type=image/x-icon><link rel=stylesheet href=/web-publicNotes/book.min.87a75ce34ba141bbe0d0011af62a81541949d0ca1a836c28fe7f8e8d0d77396d.css integrity="sha256-h6dc40uhQbvg0AEa9iqBVBlJ0Moag2wo/n+OjQ13OW0=" crossorigin=anonymous><meta charset=UTF-8><meta name=description content='
   k8s-gpu-operator
   #
 
 [[k8s-使用gpu]]
 
-  文档入口
+  1. 文档入口
   #
 
 
@@ -15,17 +15,232 @@ GPU Operator GitHub
 GPU Operator 官方文档
 
 
-  组件分层理解
+  2. 组件分层理解
   #
 
 
-核心控制层：gpu-operator Deployment
-硬件发现层：NFD + gpu-feature-discovery
-基础注入层：driver/container-toolkit/device-plugin
-验证监控层：validator/cuda-validator/dcgm-exporter
+  2.1. 核心控制层 (The Brain)
+  #
 
 
-  安装
+gpu-operator-xxx (Deployment)：核心控制器，负责监控 GPU 资源状态并协调其他组件的部署和更新。
+
+
+  2.2. 硬件感知层 (NFD: Node Feature Discovery)
+  #
+
+
+gpu-operator-node-feature-discovery-master-xxx (Deployment)：NFD 的中心节点，负责收集汇总所有 Worker 节点上报的硬件信息
+gpu-operator-node-feature-discovery-worker-xxx (DaemonSet)：在每个节点上运行，探测物理硬件（PCI 设备、CPU 指令集等）。它会发现节点上显卡，并给节点打上标签（如 feature.node.kubernetes.io/pci-10de.present=true）
+gpu-operator-node-feature-discovery-gc-xxx (Deployment)：垃圾回收，负责清理过时或无用的节点标签。
+gpu-feature-discovery-xxx (DaemonSet)：专门针对 NVIDIA GPU 的标签生成器。它会将显卡型号、显存大小等详细信息变成节点标签（例如 nvidia.com/gpu.product=GeForce-RTX-3070）
+
+
+  2.3. 基础架构注入层 (The Heavy Lifters)
+  #
+
+
+nvidia-driver-daemonset-xxx (DaemonSet)：安装驱动。它在容器里编译并向宿主机内核加载 NVIDIA 内核模块。这就是你之前报错“Secure Boot”的地方。
+nvidia-container-toolkit-daemonset-xxx (DaemonSet)：安装容器运行时。它把 nvidia-container-runtime 塞进宿主机，并修改 containerd 的配置文件，让容器能调用显卡。
+nvidia-device-plugin-daemonset-xxx (DaemonSet)：GPU 资源暴露。它告诉 K8s 调度器：“这台机器有 1 个可用 GPU”。没有它，你的 Pod 就会卡在 Pending 状态。
+
+
+  2.4. 验证与监控层 (Quality Assurance)
+  #
+
+
+nvidia-operator-validator-xxx (Deployment)：综合自检。它会等待驱动和工具箱装好，然后运行一系列检查，确保整个链条是通的。
+nvidia-cuda-validator-xxx (Job)：CUDA 测试。它会运行一个小的 CUDA 程序，验证 GPU 是否能正常执行计算任务。
+nvidia-dcgm-exporter-xxx (DaemonSet)：性能监控。它部署 NVIDIA DCGM（Data Center GPU Manager）Exporter，收集 GPU 的性能指标并暴露给 Prometheus。
+
+
+  2.5. 参考 - 注入containerd的配置
+  #
+
+version = 2
+
+[plugins]
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    cdi_spec_dirs = ["/etc/cdi", "/var/run/cdi"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    drain_exec_sync_io_timeout = "0s"
+    enable_cdi = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    image_pull_progress_timeout = "5m0s"
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "registry.cn-beijing.aliyuncs.com/kubesphereio/pause:3.9"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+      setup_serially = false
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_blockio_not_enabled_errors = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        privileged_without_host_devices_all_devices_allowed = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+        sandbox_mode = ""
+        snapshotter = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          privileged_without_host_devices_all_devices_allowed = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+          sandbox_mode = ""
+          snapshotter = ""
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia.options]
+            BinaryName = "/usr/local/nvidia/toolkit/nvidia-container-runtime"
+            SystemdCgroup = true
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia-cdi]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          privileged_without_host_devices_all_devices_allowed = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+          sandbox_mode = ""
+          snapshotter = ""
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia-cdi.options]
+            BinaryName = "/usr/local/nvidia/toolkit/nvidia-container-runtime.cdi"
+            SystemdCgroup = true
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia-legacy]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          privileged_without_host_devices_all_devices_allowed = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+          sandbox_mode = ""
+          snapshotter = ""
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia-legacy.options]
+            BinaryName = "/usr/local/nvidia/toolkit/nvidia-container-runtime.legacy"
+            SystemdCgroup = true
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          privileged_without_host_devices_all_devices_allowed = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+          sandbox_mode = ""
+          snapshotter = ""
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            SystemdCgroup = true
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        privileged_without_host_devices_all_devices_allowed = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+        sandbox_mode = ""
+        snapshotter = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+          endpoint = ["https://registry-1.docker.io"]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  3. 安装
   #
 
 helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
@@ -33,25 +248,251 @@ helm repo update
 helm pull --untar nvidia/gpu-operator
 helm install gpu-operator . -n gpu-operator --create-namespace
 
-  常见故障：Secure Boot
+  4. 常见故障：Secure Boot
   #
 
 
-现象：modprobe: ERROR: could not insert 'nvidia': Key was rejected by service
+现象：modprobe: ERROR: could not insert &#39;nvidia&#39;: Key was rejected by service
 根因：宿主机开启 Secure Boot 导致内核模块签名校验失败
 处理：在 BIOS/UEFI 关闭 Secure Boot 后重启，再重新验证
 
-mokutil --sb-state
-"><title>📓 dll-笔记</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://dlliang14.github.io/web-publicNotes//favicon.png><link href=https://dlliang14.github.io/web-publicNotes/styles.e08ceb33360cec132feb69cfb982e2a4.min.css rel=stylesheet><link href=https://dlliang14.github.io/web-publicNotes/quartz/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/darkmode.ee7e4f92c1dc2443b05a655a898a2502.min.js></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/util.c69e233dc1cc331a30b0f670e657b425.min.js></script><script async src=https://unpkg.com/@floating-ui/core@0.7.3></script><script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script><script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://dlliang14.github.io/web-publicNotes/",fetchData=Promise.all([fetch("https://dlliang14.github.io/web-publicNotes/indices/linkIndex.f6d67180c7c8f6b54976f6058e5f563b.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://dlliang14.github.io/web-publicNotes/indices/contentIndex.374f630fba04786fa743717d8da6b13a.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addCollapsibleCallouts(),initPopover("https://dlliang14.github.io/web-publicNotes",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s;drawGraph("https://dlliang14.github.io/web-publicNotes",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}const i=document.querySelectorAll("pre > code.language-mermaid, pre > code[data-lang='mermaid']");i.forEach(e=>{const t=e.parentElement;if(!t||t.classList.contains("mermaid"))return;const n=document.createElement("pre");n.className="mermaid",n.textContent=e.textContent||"",t.replaceWith(n)});var a=document.getElementsByClassName("mermaid");a.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{"’":"'"},throwOnError:!1})}</script><script>window.Million={navigate:e=>window.location.href=e,prefetch:()=>{}},window.addEventListener("DOMContentLoaded",()=>{init(),render()})</script></head><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><header class=book-header><label for=menu-control><img src=/web-publicNotes/svg/menu.svg class=book-icon alt=Menu></label><h1 id=page-title><a href=https://dlliang14.github.io/web-publicNotes/>📓 dll-笔记</a></h1><div class=spacer></div><div id=search-icon class=quartz-search><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+Logs(gpu-operator/nvidia-driver-daemonset-d2cnd:nvidia-driver-ctr)[tail]
+modprobe: ERROR: could not insert &#39;nvidia&#39;: Key was rejected by service
+
+# 目前配置
+root@prod-m1:/data/soft/gpu-operator# mokutil --sb-state
+SecureBoot enabled
+
+# 解决方法：
+  # 重启进入BIOS，找到Secure Boot选项，选择Disable，保存并退出即可。
+  # 在虚拟机启动出现 Proxmox 标志（或 TianoCore 标志）时，连续狂按 ESC 键进入 UEFI 设置界面。
+  # 使用方向键找到 Device Manager -> Secure Boot Configuration。
+  # 将 Attempt Secure Boot 这一项的勾选去掉（变成 [ ]）。
+  # 按 F10 保存，按 ESC 退出并重启。
+
+# 重启后验证
+root@prod-m1:~# mokutil --sb-state
+SecureBoot disabled
+
+  comfyui 部署参考
+  #
+
+
+[[k8s-gpu-comfyui部署]]
+'><title>📓 dll-笔记</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://dlliang14.github.io/web-publicNotes//favicon.png><link href=https://dlliang14.github.io/web-publicNotes/styles.e08ceb33360cec132feb69cfb982e2a4.min.css rel=stylesheet><link href=https://dlliang14.github.io/web-publicNotes/quartz/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/darkmode.ee7e4f92c1dc2443b05a655a898a2502.min.js></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/util.c69e233dc1cc331a30b0f670e657b425.min.js></script><script async src=https://unpkg.com/@floating-ui/core@0.7.3></script><script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script><script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://dlliang14.github.io/web-publicNotes/",fetchData=Promise.all([fetch("https://dlliang14.github.io/web-publicNotes/indices/linkIndex.d4946eac61fadcedbf1c12743512e986.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://dlliang14.github.io/web-publicNotes/indices/contentIndex.8262efdd173b891953914f8bc1bb4c15.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addCollapsibleCallouts(),initPopover("https://dlliang14.github.io/web-publicNotes",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s;drawGraph("https://dlliang14.github.io/web-publicNotes",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}const i=document.querySelectorAll("pre > code.language-mermaid, pre > code[data-lang='mermaid']");i.forEach(e=>{const t=e.parentElement;if(!t||t.classList.contains("mermaid"))return;const n=document.createElement("pre");n.className="mermaid",n.textContent=e.textContent||"",t.replaceWith(n)});var a=document.getElementsByClassName("mermaid");a.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{"’":"'"},throwOnError:!1})}</script><script>window.Million={navigate:e=>window.location.href=e,prefetch:()=>{}},window.addEventListener("DOMContentLoaded",()=>{init(),render()})</script></head><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script><script defer src=https://dlliang14.github.io/web-publicNotes/quartz/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><header class=book-header><label for=menu-control><img src=/web-publicNotes/svg/menu.svg class=book-icon alt=Menu></label><h1 id=page-title><a href=https://dlliang14.github.io/web-publicNotes/>📓 dll-笔记</a></h1><div class=spacer></div><div id=search-icon class=quartz-search><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
 <label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg>
-</label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control><main class=flex><aside class=book-menu><div class=book-menu-content><nav><div class=menu-search><div id=search-icon class=quartz-search><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div></div><ul><li><a href=/web-publicNotes/argocd/>Argocd</a></li><li><a href=/web-publicNotes/calico/>Calico</a></li><li><a href=/web-publicNotes/hugo%E5%BB%BA%E7%AB%99/>Hugo建站</a></li><li><a href=/web-publicNotes/js%E5%BC%80%E5%8F%91/>Js开发</a></li><li><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8gpu/>K8s 使用gpu</a></li><li><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8vm%E7%9B%91%E6%8E%A7/>K8s 使用vm监控</a></li><li><a href=/web-publicNotes/k8s/>K8s</a></li><li><a href=/web-publicNotes/opentelemetry/>Opentelemetry</a></li><li><a href=/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/>Python 并发编程</a></li><li><a href=/web-publicNotes/python/>Python</a></li><li><a href=/web-publicNotes/python%E5%90%8E%E7%AB%AF/>Python后端</a></li><li><a href=/web-publicNotes/sre/>Sre</a></li><li><a href=/web-publicNotes/victoriametrics/>Victoriametrics</a></li><li><a href=/web-publicNotes/web%E5%89%8D%E7%AB%AF/>Web前端</a></li><li><a href=/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/>线上故障排查</a></li><li><a href=/web-publicNotes/%E7%BE%A4%E8%BE%89/>群辉</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class="book-page container"><article class=markdown><h1 class=title>K8s Gpu Operator</h1><h1 id=k8s-gpu-operator>k8s-gpu-operator
-<a class=anchor href=#k8s-gpu-operator>#</a></h1><p><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8gpu rel=noopener class=internal-link data-src=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8gpu>k8s-使用gpu</a></p><h2 id=文档入口>文档入口
-<a class=anchor href=#%e6%96%87%e6%a1%a3%e5%85%a5%e5%8f%a3>#</a></h2><ul><li><a href=https://github.com/NVIDIA/gpu-operator rel=noopener>GPU Operator GitHub</a></li><li><a href=https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html rel=noopener>GPU Operator 官方文档</a></li></ul><h2 id=组件分层理解>组件分层理解
-<a class=anchor href=#%e7%bb%84%e4%bb%b6%e5%88%86%e5%b1%82%e7%90%86%e8%a7%a3>#</a></h2><ul><li>核心控制层：<code>gpu-operator</code> Deployment</li><li>硬件发现层：NFD + <code>gpu-feature-discovery</code></li><li>基础注入层：driver/container-toolkit/device-plugin</li><li>验证监控层：validator/cuda-validator/dcgm-exporter</li></ul><h2 id=安装>安装
-<a class=anchor href=#%e5%ae%89%e8%a3%85>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
+</label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control><main class=flex><aside class=book-menu><div class=book-menu-content><nav><div class=menu-search><div id=search-icon class=quartz-search><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div></div><ul><li><a href=/web-publicNotes/argocd/>Argocd</a></li><li><a href=/web-publicNotes/calico/>Calico</a></li><li><a href=/web-publicNotes/comfyui/>Comfyui</a></li><li><a href=/web-publicNotes/hugo%E5%BB%BA%E7%AB%99/>Hugo建站</a></li><li><a href=/web-publicNotes/js%E5%BC%80%E5%8F%91/>Js开发</a></li><li><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8gpu/>K8s 使用gpu</a></li><li><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8vm%E7%9B%91%E6%8E%A7/>K8s 使用vm监控</a></li><li><a href=/web-publicNotes/k8s/>K8s</a></li><li><a href=/web-publicNotes/opentelemetry/>Opentelemetry</a></li><li><a href=/web-publicNotes/python-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/>Python 并发编程</a></li><li><a href=/web-publicNotes/python/>Python</a></li><li><a href=/web-publicNotes/sre/>Sre</a></li><li><a href=/web-publicNotes/victoriametrics/>Victoriametrics</a></li><li><a href=/web-publicNotes/web%E5%89%8D%E7%AB%AF/>Web前端</a></li><li><a href=/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/>线上故障排查</a></li><li><a href=/web-publicNotes/%E7%BE%A4%E8%BE%89/>群辉</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class="book-page container"><article class=markdown><h1 class=title>K8s Gpu Operator</h1><h1 id=k8s-gpu-operator>k8s-gpu-operator
+<a class=anchor href=#k8s-gpu-operator>#</a></h1><p><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8gpu rel=noopener class=internal-link data-src=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8gpu>k8s-使用gpu</a></p><h2 id=1-文档入口>1. 文档入口
+<a class=anchor href=#1-%e6%96%87%e6%a1%a3%e5%85%a5%e5%8f%a3>#</a></h2><ul><li><a href=https://github.com/NVIDIA/gpu-operator rel=noopener>GPU Operator GitHub</a></li><li><a href=https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html rel=noopener>GPU Operator 官方文档</a></li></ul><h2 id=2-组件分层理解>2. 组件分层理解
+<a class=anchor href=#2-%e7%bb%84%e4%bb%b6%e5%88%86%e5%b1%82%e7%90%86%e8%a7%a3>#</a></h2><h3 id=21-核心控制层-the-brain>2.1. 核心控制层 (The Brain)
+<a class=anchor href=#21-%e6%a0%b8%e5%bf%83%e6%8e%a7%e5%88%b6%e5%b1%82-the-brain>#</a></h3><ul><li>gpu-operator-xxx (Deployment)：核心控制器，负责监控 GPU 资源状态并协调其他组件的部署和更新。</li></ul><h3 id=22-硬件感知层-nfd-node-feature-discovery>2.2. 硬件感知层 (NFD: Node Feature Discovery)
+<a class=anchor href=#22-%e7%a1%ac%e4%bb%b6%e6%84%9f%e7%9f%a5%e5%b1%82-nfd-node-feature-discovery>#</a></h3><ul><li>gpu-operator-node-feature-discovery-master-xxx (Deployment)：NFD 的中心节点，负责收集汇总所有 Worker 节点上报的硬件信息</li><li>gpu-operator-node-feature-discovery-worker-xxx (DaemonSet)：在每个节点上运行，探测物理硬件（PCI 设备、CPU 指令集等）。它会发现节点上显卡，并给节点打上标签（如 feature.node.kubernetes.io/pci-10de.present=true）</li><li>gpu-operator-node-feature-discovery-gc-xxx (Deployment)：<strong>垃圾回收</strong>，负责清理过时或无用的节点标签。</li><li>gpu-feature-discovery-xxx (DaemonSet)：专门针对 NVIDIA GPU 的标签生成器。它会将显卡型号、显存大小等详细信息变成节点标签（例如 nvidia.com/gpu.product=GeForce-RTX-3070）</li></ul><h3 id=23-基础架构注入层-the-heavy-lifters>2.3. 基础架构注入层 (The Heavy Lifters)
+<a class=anchor href=#23-%e5%9f%ba%e7%a1%80%e6%9e%b6%e6%9e%84%e6%b3%a8%e5%85%a5%e5%b1%82-the-heavy-lifters>#</a></h3><ul><li>nvidia-driver-daemonset-xxx (DaemonSet)：<strong>安装驱动</strong>。它在容器里编译并向宿主机内核加载 NVIDIA 内核模块。这就是你之前报错“<strong>Secure Boot</strong>”的地方。</li><li>nvidia-container-toolkit-daemonset-xxx (DaemonSet)：<strong>安装容器运行时</strong>。它把 nvidia-container-runtime 塞进宿主机，并修改 containerd 的配置文件，让容器能调用显卡。</li><li>nvidia-device-plugin-daemonset-xxx (DaemonSet)：<strong>GPU 资源暴露</strong>。它告诉 K8s 调度器：“这台机器有 1 个可用 GPU”。没有它，你的 Pod 就会卡在 Pending 状态。</li></ul><h3 id=24-验证与监控层-quality-assurance>2.4. 验证与监控层 (Quality Assurance)
+<a class=anchor href=#24-%e9%aa%8c%e8%af%81%e4%b8%8e%e7%9b%91%e6%8e%a7%e5%b1%82-quality-assurance>#</a></h3><ul><li>nvidia-operator-validator-xxx (Deployment)：<strong>综合自检</strong>。它会等待驱动和工具箱装好，然后运行一系列检查，确保整个链条是通的。</li><li>nvidia-cuda-validator-xxx (Job)：<strong>CUDA 测试</strong>。它会运行一个小的 CUDA 程序，验证 GPU 是否能正常执行计算任务。</li><li>nvidia-dcgm-exporter-xxx (DaemonSet)：<strong>性能监控</strong>。它部署 NVIDIA DCGM（Data Center GPU Manager）Exporter，收集 GPU 的性能指标并暴露给 Prometheus。</li></ul><h3 id=25-参考---注入containerd的配置>2.5. 参考 - 注入containerd的配置
+<a class=anchor href=#25-%e5%8f%82%e8%80%83---%e6%b3%a8%e5%85%a5containerd%e7%9a%84%e9%85%8d%e7%bd%ae>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#a6e22e>version</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>2</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[plugins]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;]</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cdi_spec_dirs</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>[&#34;/etc/cdi&#34;, &#34;/var/run/cdi&#34;]
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    device_ownership_from_security_context = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    disable_apparmor = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    disable_cgroup = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    disable_hugetlb_controller = true
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    disable_proc_mount = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    disable_tcp_service = true
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    drain_exec_sync_io_timeout = &#34;0s&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    enable_cdi = true
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    enable_selinux = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    enable_tls_streaming = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    enable_unprivileged_icmp = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    enable_unprivileged_ports = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    ignore_image_defined_volumes = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    image_pull_progress_timeout = &#34;5m0s&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    max_concurrent_downloads = 3
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    max_container_log_line_size = 16384
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    netns_mounts_under_state_dir = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    restrict_oom_score_adj = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    sandbox_image = &#34;registry.cn-beijing.aliyuncs.com/kubesphereio/pause:3.9&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    selinux_category_range = 1024
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    stats_collect_period = 10
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    stream_idle_timeout = &#34;4h0m0s&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    stream_server_address = &#34;127.0.0.1&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    stream_server_port = &#34;0&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    systemd_cgroup = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    tolerate_missing_hugetlb_controller = true
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    unset_seccomp_profile = &#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.cni]</span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>bin_dir</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/opt/cni/bin&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      conf_dir = &#34;/etc/cni/net.d&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      conf_template = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      ip_pref = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      max_conf_num = 1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      setup_serially = false</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd]</span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>default_runtime_name</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;runc&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      disable_snapshot_annotations = true
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      discard_unpacked_layers = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      ignore_blockio_not_enabled_errors = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      ignore_rdt_not_enabled_errors = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      no_pivot = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      snapshotter = &#34;overlayfs&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.default_runtime]</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>base_runtime_spec</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        cni_conf_dir = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        cni_max_conf_num = 0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        container_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        pod_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        privileged_without_host_devices = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        privileged_without_host_devices_all_devices_allowed = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        runtime_engine = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        runtime_path = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        runtime_root = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        runtime_type = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        sandbox_mode = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        snapshotter = &#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.default_runtime.options]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.runtimes]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.runtimes.nvidia]</span>
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>base_runtime_spec</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          cni_conf_dir = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          cni_max_conf_num = 0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          container_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          pod_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          privileged_without_host_devices = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          privileged_without_host_devices_all_devices_allowed = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_engine = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_path = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_root = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_type = &#34;io.containerd.runc.v2&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sandbox_mode = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          snapshotter = &#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.runtimes.nvidia.options]</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>BinaryName</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/usr/local/nvidia/toolkit/nvidia-container-runtime&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            SystemdCgroup = true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.runtimes.nvidia-cdi]</span>
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>base_runtime_spec</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          cni_conf_dir = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          cni_max_conf_num = 0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          container_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          pod_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          privileged_without_host_devices = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          privileged_without_host_devices_all_devices_allowed = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_engine = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_path = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_root = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_type = &#34;io.containerd.runc.v2&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sandbox_mode = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          snapshotter = &#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.runtimes.nvidia-cdi.options]</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>BinaryName</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/usr/local/nvidia/toolkit/nvidia-container-runtime.cdi&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            SystemdCgroup = true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.runtimes.nvidia-legacy]</span>
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>base_runtime_spec</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          cni_conf_dir = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          cni_max_conf_num = 0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          container_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          pod_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          privileged_without_host_devices = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          privileged_without_host_devices_all_devices_allowed = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_engine = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_path = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_root = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_type = &#34;io.containerd.runc.v2&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sandbox_mode = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          snapshotter = &#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.runtimes.nvidia-legacy.options]</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>BinaryName</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/usr/local/nvidia/toolkit/nvidia-container-runtime.legacy&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            SystemdCgroup = true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.runtimes.runc]</span>
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>base_runtime_spec</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          cni_conf_dir = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          cni_max_conf_num = 0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          container_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          pod_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          privileged_without_host_devices = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          privileged_without_host_devices_all_devices_allowed = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_engine = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_path = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_root = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          runtime_type = &#34;io.containerd.runc.v2&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sandbox_mode = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          snapshotter = &#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.runtimes.runc.options]</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>SystemdCgroup</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.untrusted_workload_runtime]</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>base_runtime_spec</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        cni_conf_dir = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        cni_max_conf_num = 0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        container_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        pod_annotations = []
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        privileged_without_host_devices = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        privileged_without_host_devices_all_devices_allowed = false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        runtime_engine = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        runtime_path = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        runtime_root = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        runtime_type = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        sandbox_mode = &#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        snapshotter = &#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.containerd.untrusted_workload_runtime.options]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.image_decryption]</span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>key_model</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;node&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry]</span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>config_path</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.auths]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.configs]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.headers]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors.&#34;docker.io&#34;]</span>
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>endpoint</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>[&#34;https://registry-1.docker.io&#34;]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>[plugins.&#34;io.containerd.grpc.v1.cri&#34;.x509_key_pair_streaming]</span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>tls_cert_file</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      tls_key_file = &#34;&#34;</span>
+</span></span></code></pre></div><h2 id=3-安装>3. 安装
+<a class=anchor href=#3-%e5%ae%89%e8%a3%85>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
 </span></span><span style=display:flex><span>helm repo update
 </span></span><span style=display:flex><span>helm pull --untar nvidia/gpu-operator
 </span></span><span style=display:flex><span>helm install gpu-operator . -n gpu-operator --create-namespace
-</span></span></code></pre></div><h2 id=常见故障secure-boot>常见故障：Secure Boot
-<a class=anchor href=#%e5%b8%b8%e8%a7%81%e6%95%85%e9%9a%9csecure-boot>#</a></h2><ul><li>现象：<code>modprobe: ERROR: could not insert 'nvidia': Key was rejected by service</code></li><li>根因：宿主机开启 Secure Boot 导致内核模块签名校验失败</li><li>处理：在 BIOS/UEFI 关闭 Secure Boot 后重启，再重新验证</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>mokutil --sb-state
-</span></span></code></pre></div><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8gpu/ data-ctx=k8s-gpu-operator data-src=/k8s-%E4%BD%BF%E7%94%A8gpu class=internal-link>k8s-使用gpu</a></li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/graph.3b73a5587c86252d9d006e88788bdaa1.js></script></div></div><div id=contact_buttons><footer><p>Made with <a href=https://github.com/64bitpandas/amethyst>Amethyst</a>, © 2026 dlliang14</p><ul><li><a href=https://dlliang14.github.io/web-publicNotes/>Home</a></li><li><a href=https://space.bilibili.com/4741350>BILIBILI</a></li><li><a href=https://github.com/dlliang14>GITHUB</a></li></ul></footer></div></article><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#k8s-gpu-operator>k8s-gpu-operator</a><ul><li><a href=#文档入口>文档入口</a></li><li><a href=#组件分层理解>组件分层理解</a></li><li><a href=#安装>安装</a></li><li><a href=#常见故障secure-boot>常见故障：Secure Boot</a></li></ul></li></ul></nav></div></aside></main><script>(function(){var e,s,t=null,n=document.querySelector(".book-page .markdown");if(!n)return;e=n.querySelectorAll("h2, h3, h4, h5, h6");function o(e){for(var t,s=e.childNodes,n=0;n<s.length;n++)if(t=s[n],t.nodeType===Node.TEXT_NODE&&t.nodeValue&&t.nodeValue.trim()){t.nodeValue=t.nodeValue.replace(/^\s*\d+(?:\.\d+)*\.?\s+/,"");break}}if(t===!0){Array.prototype.forEach.call(e,o),document.body.classList.add("auto-numbered");return}if(t===!1)return;if(!e.length){document.body.classList.add("auto-numbered");return}s=Array.prototype.some.call(e,function(e){var n,t=e.cloneNode(!0);return Array.prototype.forEach.call(t.querySelectorAll("a.anchor"),function(e){e.remove()}),n=(t.textContent||"").trim(),/^\d+(?:\.\d+)*\.\s*/.test(n)}),s||document.body.classList.add("auto-numbered")})()</script></body></html>
+</span></span></code></pre></div><h2 id=4-常见故障secure-boot>4. 常见故障：Secure Boot
+<a class=anchor href=#4-%e5%b8%b8%e8%a7%81%e6%95%85%e9%9a%9csecure-boot>#</a></h2><ul><li>现象：<code>modprobe: ERROR: could not insert 'nvidia': Key was rejected by service</code></li><li>根因：宿主机开启 Secure Boot 导致内核模块签名校验失败</li><li>处理：在 BIOS/UEFI 关闭 Secure Boot 后重启，再重新验证</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>Logs<span style=color:#f92672>(</span>gpu-operator/nvidia-driver-daemonset-d2cnd:nvidia-driver-ctr<span style=color:#f92672>)[</span>tail<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>modprobe: ERROR: could not insert <span style=color:#e6db74>&#39;nvidia&#39;</span>: Key was rejected by service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 目前配置</span>
+</span></span><span style=display:flex><span>root@prod-m1:/data/soft/gpu-operator# mokutil --sb-state
+</span></span><span style=display:flex><span>SecureBoot enabled
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 解决方法：</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 重启进入BIOS，找到Secure Boot选项，选择Disable，保存并退出即可。</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 在虚拟机启动出现 Proxmox 标志（或 TianoCore 标志）时，连续狂按 ESC 键进入 UEFI 设置界面。</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 使用方向键找到 Device Manager -&gt; Secure Boot Configuration。</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 将 Attempt Secure Boot 这一项的勾选去掉（变成 [ ]）。</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 按 F10 保存，按 ESC 退出并重启。</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 重启后验证</span>
+</span></span><span style=display:flex><span>root@prod-m1:~# mokutil --sb-state
+</span></span><span style=display:flex><span>SecureBoot disabled
+</span></span></code></pre></div><h2 id=comfyui-部署参考>comfyui 部署参考
+<a class=anchor href=#comfyui-%e9%83%a8%e7%bd%b2%e5%8f%82%e8%80%83>#</a></h2><ul><li><a href=/web-publicNotes/k8s-gpu-comfyui%E9%83%A8%E7%BD%B2 rel=noopener class=internal-link data-src=/web-publicNotes/k8s-gpu-comfyui%E9%83%A8%E7%BD%B2>k8s-gpu-comfyui部署</a></li></ul><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li><a href=/web-publicNotes/k8s-%E4%BD%BF%E7%94%A8gpu/ data-ctx=k8s-gpu-operator data-src=/k8s-%E4%BD%BF%E7%94%A8gpu class=internal-link>k8s-使用gpu</a></li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://dlliang14.github.io/web-publicNotes/quartz/js/graph.3b73a5587c86252d9d006e88788bdaa1.js></script></div></div><div id=contact_buttons><footer><p>Made with <a href=https://github.com/64bitpandas/amethyst>Amethyst</a>, © 2026 dlliang14</p><ul><li><a href=https://dlliang14.github.io/web-publicNotes/>Home</a></li><li><a href=https://space.bilibili.com/4741350>BILIBILI</a></li><li><a href=https://github.com/dlliang14>GITHUB</a></li></ul></footer></div></article><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#k8s-gpu-operator>k8s-gpu-operator</a><ul><li><a href=#1-文档入口>1. 文档入口</a></li><li><a href=#2-组件分层理解>2. 组件分层理解</a><ul><li><a href=#21-核心控制层-the-brain>2.1. 核心控制层 (The Brain)</a></li><li><a href=#22-硬件感知层-nfd-node-feature-discovery>2.2. 硬件感知层 (NFD: Node Feature Discovery)</a></li><li><a href=#23-基础架构注入层-the-heavy-lifters>2.3. 基础架构注入层 (The Heavy Lifters)</a></li><li><a href=#24-验证与监控层-quality-assurance>2.4. 验证与监控层 (Quality Assurance)</a></li><li><a href=#25-参考---注入containerd的配置>2.5. 参考 - 注入containerd的配置</a></li></ul></li><li><a href=#3-安装>3. 安装</a></li><li><a href=#4-常见故障secure-boot>4. 常见故障：Secure Boot</a></li><li><a href=#comfyui-部署参考>comfyui 部署参考</a></li></ul></li></ul></nav></div></aside></main><script>(function(){var e,s,t=null,n=document.querySelector(".book-page .markdown");if(!n)return;e=n.querySelectorAll("h2, h3, h4, h5, h6");function o(e){for(var t,s=e.childNodes,n=0;n<s.length;n++)if(t=s[n],t.nodeType===Node.TEXT_NODE&&t.nodeValue&&t.nodeValue.trim()){t.nodeValue=t.nodeValue.replace(/^\s*\d+(?:\.\d+)*\.?\s+/,"");break}}if(t===!0){Array.prototype.forEach.call(e,o),document.body.classList.add("auto-numbered");return}if(t===!1)return;if(!e.length){document.body.classList.add("auto-numbered");return}s=Array.prototype.some.call(e,function(e){var n,t=e.cloneNode(!0);return Array.prototype.forEach.call(t.querySelectorAll("a.anchor"),function(e){e.remove()}),n=(t.textContent||"").trim(),/^\d+(?:\.\d+)*\.\s*/.test(n)}),s||document.body.classList.add("auto-numbered")})()</script></body></html>

@@ -2,10 +2,13 @@
  k8s-gpu-hami部署
  &lt;a class="anchor" href="#k8s-gpu-hami%e9%83%a8%e7%bd%b2"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
-&lt;p&gt;[[k8s-使用gpu]]&lt;/p&gt;
-&lt;h2 id="组件与依赖"&gt;
- 组件与依赖
- &lt;a class="anchor" href="#%e7%bb%84%e4%bb%b6%e4%b8%8e%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://project-hami.io/zh/" rel="noopener"&gt;hami官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1-组件与依赖"&gt;
+ 1. 组件与依赖
+ &lt;a class="anchor" href="#1-%e7%bb%84%e4%bb%b6%e4%b8%8e%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;HAMi：Heterogeneous AI Management Infrastructure&lt;/li&gt;
@@ -13,9 +16,9 @@
 &lt;li&gt;NVIDIA Container Toolkit&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;NVIDIA/k8s-device-plugin&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="快速流程"&gt;
- 快速流程
- &lt;a class="anchor" href="#%e5%bf%ab%e9%80%9f%e6%b5%81%e7%a8%8b"&gt;#&lt;/a&gt;
+&lt;h2 id="2-快速流程"&gt;
+ 2. 快速流程
+ &lt;a class="anchor" href="#2-%e5%bf%ab%e9%80%9f%e6%b5%81%e7%a8%8b"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;安装并验证宿主机 NVIDIA 驱动（&lt;code&gt;nvidia-smi&lt;/code&gt;）&lt;/li&gt;
@@ -24,9 +27,9 @@
 &lt;li&gt;安装 HAMi Helm Chart&lt;/li&gt;
 &lt;li&gt;给 GPU 节点打标签，验证 &lt;code&gt;nvidia.com/gpu&lt;/code&gt; 资源&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="关键命令"&gt;
- 关键命令
- &lt;a class="anchor" href="#%e5%85%b3%e9%94%ae%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;h2 id="3-关键命令"&gt;
+ 3. 关键命令
+ &lt;a class="anchor" href="#3-%e5%85%b3%e9%94%ae%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装 toolkit&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt update
@@ -45,30 +48,136 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 节点标签&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl label node prod-m1 gpu&lt;span style="color:#f92672"&gt;=&lt;/span&gt;on
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl describe node prod-m1 | grep -i nvidia
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="常见资源声明"&gt;
- 常见资源声明
- &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e8%b5%84%e6%ba%90%e5%a3%b0%e6%98%8e"&gt;#&lt;/a&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="4-实验过程-hami"&gt;
+ 4. 实验过程 hami
+ &lt;a class="anchor" href="#4-%e5%ae%9e%e9%aa%8c%e8%bf%87%e7%a8%8b-hami"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;vGPU：&lt;code&gt;nvidia.com/vgpu: 1&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;MIG：&lt;code&gt;nvidia.com/mig-1g.5gb: 1&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="常见故障"&gt;
- 常见故障
- &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%95%85%e9%9a%9c"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;现象：&lt;code&gt;hami-device-plugin&lt;/code&gt; 反复重启（BackOff）&lt;/li&gt;
-&lt;li&gt;处理：补齐 &lt;code&gt;RuntimeClass&lt;/code&gt; 并让 HAMi 强制使用 nvidia runtime&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;apiVersion&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;node.k8s.io/v1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;kind&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;RuntimeClass&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;nvidia&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;handler&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;nvidia&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm upgrade hami hami-charts/hami -n kube-system &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set devicePlugin.runtimeClassName&lt;span style="color:#f92672"&gt;=&lt;/span&gt;nvidia &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set resourceName&lt;span style="color:#f92672"&gt;=&lt;/span&gt;nvidia.com/gpu &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set resourceMem&lt;span style="color:#f92672"&gt;=&lt;/span&gt;nvidia.com/gpumem &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set resourceCore&lt;span style="color:#f92672"&gt;=&lt;/span&gt;nvidia.com/gpucores
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>
+&lt;h3 id="41-实验目标"&gt;
+ 4.1. 实验目标
+ &lt;a class="anchor" href="#41-%e5%ae%9e%e9%aa%8c%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;安装gpu驱动和gpu容器运行时&lt;/li&gt;
+&lt;li&gt;安装hami&lt;/li&gt;
+&lt;li&gt;使用hami部署gpu应用-comfyui&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="42-实验环境"&gt;
+ 4.2. 实验环境
+ &lt;a class="anchor" href="#42-%e5%ae%9e%e9%aa%8c%e7%8e%af%e5%a2%83"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;已有的k8s集群&lt;/li&gt;
+&lt;li&gt;一台直通了gpu的k8s节点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="43-实验步骤"&gt;
+ 4.3. 实验步骤
+ &lt;a class="anchor" href="#43-%e5%ae%9e%e9%aa%8c%e6%ad%a5%e9%aa%a4"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="431-环境检查"&gt;
+ 4.3.1. 环境检查
+ &lt;a class="anchor" href="#431-%e7%8e%af%e5%a2%83%e6%a3%80%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@prod-m1:~# lspci -nn | grep -Ei &lt;span style="color:#e6db74"&gt;&amp;#39;vga&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;00:01.0 VGA compatible controller &lt;span style="color:#f92672"&gt;[&lt;/span&gt;0300&lt;span style="color:#f92672"&gt;]&lt;/span&gt;: Device &lt;span style="color:#f92672"&gt;[&lt;/span&gt;1234:1111&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;(&lt;/span&gt;rev 02&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;01:00.0 VGA compatible controller &lt;span style="color:#f92672"&gt;[&lt;/span&gt;0300&lt;span style="color:#f92672"&gt;]&lt;/span&gt;: NVIDIA Corporation GA104 &lt;span style="color:#f92672"&gt;[&lt;/span&gt;GeForce RTX 3070&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;10de:2484&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;(&lt;/span&gt;rev a1&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@prod-m1:~# lspci | grep -i nvidia
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;01:00.0 VGA compatible controller: NVIDIA Corporation GA104 &lt;span style="color:#f92672"&gt;[&lt;/span&gt;GeForce RTX 3070&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;(&lt;/span&gt;rev a1&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;01:00.1 Audio device: NVIDIA Corporation GA104 High Definition Audio Controller &lt;span style="color:#f92672"&gt;(&lt;/span&gt;rev a1&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# pve显示 Kernel driver in use: vfio-pci 表示直通成功&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@pve:~# lspci -nnk | grep -i nvidia -A &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2b:00.0 VGA compatible controller &lt;span style="color:#f92672"&gt;[&lt;/span&gt;0300&lt;span style="color:#f92672"&gt;]&lt;/span&gt;: NVIDIA Corporation GA104 &lt;span style="color:#f92672"&gt;[&lt;/span&gt;GeForce RTX 3070&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;10de:2484&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;(&lt;/span&gt;rev a1&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	Subsystem: Micro-Star International Co., Ltd. &lt;span style="color:#f92672"&gt;[&lt;/span&gt;MSI&lt;span style="color:#f92672"&gt;]&lt;/span&gt; GA104 &lt;span style="color:#f92672"&gt;[&lt;/span&gt;GeForce RTX 3070&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;1462:8d9a&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	Kernel driver in use: vfio-pci
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	Kernel modules: nvidiafb, nouveau
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2b:00.1 Audio device &lt;span style="color:#f92672"&gt;[&lt;/span&gt;0403&lt;span style="color:#f92672"&gt;]&lt;/span&gt;: NVIDIA Corporation GA104 High Definition Audio Controller &lt;span style="color:#f92672"&gt;[&lt;/span&gt;10de:228b&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;(&lt;/span&gt;rev a1&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	Subsystem: Micro-Star International Co., Ltd. &lt;span style="color:#f92672"&gt;[&lt;/span&gt;MSI&lt;span style="color:#f92672"&gt;]&lt;/span&gt; GA104 High Definition Audio Controller &lt;span style="color:#f92672"&gt;[&lt;/span&gt;1462:8d9a&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	Kernel driver in use: vfio-pci
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	Kernel modules: snd_hda_intel
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="432-安装gpu驱动"&gt;
+ 4.3.2. 安装gpu驱动
+ &lt;a class="anchor" href="#432-%e5%ae%89%e8%a3%85gpu%e9%a9%b1%e5%8a%a8"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装nvidia驱动&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 更新 apt 缓存&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 自动安装推荐的 Nvidia 驱动（通常是稳定版 535 或以上）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo ubuntu-drivers autoinstall
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装完成后必须重启该节点&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo reboot
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 重启后验证驱动安装成功&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nvidia-smi
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="433-安装nvidia-container-toolkit"&gt;
+ 4.3.3. 安装nvidia-container-toolkit
+ &lt;a class="anchor" href="#433-%e5%ae%89%e8%a3%85nvidia-container-toolkit"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. 添加 Nvidia 官方包仓库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sed &lt;span style="color:#e6db74"&gt;&amp;#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&amp;#39;&lt;/span&gt; | &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. 更新并安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt install -y nvidia-container-toolkit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. containerd 添加 nvidia-container-runtime&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo nvidia-ctk runtime configure --runtime&lt;span style="color:#f92672"&gt;=&lt;/span&gt;containerd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO&lt;span style="color:#f92672"&gt;[&lt;/span&gt;0000&lt;span style="color:#f92672"&gt;]&lt;/span&gt; Using config version &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO&lt;span style="color:#f92672"&gt;[&lt;/span&gt;0000&lt;span style="color:#f92672"&gt;]&lt;/span&gt; Using CRI runtime plugin name &lt;span style="color:#e6db74"&gt;&amp;#34;io.containerd.grpc.v1.cri&amp;#34;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO&lt;span style="color:#f92672"&gt;[&lt;/span&gt;0000&lt;span style="color:#f92672"&gt;]&lt;/span&gt; Wrote updated config to /etc/containerd/conf.d/99-nvidia.toml 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO&lt;span style="color:#f92672"&gt;[&lt;/span&gt;0000&lt;span style="color:#f92672"&gt;]&lt;/span&gt; It is recommended that containerd daemon be restarted. 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 4. 重启 containerd 使配置生效&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl restart containerd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="4331-containerd-新增配置"&gt;
+ 4.3.3.1. containerd 新增配置
+ &lt;a class="anchor" href="#4331-containerd-%e6%96%b0%e5%a2%9e%e9%85%8d%e7%bd%ae"&gt;#&lt;/a&gt;
+&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;version&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;[plugins]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;sandbox_image&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;registry.cn-beijing.aliyuncs.com/kubesphereio/pause:3.9&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.cni]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;bin_dir&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/opt/cni/bin&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; conf_dir = &amp;#34;/etc/cni/net.d&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; conf_template = &amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; max_conf_num = 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.containerd]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.containerd.runtimes]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.containerd.runtimes.nvidia]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;runtime_type&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;io.containerd.runc.v2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.containerd.runtimes.nvidia.options]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;BinaryName&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/usr/bin/nvidia-container-runtime&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; SystemdCgroup = true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.containerd.runtimes.runc]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;runtime_type&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;io.containerd.runc.v2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.containerd.runtimes.runc.options]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;SystemdCgroup&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.registry]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.registry.mirrors]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;[plugins.&amp;#34;io.containerd.grpc.v1.cri&amp;#34;.registry.mirrors.&amp;#34;docker.io&amp;#34;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;endpoint&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;[&amp;#34;https://registry-1.docker.io&amp;#34;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="434-安装hami"&gt;
+ 4.3.4. 安装hami
+ &lt;a class="anchor" href="#434-%e5%ae%89%e8%a3%85hami"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;p&gt;
+&lt;a href="https://project-hami.io/docs/installation/online-installation" rel="noopener"&gt;hami官网介绍&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

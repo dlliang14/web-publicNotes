@@ -2,7 +2,7 @@
  k8s-istio-介绍
  &lt;a class="anchor" href="#k8s-istio-%e4%bb%8b%e7%bb%8d"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
-&lt;p&gt;[[k8s-服务网格istio]]&lt;/p&gt;
+&lt;p&gt;[[k8s-istio]]&lt;/p&gt;
 &lt;h2 id="官方资料"&gt;
  官方资料
  &lt;a class="anchor" href="#%e5%ae%98%e6%96%b9%e8%b5%84%e6%96%99"&gt;#&lt;/a&gt;
@@ -39,7 +39,7 @@
 &lt;li&gt;细粒度服务治理优先 Sidecar&lt;/li&gt;
 &lt;li&gt;边界统一接入优先网关&lt;/li&gt;
 &lt;li&gt;混合架构常见：集群内 Sidecar，边界用 Ingress/Egress Gateway&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BCistio/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BCistio/</guid><description>&lt;h1 id="k8s-服务网格istio"&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/k8s-istio/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/k8s-istio/</guid><description>&lt;h1 id="k8s-服务网格istio"&gt;
  k8s-服务网格istio
  &lt;a class="anchor" href="#k8s-%e6%9c%8d%e5%8a%a1%e7%bd%91%e6%a0%bcistio"&gt;#&lt;/a&gt;
 &lt;/h1&gt;

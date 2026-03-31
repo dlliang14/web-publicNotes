@@ -1,4 +1,94 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sre on</title><link>https://dlliang14.github.io/web-publicNotes/tags/sre/</link><description>Recent content in Sre on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/sre/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E5%A4%8D%E7%9B%98%E6%96%B9%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E5%A4%8D%E7%9B%98%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="sre-复盘方法"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sre on</title><link>https://dlliang14.github.io/web-publicNotes/tags/sre/</link><description>Recent content in Sre on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/sre/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E4%B8%9C%E6%96%B9%E8%B4%A2%E5%AF%8C%E8%BF%90%E7%BB%B4%E6%95%85%E9%9A%9C%E5%8E%86%E5%8F%B2%E5%A4%8D%E7%9B%98/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E4%B8%9C%E6%96%B9%E8%B4%A2%E5%AF%8C%E8%BF%90%E7%BB%B4%E6%95%85%E9%9A%9C%E5%8E%86%E5%8F%B2%E5%A4%8D%E7%9B%98/</guid><description>&lt;h1 id="sre-东方财富运维故障历史复盘"&gt;
+ sre-东方财富运维故障历史复盘
+ &lt;a class="anchor" href="#sre-%e4%b8%9c%e6%96%b9%e8%b4%a2%e5%af%8c%e8%bf%90%e7%bb%b4%e6%95%85%e9%9a%9c%e5%8e%86%e5%8f%b2%e5%a4%8d%e7%9b%98"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[sre]]&lt;/p&gt;
+&lt;h2 id="双控冗余配置失败-增加流量监控"&gt;
+ 双控冗余配置失败 增加流量监控
+ &lt;a class="anchor" href="#%e5%8f%8c%e6%8e%a7%e5%86%97%e4%bd%99%e9%85%8d%e7%bd%ae%e5%a4%b1%e8%b4%a5-%e5%a2%9e%e5%8a%a0%e6%b5%81%e9%87%8f%e7%9b%91%e6%8e%a7"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;centos 6 和 7 配置不同，双控冗余配置失败&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;只监控了端口active状态，没有监控数据流量，导致故障发生时无法及时发现。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重启orcale数据库后，切换到左边控制器，恢复服务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;故障时间：2021/7/30非高峰时段9:55-10:15，6、7、8分区部分用户约20分钟无法交易。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原因：EMC存储的右下角控制器发生硬件故障，导致交易数据库down。自动切换失效，手动切换控制器恢复时间较长。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;故障总结：对存储硬件设备的应急演练不够，监控不到位。现已增加控制器的流量监控和报警，可以杜绝此类故障再次发生。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+&lt;img src="https://img.180007.xyz/20260328175036.png" width="auto" alt="双控冗余配置失败" /&gt;&lt;/p&gt;
+&lt;h2 id="盘中hosts更新-加强变更管理"&gt;
+ 盘中hosts更新 加强变更管理
+ &lt;a class="anchor" href="#%e7%9b%98%e4%b8%adhosts%e6%9b%b4%e6%96%b0-%e5%8a%a0%e5%bc%ba%e5%8f%98%e6%9b%b4%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;开发感觉服务不通，需要调整hosts。&lt;/li&gt;
+&lt;li&gt;直接修改了生产环境的hosts，不该通的服务通了，导致部分用户访问异常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+&lt;img src="https://img.180007.xyz/20260328175748.png" width="auto" alt="盘中hosts更新" /&gt;&lt;/p&gt;
+&lt;h2 id="外部依赖单点-增加备份链路"&gt;
+ 外部依赖单点 增加备份链路
+ &lt;a class="anchor" href="#%e5%a4%96%e9%83%a8%e4%be%9d%e8%b5%96%e5%8d%95%e7%82%b9-%e5%a2%9e%e5%8a%a0%e5%a4%87%e4%bb%bd%e9%93%be%e8%b7%af"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;外部系统只提供单链路或单设备，内部虽冗余仍可能整体不可用。&lt;/p&gt;
+&lt;p&gt;治理要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;外部依赖纳入同等冗余审计。&lt;/li&gt;
+&lt;li&gt;对关键依赖建立替代路径与降级路径。&lt;/li&gt;
+&lt;li&gt;后续又要了一个备份链路，2个单网口。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+&lt;img src="https://img.180007.xyz/20260328180102.png" width="auto" alt="民生银行单点" /&gt;&lt;/p&gt;
+&lt;h2 id="冷备切换不熟练-单点服务要做好切换演练"&gt;
+ 冷备切换不熟练 单点服务要做好切换演练
+ &lt;a class="anchor" href="#%e5%86%b7%e5%a4%87%e5%88%87%e6%8d%a2%e4%b8%8d%e7%86%9f%e7%bb%83-%e5%8d%95%e7%82%b9%e6%9c%8d%e5%8a%a1%e8%a6%81%e5%81%9a%e5%a5%bd%e5%88%87%e6%8d%a2%e6%bc%94%e7%bb%83"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;因为合规要求，踢人服务只能单台。&lt;/li&gt;
+&lt;li&gt;有冷备，但是ip不一致，切换后没有更新，导致服务不可用。&lt;/li&gt;
+&lt;li&gt;后续新增放宽逻辑，允许先不踢人，后续收盘再踢人。&lt;/li&gt;
+&lt;li&gt;单点服务要做好切换演练，确保切换流程熟练，切换后相关配置也要及时更新。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+&lt;img src="https://img.180007.xyz/20260328190601.png" width="auto" alt="冷备切换不熟练" /&gt;&lt;/p&gt;
+&lt;h2 id="配置错误-a角配置b角复查"&gt;
+ 配置错误 A角配置B角复查
+ &lt;a class="anchor" href="#%e9%85%8d%e7%bd%ae%e9%94%99%e8%af%af-a%e8%a7%92%e9%85%8d%e7%bd%aeb%e8%a7%92%e5%a4%8d%e6%9f%a5"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;因为历史原因，收费和免费的端口是一样的，人为配置错误。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+&lt;img src="https://img.180007.xyz/20260328190854.png" width="auto" alt="配置错误" /&gt;&lt;/p&gt;
+&lt;h2 id="流量监控"&gt;
+ 流量监控
+ &lt;a class="anchor" href="#%e6%b5%81%e9%87%8f%e7%9b%91%e6%8e%a7"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;流量突然增大，怎么办&lt;/li&gt;
+&lt;li&gt;net-flow 分析流量，通过五元组快速定位哪个业务把专线流量打高。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+&lt;img src="https://img.180007.xyz/20260328191641.png" width="auto" alt="流量监控" /&gt;&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E5%A4%8D%E7%9B%98%E6%96%B9%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E5%A4%8D%E7%9B%98%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="sre-复盘方法"&gt;
  sre-复盘方法
  &lt;a class="anchor" href="#sre-%e5%a4%8d%e7%9b%98%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -174,62 +264,6 @@
 &lt;li&gt;历史风险“已知不改”会放大为系统性事故。&lt;/li&gt;
 &lt;li&gt;核心基础模块必须设计隔离与回退能力。&lt;/li&gt;
 &lt;li&gt;故障恢复速度取决于工具链成熟度，而不仅是人力投入。&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre-%E6%A1%88%E4%BE%8B-%E8%BF%90%E7%BB%B4%E6%95%85%E9%9A%9C%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre-%E6%A1%88%E4%BE%8B-%E8%BF%90%E7%BB%B4%E6%95%85%E9%9A%9C%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h1 id="sre-案例-运维故障模式"&gt;
- sre-案例-运维故障模式
- &lt;a class="anchor" href="#sre-%e6%a1%88%e4%be%8b-%e8%bf%90%e7%bb%b4%e6%95%85%e9%9a%9c%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;[[sre]]&lt;/p&gt;
-&lt;h2 id="常见模式一冗余失效"&gt;
- 常见模式一：冗余失效
- &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%b8%80%e5%86%97%e4%bd%99%e5%a4%b1%e6%95%88"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;表面是双活/双控，实际只有单链路承载真实流量，故障时无法自动切换。&lt;/p&gt;
-&lt;p&gt;治理要点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;监控不仅看链路活性，还要看链路真实流量。&lt;/li&gt;
-&lt;li&gt;周期性做切换演练，验证“可切”而不是“看起来可切”。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="常见模式二变更时机错误"&gt;
- 常见模式二：变更时机错误
- &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%ba%8c%e5%8f%98%e6%9b%b4%e6%97%b6%e6%9c%ba%e9%94%99%e8%af%af"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;在业务高峰执行高风险变更，导致局部问题扩大。&lt;/p&gt;
-&lt;p&gt;治理要点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;盘中变更禁令与审批门禁。&lt;/li&gt;
-&lt;li&gt;高风险操作必须双人复核。&lt;/li&gt;
-&lt;li&gt;新同学上岗采用分级授权。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="常见模式三外部依赖单点"&gt;
- 常见模式三：外部依赖单点
- &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%b8%89%e5%a4%96%e9%83%a8%e4%be%9d%e8%b5%96%e5%8d%95%e7%82%b9"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;外部系统只提供单链路或单设备，内部虽冗余仍可能整体不可用。&lt;/p&gt;
-&lt;p&gt;治理要点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;外部依赖纳入同等冗余审计。&lt;/li&gt;
-&lt;li&gt;对关键依赖建立替代路径与降级路径。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="常见模式四配置隔离不充分"&gt;
- 常见模式四：配置隔离不充分
- &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e5%9b%9b%e9%85%8d%e7%bd%ae%e9%9a%94%e7%a6%bb%e4%b8%8d%e5%85%85%e5%88%86"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;收费/免费、主/备、环境/租户隔离边界不清，故障时相互影响。&lt;/p&gt;
-&lt;p&gt;治理要点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;明确隔离边界并做配置基线检查。&lt;/li&gt;
-&lt;li&gt;建立灰度验证与回滚脚本。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="常见模式五可观测性不足"&gt;
- 常见模式五：可观测性不足
- &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e6%a8%a1%e5%bc%8f%e4%ba%94%e5%8f%af%e8%a7%82%e6%b5%8b%e6%80%a7%e4%b8%8d%e8%b6%b3"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;知道“出问题了”，但不知道“哪里先坏、为什么坏”。&lt;/p&gt;
-&lt;p&gt;治理要点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;指标、日志、链路统一关联。&lt;/li&gt;
-&lt;li&gt;对关键链路建立分钟级定位能力。&lt;/li&gt;
-&lt;li&gt;故障演练要覆盖“定位速度”指标。&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/sre/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/sre/</guid><description>&lt;h1 id="大纲-sre"&gt;
  大纲-sre
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-sre"&gt;#&lt;/a&gt;
@@ -249,7 +283,7 @@
 &lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[[sre-案例-码表故障]]&lt;/li&gt;
-&lt;li&gt;[[sre-案例-运维故障模式]]&lt;/li&gt;
+&lt;li&gt;[[sre-东方财富运维故障历史复盘]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="排障"&gt;
  排障
@@ -267,10 +301,13 @@
  &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;p&gt;在前 60 秒快速判断故障属于哪一类：CPU、内存、磁盘、网络、进程。&lt;/p&gt;
-&lt;h2 id="十条高频命令"&gt;
- 十条高频命令
- &lt;a class="anchor" href="#%e5%8d%81%e6%9d%a1%e9%ab%98%e9%a2%91%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;h2 id="最应该排查的性能指标"&gt;
+ 最应该排查的性能指标
+ &lt;a class="anchor" href="#%e6%9c%80%e5%ba%94%e8%af%a5%e6%8e%92%e6%9f%a5%e7%9a%84%e6%80%a7%e8%83%bd%e6%8c%87%e6%a0%87"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
+&lt;p&gt;
+&lt;a href="https://www.cnblogs.com/276815076/p/17163639.html" rel="noopener"&gt;参考链接&lt;/a&gt;
+在这篇文章中，Netflix 的性能工程团队将会为你展示如何在最初的 60 秒内通过命令行做性能排查，这个过程中，会使用一些标准的 Linux 工具。在 60 秒内，你可以通过运行以下十个命令来大致了解系统资源使用情况和正在运行的进程。寻找错误和饱和度指标，然后是资源利用率相关的指标。饱和度这个词可能不易理解，大家可以Google一下USE方法，所谓了饱和了，是资源的负载超过其处理能力了，可以表现为请求队列的长度或等待时间。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;部分命令来自 &lt;code&gt;sysstat&lt;/code&gt;，机器上没有时需要先安装。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -383,13 +420,14 @@
  &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%95%b0%e6%8d%ae%e5%ba%93%e4%b8%8e%e7%bc%93%e5%ad%98%e6%a1%88%e4%be%8b"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;[[线上故障排查]]&lt;/p&gt;
-&lt;h2 id="mysql"&gt;
- MySQL
- &lt;a class="anchor" href="#mysql"&gt;#&lt;/a&gt;
+&lt;h2 id="1-mysql"&gt;
+ 1. mysql
+ &lt;a class="anchor" href="#1-mysql"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
-&lt;h3 id="死锁"&gt;
- 死锁
- &lt;a class="anchor" href="#%e6%ad%bb%e9%94%81"&gt;#&lt;/a&gt;
+&lt;p&gt;[[mysql]]&lt;/p&gt;
+&lt;h3 id="11-死锁"&gt;
+ 1.1. 死锁
+ &lt;a class="anchor" href="#11-%e6%ad%bb%e9%94%81"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SHOW&lt;/span&gt; ENGINE INNODB STATUS&lt;span style="color:#960050;background-color:#1e0010"&gt;\&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;G&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
@@ -398,9 +436,9 @@
 &lt;li&gt;可先确认事务隔离级别：&lt;code&gt;SELECT @@tx_isolation;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;监控上可关注递增指标 &lt;code&gt;mysql_global_status_innodb_deadlocks&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="慢-sql"&gt;
- 慢 SQL
- &lt;a class="anchor" href="#%e6%85%a2-sql"&gt;#&lt;/a&gt;
+&lt;h3 id="12-慢-sql"&gt;
+ 1.2. 慢 SQL
+ &lt;a class="anchor" href="#12-%e6%85%a2-sql"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;关注执行计划与索引命中&lt;/li&gt;
@@ -408,35 +446,14 @@
 &lt;li&gt;必要时配合应用侧限流/降级&lt;/li&gt;
 &lt;li&gt;乐观锁更新场景可检查是否存在“先查版本，再带版本条件更新”的缺失&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="redis"&gt;
- Redis
- &lt;a class="anchor" href="#redis"&gt;#&lt;/a&gt;
+&lt;h2 id="2-redis"&gt;
+ 2. redis
+ &lt;a class="anchor" href="#2-redis"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
-&lt;h3 id="部署与配置"&gt;
- 部署与配置
- &lt;a class="anchor" href="#%e9%83%a8%e7%bd%b2%e4%b8%8e%e9%85%8d%e7%bd%ae"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;高可用方案按规模选择哨兵或集群。&lt;/li&gt;
-&lt;li&gt;副本数通常保持奇数更利于故障仲裁。&lt;/li&gt;
-&lt;li&gt;建议关闭透明大页：&lt;code&gt;echo never &amp;gt; /sys/kernel/mm/transparent_hugepage/enabled&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;建议开启 &lt;code&gt;vm.overcommit_memory=1&lt;/code&gt;，避免创建 RDB 快照时内存申请失败。&lt;/li&gt;
-&lt;li&gt;内存一般不要打满，常见经验值是控制在物理内存的 60% 左右。&lt;/li&gt;
-&lt;li&gt;根据场景配置淘汰策略、AOF、慢日志阈值和危险命令安全加固。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="淘汰策略"&gt;
- 淘汰策略
- &lt;a class="anchor" href="#%e6%b7%98%e6%b1%b0%e7%ad%96%e7%95%a5"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;noeviction&lt;/code&gt;：默认不淘汰&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;allkeys-lru&lt;/code&gt;：适合缓存场景&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;allkeys-lfu&lt;/code&gt;：更适合热点明显的场景&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;volatile-lru&lt;/code&gt;：只淘汰设置过期时间的 key&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="大-key"&gt;
- 大 Key
- &lt;a class="anchor" href="#%e5%a4%a7-key"&gt;#&lt;/a&gt;
+&lt;p&gt;[[redis]]&lt;/p&gt;
+&lt;h3 id="21-大-key"&gt;
+ 2.1. 大 Key
+ &lt;a class="anchor" href="#21-%e5%a4%a7-key"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;典型问题：内存占用高、阻塞严重&lt;/li&gt;
@@ -444,42 +461,33 @@
 &lt;li&gt;业务侧通常要从模型设计解决，比如按 UID 分桶或拆分结构&lt;/li&gt;
 &lt;li&gt;可借助 &lt;code&gt;rdbtool&lt;/code&gt; 等方式分析大 key 分布&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="热-key"&gt;
- 热 Key
- &lt;a class="anchor" href="#%e7%83%ad-key"&gt;#&lt;/a&gt;
+&lt;h3 id="22-热-key"&gt;
+ 2.2. 热 Key
+ &lt;a class="anchor" href="#22-%e7%83%ad-key"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;典型问题：打满单节点 CPU/网卡&lt;/li&gt;
 &lt;li&gt;处理建议：本地缓存、读写分离、限流、散列拆分&lt;/li&gt;
 &lt;li&gt;监控最好在业务 SDK 或客户端拦截器侧提前做频率统计&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="连接数过高"&gt;
- 连接数过高
- &lt;a class="anchor" href="#%e8%bf%9e%e6%8e%a5%e6%95%b0%e8%bf%87%e9%ab%98"&gt;#&lt;/a&gt;
+&lt;h3 id="23-连接数过高"&gt;
+ 2.3. 连接数过高
+ &lt;a class="anchor" href="#23-%e8%bf%9e%e6%8e%a5%e6%95%b0%e8%bf%87%e9%ab%98"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;检查 &lt;code&gt;maxclients&lt;/code&gt; 与连接生命周期&lt;/li&gt;
 &lt;li&gt;避免短连接风暴，优先连接池治理&lt;/li&gt;
 &lt;li&gt;可临时查看或调整：&lt;code&gt;CONFIG GET maxclients&lt;/code&gt;、&lt;code&gt;CONFIG SET maxclients 100000&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="节点故障处理"&gt;
- 节点故障处理
- &lt;a class="anchor" href="#%e8%8a%82%e7%82%b9%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86"&gt;#&lt;/a&gt;
+&lt;h3 id="24-节点故障处理"&gt;
+ 2.4. 节点故障处理
+ &lt;a class="anchor" href="#24-%e8%8a%82%e7%82%b9%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;cluster nodes&lt;/code&gt; 查看集群状态&lt;/li&gt;
 &lt;li&gt;节点损坏后可先 &lt;code&gt;cluster forget &amp;lt;node_id&amp;gt;&lt;/code&gt; 从其他节点移除视图&lt;/li&gt;
 &lt;li&gt;重建前要清理节点上的 &lt;code&gt;rdb&lt;/code&gt;、&lt;code&gt;aof&lt;/code&gt;、&lt;code&gt;nodes.conf&lt;/code&gt; 等旧状态文件&lt;/li&gt;
 &lt;li&gt;再将新节点重新加入集群并补齐主从关系&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="复盘要点"&gt;
- 复盘要点
- &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e8%a6%81%e7%82%b9"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;哪个指标最早异常&lt;/li&gt;
-&lt;li&gt;哪个动作真正止血&lt;/li&gt;
-&lt;li&gt;是否能沉淀成自动化检测规则&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="线上故障排查-日志分析"&gt;
  线上故障排查-日志分析
  &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
@@ -500,7 +508,7 @@
  &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%a5%97%e8%b7%af"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;h3 id="less"&gt;
- less
+ [[less]]
  &lt;a class="anchor" href="#less"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;less /path/to/logfile.log
@@ -515,6 +523,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -i 忽略大小写&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -S 不换行&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -R 显示原始控制字符（如颜色）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# &amp;amp;pattern 过滤当前内容，经常和!一起反向过滤噪音行&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;less&lt;/code&gt; 按需加载，适合大日志；比直接用编辑器更稳。&lt;/li&gt;
 &lt;li&gt;如果环境配置了 &lt;code&gt;lesspipe&lt;/code&gt;，压缩文件也能直接查看。&lt;/li&gt;
@@ -523,7 +532,7 @@
 &lt;li&gt;&lt;code&gt;/ERROR&lt;/code&gt; 和 &lt;code&gt;?ERROR&lt;/code&gt; 分别是向前、向后搜索；&lt;code&gt;F&lt;/code&gt; 类似 &lt;code&gt;tail -f&lt;/code&gt;，适合追实时日志。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="grep"&gt;
- grep
+ [[grep]]
  &lt;a class="anchor" href="#grep"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep -iE &lt;span style="color:#e6db74"&gt;&amp;#34;error|timeout|refused&amp;#34;&lt;/span&gt; app.log
@@ -538,19 +547,10 @@
 &lt;li&gt;&lt;code&gt;-A 3 -B 2&lt;/code&gt; 适合报错场景，把前后文一起打出来，避免只看到单行异常。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="awk"&gt;
- awk
+ [[awk]]
  &lt;a class="anchor" href="#awk"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;awk &lt;span style="color:#e6db74"&gt;&amp;#39;$9 &amp;gt;= 500 {print $0}&amp;#39;&lt;/span&gt; access.log
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;awk &lt;span style="color:#e6db74"&gt;&amp;#39;{print $9}&amp;#39;&lt;/span&gt; access.log | sort | uniq -c | sort -nr
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat /path/to/logfile.log | awk -v RS&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;/Broken pipe/&amp;#39;&lt;/span&gt; | less
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-F&lt;/code&gt; 指定列分隔符，默认空格或制表符。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;RS&lt;/code&gt; 控制记录分隔符，&lt;code&gt;-v RS=''&lt;/code&gt; 可按空行分块查看 Java 异常堆栈。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;NF&lt;/code&gt; 表示列数，&lt;code&gt;NR&lt;/code&gt; 表示记录号，&lt;code&gt;$0&lt;/code&gt; 是整行，&lt;code&gt;$1/$2/...&lt;/code&gt; 是具体列。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;awk&lt;/code&gt; 比 &lt;code&gt;grep&lt;/code&gt; 更适合做数值比较、字段统计和组合条件筛选。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这几个示例分别在做什么：&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="线上故障排查-系统资源分析"&gt;
+&lt;p&gt;[[awk]]&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="线上故障排查-系统资源分析"&gt;
  线上故障排查-系统资源分析
  &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e7%b3%bb%e7%bb%9f%e8%b5%84%e6%ba%90%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -648,6 +648,14 @@
  大纲-线上故障排查
  &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://www.bilibili.com/cheese/play/ep1135127" rel="noopener"&gt;参考链接1-b站孟小哥抓虫课程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/moooofly/MarkSomethingDownLLS/blob/master/%e5%90%84%e5%a4%a7%e4%ba%92%e8%81%94%e7%bd%91%e5%85%ac%e5%8f%b8%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86%e8%b5%84%e6%96%99%e6%b1%87%e6%80%bb.md" rel="noopener"&gt;参考链接2-github分享-里面还有3个案例&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://www.bilibili.com/video/BV1be4y1f79F" rel="noopener"&gt;参考链接3-b站阿里云技巧分享&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="入口方法"&gt;
  入口方法
  &lt;a class="anchor" href="#%e5%85%a5%e5%8f%a3%e6%96%b9%e6%b3%95"&gt;#&lt;/a&gt;
@@ -660,8 +668,73 @@
  常用技术栈
  &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e6%8a%80%e6%9c%af%e6%a0%88"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
+&lt;h3 id="线上故障排查-日志分析"&gt;
+ 线上故障排查-日志分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="常用命令"&gt;
+ 常用命令
+ &lt;a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;[[线上故障排查-日志分析]]&lt;/li&gt;
+&lt;li&gt;[[less]] ：交互查看大日志（推荐）&lt;/li&gt;
+&lt;li&gt;[[grep]]：快速过滤关键词&lt;/li&gt;
+&lt;li&gt;[[awk]]：做统计、聚合、条件筛选&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="其他命令"&gt;
+ 其他命令
+ &lt;a class="anchor" href="#%e5%85%b6%e4%bb%96%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;cat、head、tail：输出日志&lt;/li&gt;
+&lt;li&gt;wc：统计行数、单词数、字节数&lt;/li&gt;
+&lt;li&gt;sort：排序&lt;/li&gt;
+&lt;li&gt;uniq：去重&lt;/li&gt;
+&lt;li&gt;gzip 压缩包需要换成 zless zgrep zcat&lt;/li&gt;
+&lt;li&gt;man 可以查看命令的使用说明和选项参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 输出日志&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;head -n &lt;span style="color:#ae81ff"&gt;1000&lt;/span&gt; /path/to/logfile.log | grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tail -n &lt;span style="color:#ae81ff"&gt;1000&lt;/span&gt; -f /path/to/logfile.log | grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 统计行数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wc -l /path/to/logfile.log 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 默认显示行数、单词数、字节数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sam@samdeMac-mini logs % wc gateway.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;278&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1837&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;27745&lt;/span&gt; gateway.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# sort 排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -n 按照数值排序 默认按照字典序排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -k 5 按照第5列排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -r 反向排序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -u 去重,但性能较差，一般排序后使用 uniq 去重&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -t 指定分隔符 默认空格/制表符分隔&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# uniq 去重&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -c 最常用！统计每行出现的次数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -d 只显示重复的行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# -u 只显示不重复的行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 综合案例&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&amp;#34;1 aaa AA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;9 sss SS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;9 sss SS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;2 bbb BB
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;2 bbb XX
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;2 bbb BB
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;3 ccc CC
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;| awk &lt;span style="color:#e6db74"&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt; | sort -nr | uniq -c | sort -nr
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 解压后分析日志&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gzip -d /path/to/logfile.log.gz -c | grep &lt;span style="color:#e6db74"&gt;&amp;#34;ERROR&amp;#34;&lt;/span&gt; | less
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -d 解压&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -c 输出到标准输出 不修改原文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="线上故障排查-资源分析"&gt;
+ 线上故障排查-资源分析
+ &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e8%b5%84%e6%ba%90%e5%88%86%e6%9e%90"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;[[线上故障排查-系统资源分析]]&lt;/li&gt;
 &lt;li&gt;[[线上故障排查-进程与内核观测]]&lt;/li&gt;
 &lt;/ul&gt;
@@ -671,4 +744,13 @@
 &lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[[线上故障排查-数据库与缓存案例]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="复盘要点"&gt;
+ 复盘要点
+ &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e8%a6%81%e7%82%b9"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;哪个指标最早异常&lt;/li&gt;
+&lt;li&gt;哪个动作真正止血&lt;/li&gt;
+&lt;li&gt;是否能沉淀成自动化检测规则&lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>

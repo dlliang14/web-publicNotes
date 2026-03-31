@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bgp on</title><link>https://dlliang14.github.io/web-publicNotes/tags/bgp/</link><description>Recent content in Bgp on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/bgp/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico-bgp%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico-bgp%E9%85%8D%E7%BD%AE/</guid><description>&lt;h1 id="calico-bgp配置"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bgp on</title><link>https://dlliang14.github.io/web-publicNotes/tags/bgp/</link><description>Recent content in Bgp on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/bgp/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/bgp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/bgp/</guid><description>&lt;h1 id="bgp"&gt;
+ bgp
+ &lt;a class="anchor" href="#bgp"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="大型组网"&gt;
+ 大型组网
+ &lt;a class="anchor" href="#%e5%a4%a7%e5%9e%8b%e7%bb%84%e7%bd%91"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;物理路由器&lt;/strong&gt;之间 配置 &lt;strong&gt;bgp对等体&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;k8s节点&lt;/strong&gt;与路由器 配置&lt;strong&gt;路由反射&lt;/strong&gt;RR(route reflector)&lt;/li&gt;
+&lt;li&gt;或者 使用 vxlan/ ipip 隧道 overlay网络&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;cross-subnet&lt;/strong&gt; 模式下的 vxlan/ipip 只在不同子网节点间建立隧道，同子网节点间不建立隧道，减少开销&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不同子网&lt;/strong&gt; 通过宿主机里网络配置的ip和子网掩码 来判断&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="bgp-相关知识"&gt;
+ BGP 相关知识
+ &lt;a class="anchor" href="#bgp-%e7%9b%b8%e5%85%b3%e7%9f%a5%e8%af%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AS 自制域 Autonomous System&lt;/li&gt;
+&lt;li&gt;ASN 自制域编号 Autonomous System Number&lt;/li&gt;
+&lt;li&gt;IBGP 内部BGP&lt;/li&gt;
+&lt;li&gt;EBGP 外部BGP&lt;/li&gt;
+&lt;li&gt;BGP Peer BGP对等体，邻居&lt;/li&gt;
+&lt;li&gt;RR (route reflector) 路由反射器&lt;/li&gt;
+&lt;li&gt;Full Mesh 全网状结构&lt;/li&gt;
+&lt;li&gt;Spine Leaf 脊柱叶子架构 多一个机架就多一个leaf交换机&lt;/li&gt;
+&lt;li&gt;TOR(top of rack) 机架顶部的交换机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="bgp-相关"&gt;
+ BGP 相关
+ &lt;a class="anchor" href="#bgp-%e7%9b%b8%e5%85%b3"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[calico]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/calico-bgp%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/calico-bgp%E9%85%8D%E7%BD%AE/</guid><description>&lt;h1 id="calico-bgp配置"&gt;
  calico-bgp配置
  &lt;a class="anchor" href="#calico-bgp%e9%85%8d%e7%bd%ae"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -80,38 +116,4 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;172.16.72.199 0.0.0.0 255.255.255.255 UH &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; calia7f56e17c3d
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;172.16.72.200 0.0.0.0 255.255.255.255 UH &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; calid4ba558f3e2
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;192.168.18.0 10.0.0.1 255.255.255.0 UG &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; enp6s18
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>bgp</title><link>https://dlliang14.github.io/web-publicNotes/bgp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/bgp/</guid><description>&lt;h1 id="bgp"&gt;
- bgp
- &lt;a class="anchor" href="#bgp"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h2 id="大型组网"&gt;
- 大型组网
- &lt;a class="anchor" href="#%e5%a4%a7%e5%9e%8b%e7%bb%84%e7%bd%91"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;物理路由器&lt;/strong&gt;之间 配置 &lt;strong&gt;bgp对等体&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;k8s节点&lt;/strong&gt;与路由器 配置&lt;strong&gt;路由反射&lt;/strong&gt;RR(route reflector)&lt;/li&gt;
-&lt;li&gt;或者 使用 vxlan/ ipip 隧道 overlay网络&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;cross-subnet&lt;/strong&gt; 模式下的 vxlan/ipip 只在不同子网节点间建立隧道，同子网节点间不建立隧道，减少开销&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;不同子网&lt;/strong&gt; 通过宿主机里网络配置的ip和子网掩码 来判断&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="bgp-相关知识"&gt;
- BGP 相关知识
- &lt;a class="anchor" href="#bgp-%e7%9b%b8%e5%85%b3%e7%9f%a5%e8%af%86"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;AS 自制域 Autonomous System&lt;/li&gt;
-&lt;li&gt;ASN 自制域编号 Autonomous System Number&lt;/li&gt;
-&lt;li&gt;IBGP 内部BGP&lt;/li&gt;
-&lt;li&gt;EBGP 外部BGP&lt;/li&gt;
-&lt;li&gt;BGP Peer BGP对等体，邻居&lt;/li&gt;
-&lt;li&gt;RR (route reflector) 路由反射器&lt;/li&gt;
-&lt;li&gt;Full Mesh 全网状结构&lt;/li&gt;
-&lt;li&gt;Spine Leaf 脊柱叶子架构 多一个机架就多一个leaf交换机&lt;/li&gt;
-&lt;li&gt;TOR(top of rack) 机架顶部的交换机&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="bgp-相关"&gt;
- BGP 相关
- &lt;a class="anchor" href="#bgp-%e7%9b%b8%e5%85%b3"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;[[calico]]&lt;/p&gt;</description></item></channel></rss>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

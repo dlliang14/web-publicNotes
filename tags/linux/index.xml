@@ -1,4 +1,58 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on</title><link>https://dlliang14.github.io/web-publicNotes/tags/linux/</link><description>Recent content in Linux on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</guid><description>&lt;h1 id="线上故障排查-60秒定位法"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on</title><link>https://dlliang14.github.io/web-publicNotes/tags/linux/</link><description>Recent content in Linux on</description><generator>Hugo</generator><language>en</language><atom:link href="https://dlliang14.github.io/web-publicNotes/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://dlliang14.github.io/web-publicNotes/awk/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/awk/</guid><description>&lt;h1 id="awk"&gt;
+ awk
+ &lt;a class="anchor" href="#awk"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="awk-使用说明"&gt;
+ awk 使用说明
+ &lt;a class="anchor" href="#awk-%e4%bd%bf%e7%94%a8%e8%af%b4%e6%98%8e"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;相比grep，可以做更复杂的统计分析和模式匹配&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -F: 列分隔符 Field Separator&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 默认空格/制表符分隔&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# NF 列数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# $1 第一列 $2 第二列&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -v RS=&amp;#39;&amp;#39; 行分隔符 Record Separator&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 默认\n&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 可以设置 RS=&amp;#39;&amp;#39; 来按空行分隔记录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# NR 行号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# $0 整行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# pattern {action} 模式匹配&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# pattern 可以是正则表达式 也可以是条件表达式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# $0 ~ /pattern1|pattern2/ 可以简写 为 /pattern/ 直接匹配整行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# $5 &amp;gt; 500 可以匹配特定列的值 而 grep 不懂数字大小&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# /2021-01-01 00:00:00/, /2021-01-31 23:59:59/ 可以匹配日期范围&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# $1 == &amp;#34;192.168.1.1&amp;#34; &amp;amp;&amp;amp; $9 == 404 可以组合多个条件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# action 是在模式匹配时执行的命令块&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 默认action {print $0} 可以省略 直接打印整行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# $9 != 200 {print &amp;#34;状态码异常:&amp;#34;, $9, &amp;#34;URL:&amp;#34;, $7}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 极致简写 awk &amp;#39;1&amp;#39; 相当于 awk &amp;#39;{print $0}&amp;#39; 直接打印所有行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 分别统计偶数和奇数的和&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;seq &lt;span style="color:#ae81ff"&gt;10&lt;/span&gt; | awk &lt;span style="color:#e6db74"&gt;&amp;#39;BEGIN {even_sum=0; odd_sum=0}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; {if ($1 % 2 == 0) even_sum+=$1; else odd_sum+=$1}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; END {print &amp;#34;偶数和:&amp;#34;, even_sum, &amp;#34;奇数和:&amp;#34;, odd_sum}&amp;#39;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;seq &lt;span style="color:#ae81ff"&gt;10&lt;/span&gt; | awk &lt;span style="color:#e6db74"&gt;&amp;#39;BEGIN {even_sum=0; odd_sum=0}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; NR % 2 == 0 {even_sum+=$1}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; NR % 2 == 1 {odd_sum+=$1}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; END {print &amp;#34;偶数和:&amp;#34;, even_sum, &amp;#34;奇数和:&amp;#34;, odd_sum}&amp;#39;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="awk-实战"&gt;
+ awk 实战
+ &lt;a class="anchor" href="#awk-%e5%ae%9e%e6%88%98"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="java日志分析-异常栈"&gt;
+ java日志分析 异常栈
+ &lt;a class="anchor" href="#java%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90-%e5%bc%82%e5%b8%b8%e6%a0%88"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat /path/to/logfile.log | awk -v RS&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;/Broken pipe/&amp;#39;&lt;/span&gt; | less
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# -v RS=&amp;#39;&amp;#39; 以空行分隔记录，&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# &amp;#39;/Broken pipe/&amp;#39; 匹配带有Broken pipe的记录，&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 这样可以一次看到完整的异常栈而不是被分行打断&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5-60%E7%A7%92%E5%AE%9A%E4%BD%8D%E6%B3%95/</guid><description>&lt;h1 id="线上故障排查-60秒定位法"&gt;
  线上故障排查-60秒定位法
  &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-60%e7%a7%92%e5%ae%9a%e4%bd%8d%e6%b3%95"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -8,10 +62,13 @@
  &lt;a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%9b%ae%e6%a0%87"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;p&gt;在前 60 秒快速判断故障属于哪一类：CPU、内存、磁盘、网络、进程。&lt;/p&gt;
-&lt;h2 id="十条高频命令"&gt;
- 十条高频命令
- &lt;a class="anchor" href="#%e5%8d%81%e6%9d%a1%e9%ab%98%e9%a2%91%e5%91%bd%e4%bb%a4"&gt;#&lt;/a&gt;
+&lt;h2 id="最应该排查的性能指标"&gt;
+ 最应该排查的性能指标
+ &lt;a class="anchor" href="#%e6%9c%80%e5%ba%94%e8%af%a5%e6%8e%92%e6%9f%a5%e7%9a%84%e6%80%a7%e8%83%bd%e6%8c%87%e6%a0%87"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
+&lt;p&gt;
+&lt;a href="https://www.cnblogs.com/276815076/p/17163639.html" rel="noopener"&gt;参考链接&lt;/a&gt;
+在这篇文章中，Netflix 的性能工程团队将会为你展示如何在最初的 60 秒内通过命令行做性能排查，这个过程中，会使用一些标准的 Linux 工具。在 60 秒内，你可以通过运行以下十个命令来大致了解系统资源使用情况和正在运行的进程。寻找错误和饱和度指标，然后是资源利用率相关的指标。饱和度这个词可能不易理解，大家可以Google一下USE方法，所谓了饱和了，是资源的负载超过其处理能力了，可以表现为请求队列的长度或等待时间。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;部分命令来自 &lt;code&gt;sysstat&lt;/code&gt;，机器上没有时需要先安装。&lt;/p&gt;
 &lt;/blockquote&gt;

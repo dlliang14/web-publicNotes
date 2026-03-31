@@ -70,7 +70,11 @@
 &lt;li&gt;双链支持
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;[[笔记名称]]&lt;/code&gt; 创建双链，自动创建笔记&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;[[笔记名称#标题]]&lt;/code&gt; 自动跳转到标题位置，只需要1个&lt;code&gt;#&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[[笔记名称#章节]]&lt;/code&gt; 自动跳转到对应章节位置，只需要1个&lt;code&gt;#&lt;/code&gt;
+&lt;ol&gt;
+&lt;li&gt;不推荐使用！章节修改后，foam不会自动更新&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;为了hugo自动识别，外加我是foam，不是obisidian，只能把需要发布的全放到根目录&lt;/li&gt;

@@ -3,13 +3,14 @@
  &lt;a class="anchor" href="#%e7%ba%bf%e4%b8%8a%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5-%e6%95%b0%e6%8d%ae%e5%ba%93%e4%b8%8e%e7%bc%93%e5%ad%98%e6%a1%88%e4%be%8b"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;[[线上故障排查]]&lt;/p&gt;
-&lt;h2 id="mysql"&gt;
- MySQL
- &lt;a class="anchor" href="#mysql"&gt;#&lt;/a&gt;
+&lt;h2 id="1-mysql"&gt;
+ 1. mysql
+ &lt;a class="anchor" href="#1-mysql"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
-&lt;h3 id="死锁"&gt;
- 死锁
- &lt;a class="anchor" href="#%e6%ad%bb%e9%94%81"&gt;#&lt;/a&gt;
+&lt;p&gt;[[mysql]]&lt;/p&gt;
+&lt;h3 id="11-死锁"&gt;
+ 1.1. 死锁
+ &lt;a class="anchor" href="#11-%e6%ad%bb%e9%94%81"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SHOW&lt;/span&gt; ENGINE INNODB STATUS&lt;span style="color:#960050;background-color:#1e0010"&gt;\&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;G&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
@@ -18,9 +19,9 @@
 &lt;li&gt;可先确认事务隔离级别：&lt;code&gt;SELECT @@tx_isolation;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;监控上可关注递增指标 &lt;code&gt;mysql_global_status_innodb_deadlocks&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="慢-sql"&gt;
- 慢 SQL
- &lt;a class="anchor" href="#%e6%85%a2-sql"&gt;#&lt;/a&gt;
+&lt;h3 id="12-慢-sql"&gt;
+ 1.2. 慢 SQL
+ &lt;a class="anchor" href="#12-%e6%85%a2-sql"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;关注执行计划与索引命中&lt;/li&gt;
@@ -28,35 +29,14 @@
 &lt;li&gt;必要时配合应用侧限流/降级&lt;/li&gt;
 &lt;li&gt;乐观锁更新场景可检查是否存在“先查版本，再带版本条件更新”的缺失&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="redis"&gt;
- Redis
- &lt;a class="anchor" href="#redis"&gt;#&lt;/a&gt;
+&lt;h2 id="2-redis"&gt;
+ 2. redis
+ &lt;a class="anchor" href="#2-redis"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
-&lt;h3 id="部署与配置"&gt;
- 部署与配置
- &lt;a class="anchor" href="#%e9%83%a8%e7%bd%b2%e4%b8%8e%e9%85%8d%e7%bd%ae"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;高可用方案按规模选择哨兵或集群。&lt;/li&gt;
-&lt;li&gt;副本数通常保持奇数更利于故障仲裁。&lt;/li&gt;
-&lt;li&gt;建议关闭透明大页：&lt;code&gt;echo never &amp;gt; /sys/kernel/mm/transparent_hugepage/enabled&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;建议开启 &lt;code&gt;vm.overcommit_memory=1&lt;/code&gt;，避免创建 RDB 快照时内存申请失败。&lt;/li&gt;
-&lt;li&gt;内存一般不要打满，常见经验值是控制在物理内存的 60% 左右。&lt;/li&gt;
-&lt;li&gt;根据场景配置淘汰策略、AOF、慢日志阈值和危险命令安全加固。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="淘汰策略"&gt;
- 淘汰策略
- &lt;a class="anchor" href="#%e6%b7%98%e6%b1%b0%e7%ad%96%e7%95%a5"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;noeviction&lt;/code&gt;：默认不淘汰&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;allkeys-lru&lt;/code&gt;：适合缓存场景&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;allkeys-lfu&lt;/code&gt;：更适合热点明显的场景&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;volatile-lru&lt;/code&gt;：只淘汰设置过期时间的 key&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="大-key"&gt;
- 大 Key
- &lt;a class="anchor" href="#%e5%a4%a7-key"&gt;#&lt;/a&gt;
+&lt;p&gt;[[redis]]&lt;/p&gt;
+&lt;h3 id="21-大-key"&gt;
+ 2.1. 大 Key
+ &lt;a class="anchor" href="#21-%e5%a4%a7-key"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;典型问题：内存占用高、阻塞严重&lt;/li&gt;
@@ -64,40 +44,31 @@
 &lt;li&gt;业务侧通常要从模型设计解决，比如按 UID 分桶或拆分结构&lt;/li&gt;
 &lt;li&gt;可借助 &lt;code&gt;rdbtool&lt;/code&gt; 等方式分析大 key 分布&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="热-key"&gt;
- 热 Key
- &lt;a class="anchor" href="#%e7%83%ad-key"&gt;#&lt;/a&gt;
+&lt;h3 id="22-热-key"&gt;
+ 2.2. 热 Key
+ &lt;a class="anchor" href="#22-%e7%83%ad-key"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;典型问题：打满单节点 CPU/网卡&lt;/li&gt;
 &lt;li&gt;处理建议：本地缓存、读写分离、限流、散列拆分&lt;/li&gt;
 &lt;li&gt;监控最好在业务 SDK 或客户端拦截器侧提前做频率统计&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="连接数过高"&gt;
- 连接数过高
- &lt;a class="anchor" href="#%e8%bf%9e%e6%8e%a5%e6%95%b0%e8%bf%87%e9%ab%98"&gt;#&lt;/a&gt;
+&lt;h3 id="23-连接数过高"&gt;
+ 2.3. 连接数过高
+ &lt;a class="anchor" href="#23-%e8%bf%9e%e6%8e%a5%e6%95%b0%e8%bf%87%e9%ab%98"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;检查 &lt;code&gt;maxclients&lt;/code&gt; 与连接生命周期&lt;/li&gt;
 &lt;li&gt;避免短连接风暴，优先连接池治理&lt;/li&gt;
 &lt;li&gt;可临时查看或调整：&lt;code&gt;CONFIG GET maxclients&lt;/code&gt;、&lt;code&gt;CONFIG SET maxclients 100000&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="节点故障处理"&gt;
- 节点故障处理
- &lt;a class="anchor" href="#%e8%8a%82%e7%82%b9%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86"&gt;#&lt;/a&gt;
+&lt;h3 id="24-节点故障处理"&gt;
+ 2.4. 节点故障处理
+ &lt;a class="anchor" href="#24-%e8%8a%82%e7%82%b9%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;cluster nodes&lt;/code&gt; 查看集群状态&lt;/li&gt;
 &lt;li&gt;节点损坏后可先 &lt;code&gt;cluster forget &amp;lt;node_id&amp;gt;&lt;/code&gt; 从其他节点移除视图&lt;/li&gt;
 &lt;li&gt;重建前要清理节点上的 &lt;code&gt;rdb&lt;/code&gt;、&lt;code&gt;aof&lt;/code&gt;、&lt;code&gt;nodes.conf&lt;/code&gt; 等旧状态文件&lt;/li&gt;
 &lt;li&gt;再将新节点重新加入集群并补齐主从关系&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="复盘要点"&gt;
- 复盘要点
- &lt;a class="anchor" href="#%e5%a4%8d%e7%9b%98%e8%a6%81%e7%82%b9"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;哪个指标最早异常&lt;/li&gt;
-&lt;li&gt;哪个动作真正止血&lt;/li&gt;
-&lt;li&gt;是否能沉淀成自动化检测规则&lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>

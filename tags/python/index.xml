@@ -126,7 +126,66 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;q&lt;span style="color:#f92672"&gt;.&lt;/span&gt;get(block&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;, timeout&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;None&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 队列空时阻塞&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;q&lt;span style="color:#f92672"&gt;.&lt;/span&gt;get(block&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 队列空时直接抛出异常&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E5%8D%8F%E7%A8%8Bgevent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E5%8D%8F%E7%A8%8Bgevent/</guid><description>&lt;h1 id="python-协程gevent"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</guid><description>&lt;h1 id="python后端-依赖管理"&gt;
+ python后端-依赖管理
+ &lt;a class="anchor" href="#python%e5%90%8e%e7%ab%af-%e4%be%9d%e8%b5%96%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python后端]]&lt;/p&gt;
+&lt;h2 id="两种生成方案对比"&gt;
+ 两种生成方案对比
+ &lt;a class="anchor" href="#%e4%b8%a4%e7%a7%8d%e7%94%9f%e6%88%90%e6%96%b9%e6%a1%88%e5%af%b9%e6%af%94"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;方案&lt;/th&gt;
+ &lt;th&gt;pipreqs&lt;/th&gt;
+ &lt;th&gt;pip freeze&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;扫描代码找 import&lt;/td&gt;
+ &lt;td&gt;导出当前环境所有包&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;应用场景&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;新项目、梳理项目依赖&lt;/td&gt;
+ &lt;td&gt;当前环境已调试好，要复现环境&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;优点&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;只包含实际用到的包&lt;/td&gt;
+ &lt;td&gt;精确复现，版本锁定&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;缺点&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;可能漏掉动态导入的包；联网查版本&lt;/td&gt;
+ &lt;td&gt;包含很多间接依赖，体积大&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="方案一pipreqs静态扫描"&gt;
+ 方案一：pipreqs（静态扫描）
+ &lt;a class="anchor" href="#%e6%96%b9%e6%a1%88%e4%b8%80pipreqs%e9%9d%99%e6%80%81%e6%89%ab%e6%8f%8f"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;适合：新项目或需要梳理核心依赖&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install pipreqs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /path/to/your/project
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pipreqs ./ --encoding&lt;span style="color:#f92672"&gt;=&lt;/span&gt;utf8
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--ignore &amp;lt;dir1,dir2,...&amp;gt;&lt;/code&gt; 忽略某些目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--force&lt;/code&gt; 强制覆盖已有 &lt;code&gt;requirements.txt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-pin&lt;/code&gt; 不锁定依赖版本，生成的 requirements.txt 中不包含版本号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--use-local&lt;/code&gt; 只使用本地已安装的包，不联网查询最新版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️ 注意：可能会联网查询最新版本，偶尔与当前 Python 版本不兼容。
+所以推荐使用 &lt;code&gt;--use-local&lt;/code&gt; 参数，Use ONLY local package info instead of querying PyPI
+如果你追求更严谨的生产环境依赖管理，可以先用 pipreqs &amp;ndash;no-pin 生成基础清单，再用 pip-compile 生成带 Hash 校验的锁定文件。
+在 Windows 下使用 pipreqs 处理包含中文路径或中文注释的代码时，记得始终带上 &lt;code&gt;--encoding=utf8&lt;/code&gt;，否则极易抛出 UnicodeDecodeError。&lt;/p&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E5%8D%8F%E7%A8%8Bgevent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E5%8D%8F%E7%A8%8Bgevent/</guid><description>&lt;h1 id="python-协程gevent"&gt;
  python-协程gevent
  &lt;a class="anchor" href="#python-%e5%8d%8f%e7%a8%8bgevent"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -221,6 +280,35 @@
 &lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[[python-io多路复用]]&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="python后端-环境安装"&gt;
+ python后端-环境安装
+ &lt;a class="anchor" href="#python%e5%90%8e%e7%ab%af-%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;[[python后端]]&lt;/p&gt;
+&lt;h2 id="conda-环境创建"&gt;
+ Conda 环境创建
+ &lt;a class="anchor" href="#conda-%e7%8e%af%e5%a2%83%e5%88%9b%e5%bb%ba"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda create -n python-backend python&lt;span style="color:#f92672"&gt;=&lt;/span&gt;3.12
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-y&lt;/code&gt; 自动确认安装，无需手动输入&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-default-packages&lt;/code&gt; 不安装默认包，创建更干净的环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="环境管理"&gt;
+ 环境管理
+ &lt;a class="anchor" href="#%e7%8e%af%e5%a2%83%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda env list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda activate python-backend
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="建议"&gt;
+ 建议
+ &lt;a class="anchor" href="#%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;项目独立虚拟环境，避免依赖污染&lt;/li&gt;
+&lt;li&gt;先激活环境再安装依赖&lt;/li&gt;
+&lt;li&gt;在 README 记录 Python 版本和环境名&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python-%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python-%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85/</guid><description>&lt;h1 id="python-生产者消费者"&gt;
  python-生产者消费者
  &lt;a class="anchor" href="#python-%e7%94%9f%e4%ba%a7%e8%80%85%e6%b6%88%e8%b4%b9%e8%80%85"&gt;#&lt;/a&gt;
@@ -637,6 +725,10 @@
  基础知识
  &lt;a class="anchor" href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[[python-环境安装]]&lt;/li&gt;
+&lt;li&gt;[[python-依赖管理]]&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="网络开发"&gt;
  网络开发
  &lt;a class="anchor" href="#%e7%bd%91%e7%bb%9c%e5%bc%80%e5%8f%91"&gt;#&lt;/a&gt;
@@ -652,92 +744,12 @@
 &lt;ul&gt;
 &lt;li&gt;[[python-并发编程]]&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="后端开发"&gt;
- 后端开发
- &lt;a class="anchor" href="#%e5%90%8e%e7%ab%af%e5%bc%80%e5%8f%91"&gt;#&lt;/a&gt;
+&lt;h2 id="cicd"&gt;
+ CICD
+ &lt;a class="anchor" href="#cicd"&gt;#&lt;/a&gt;
 &lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;[[python后端]]&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</guid><description>&lt;h1 id="python后端-依赖管理"&gt;
- python后端-依赖管理
- &lt;a class="anchor" href="#python%e5%90%8e%e7%ab%af-%e4%be%9d%e8%b5%96%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;[[python后端]]&lt;/p&gt;
-&lt;h2 id="生成-requirementstxt"&gt;
- 生成 requirements.txt
- &lt;a class="anchor" href="#%e7%94%9f%e6%88%90-requirementstxt"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install pipreqs
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /path/to/your/project
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pipreqs ./ --encoding&lt;span style="color:#f92672"&gt;=&lt;/span&gt;utf8
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;--ignore &amp;lt;dir1,dir2,...&amp;gt;&lt;/code&gt; 忽略某些目录&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--force&lt;/code&gt; 强制覆盖已有 &lt;code&gt;requirements.txt&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--no-pin&lt;/code&gt; 不锁版本&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;注意：&lt;code&gt;pipreqs&lt;/code&gt; 可能会联网查询最新版本，偶尔与当前 Python 版本不兼容。&lt;/p&gt;
-&lt;h2 id="安装依赖"&gt;
- 安装依赖
- &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install -r requirements.txt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-i &amp;lt;url&amp;gt;&lt;/code&gt; 指定镜像源&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--no-cache-dir&lt;/code&gt; 不使用缓存，强制重新下载&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--upgrade&lt;/code&gt; 升级到最新版本&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="导出依赖"&gt;
- 导出依赖
- &lt;a class="anchor" href="#%e5%af%bc%e5%87%ba%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip list
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip freeze &amp;gt; requirements.txt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;说明：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;pip list&lt;/code&gt; 查看已安装包&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;pip freeze&lt;/code&gt; 生成可复现依赖清单&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="python后端-环境安装"&gt;
- python后端-环境安装
- &lt;a class="anchor" href="#python%e5%90%8e%e7%ab%af-%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;[[python后端]]&lt;/p&gt;
-&lt;h2 id="conda-环境创建"&gt;
- Conda 环境创建
- &lt;a class="anchor" href="#conda-%e7%8e%af%e5%a2%83%e5%88%9b%e5%bb%ba"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda create -n python-backend python&lt;span style="color:#f92672"&gt;=&lt;/span&gt;3.12
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-y&lt;/code&gt; 自动确认安装，无需手动输入&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--no-default-packages&lt;/code&gt; 不安装默认包，创建更干净的环境&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="环境管理"&gt;
- 环境管理
- &lt;a class="anchor" href="#%e7%8e%af%e5%a2%83%e7%ae%a1%e7%90%86"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda env list
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda activate python-backend
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="建议"&gt;
- 建议
- &lt;a class="anchor" href="#%e5%bb%ba%e8%ae%ae"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;项目独立虚拟环境，避免依赖污染&lt;/li&gt;
-&lt;li&gt;先激活环境再安装依赖&lt;/li&gt;
-&lt;li&gt;在 README 记录 Python 版本和环境名&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/python%E5%90%8E%E7%AB%AF/</guid><description>&lt;h1 id="大纲-python后端"&gt;
- 大纲-python后端
- &lt;a class="anchor" href="#%e5%a4%a7%e7%ba%b2-python%e5%90%8e%e7%ab%af"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h2 id="环境与依赖"&gt;
- 环境与依赖
- &lt;a class="anchor" href="#%e7%8e%af%e5%a2%83%e4%b8%8e%e4%be%9d%e8%b5%96"&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;[[python后端-环境安装]]&lt;/li&gt;
-&lt;li&gt;[[python后端-依赖管理]]&lt;/li&gt;
+&lt;li&gt;[[python-cicd]]&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://dlliang14.github.io/web-publicNotes/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dlliang14.github.io/web-publicNotes/%E6%97%A0%E6%84%8F%E4%B9%89-python-%E8%80%81%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0/</guid><description>&lt;h1 id="python-老网课笔记-大概率不会再看"&gt;
  python-老网课笔记-大概率不会再看
  &lt;a class="anchor" href="#python-%e8%80%81%e7%bd%91%e8%af%be%e7%ac%94%e8%ae%b0-%e5%a4%a7%e6%a6%82%e7%8e%87%e4%b8%8d%e4%bc%9a%e5%86%8d%e7%9c%8b"&gt;#&lt;/a&gt;
