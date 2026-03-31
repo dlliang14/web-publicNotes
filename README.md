@@ -167,6 +167,24 @@ A large portion of Amethyst's code base can be derived from the following two pr
 
 ## update log
 
+### 20260331
+
+> 增加章节号功能，可以通过在页面 frontmatter 中设置 `forceAutoNumbering` 来控制章节号的渲染：
+
+1. `forceAutoNumbering: true`
+    - 强制启用自动章节号
+    - 会先清理 `h2~h6` 标题开头的手工数字前缀（如 `1.2. `），再由前端统一渲染
+    - 适合“旧章节号不准，想一键纠正”的页面
+
+2. `forceAutoNumbering: false`
+    - 强制禁用自动章节号
+    - 无论标题是否有数字都不自动渲染
+
+3. 不写该字段
+    - 维持原自动检测逻辑：
+    - 检测到已有手工编号则不自动渲染
+    - 检测不到则自动渲染
+
 ### 20260329
 
 - 添加能跳转到对应笔记相关标题行的功能，比如双链 [[大纲/python#并发编程]] (这是foam已有功能，但是hugo没有)

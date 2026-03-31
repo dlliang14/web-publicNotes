@@ -1,0 +1,57 @@
+<script>
+  (function () {
+  	var forceAutoNumbering = null
+  	{{- if isset .Params "forceAutoNumbering" }}
+  	forceAutoNumbering = {{ if (index .Params "forceAutoNumbering") }}true{{ else }}false{{ end }}
+  	{{- else if isset .Params "forceautonumbering" }}
+  	forceAutoNumbering = {{ if (index .Params "forceautonumbering") }}true{{ else }}false{{ end }}
+  	{{- end }}
+
+  	var markdown = document.querySelector(".book-page .markdown")
+  	if (!markdown) {
+  		return
+  	}
+
+  	var headings = markdown.querySelectorAll("h2, h3, h4, h5, h6")
+
+  	function stripManualPrefix(heading) {
+  		var nodes = heading.childNodes
+  		for (var i = 0; i < nodes.length; i++) {
+  			var node = nodes[i]
+  			if (node.nodeType === Node.TEXT_NODE && node.nodeValue && node.nodeValue.trim()) {
+  				node.nodeValue = node.nodeValue.replace(/^\s*\d+(?:\.\d+)*\.?\s+/, "")
+  				break
+  			}
+  		}
+  	}
+
+  	if (forceAutoNumbering === true) {
+  		Array.prototype.forEach.call(headings, stripManualPrefix)
+  		document.body.classList.add("auto-numbered")
+  		return
+  	}
+
+  	if (forceAutoNumbering === false) {
+  		return
+  	}
+
+  	if (!headings.length) {
+  		document.body.classList.add("auto-numbered")
+  		return
+  	}
+
+  	var hasManualNumbering = Array.prototype.some.call(headings, function (heading) {
+  		var clone = heading.cloneNode(true)
+  		Array.prototype.forEach.call(clone.querySelectorAll("a.anchor"), function (anchor) {
+  			anchor.remove()
+  		})
+
+  		var text = (clone.textContent || "").trim()
+  		return /^\d+(?:\.\d+)*\.\s*/.test(text)
+  	})
+
+  	if (!hasManualNumbering) {
+  		document.body.classList.add("auto-numbered")
+  	}
+  })()
+</script>

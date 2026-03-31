@@ -1,7 +1,9 @@
-$startLevel: 1;
+$startLevel: 2;
 $endLevel: 6;
 
-.book-page .markdown {
+body.auto-numbered .book-page .markdown {
+  counter-reset: h2 h3 h4 h5 h6;
+
   @for $currentLevel from $startLevel through $endLevel {
     > h#{$currentLevel} {
       counter-increment: h#{$currentLevel};
@@ -19,7 +21,7 @@ $endLevel: 6;
   }
 }
 
-.book-toc nav ul {
+body.auto-numbered .book-toc nav ul {
   li {
     counter-increment: item;
 
